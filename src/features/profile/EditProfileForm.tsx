@@ -1,0 +1,343 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/Button";
+import { Field, Input, Select, Textarea } from "@/components/ui/Field";
+import { SelectableChip } from "@/components/ui/Chip";
+import { TopBar } from "@/components/layout/TopBar";
+import { PhotoManager, type StoredPhoto } from "@/features/profile/PhotoManager";
+import { IntentionPicker } from "@/features/profile/IntentionPicker";
+import { AgeRangeSlider } from "@/features/profile/AgeRangeSlider";
+import { CountryPicker } from "@/features/profile/CountryPicker";
+import { createClient } from "@/lib/supabase/client";
+import { CEFR_DESCRIPTIONS, COUNTRIES } from "@/lib/constants";
+import {
+  CEFR_LEVELS,
+  type CefrLevel,
+  type Intention,
+  type Interest,
+  type Language,
+} from "@/types/domain";
+
+type Initial = {
+  firstName: string;
+  city: string;
+  countryCode: string;
+  bio: string;
+  intentions: Intention[];
+  ageMin: number;
+  ageMax: number;
+  countries: string[];
+  hideDating: boolean;
+  native: string;
+  learning: string;
+  level: CefrLevel;
+  photos: StoredPhoto[];
+  interestIds: number[];
+};
+
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-3xl border border-line bg-raised p-5">
+      <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-faint">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+
+export function EditProfileForm({
+  userId,
+  languages,
+  interests,
+  initial,
+}: {
+  userId: string;
+  languages: Language[];
+  interests: Interest[];
+  initial: Initial;
+}) {
+  const router = useRouter();
+  const [form, setForm] = useState(initial);
+  const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  function set<K extends keyof Initial>(key: K, value: Initial[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function save() {
+    setError(null);
+    if (form.native === form.learning) {
+      setError("Pick a different language to learn than the one you speak.");
+      return;
+    }
+
+    setSaving(true);
+    const supabase = createClient();
+
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .update({
+        first_name: form.firstName.trim(),
+        city: form.city.trim() || null,
+        country_code: form.countryCode,
+        bio: form.bio.trim() || null,
+        intentions: form.intentions,
+        preferred_age_min: form.ageMin,
+        preferred_age_max: form.ageMax,
+        preferred_countries: form.countries,
+        hide_dating_profiles: form.hideDating,
+      })
+      .eq("id", userId);
+
+    if (profileError) {
+      setError(profileError.message);
+      setSaving(false);
+      return;
+    }
+
+    await supabase.from("user_languages").delete().eq("user_id", userId);
+    const { error: langError } = await supabase.from("user_languages").insert([
+      { user_id: userId, language_code: form.native, role: "native", cefr_level: null },
+      {
+        user_id: userId,
+        language_code: form.learning,
+        role: "learning",
+        cefr_level: form.level,
+      },
+    ]);
+
+    if (langError) {
+      setError(langError.message);
+      setSaving(false);
+      return;
+    }
+
+    await supabase.from("user_interests").delete().eq("user_id", userId);
+    if (form.interestIds.length > 0) {
+      await supabase
+        .from("user_interests")
+        .insert(form.interestIds.map((id) => ({ user_id: userId, interest_id: id })));
+    }
+
+    router.push("/profile");
+    router.refresh();
+  }
+
+  const languageOptions = (
+    <>
+      <optgroup label="Available now">
+        {languages
+          .filter((l) => l.is_launch_language)
+          .map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.flag_emoji} {l.name}
+            </option>
+          ))}
+      </optgroup>
+      <optgroup label="More languages">
+        {languages
+          .filter((l) => !l.is_launch_language)
+          .map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.flag_emoji} {l.name}
+            </option>
+          ))}
+      </optgroup>
+    </>
+  );
+
+  return (
+    <>
+      <TopBar title="Edit profile" />
+      <div className="mx-auto w-full max-w-md space-y-4 px-5 py-5">
+        <Section title="Photos">
+          <PhotoManager
+            userId={userId}
+            photos={form.photos}
+            onChange={(photos) => set("photos", photos)}
+          />
+        </Section>
+
+        <Section title="About you">
+          <div className="space-y-4">
+            <Field label="First name">
+              <Input
+                value={form.firstName}
+                onChange={(e) => set("firstName", e.target.value)}
+                maxLength={40}
+              />
+            </Field>
+            <Field label="Country">
+              <Select
+                value={form.countryCode}
+                onChange={(e) => set("countryCode", e.target.value)}
+              >
+                <option value="">Select a country</option>
+                {COUNTRIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.flag} {c.name}
+                  </option>
+                ))}
+              </Select>
+            </Field>
+            <Field label="City" hint="Optional.">
+              <Input
+                value={form.city}
+                onChange={(e) => set("city", e.target.value)}
+                maxLength={80}
+              />
+            </Field>
+            <Field label="Your line">
+              <Textarea
+                value={form.bio}
+                onChange={(e) => set("bio", e.target.value.slice(0, 300))}
+                rows={3}
+              />
+            </Field>
+          </div>
+        </Section>
+
+        <Section title="Languages">
+          <div className="space-y-4">
+            <Field label="I speak natively">
+              <Select
+                value={form.native}
+                onChange={(e) => set("native", e.target.value)}
+              >
+                <option value="">Select a language</option>
+                {languageOptions}
+              </Select>
+            </Field>
+            <Field label="I want to learn">
+              <Select
+                value={form.learning}
+                onChange={(e) => set("learning", e.target.value)}
+              >
+                <option value="">Select a language</option>
+                {languageOptions}
+              </Select>
+            </Field>
+            <div>
+              <span className="mb-2 block text-sm font-semibold text-ink">
+                My level
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {CEFR_LEVELS.map((l) => (
+                  <SelectableChip
+                    key={l}
+                    selected={form.level === l}
+                    onClick={() => set("level", l)}
+                  >
+                    {l}
+                  </SelectableChip>
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-faint">
+                {CEFR_DESCRIPTIONS[form.level]}
+              </p>
+            </div>
+          </div>
+        </Section>
+
+        <Section title="Interests">
+          <div className="flex flex-wrap gap-2">
+            {interests.map((interest) => {
+              const selected = form.interestIds.includes(interest.id);
+              return (
+                <SelectableChip
+                  key={interest.id}
+                  selected={selected}
+                  onClick={() =>
+                    set(
+                      "interestIds",
+                      selected
+                        ? form.interestIds.filter((id) => id !== interest.id)
+                        : form.interestIds.length >= 8
+                          ? form.interestIds
+                          : [...form.interestIds, interest.id],
+                    )
+                  }
+                >
+                  {interest.emoji} {interest.label}
+                </SelectableChip>
+              );
+            })}
+          </div>
+        </Section>
+
+        <Section title="Here for">
+          <IntentionPicker
+            value={form.intentions}
+            onChange={(v) => set("intentions", v)}
+          />
+        </Section>
+
+        <Section title="Who you meet">
+          <div className="space-y-6">
+            <AgeRangeSlider
+              min={form.ageMin}
+              max={form.ageMax}
+              onChange={(lo, hi) =>
+                setForm((prev) => ({ ...prev, ageMin: lo, ageMax: hi }))
+              }
+            />
+            <div>
+              <span className="mb-3 block text-sm font-semibold text-ink">
+                Countries
+              </span>
+              <CountryPicker
+                value={form.countries}
+                onChange={(v) => set("countries", v)}
+              />
+            </div>
+            <label className="flex items-start gap-3 rounded-2xl bg-sunken p-4">
+              <input
+                type="checkbox"
+                checked={form.hideDating}
+                onChange={(e) => set("hideDating", e.target.checked)}
+                className="mt-0.5 size-4 accent-[var(--brand)]"
+              />
+              <span>
+                <span className="block text-sm font-semibold text-ink">
+                  Language partners only
+                </span>
+                <span className="mt-0.5 block text-xs text-muted">
+                  Hides everyone open to dating from Discover.
+                </span>
+              </span>
+            </label>
+          </div>
+        </Section>
+
+        {error && (
+          <p role="alert" className="rounded-2xl bg-negative-soft px-4 py-3 text-sm text-negative">
+            {error}
+          </p>
+        )}
+
+        <div className="flex gap-3 pb-4">
+          <Button
+            variant="secondary"
+            fullWidth
+            onClick={() => router.push("/profile")}
+          >
+            Cancel
+          </Button>
+          <Button fullWidth onClick={save} loading={saving}>
+            Save changes
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+}

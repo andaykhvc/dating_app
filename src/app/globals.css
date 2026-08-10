@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Lingua Match design tokens.
+ *
+ * Warm paper rather than clinical white, electric indigo rather than the red /
+ * pink / flame vocabulary every dating app shares, and amber reserved
+ * exclusively for progress — XP, streaks, levels. Keeping the accent for
+ * progress alone is what makes the gamification feel earned instead of noisy.
+ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --surface: #faf7f2;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f1ece3;
+  --ink: #16151c;
+  --ink-muted: #605c6e;
+  --ink-faint: #8f8a9e;
+  --line: #e6e0d6;
+
+  --brand: #3b2fe8;
+  --brand-strong: #2a1fc4;
+  --brand-soft: #ecebfe;
+  --brand-ink: #ffffff;
+
+  --accent: #f2761f;
+  --accent-soft: #fdeee1;
+
+  --positive: #10804f;
+  --positive-soft: #e3f5ec;
+  --negative: #c0324b;
+  --negative-soft: #fbe9ec;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --surface: #0f0e14;
+    --surface-raised: #1a1822;
+    --surface-sunken: #16151d;
+    --ink: #f4f2f8;
+    --ink-muted: #a49fb4;
+    --ink-faint: #736e84;
+    --line: #2a2735;
+
+    --brand: #7d72ff;
+    --brand-strong: #9a92ff;
+    --brand-soft: #221f3d;
+    --brand-ink: #0f0e14;
+
+    --accent: #ff9b4d;
+    --accent-soft: #2d2016;
+
+    --positive: #4ade9f;
+    --positive-soft: #14261f;
+    --negative: #ff7d94;
+    --negative-soft: #2a151b;
   }
 }
 
+@theme inline {
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-sunken: var(--surface-sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--ink-muted);
+  --color-faint: var(--ink-faint);
+  --color-line: var(--line);
+
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-ink: var(--brand-ink);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-negative: var(--negative);
+  --color-negative-soft: var(--negative-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.75rem;
+}
+
+html {
+  background: var(--surface);
+  color-scheme: light dark;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  /* Stops the whole page rubber-banding in standalone mode, which is the
+     single biggest tell that a PWA is "just a website". */
+  overscroll-behavior-y: none;
+}
+
+/* Swiping a card must never scroll or select the page underneath. */
+.no-touch-scroll {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-pop {
+  animation: pop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-pop {
+    animation: none;
+  }
 }
