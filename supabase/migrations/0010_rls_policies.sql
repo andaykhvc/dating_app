@@ -134,6 +134,7 @@ grant update (
   preferred_age_min,
   preferred_age_max,
   preferred_countries,
+  hide_dating_profiles,
   onboarding_completed_at,
   updated_at
 ) on profiles to authenticated;
