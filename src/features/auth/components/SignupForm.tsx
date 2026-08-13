@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
+import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
 
@@ -150,6 +151,14 @@ export function SignupForm() {
       <Button type="submit" size="lg" fullWidth loading={loading}>
         Create account
       </Button>
+
+      <div className="flex items-center gap-3 py-1">
+        <div className="h-px flex-1 bg-line" />
+        <span className="text-xs text-muted">or continue with</span>
+        <div className="h-px flex-1 bg-line" />
+      </div>
+
+      <OAuthButtons />
 
       <p className="text-center text-sm text-muted">
         Already have an account?{" "}
