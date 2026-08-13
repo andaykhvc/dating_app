@@ -5,14 +5,23 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
+import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
+
+const CALLBACK_ERRORS: Record<string, string> = {
+  auth_callback_failed: "That didn't work — please try again.",
+};
 
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const next = searchParams.get("next");
+  const callbackError = searchParams.get("error");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(
+    callbackError ? (CALLBACK_ERRORS[callbackError] ?? "Something went wrong — please try again.") : null,
+  );
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
@@ -32,7 +41,6 @@ export function LoginForm() {
       return;
     }
 
-    const next = searchParams.get("next");
     router.push(next && next.startsWith("/") ? next : "/discover");
     router.refresh();
   }
@@ -77,6 +85,14 @@ export function LoginForm() {
       <Button type="submit" size="lg" fullWidth loading={loading}>
         Sign in
       </Button>
+
+      <div className="flex items-center gap-3 py-1">
+        <div className="h-px flex-1 bg-line" />
+        <span className="text-xs text-muted">or continue with</span>
+        <div className="h-px flex-1 bg-line" />
+      </div>
+
+      <OAuthButtons next={next && next.startsWith("/") ? next : undefined} />
 
       <p className="text-center text-sm text-muted">
         New here?{" "}

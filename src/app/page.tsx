@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoMark } from "@/components/icons";
+import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { APP_NAME } from "@/lib/constants";
 
 const STEPS = [
@@ -70,6 +71,15 @@ export default function LandingPage() {
         >
           I already have one
         </Link>
+
+        <div className="flex items-center gap-3 py-1">
+          <div className="h-px flex-1 bg-line" />
+          <span className="text-xs text-muted">or continue with</span>
+          <div className="h-px flex-1 bg-line" />
+        </div>
+
+        <OAuthButtons />
+
         <p className="pt-2 text-center text-xs text-faint">
           18+ only. Report and block are always one tap away.
         </p>

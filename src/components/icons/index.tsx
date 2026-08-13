@@ -253,6 +253,39 @@ export function DoubleCheckIcon({ className = "size-3.5" }: IconProps) {
   );
 }
 
+/** Google's "G" mark is fixed-color per brand guidelines — not currentColor. */
+export function GoogleLogo({ className = "size-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path
+        d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.87c2.27-2.09 3.58-5.17 3.58-8.82Z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 24c3.24 0 5.96-1.07 7.94-2.91l-3.87-3c-1.08.72-2.46 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.95H1.27v3.1A12 12 0 0 0 12 24Z"
+        fill="#34A853"
+      />
+      <path
+        d="M5.27 14.29a7.2 7.2 0 0 1 0-4.58v-3.1H1.27a12 12 0 0 0 0 10.78l4-3.1Z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M12 4.77c1.76 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0A12 12 0 0 0 1.27 6.61l4 3.1c.95-2.84 3.6-4.94 6.73-4.94Z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
+}
+
+export function AppleLogo({ className = "size-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M17.05 12.54c-.02-2.06 1.68-3.05 1.76-3.1-.96-1.4-2.45-1.6-2.98-1.62-1.27-.13-2.48.75-3.12.75-.65 0-1.63-.73-2.68-.71-1.38.02-2.65.8-3.36 2.03-1.43 2.49-.37 6.17 1.03 8.19.68.99 1.5 2.1 2.57 2.06 1.03-.04 1.42-.66 2.67-.66 1.24 0 1.6.66 2.68.64 1.11-.02 1.81-1 2.48-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.14-.82-2.17-3.26Z" />
+      <path d="M15.05 6.4c.56-.68.94-1.62.83-2.56-.81.03-1.79.54-2.37 1.22-.52.6-.97 1.57-.85 2.49.9.07 1.83-.46 2.39-1.15Z" />
+    </svg>
+  );
+}
+
 /** The brand mark: two speech bubbles mid-exchange. Matches public/icons/icon.svg. */
 export function LogoMark({ className = "size-9" }: IconProps) {
   return (
