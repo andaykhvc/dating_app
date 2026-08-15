@@ -27,7 +27,7 @@ export function Sheet({
   if (!open) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
+    <div className="fixed inset-x-0 top-0 z-50 flex h-svh items-end justify-center sm:items-center">
       <button
         aria-label="Close"
         onClick={onClose}
