@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 /** Bottom sheet — the mobile-native way to present a secondary surface. */
 export function Sheet({
@@ -25,8 +26,8 @@ export function Sheet({
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
+  return createPortal(
+    <div className="fixed inset-x-0 top-0 z-50 flex h-svh items-end justify-center sm:items-center">
       <button
         aria-label="Close"
         onClick={onClose}
@@ -42,6 +43,7 @@ export function Sheet({
         <h2 className="mb-4 text-lg font-bold text-ink">{title}</h2>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
