@@ -56,9 +56,27 @@ export function Select({
   children,
   ...props
 }: SelectHTMLAttributes<HTMLSelectElement>) {
+  // appearance-none drops the platform arrow, so draw one back — otherwise a
+  // select reads as a plain text box.
   return (
-    <select {...props} className={cn(CONTROL, "appearance-none", className)}>
-      {children}
-    </select>
+    <span className="relative block">
+      <select {...props} className={cn(CONTROL, "appearance-none pr-11", className)}>
+        {children}
+      </select>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden
+        className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-faint"
+      >
+        <path
+          d="m6 9 6 6 6-6"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
   );
 }

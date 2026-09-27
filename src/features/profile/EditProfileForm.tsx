@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BackIcon } from "@/components/icons";
 import { Button } from "@/components/ui/Button";
 import { Field, Input, Select, Textarea } from "@/components/ui/Field";
 import { SelectableChip } from "@/components/ui/Chip";
@@ -45,7 +47,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-line bg-raised p-5">
+    <section className="rounded-3xl border border-line bg-raised p-5 md:p-6">
       <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-faint">
         {title}
       </h2>
@@ -69,6 +71,12 @@ export function EditProfileForm({
   const [form, setForm] = useState(initial);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+
+  // Save can be pressed from the header, far from where the error renders.
+  useEffect(() => {
+    if (error) errorRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [error]);
 
   function set<K extends keyof Initial>(key: K, value: Initial[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -158,174 +166,201 @@ export function EditProfileForm({
 
   return (
     <>
-      <TopBar title="Edit profile" />
-      <div className="mx-auto w-full max-w-md space-y-4 px-5 py-5">
-        <Section title="Photos">
-          <PhotoManager
-            userId={userId}
-            photos={form.photos}
-            onChange={(photos) => set("photos", photos)}
-          />
-        </Section>
-
-        <Section title="About you">
-          <div className="space-y-4">
-            <Field label="First name">
-              <Input
-                value={form.firstName}
-                onChange={(e) => set("firstName", e.target.value)}
-                maxLength={40}
-              />
-            </Field>
-            <Field label="Country">
-              <Select
-                value={form.countryCode}
-                onChange={(e) => set("countryCode", e.target.value)}
-              >
-                <option value="">Select a country</option>
-                {COUNTRIES.map((c) => (
-                  <option key={c.code} value={c.code}>
-                    {c.flag} {c.name}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-            <Field label="City" hint="Optional.">
-              <Input
-                value={form.city}
-                onChange={(e) => set("city", e.target.value)}
-                maxLength={80}
-              />
-            </Field>
-            <Field label="Your line">
-              <Textarea
-                value={form.bio}
-                onChange={(e) => set("bio", e.target.value.slice(0, 300))}
-                rows={3}
-              />
-            </Field>
-          </div>
-        </Section>
-
-        <Section title="Languages">
-          <div className="space-y-4">
-            <Field label="I speak natively">
-              <Select
-                value={form.native}
-                onChange={(e) => set("native", e.target.value)}
-              >
-                <option value="">Select a language</option>
-                {languageOptions}
-              </Select>
-            </Field>
-            <Field label="I want to learn">
-              <Select
-                value={form.learning}
-                onChange={(e) => set("learning", e.target.value)}
-              >
-                <option value="">Select a language</option>
-                {languageOptions}
-              </Select>
-            </Field>
-            <div>
-              <span className="mb-2 block text-sm font-semibold text-ink">
-                My level
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {CEFR_LEVELS.map((l) => (
-                  <SelectableChip
-                    key={l}
-                    selected={form.level === l}
-                    onClick={() => set("level", l)}
-                  >
-                    {l}
-                  </SelectableChip>
-                ))}
-              </div>
-              <p className="mt-2 text-xs text-faint">
-                {CEFR_DESCRIPTIONS[form.level]}
-              </p>
-            </div>
-          </div>
-        </Section>
-
-        <Section title="Interests">
-          <div className="flex flex-wrap gap-2">
-            {interests.map((interest) => {
-              const selected = form.interestIds.includes(interest.id);
-              return (
-                <SelectableChip
-                  key={interest.id}
-                  selected={selected}
-                  onClick={() =>
-                    set(
-                      "interestIds",
-                      selected
-                        ? form.interestIds.filter((id) => id !== interest.id)
-                        : form.interestIds.length >= 8
-                          ? form.interestIds
-                          : [...form.interestIds, interest.id],
-                    )
-                  }
-                >
-                  {interest.emoji} {interest.label}
-                </SelectableChip>
-              );
-            })}
-          </div>
-        </Section>
-
-        <Section title="Here for">
-          <IntentionPicker
-            value={form.intentions}
-            onChange={(v) => set("intentions", v)}
-          />
-        </Section>
-
-        <Section title="Who you meet">
-          <div className="space-y-6">
-            <AgeRangeSlider
-              min={form.ageMin}
-              max={form.ageMax}
-              onChange={(lo, hi) =>
-                setForm((prev) => ({ ...prev, ageMin: lo, ageMax: hi }))
-              }
+      {/* Save sits in the header as well as at the end, so a long form never
+          needs scrolling back down to commit a one-field change. */}
+      <TopBar
+        title="Edit profile"
+        width="wide"
+        leading={
+          <Link
+            href="/profile"
+            aria-label="Back to profile"
+            className="-ml-2 flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+          >
+            <BackIcon className="size-5" />
+          </Link>
+        }
+        action={
+          <Button onClick={save} loading={saving} className="h-10 px-4">
+            Save
+          </Button>
+        }
+      />
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-gutter py-5 md:py-8 lg:grid-cols-2 lg:items-start lg:gap-6">
+        <div className="space-y-4 lg:space-y-6">
+          <Section title="Photos">
+            <PhotoManager
+              userId={userId}
+              photos={form.photos}
+              onChange={(photos) => set("photos", photos)}
             />
-            <div>
-              <span className="mb-3 block text-sm font-semibold text-ink">
-                Countries
-              </span>
-              <CountryPicker
-                value={form.countries}
-                onChange={(v) => set("countries", v)}
-              />
+          </Section>
+
+          <Section title="About you">
+            <div className="space-y-4">
+              <Field label="First name">
+                <Input
+                  value={form.firstName}
+                  onChange={(e) => set("firstName", e.target.value)}
+                  maxLength={40}
+                />
+              </Field>
+              <Field label="Country">
+                <Select
+                  value={form.countryCode}
+                  onChange={(e) => set("countryCode", e.target.value)}
+                >
+                  <option value="">Select a country</option>
+                  {COUNTRIES.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.flag} {c.name}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+              <Field label="City" hint="Optional.">
+                <Input
+                  value={form.city}
+                  onChange={(e) => set("city", e.target.value)}
+                  maxLength={80}
+                />
+              </Field>
+              <Field label="Your line">
+                <Textarea
+                  value={form.bio}
+                  onChange={(e) => set("bio", e.target.value.slice(0, 300))}
+                  rows={3}
+                />
+              </Field>
             </div>
-            <label className="flex items-start gap-3 rounded-2xl bg-sunken p-4">
-              <input
-                type="checkbox"
-                checked={form.hideDating}
-                onChange={(e) => set("hideDating", e.target.checked)}
-                className="mt-0.5 size-4 accent-[var(--brand)]"
+          </Section>
+
+          <Section title="Languages">
+            <div className="space-y-4">
+              <Field label="I speak natively">
+                <Select
+                  value={form.native}
+                  onChange={(e) => set("native", e.target.value)}
+                >
+                  <option value="">Select a language</option>
+                  {languageOptions}
+                </Select>
+              </Field>
+              <Field label="I want to learn">
+                <Select
+                  value={form.learning}
+                  onChange={(e) => set("learning", e.target.value)}
+                >
+                  <option value="">Select a language</option>
+                  {languageOptions}
+                </Select>
+              </Field>
+              <div>
+                <span className="mb-2 block text-sm font-semibold text-ink">
+                  My level
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {CEFR_LEVELS.map((l) => (
+                    <SelectableChip
+                      key={l}
+                      selected={form.level === l}
+                      onClick={() => set("level", l)}
+                    >
+                      {l}
+                    </SelectableChip>
+                  ))}
+                </div>
+                <p className="mt-2 text-xs text-faint">
+                  {CEFR_DESCRIPTIONS[form.level]}
+                </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+
+        <div className="space-y-4 lg:space-y-6">
+          <Section title="Interests">
+            <div className="flex flex-wrap gap-2">
+              {interests.map((interest) => {
+                const selected = form.interestIds.includes(interest.id);
+                return (
+                  <SelectableChip
+                    key={interest.id}
+                    selected={selected}
+                    onClick={() =>
+                      set(
+                        "interestIds",
+                        selected
+                          ? form.interestIds.filter((id) => id !== interest.id)
+                          : form.interestIds.length >= 8
+                            ? form.interestIds
+                            : [...form.interestIds, interest.id],
+                      )
+                    }
+                  >
+                    {interest.emoji} {interest.label}
+                  </SelectableChip>
+                );
+              })}
+            </div>
+          </Section>
+
+          <Section title="Here for">
+            <IntentionPicker
+              value={form.intentions}
+              onChange={(v) => set("intentions", v)}
+            />
+          </Section>
+
+          <Section title="Who you meet">
+            <div className="space-y-6">
+              <AgeRangeSlider
+                min={form.ageMin}
+                max={form.ageMax}
+                onChange={(lo, hi) =>
+                  setForm((prev) => ({ ...prev, ageMin: lo, ageMax: hi }))
+                }
               />
-              <span>
-                <span className="block text-sm font-semibold text-ink">
-                  Language partners only
+              <div>
+                <span className="mb-3 block text-sm font-semibold text-ink">
+                  Countries
                 </span>
-                <span className="mt-0.5 block text-xs text-muted">
-                  Hides everyone open to dating from Discover.
+                <CountryPicker
+                  value={form.countries}
+                  onChange={(v) => set("countries", v)}
+                />
+              </div>
+              <label className="flex items-start gap-3 rounded-2xl bg-sunken p-4">
+                <input
+                  type="checkbox"
+                  checked={form.hideDating}
+                  onChange={(e) => set("hideDating", e.target.checked)}
+                  className="mt-0.5 size-4 accent-[var(--brand)]"
+                />
+                <span>
+                  <span className="block text-sm font-semibold text-ink">
+                    Language partners only
+                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">
+                    Hides everyone open to dating from Discover.
+                  </span>
                 </span>
-              </span>
-            </label>
-          </div>
-        </Section>
+              </label>
+            </div>
+          </Section>
+        </div>
 
         {error && (
-          <p role="alert" className="rounded-2xl bg-negative-soft px-4 py-3 text-sm text-negative">
+          <p
+            ref={errorRef}
+            role="alert"
+            className="rounded-2xl bg-negative-soft px-4 py-3 text-sm text-negative lg:col-span-2"
+          >
             {error}
           </p>
         )}
 
-        <div className="flex gap-3 pb-4">
+        <div className="flex gap-3 pb-4 lg:col-span-2 lg:ml-auto lg:w-full lg:max-w-sm">
           <Button
             variant="secondary"
             fullWidth

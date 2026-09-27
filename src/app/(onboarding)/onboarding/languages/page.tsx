@@ -1,12 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/queries";
 import { LanguagesStep } from "@/features/onboarding/components/LanguagesStep";
 import type { CefrLevel, Language } from "@/types/domain";
 
 export default async function LanguagesPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [supabase, user] = await Promise.all([createClient(), getCurrentUser()]);
 
   const [{ data: languages }, { data: userLanguages }] = await Promise.all([
     supabase

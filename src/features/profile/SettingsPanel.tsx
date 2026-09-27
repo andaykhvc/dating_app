@@ -39,7 +39,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-4 px-5 py-5">
+    <div className="mx-auto w-full max-w-xl space-y-4 px-gutter py-5 md:space-y-5 md:py-8">
       <section className="rounded-3xl border border-line bg-raised p-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">
           Blocked people
@@ -69,7 +69,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
                   type="button"
                   onClick={() => unblock(person.user_id)}
                   disabled={busy === person.user_id}
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
+                  className="min-h-9 shrink-0 rounded-full px-3.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
                 >
                   Unblock
                 </button>

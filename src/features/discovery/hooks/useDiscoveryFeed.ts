@@ -18,6 +18,9 @@ export function useDiscoveryFeed(initial: DiscoveryCard[]) {
   const [exhausted, setExhausted] = useState(initial.length === 0);
   const [error, setError] = useState<string | null>(null);
   const inFlight = useRef(false);
+  // A refill can land before the swipe that removed someone has been written,
+  // in which case the server still returns them. Remember who has gone.
+  const dismissed = useRef(new Set<string>());
 
   const refill = useCallback(async () => {
     if (inFlight.current) return;
@@ -28,7 +31,10 @@ export function useDiscoveryFeed(initial: DiscoveryCard[]) {
       const batch = await fetchDiscoveryBatch();
       setCards((prev) => {
         const seen = new Set(prev.map((c) => c.id));
-        return [...prev, ...batch.filter((c) => !seen.has(c.id))];
+        return [
+          ...prev,
+          ...batch.filter((c) => !seen.has(c.id) && !dismissed.current.has(c.id)),
+        ];
       });
       setExhausted(batch.length === 0);
     } catch (e) {
@@ -40,8 +46,16 @@ export function useDiscoveryFeed(initial: DiscoveryCard[]) {
   }, []);
 
   const dismissTop = useCallback(() => {
-    setCards((prev) => prev.slice(1));
+    setCards((prev) => {
+      if (prev[0]) dismissed.current.add(prev[0].id);
+      return prev.slice(1);
+    });
   }, []);
 
-  return { cards, loading, exhausted, error, dismissTop, refill };
+  /** The swipe never reached the server, so let a later refill bring them back. */
+  const undismiss = useCallback((id: string) => {
+    dismissed.current.delete(id);
+  }, []);
+
+  return { cards, loading, exhausted, error, dismissTop, undismiss, refill };
 }

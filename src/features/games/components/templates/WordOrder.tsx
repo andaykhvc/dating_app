@@ -4,14 +4,30 @@ import { useMemo, useState } from "react";
 import { GameFooter, Instructions } from "./shared";
 import type { TemplateProps, WordOrderPayload } from "@/features/games/engine/types";
 
-function shuffle<T>(items: T[]): T[] {
+/**
+ * Seeded by the session id rather than Math.random(): the server and the
+ * browser both render this, and a different order on each side was a hydration
+ * mismatch. It also keeps the order stable across a refresh of the same round.
+ */
+function seededShuffle<T>(items: T[], seed: string): T[] {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
+  const random = () => {
+    h = Math.imul(h ^ (h >>> 15), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return ((h ^= h >>> 16) >>> 0) / 4294967296;
+  };
+
   const copy = [...items];
   for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
 }
+
+const TOKEN =
+  "min-h-11 max-w-full rounded-xl px-3.5 py-2 text-base font-medium leading-snug [overflow-wrap:anywhere] transition-[transform,colors] active:scale-95";
 
 export function WordOrder({
   session,
@@ -24,8 +40,12 @@ export function WordOrder({
 
   // Indices, not strings — a sentence can legitimately repeat a word.
   const pool = useMemo(
-    () => shuffle((payload?.tokens ?? []).map((_, i) => i)),
-    [payload?.tokens],
+    () =>
+      seededShuffle(
+        (payload?.tokens ?? []).map((_, i) => i),
+        session.session_id,
+      ),
+    [payload?.tokens, session.session_id],
   );
   const [picked, setPicked] = useState<number[]>([]);
 
@@ -33,12 +53,17 @@ export function WordOrder({
   const sentence = picked.map((i) => payload.tokens[i]).join(" ");
 
   return (
-    <div className="flex flex-1 flex-col gap-7">
+    <div className="flex flex-1 flex-col gap-6 md:gap-8">
       <Instructions>Tap the words to build the sentence.</Instructions>
 
-      <div className="min-h-24 rounded-2xl border-2 border-dashed border-line bg-raised p-4">
+      <div
+        aria-live="polite"
+        className="min-h-28 rounded-2xl border-2 border-dashed border-line bg-raised p-3 sm:p-4"
+      >
         {picked.length === 0 ? (
-          <p className="text-center text-sm text-faint">Your sentence appears here</p>
+          <p className="flex min-h-20 items-center justify-center text-center text-sm text-faint">
+            Your sentence appears here
+          </p>
         ) : (
           <div className="flex flex-wrap gap-2">
             {picked.map((tokenIndex, position) => (
@@ -50,7 +75,8 @@ export function WordOrder({
                   setPicked((prev) => prev.filter((_, p) => p !== position))
                 }
                 disabled={result !== null}
-                className="rounded-xl bg-brand px-3 py-2 text-sm font-medium text-brand-ink"
+                aria-label={`Remove “${payload.tokens[tokenIndex]}”`}
+                className={`${TOKEN} bg-brand text-brand-ink`}
               >
                 {payload.tokens[tokenIndex]}
               </button>
@@ -66,22 +92,20 @@ export function WordOrder({
             type="button"
             onClick={() => setPicked((prev) => [...prev, tokenIndex])}
             disabled={result !== null}
-            className="rounded-xl border border-line bg-raised px-3 py-2 text-sm font-medium text-ink transition-colors hover:border-brand/40 disabled:opacity-50"
+            className={`${TOKEN} border border-line bg-raised text-ink hover:border-brand/40 disabled:opacity-50`}
           >
             {payload.tokens[tokenIndex]}
           </button>
         ))}
       </div>
 
-      <div className="mt-auto">
-        <GameFooter
-          result={result}
-          submitting={submitting}
-          canSubmit={remaining.length === 0}
-          onSubmit={() => onSubmit({ answer: sentence })}
-          onDone={onDone}
-        />
-      </div>
+      <GameFooter
+        result={result}
+        submitting={submitting}
+        canSubmit={remaining.length === 0}
+        onSubmit={() => onSubmit({ answer: sentence })}
+        onDone={onDone}
+      />
     </div>
   );
 }

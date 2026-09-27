@@ -29,6 +29,9 @@ export const viewport: Viewport = {
   maximumScale: 1,
   // Lets the app paint into the notch and home-indicator areas in standalone mode.
   viewportFit: "cover",
+  // Android Chrome shrinks the layout viewport (and so dvh) when the keyboard
+  // opens, which keeps the chat composer and form buttons above it.
+  interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#faf7f2" },
     { media: "(prefers-color-scheme: dark)", color: "#0f0e14" },

@@ -72,13 +72,19 @@ export async function sendMessage(
   return normalize(data as unknown as RawMessage);
 }
 
-/** The recipient acknowledges receipt. A column grant limits this to the flag. */
-export async function markDelivered(messageId: number) {
+/**
+ * The recipient acknowledges receipt. A column grant limits this to the flag,
+ * and the update policy to messages the other person sent. One request for the
+ * whole batch — opening a thread with thirty unread messages used to send
+ * thirty separate updates.
+ */
+export async function markDelivered(messageIds: number[]) {
+  if (messageIds.length === 0) return;
   const supabase = createClient();
   await supabase
     .from("messages")
     .update({ delivery_state: "delivered" })
-    .eq("id", messageId);
+    .in("id", messageIds);
 }
 
 export async function submitCorrection(

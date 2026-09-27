@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ChoiceButton, GameFooter, Instructions, Prompt } from "./shared";
+import {
+  ChoiceButton,
+  ChoiceGrid,
+  GameFooter,
+  Instructions,
+  Prompt,
+} from "./shared";
 import type {
   TemplateProps,
   TranslationChoicePayload,
@@ -16,14 +22,15 @@ export function TranslationChoice({
 }: TemplateProps & { onDone: () => void }) {
   const payload = session.content?.payload as unknown as TranslationChoicePayload;
   const [choice, setChoice] = useState<string | null>(null);
+  const choices = payload?.choices ?? [];
 
   return (
-    <div className="flex flex-1 flex-col gap-7">
+    <div className="flex flex-1 flex-col gap-6 md:gap-8">
       <Instructions>Which one means the same thing?</Instructions>
       <Prompt>{payload?.prompt}</Prompt>
 
-      <div className="space-y-2.5">
-        {payload?.choices.map((option) => (
+      <ChoiceGrid choices={choices}>
+        {choices.map((option) => (
           <ChoiceButton
             key={option}
             label={option}
@@ -41,17 +48,15 @@ export function TranslationChoice({
             disabled={result !== null}
           />
         ))}
-      </div>
+      </ChoiceGrid>
 
-      <div className="mt-auto">
-        <GameFooter
-          result={result}
-          submitting={submitting}
-          canSubmit={choice !== null}
-          onSubmit={() => onSubmit({ answer: choice ?? "" })}
-          onDone={onDone}
-        />
-      </div>
+      <GameFooter
+        result={result}
+        submitting={submitting}
+        canSubmit={choice !== null}
+        onSubmit={() => onSubmit({ answer: choice ?? "" })}
+        onDone={onDone}
+      />
     </div>
   );
 }

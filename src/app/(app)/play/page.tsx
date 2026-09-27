@@ -11,7 +11,7 @@ export default async function PlayPage() {
 
   return (
     <>
-      <TopBar title="Play" subtitle="Daily challenge, missions and XP" />
+      <TopBar title="Play" subtitle="Daily challenge, missions and XP" width="wide" />
       <PlayHub overview={data as PlayOverview} />
     </>
   );

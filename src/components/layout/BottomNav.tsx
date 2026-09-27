@@ -2,49 +2,43 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  DiscoverIcon,
-  MatchesIcon,
-  MessagesIcon,
-  PlayIcon,
-  ProfileIcon,
-} from "@/components/icons";
+import { TABS, isImmersive, isTabActive } from "@/components/layout/nav";
 import { cn } from "@/lib/utils";
 
-const TABS = [
-  { href: "/discover", label: "Discover", Icon: DiscoverIcon },
-  { href: "/matches", label: "Matches", Icon: MatchesIcon },
-  { href: "/play", label: "Play", Icon: PlayIcon },
-  { href: "/messages", label: "Messages", Icon: MessagesIcon },
-  { href: "/profile", label: "Profile", Icon: ProfileIcon },
-] as const;
-
+/** Phones only — from tablet width up the SideNav takes over. */
 export function BottomNav() {
   const pathname = usePathname();
-
-  // An open chat or a challenge in progress owns the bottom of the screen.
-  const immersive =
-    /^\/messages\/[^/]+$/.test(pathname) ||
-    /^\/play\/session\/[^/]+$/.test(pathname);
-  if (immersive) return null;
+  if (isImmersive(pathname)) return null;
 
   return (
-    <nav className="safe-bottom sticky bottom-0 z-30 border-t border-line bg-raised/95 backdrop-blur-lg">
-      <ul className="mx-auto flex max-w-md items-stretch">
+    <nav
+      aria-label="Main"
+      className="safe-bottom safe-x sticky bottom-0 z-30 border-t border-line bg-raised/95 backdrop-blur-lg md:hidden"
+    >
+      <ul className="mx-auto flex max-w-lg items-stretch">
         {TABS.map(({ href, label, Icon }) => {
-          const active = pathname === href || pathname.startsWith(`${href}/`);
+          const active = isTabActive(pathname, href);
           return (
             <li key={href} className="flex-1">
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex flex-col items-center gap-1 py-2.5 transition-colors",
-                  active ? "text-brand" : "text-faint hover:text-muted",
+                  "group flex min-h-14 flex-col items-center justify-center gap-0.5 pb-1.5 pt-2 transition-colors tiny:min-h-12 tiny:pb-1 tiny:pt-1.5",
+                  active ? "text-brand" : "text-faint active:text-muted",
                 )}
               >
-                <Icon className="size-6" filled={active} />
-                <span className="text-[0.6875rem] font-medium">{label}</span>
+                <span
+                  className={cn(
+                    "flex h-7 w-12 items-center justify-center rounded-full transition-colors",
+                    active && "bg-brand-soft",
+                  )}
+                >
+                  <Icon className="size-6" filled={active} />
+                </span>
+                <span className="text-[0.6875rem] font-medium leading-none tiny:sr-only">
+                  {label}
+                </span>
               </Link>
             </li>
           );

@@ -105,22 +105,24 @@ export function LanguagesStep({
       error={error}
     >
       <div className="space-y-6">
-        <Field label="I speak natively">
-          <Select value={native} onChange={(e) => setNative(e.target.value)}>
-            <option value="">Select a language</option>
-            {renderOptions()}
-          </Select>
-        </Field>
+        <div className="grid items-start gap-6 sm:grid-cols-2 sm:gap-4">
+          <Field label="I speak natively">
+            <Select value={native} onChange={(e) => setNative(e.target.value)}>
+              <option value="">Select a language</option>
+              {renderOptions()}
+            </Select>
+          </Field>
 
-        <Field
-          label="I want to learn"
-          hint="Challenges and practice content come from this language."
-        >
-          <Select value={learning} onChange={(e) => setLearning(e.target.value)}>
-            <option value="">Select a language</option>
-            {renderOptions()}
-          </Select>
-        </Field>
+          <Field
+            label="I want to learn"
+            hint="Challenges and practice content come from this language."
+          >
+            <Select value={learning} onChange={(e) => setLearning(e.target.value)}>
+              <option value="">Select a language</option>
+              {renderOptions()}
+            </Select>
+          </Field>
+        </div>
 
         <div>
           <span className="mb-2 block text-sm font-semibold text-ink">

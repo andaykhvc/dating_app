@@ -1,12 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/queries";
 import { PreferencesStep } from "@/features/onboarding/components/PreferencesStep";
 import type { Intention } from "@/types/domain";
 
 export default async function PreferencesPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [supabase, user] = await Promise.all([createClient(), getCurrentUser()]);
 
   const { data: profile } = await supabase
     .from("profiles")

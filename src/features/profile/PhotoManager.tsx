@@ -2,8 +2,9 @@
 
 import { useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { ThumbImage } from "@/components/ui/ThumbImage";
 import { compressImage } from "@/lib/image/compressImage";
-import { photoUrl, PHOTO_BUCKET } from "@/lib/photos";
+import { PHOTO_BUCKET, thumbPath } from "@/lib/photos";
 import { MAX_PHOTOS } from "@/lib/constants";
 
 export type StoredPhoto = { id: string; storage_path: string; position: number };
@@ -40,15 +41,20 @@ export function PhotoManager({
 
     setBusy(true);
     setError(null);
+    const supabase = createClient();
+    const bucket = supabase.storage.from(PHOTO_BUCKET);
+    const path = `${userId}/${crypto.randomUUID()}.webp`;
     try {
-      const blob = await compressImage(file);
-      const supabase = createClient();
-      const path = `${userId}/${crypto.randomUUID()}.webp`;
+      const { full, thumb } = await compressImage(file);
+      const options = { contentType: "image/webp", upsert: false };
 
-      const { error: uploadError } = await supabase.storage
-        .from(PHOTO_BUCKET)
-        .upload(path, blob, { contentType: "image/webp", upsert: false });
-      if (uploadError) throw uploadError;
+      // A failed thumbnail only costs bandwidth — avatars fall back to the
+      // full photo — so only the full upload's error fails the step.
+      const [fullUpload] = await Promise.all([
+        bucket.upload(path, full, options),
+        bucket.upload(thumbPath(path), thumb, options),
+      ]);
+      if (fullUpload.error) throw fullUpload.error;
 
       const { data, error: insertError } = await supabase
         .from("profile_photos")
@@ -59,6 +65,9 @@ export function PhotoManager({
 
       onChange([...photos, data as StoredPhoto].sort((a, b) => a.position - b.position));
     } catch (e) {
+      // Nothing points at these objects without the row, so they would sit in
+      // the public bucket forever. Best effort; either may not exist.
+      void bucket.remove([path, thumbPath(path)]);
       setError(e instanceof Error ? e.message : "Upload failed. Try another photo.");
     } finally {
       setBusy(false);
@@ -81,7 +90,9 @@ export function PhotoManager({
       return;
     }
 
-    await supabase.storage.from(PHOTO_BUCKET).remove([photo.storage_path]);
+    await supabase.storage
+      .from(PHOTO_BUCKET)
+      .remove([photo.storage_path, thumbPath(photo.storage_path)]);
     onChange(photos.filter((p) => p.id !== photo.id));
     setBusy(false);
   }
@@ -92,52 +103,50 @@ export function PhotoManager({
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-3">
-        {slots.map((photo, i) => {
-          const url = photoUrl(photo?.storage_path);
-          return (
-            <div
-              key={i}
-              className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-line bg-sunken"
-            >
-              {photo && url ? (
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={url}
-                    alt=""
-                    className="size-full object-cover"
-                    loading="lazy"
-                  />
-                  {i === 0 && (
-                    <span className="absolute left-1.5 top-1.5 rounded-full bg-brand px-2 py-0.5 text-[0.625rem] font-semibold text-brand-ink">
-                      Main
-                    </span>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => remove(photo)}
-                    disabled={busy}
-                    aria-label="Remove photo"
-                    className="absolute right-1.5 top-1.5 flex size-6 items-center justify-center rounded-full bg-black/60 text-sm text-white"
-                  >
-                    ×
-                  </button>
-                </>
-              ) : (
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
+        {slots.map((photo, i) => (
+          <div
+            key={i}
+            className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-line bg-sunken"
+          >
+            {photo ? (
+              <>
+                <ThumbImage
+                  storagePath={photo.storage_path}
+                  alt={i === 0 ? "Main photo" : `Photo ${i + 1}`}
+                  className="size-full object-cover"
+                />
+                {i === 0 && (
+                  <span className="absolute bottom-1.5 left-1.5 rounded-full bg-brand px-2 py-0.5 text-[0.625rem] font-semibold text-brand-ink">
+                    Main
+                  </span>
+                )}
+                {/* The visible dot is small; the tappable area is not. */}
                 <button
                   type="button"
-                  onClick={() => inputRef.current?.click()}
+                  onClick={() => remove(photo)}
                   disabled={busy}
-                  className="flex size-full items-center justify-center text-2xl text-faint transition-colors hover:bg-brand-soft hover:text-brand disabled:opacity-50"
-                  aria-label="Add photo"
+                  aria-label={`Remove photo ${i + 1}`}
+                  className="absolute right-0 top-0 flex size-10 items-start justify-end p-1.5 disabled:opacity-50"
                 >
-                  +
+                  <span className="flex size-6 items-center justify-center rounded-full bg-black/60 text-sm leading-none text-white">
+                    ×
+                  </span>
                 </button>
-              )}
-            </div>
-          );
-        })}
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => inputRef.current?.click()}
+                disabled={busy}
+                className="flex size-full items-center justify-center text-2xl text-faint transition-colors hover:bg-brand-soft hover:text-brand disabled:opacity-50"
+                aria-label="Add photo"
+              >
+                +
+              </button>
+            )}
+          </div>
+        ))}
       </div>
 
       <input

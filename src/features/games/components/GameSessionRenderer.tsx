@@ -92,20 +92,20 @@ export function GameSessionRenderer({
   return (
     <div className="flex min-h-dvh flex-col">
       <header className="safe-top sticky top-0 z-20 border-b border-line bg-surface/90 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-md items-center gap-2 px-3 py-3">
+        <div className="mx-auto flex min-h-14 max-w-2xl items-center gap-2 px-2 py-1.5 md:min-h-16 md:px-gutter">
           <button
             type="button"
             onClick={() => router.push(returnTo)}
             aria-label="Leave challenge"
-            className="rounded-full p-2 text-muted hover:bg-sunken"
+            className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
           >
             <BackIcon className="size-5" />
           </button>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-bold text-ink">
+            <p className="truncate text-[0.9375rem] font-bold text-ink">
               {session.template.title}
             </p>
-            <p className="text-[0.6875rem] text-faint">
+            <p className="text-[0.6875rem] text-faint md:text-xs">
               {session.content.language_code.toUpperCase()} ·{" "}
               {session.content.cefr_level} · +{session.template.xp_reward} XP
             </p>
@@ -113,13 +113,15 @@ export function GameSessionRenderer({
         </div>
       </header>
 
-      <div className="safe-bottom mx-auto flex w-full max-w-md flex-1 flex-col px-5 py-7">
-        {renderTemplate()}
+      {/* Reading width on every screen; the footer inside each template is
+          sticky, so the action stays reachable however long the content. */}
+      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-gutter pt-6 md:pt-12">
         {error && (
-          <p role="alert" className="mt-3 text-center text-xs text-negative">
+          <p role="alert" className="mb-4 rounded-2xl bg-negative-soft px-4 py-3 text-center text-sm text-negative">
             {error}
           </p>
         )}
+        {renderTemplate()}
       </div>
     </div>
   );

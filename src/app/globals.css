@@ -1,6 +1,21 @@
 @import "tailwindcss";
 
 /*
+ * Height-aware variants. Width breakpoints decide layout; these only tighten
+ * spacing when a screen is short (small phones, landscape, laptop windows).
+ */
+@custom-variant short (@media (max-height: 44rem));
+@custom-variant tiny (@media (max-height: 34rem));
+
+/*
+ * The discovery card sizes its own content from the space it is given, not the
+ * viewport, so the same card works in a phone deck and a desktop column.
+ */
+@custom-variant card-compact (@container card (max-height: 31rem));
+@custom-variant card-tiny (@container card (max-height: 24rem));
+@custom-variant card-wide (@container card (orientation: landscape));
+
+/*
  * Lingua Match design tokens.
  *
  * Warm paper rather than clinical white, electric indigo rather than the red /
@@ -30,6 +45,9 @@
   --positive-soft: #e3f5ec;
   --negative: #c0324b;
   --negative-soft: #fbe9ec;
+
+  /* Fluid page gutter: 16px on the smallest phones, 32px from tablets up. */
+  --gutter: clamp(1rem, 4vw, 2rem);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -87,6 +105,9 @@
 html {
   background: var(--surface);
   color-scheme: light dark;
+  /* Stops iOS inflating text when the phone is turned sideways. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -98,6 +119,56 @@ body {
   overscroll-behavior-y: none;
 }
 
+/* No grey flash on tap, and no double-tap-zoom delay on controls. */
+a,
+button,
+label,
+summary,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+a:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@utility px-gutter {
+  padding-inline: var(--gutter);
+}
+
+@utility -mx-gutter {
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+/*
+ * `pt-safe-6` = at least spacing 6, or the notch / home-indicator inset if that
+ * is bigger. Unlike the .safe-* helpers below these live in the utility layer,
+ * so they combine with responsive variants instead of silently replacing (or
+ * being replaced by) a pt-* / pb-* on the same element.
+ */
+@utility pt-safe-* {
+  padding-top: max(calc(var(--spacing) * --value(integer)), env(safe-area-inset-top, 0px));
+}
+
+@utility pb-safe-* {
+  padding-bottom: max(calc(var(--spacing) * --value(integer)), env(safe-area-inset-bottom, 0px));
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.card-container {
+  container: card / size;
+}
+
 /* Swiping a card must never scroll or select the page underneath. */
 .no-touch-scroll {
   touch-action: none;
@@ -106,12 +177,18 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* For elements with no padding of their own on that side (see pt-safe-*). */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .safe-top {
   padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-x {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 @keyframes rise {
@@ -139,6 +216,31 @@ body {
   }
 }
 
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
 .animate-rise {
   animation: rise 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -147,9 +249,39 @@ body {
   animation: pop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.animate-fade {
+  animation: fade 0.2s ease-out both;
+}
+
+/* A bottom sheet on phones, a centred dialog once there is room for one. */
+.animate-sheet {
+  animation: sheet-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (min-width: 40rem) {
+  .animate-sheet {
+    animation-name: dialog-in;
+    animation-duration: 0.22s;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+      90deg,
+      var(--surface-sunken) 0%,
+      color-mix(in oklab, var(--surface-sunken), var(--surface-raised) 60%) 50%,
+      var(--surface-sunken) 100%
+    )
+    0 0 / 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
-  .animate-pop {
+  .animate-pop,
+  .animate-fade,
+  .animate-sheet,
+  .skeleton {
     animation: none;
   }
 }

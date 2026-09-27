@@ -1,12 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/queries";
 import { PhotosStep } from "@/features/onboarding/components/PhotosStep";
 import type { StoredPhoto } from "@/features/profile/PhotoManager";
 
 export default async function PhotosPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [supabase, user] = await Promise.all([createClient(), getCurrentUser()]);
 
   const { data: photos } = await supabase
     .from("profile_photos")

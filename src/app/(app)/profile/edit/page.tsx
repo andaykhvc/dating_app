@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/queries";
 import { EditProfileForm } from "@/features/profile/EditProfileForm";
 import type { StoredPhoto } from "@/features/profile/PhotoManager";
 import type { CefrLevel, Intention, Interest, Language } from "@/types/domain";
@@ -7,10 +8,7 @@ import type { CefrLevel, Intention, Interest, Language } from "@/types/domain";
 export const metadata: Metadata = { title: "Edit profile" };
 
 export default async function EditProfilePage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [supabase, user] = await Promise.all([createClient(), getCurrentUser()]);
 
   const [
     { data: profile },

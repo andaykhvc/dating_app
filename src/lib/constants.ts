@@ -3,9 +3,28 @@ import type { Intention } from "@/types/domain";
 export const APP_NAME = "Lingua Match";
 export const APP_TAGLINE = "Learn a language with someone real.";
 
+/** The three-line pitch, shared by the landing page and the auth screens. */
+export const VALUE_PROPS = [
+  {
+    title: "Find someone worth talking to",
+    body: "Swipe through people who speak what you are learning — and are learning what you speak.",
+  },
+  {
+    title: "Never stare at an empty chat",
+    body: "Every match arrives with a mission. A real thing to talk about, from the first message.",
+  },
+  {
+    title: "Fix each other's mistakes",
+    body: "Tap any message to suggest a correction. You both earn XP — no robot marking your grammar.",
+  },
+] as const;
+
 export const MAX_PHOTOS = 6;
 export const MAX_PHOTO_DIMENSION = 1280;
 export const PHOTO_QUALITY = 0.75;
+/** Avatars and gallery tiles never render above ~120px, so 320px covers 3x screens. */
+export const THUMB_DIMENSION = 320;
+export const THUMB_QUALITY = 0.7;
 export const MESSAGE_PAGE_SIZE = 30;
 export const DISCOVERY_BATCH_SIZE = 10;
 /** Fetch the next batch before the deck empties, so swiping never stalls. */
