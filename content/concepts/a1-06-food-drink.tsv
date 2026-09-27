@@ -1,0 +1,85 @@
+# Unit A1.6 — Food and drink: drinks, food, at the café, likes and dislikes
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- drinks
+coffee	w	noun		drinks	drinks	coffee	der Kaffee	el café	de koffie	kahve		
+tea	w	noun		drinks	drinks	tea	der Tee	el té	de thee	çay		
+water	w	noun		drinks	drinks	water	das Wasser	el agua {f}	het water	su		
+milk	w	noun		drinks	drinks	milk	die Milch	la leche	de melk	süt		
+juice	w	noun		drinks	drinks	juice	der Saft	el zumo | el jugo	het sap	meyve suyu		
+beer	w	noun		drinks	drinks	beer	das Bier	la cerveza	het bier	bira		
+wine	w	noun		drinks	drinks	wine	der Wein	el vino	de wijn	şarap		
+glass	w	noun		drinks	tableware	glass	das Glas	el vaso	het glas	bardak		
+cup	w	noun		drinks	tableware	cup	die Tasse	la taza	het kopje	fincan		
+to-drink	w	verb		drinks	food-verbs	to drink	trinken	beber | tomar	drinken	içmek		
+hot	w	adjective		drinks	temperature	hot	heiß	caliente	heet	sıcak		
+cold	w	adjective		drinks	temperature	cold	kalt	frío | fría	koud	soğuk		
+s.coffee-every-morning	s			drinks		I drink coffee every morning.	Ich [trinke:verb] jeden Morgen Kaffee.	[Bebo:verb] café todas las mañanas. | Tomo café todas las mañanas.	Ik [drink:verb] elke ochtend koffie.	Her sabah kahve [içerim:verb].		
+s.coffee-or-tea	s			drinks		Coffee or tea?	Kaffee oder [Tee:noun]?	¿Café o [té:noun]?	Koffie of [thee:noun]?	Kahve mi [çay:noun] mı?	A friend visits and you offer something hot to drink.	
+s.glass-water	s			drinks		A glass of water, please.	Ein Glas [Wasser:noun], bitte.	Un vaso de [agua:noun], por favor.	Een glas [water:noun], alstublieft.	Bir bardak [su:noun], lütfen.	You're thirsty in a restaurant.	
+s.no-alcohol	s			drinks		I don't drink alcohol.	Ich trinke keinen [Alkohol:noun].	No bebo [alcohol:noun].	Ik drink geen [alcohol:noun].	[Alkol:noun] içmiyorum.		
+s.tea-milk	s			drinks		Do you drink tea with milk?	Trinkst du Tee mit [Milch:noun]?	¿Tomas el té con [leche:noun]?	Drink je thee met [melk:noun]?	Çayı [sütlü:adjective] mü içersin?		
+s.beer-cold	s			drinks		The beer is nice and cold.	Das Bier ist schön [kalt:adjective].	La cerveza está muy [fría:adjective].	Het bier is lekker [koud:adjective].	Bira çok [soğuk:adjective].		
+s.tea-hot	s			drinks		Careful, the tea is hot!	Vorsicht, der Tee ist [heiß:adjective]!	¡Cuidado, el té está [caliente:adjective]!	Pas op, de thee is [heet:adjective]!	Dikkat, çay çok [sıcak:adjective]!	You hand a friend a cup that has just been poured.	
+s.favourite-drink	s			drinks		What's your favourite drink? | What's your favorite drink?	Was ist dein [Lieblingsgetränk:noun]?	¿Cuál es tu bebida [favorita:adjective]?	Wat is je [lievelingsdrankje:noun]?	En sevdiğin [içecek:noun] ne?		social
+# ---- food
+bread	w	noun		food	food	bread	das Brot	el pan	het brood	ekmek		
+cheese	w	noun		food	food	cheese	der Käse	el queso	de kaas	peynir		
+egg	w	noun		food	food	egg	das Ei	el huevo	het ei	yumurta		
+apple	w	noun		food	food	apple	der Apfel	la manzana	de appel	elma		
+rice	w	noun		food	food	rice	der Reis	el arroz	de rijst	pilav | pirinç		
+meat	w	noun		food	food	meat	das Fleisch	la carne	het vlees	et		
+fish	w	noun		food	food	fish	der Fisch	el pescado	de vis	balık		
+vegetables	w	noun		food	food	vegetables	das Gemüse	las verduras | la verdura	de groente | de groenten	sebze		
+fruit	w	noun		food	food	fruit	das Obst	la fruta	het fruit	meyve		
+soup	w	noun		food	food	soup	die Suppe	la sopa	de soep	çorba		
+meal	w	noun		food	meals	food | meal	das Essen	la comida	het eten	yemek		gloss=food (a meal)
+lunch	w	noun		food	meals	lunch	das Mittagessen	el almuerzo	de lunch	öğle yemeği		
+dinner	w	noun		food	meals	dinner	das Abendessen	la cena	het avondeten	akşam yemeği		
+to-eat	w	verb		food	food-verbs	to eat	essen	comer	eten	yemek yemek		
+to-cook	w	verb		food	food-verbs	to cook	kochen	cocinar	koken	yemek yapmak | pişirmek		
+delicious	w	adjective		food	taste	delicious | tasty	lecker	rico | rica | delicioso	lekker	lezzetli		
+s.no-meat	s			food		I don't eat meat.	Ich esse kein [Fleisch:noun].	No como [carne:noun].	Ik eet geen [vlees:noun].	[Et:noun] yemiyorum.		
+s.vegetarian	s			food		I'm vegetarian. | I am vegetarian.	Ich bin [Vegetarier:noun]. | Ich bin Vegetarierin.	Soy [vegetariano:adjective]. | Soy vegetariana.	Ik ben [vegetariër:noun].	Ben [vejetaryenim:adjective].		
+s.bread-cheese	s			food		For breakfast I eat bread with cheese.	Zum Frühstück esse ich Brot mit [Käse:noun].	Para desayunar como pan con [queso:noun].	Als ontbijt eet ik brood met [kaas:noun].	Kahvaltıda ekmek ve [peynir:noun] yerim.		
+s.cooking-tonight	s			food		I'm cooking tonight. | Tonight I'm cooking.	Heute Abend [koche:verb] ich.	Esta noche [cocino:verb] yo.	Vanavond [kook:verb] ik.	Bu akşam yemeği ben [yapıyorum:verb].		
+s.food-delicious	s			food		The food is delicious!	Das Essen ist [lecker:adjective]!	¡La comida está [riquísima:adjective]!	Het eten is [lekker:adjective]!	Yemek çok [lezzetli:adjective]!	You want to compliment the cook.	
+s.favourite-food	s			food		What's your favourite food? | What's your favorite food?	Was ist dein [Lieblingsessen:noun]?	¿Cuál es tu comida [favorita:adjective]?	Wat is je [lievelingseten:noun]?	En sevdiğin [yemek:noun] ne?		social
+s.fruit-healthy	s			food		Fruit is healthy.	Obst ist [gesund:adjective].	La fruta es [sana:adjective].	Fruit is [gezond:adjective].	Meyve [sağlıklıdır:adjective].		
+s.eat-together	s			food		Shall we eat something together?	Wollen wir zusammen etwas [essen:verb]?	¿[Comemos:verb] algo juntos?	Zullen we samen iets [eten:verb]?	Birlikte bir şeyler [yiyelim:verb] mi?	You'd like to invite a match for a meal.	social
+# ---- at the café
+cafe	w	noun		cafe	places	café	das Café	la cafetería	het café	kafe		
+menu	w	noun		cafe	restaurant	menu	die Speisekarte | die Karte	la carta | el menú	de menukaart | de kaart	menü		
+bill	w	noun		cafe	restaurant	bill | check	die Rechnung	la cuenta	de rekening	hesap		
+table	w	noun		cafe	furniture	table	der Tisch	la mesa	de tafel	masa		
+to-order	w	verb		cafe	restaurant-verbs	to order	bestellen	pedir	bestellen	sipariş vermek		
+to-pay	w	verb		cafe	money-verbs	to pay	bezahlen | zahlen	pagar	betalen	ödemek		
+cash	w	noun		cafe	money	cash	das Bargeld	el efectivo	het contant geld	nakit		
+card	w	noun		cafe	money	card	die Karte	la tarjeta	de pinpas | de kaart	kart		gloss=card (bank card)
+tip	w	noun		cafe	money	tip	das Trinkgeld	la propina	de fooi	bahşiş		
+sugar	w	noun		cafe	food	sugar	der Zucker	el azúcar	de suiker	şeker		
+s.bill-please	s			cafe		The bill, please. | The check, please.	Die [Rechnung:noun], bitte.	La [cuenta:noun], por favor.	De [rekening:noun], alstublieft.	[Hesap:noun], lütfen.	You've finished eating and want to pay.	
+s.table-for-two	s			cafe		A table for two, please.	Einen [Tisch:noun] für zwei, bitte.	Una [mesa:noun] para dos, por favor.	Een [tafel:noun] voor twee, alstublieft.	İki kişilik bir [masa:noun], lütfen.	You arrive at a restaurant with a friend.	
+s.pay-card	s			cafe		Can I pay by card?	Kann ich mit [Karte:noun] zahlen?	¿Puedo pagar con [tarjeta:noun]?	Kan ik met de [pinpas:noun] betalen? | Kan ik pinnen?	[Kartla:noun] ödeyebilir miyim?	You don't have any cash on you.	
+s.like-cappuccino	s			cafe		I'd like a cappuccino.	Ich [hätte:verb] gern einen Cappuccino.	[Quería:verb] un capuchino.	Ik [wil:verb] graag een cappuccino.	Bir kapuçino [alabilir:verb] miyim?	The waiter asks what you would like.	
+s.no-sugar	s			cafe		Without sugar, please.	Ohne [Zucker:noun], bitte.	Sin [azúcar:noun], por favor.	Zonder [suiker:noun], alstublieft.	[Şekersiz:adjective], lütfen.		
+s.see-menu	s			cafe		Can I see the menu?	Kann ich die [Speisekarte:noun] sehen?	¿Puedo ver la [carta:noun]?	Mag ik de [menukaart:noun] zien?	[Menüyü:noun] görebilir miyim?		
+s.i-pay-today	s			cafe		I'm paying today. | It's on me today.	Heute [zahle:verb] ich.	Hoy [pago:verb] yo.	Vandaag [betaal:verb] ik.	Bugün ben [ödüyorum:verb].	You want to treat your friend.	
+s.nice-cafe-near	s			cafe		I know a nice café near here.	Ich kenne ein schönes [Café:noun] hier in der Nähe.	Conozco una [cafetería:noun] bonita cerca de aquí.	Ik ken een leuk [café:noun] hier in de buurt.	Buralarda güzel bir [kafe:noun] biliyorum.		social
+# ---- likes and dislikes
+to-like	w	verb		likes	preference-verbs	to like	mögen	gustar	leuk vinden	sevmek | hoşlanmak		
+to-love	w	verb		likes	preference-verbs	to love	lieben	encantar | amar	houden van	bayılmak		gloss=to love (something)
+to-hate	w	verb		likes	preference-verbs	to hate	hassen	odiar	haten	nefret etmek		
+very	w	adverb		likes	degree	very	sehr	muy	heel | erg	çok		
+really	w	adverb		likes	degree	really	wirklich	de verdad | realmente	echt	gerçekten		
+sweet	w	adjective		likes	taste	sweet	süß	dulce	zoet	tatlı		
+spicy	w	adjective		likes	taste	spicy | hot	scharf	picante	pittig	acı		
+good	w	adjective		likes	quality	good	gut	bueno | buena	goed	iyi		
+bad	w	adjective		likes	quality	bad	schlecht	malo | mala	slecht	kötü		
+s.like-chocolate	s			likes		I really like chocolate.	Ich [mag:verb] Schokolade sehr.	Me [gusta:verb] mucho el chocolate.	Ik [vind:verb] chocolade heel lekker.	Çikolatayı çok [severim:verb].		
+s.no-spicy	s			likes		I don't like spicy food.	Ich mag kein [scharfes:adjective] Essen.	No me gusta la comida [picante:adjective].	Ik hou niet van [pittig:adjective] eten.	[Acı:adjective] yemekleri sevmem.		
+s.love-pizza	s			likes		I love pizza!	Ich [liebe:verb] Pizza!	¡Me [encanta:verb] la pizza!	Ik [hou:verb] van pizza!	Pizzaya [bayılırım:verb]!		
+s.like-turkish-food	s			likes		Do you like Turkish food?	[Magst:verb] du türkisches Essen?	¿Te [gusta:verb] la comida turca?	[Vind:verb] je Turks eten lekker?	Türk yemeklerini [sever:verb] misin?		social
+s.hate-early	s			likes		I hate getting up early.	Ich [hasse:verb] es, früh aufzustehen.	[Odio:verb] levantarme temprano.	Ik [haat:verb] vroeg opstaan.	Erken kalkmaktan nefret [ediyorum:verb].		
+s.cake-sweet	s			likes		This cake is very sweet.	Dieser Kuchen ist sehr [süß:adjective].	Esta tarta es muy [dulce:adjective].	Deze taart is erg [zoet:adjective].	Bu pasta çok [tatlı:adjective].		
+s.not-bad	s			likes		Not bad!	Nicht [schlecht:adjective]!	¡No está [mal:adverb]!	Niet [slecht:adjective]!	Fena [değil:adverb]!	A friend asks how the new café was: it was fine.	

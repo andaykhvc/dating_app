@@ -11,13 +11,20 @@ export function MessageInput({
   onCancelReply,
   onSend,
   disabled,
+  initialValue = "",
+  draftNote,
 }: {
   replyTo: ChatMessage | null;
   onCancelReply: () => void;
   onSend: (body: string) => Promise<void>;
   disabled?: boolean;
+  /** Prefilled text, e.g. a phrase from a lesson. Never sent automatically. */
+  initialValue?: string;
+  /** Shown above the composer while the prefilled text is still there. */
+  draftNote?: string;
 }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialValue);
+  const [showNote, setShowNote] = useState(Boolean(draftNote && initialValue));
   const [sending, setSending] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -37,6 +44,7 @@ export function MessageInput({
     const body = value.trim();
     if (!body || sending) return;
     setSending(true);
+    setShowNote(false);
     setValue("");
     try {
       await onSend(body);
@@ -49,6 +57,19 @@ export function MessageInput({
 
   return (
     <div className="safe-bottom safe-x shrink-0 border-t border-line bg-raised/95 backdrop-blur-lg">
+      {showNote && draftNote && (
+        <div className="mx-auto flex max-w-3xl items-center gap-2 border-b border-line px-gutter py-1.5">
+          <p className="min-w-0 flex-1 text-xs text-brand">{draftNote}</p>
+          <button
+            type="button"
+            onClick={() => setShowNote(false)}
+            aria-label="Dismiss"
+            className="-mr-2 flex size-9 shrink-0 items-center justify-center rounded-full text-lg leading-none text-faint hover:bg-sunken hover:text-ink"
+          >
+            ×
+          </button>
+        </div>
+      )}
       {replyTo && (
         <div className="mx-auto flex max-w-3xl items-center gap-2 border-b border-line px-gutter py-1.5">
           <div className="min-w-0 flex-1 border-l-2 border-brand pl-2.5">

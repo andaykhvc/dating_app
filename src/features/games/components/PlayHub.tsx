@@ -10,6 +10,8 @@ import {
 } from "@/features/progress/components/ProgressBadges";
 import { SectionLabel } from "@/components/layout/Page";
 import { startGameSession } from "@/features/games/api";
+import { CourseCard, Syllabus } from "@/features/learn/components/CourseOverview";
+import type { LearnOverview } from "@/features/learn/types";
 import type { UserProgress } from "@/types/domain";
 
 type PracticeTemplate = {
@@ -45,11 +47,17 @@ export type PlayOverview = {
 };
 
 /**
- * One column on phones. On desktop the "you" half (progress and today's
- * challenge) stays pinned on the left while missions and practice — the lists
- * that grow — scroll on the right.
+ * One column on phones. On desktop the "you" half (progress, the course card
+ * and today's challenge) stays pinned on the left while the syllabus, missions
+ * and practice — the lists that grow — scroll on the right.
  */
-export function PlayHub({ overview }: { overview: PlayOverview }) {
+export function PlayHub({
+  overview,
+  learn,
+}: {
+  overview: PlayOverview;
+  learn: LearnOverview;
+}) {
   const router = useRouter();
   const [starting, setStarting] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -89,6 +97,8 @@ export function PlayHub({ overview }: { overview: PlayOverview }) {
           </section>
         )}
 
+        <CourseCard overview={learn} />
+
         {daily && (
           <section>
             <SectionLabel>Daily challenge</SectionLabel>
@@ -120,6 +130,13 @@ export function PlayHub({ overview }: { overview: PlayOverview }) {
       </div>
 
       <div className="space-y-4 md:space-y-6">
+        {learn.units && learn.units.length > 0 && (
+          <section>
+            <SectionLabel>Your course</SectionLabel>
+            <Syllabus overview={learn} />
+          </section>
+        )}
+
         <section>
           <SectionLabel>Missions with your matches</SectionLabel>
           {missions.length === 0 ? (
@@ -168,7 +185,7 @@ export function PlayHub({ overview }: { overview: PlayOverview }) {
         </section>
 
         <section>
-          <SectionLabel>Practice on your own</SectionLabel>
+          <SectionLabel>Quick challenges</SectionLabel>
           {overview.practice.length === 0 ? (
             <p className="rounded-3xl border border-dashed border-line p-5 text-center text-sm text-muted">
               No solo content for your target language yet.

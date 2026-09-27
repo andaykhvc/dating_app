@@ -1,0 +1,46 @@
+# Unit A2.3 — Health and feelings: body and health, feelings
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- body and health
+head	w	noun		body	body	head	der Kopf	la cabeza	het hoofd	baş | kafa		
+stomach	w	noun		body	body	stomach | belly	der Bauch	el estómago | la barriga	de buik	karın | mide		
+back	w	noun		body	body	back	der Rücken	la espalda	de rug	sırt		gloss=back (body)
+tooth	w	noun		body	body	tooth	der Zahn	el diente	de tand	diş		
+hand	w	noun		body	body	hand	die Hand	la mano {f}	de hand	el		
+foot	w	noun		body	body	foot	der Fuß	el pie	de voet	ayak		
+face	w	noun		body	body	face	das Gesicht	la cara	het gezicht	yüz		
+ill	w	adjective		body	health	ill | sick	krank	enfermo | enferma	ziek	hasta		
+healthy	w	adjective		body	health	healthy	gesund	sano | sana	gezond	sağlıklı		
+pain	w	noun		body	health	pain	der Schmerz | die Schmerzen	el dolor	de pijn	ağrı		
+medicine	w	noun		body	health	medicine	das Medikament	el medicamento	het medicijn	ilaç		
+fever	w	noun		body	health	fever | temperature	das Fieber	la fiebre	de koorts	ateş		
+s.headache	s			body		I have a headache.	Ich habe [Kopfschmerzen:noun].	Me duele la [cabeza:noun].	Ik heb [hoofdpijn:noun].	Başım [ağrıyor:verb].		
+s.not-feeling-well	s			body		I don't feel well.	Ich fühle mich nicht [gut:adverb].	No me encuentro [bien:adverb].	Ik voel me niet [lekker:adjective].	Kendimi [iyi:adjective] hissetmiyorum.		
+s.have-cold	s			body		I have a cold. | I've got a cold.	Ich bin [erkältet:adjective].	Estoy [resfriado:adjective]. | Estoy resfriada.	Ik ben [verkouden:adjective].	[Nezle:noun] oldum.		
+s.need-doctor	s			body		I need a doctor.	Ich brauche einen [Arzt:noun].	Necesito un [médico:noun].	Ik heb een [dokter:noun] nodig.	[Doktora:noun] ihtiyacım var.	You feel very ill and want medical help.	
+s.stomach-hurts	s			body		My stomach hurts.	Mein [Bauch:noun] tut weh.	Me duele el [estómago:noun].	Mijn [buik:noun] doet pijn.	[Karnım:noun] ağrıyor.		
+s.get-well-soon	s			body		Get well soon!	Gute [Besserung:noun]!	¡Que te [mejores:verb]!	[Beterschap:noun]!	Geçmiş [olsun:verb]!	A friend tells you they are ill.	social
+s.fever-home	s			body		I have a fever, so I'm staying at home.	Ich habe [Fieber:noun] und bleibe zu Hause.	Tengo [fiebre:noun] y me quedo en casa.	Ik heb [koorts:noun] en blijf thuis.	[Ateşim:noun] var, evde kalıyorum.		
+s.take-medicine	s			body		Take this medicine twice a day.	Nimm dieses [Medikament:noun] zweimal am Tag.	Toma este [medicamento:noun] dos veces al día.	Neem dit [medicijn:noun] twee keer per dag.	Bu [ilacı:noun] günde iki kez al.		
+s.feeling-now	s			body		How are you feeling now?	Wie [fühlst:verb] du dich jetzt?	¿Cómo te [encuentras:verb] ahora?	Hoe [voel:verb] je je nu?	Şimdi nasıl [hissediyorsun:verb]?		social
+# ---- feelings
+happy	w	adjective		feelings	emotions	happy	glücklich	feliz	blij | gelukkig	mutlu		
+sad	w	adjective		feelings	emotions	sad	traurig	triste	verdrietig	üzgün		
+tired	w	adjective		feelings	emotions	tired	müde	cansado | cansada	moe	yorgun		
+nervous	w	adjective		feelings	emotions	nervous	nervös	nervioso | nerviosa	zenuwachtig	gergin		
+angry	w	adjective		feelings	emotions	angry	wütend | sauer	enfadado | enfadada	boos	kızgın		
+bored	w	adjective		feelings	emotions	bored	gelangweilt	aburrido | aburrida	verveeld	sıkılmış		
+excited	w	adjective		feelings	emotions	excited	aufgeregt	emocionado | emocionada	enthousiast	heyecanlı		
+stressed	w	adjective		feelings	emotions	stressed	gestresst	estresado | estresada	gestrest	stresli		
+surprised	w	adjective		feelings	emotions	surprised	überrascht	sorprendido | sorprendida	verrast	şaşırmış		
+worried	w	adjective		feelings	emotions	worried	besorgt	preocupado | preocupada	bezorgd	endişeli		
+to-feel	w	verb		feelings	emotion-verbs	to feel	sich fühlen	sentirse	zich voelen	hissetmek		
+s.so-happy	s			feelings		I'm so happy!	Ich bin so [glücklich:adjective]!	¡Estoy muy [feliz:adjective]!	Ik ben zo [blij:adjective]!	Çok [mutluyum:adjective]!	You've just got some good news.	
+s.bit-sad	s			feelings		I'm a bit sad today.	Ich bin heute ein bisschen [traurig:adjective].	Hoy estoy un poco [triste:adjective].	Ik ben vandaag een beetje [verdrietig:adjective].	Bugün biraz [üzgünüm:adjective].		
+s.nervous-exam	s			feelings		I'm nervous about the exam.	Ich bin [nervös:adjective] wegen der Prüfung.	Estoy [nervioso:adjective] por el examen. | Estoy nerviosa por el examen.	Ik ben [zenuwachtig:adjective] voor het examen.	Sınav yüzünden [gerginim:adjective].		
+s.dont-be-angry	s			feelings		Don't be angry!	Sei nicht [sauer:adjective]!	¡No te [enfades:verb]!	Wees niet [boos:adjective]!	[Kızma:verb]!	You forgot your friend's birthday and they're upset.	
+s.stressed-work	s			feelings		I'm stressed because of work.	Ich bin wegen der Arbeit [gestresst:adjective].	Estoy [estresado:adjective] por el trabajo. | Estoy estresada por el trabajo.	Ik ben [gestrest:adjective] door mijn werk.	İş yüzünden [stresliyim:adjective].		
+s.feel-today	s			feelings		How do you feel today? | How are you feeling today?	Wie fühlst du dich [heute:adverb]?	¿Cómo te sientes [hoy:adverb]?	Hoe voel je je [vandaag:adverb]?	[Bugün:adverb] nasıl hissediyorsun?		social
+s.looking-forward-trip	s			feelings		I'm really looking forward to the trip!	Ich freue mich sehr auf die [Reise:noun]!	¡Tengo muchas ganas de hacer el [viaje:noun]!	Ik heb echt zin in de [reis:noun]!	Bu [gezi:noun] için çok heyecanlıyım!		
+s.what-makes-happy	s			feelings		What makes you happy?	Was macht dich [glücklich:adjective]?	¿Qué te hace [feliz:adjective]?	Waar word jij [blij:adjective] van?	Seni ne [mutlu:adjective] eder?		social
+s.dont-worry	s			feelings		Don't worry!	Mach dir keine [Sorgen:noun]!	¡No te [preocupes:verb]!	Maak je geen [zorgen:noun]!	[Merak:noun] etme!	A friend is stressed about being late.	

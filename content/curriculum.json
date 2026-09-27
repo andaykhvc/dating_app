@@ -1,0 +1,139 @@
+{
+  "courses": [
+    { "language": "de", "title": "German", "description": "Everyday German from your first hello to making plans with a match." },
+    { "language": "es", "title": "Spanish", "description": "Everyday Spanish from your first hello to making plans with a match." },
+    { "language": "nl", "title": "Dutch", "description": "Everyday Dutch from your first hello to making plans with a match." },
+    { "language": "tr", "title": "Turkish", "description": "Everyday Turkish from your first hello to making plans with a match." },
+    { "language": "en", "title": "English", "description": "Everyday English from your first hello to making plans with a match." }
+  ],
+  "units": [
+    {
+      "key": "a1-first-steps", "cefr": "A1", "title": "First steps",
+      "description": "Say hello, introduce yourself and be polite.",
+      "skills": [
+        { "key": "greetings", "title": "Greetings", "description": "Hello, goodbye and how are you.", "icon": "👋" },
+        { "key": "introductions", "title": "Introductions", "description": "Your name and nice to meet you.", "icon": "🤝" },
+        { "key": "courtesy", "title": "Please and thank you", "description": "Being polite, saying sorry, yes and no.", "icon": "🙏" }
+      ]
+    },
+    {
+      "key": "a1-where-from", "cefr": "A1", "title": "Where you're from",
+      "description": "Countries, languages and numbers.",
+      "skills": [
+        { "key": "countries", "title": "Countries", "description": "Where you come from and where you live.", "icon": "🌍" },
+        { "key": "languages", "title": "Languages", "description": "What you speak and what you are learning.", "icon": "🗣️" },
+        { "key": "numbers", "title": "Numbers", "description": "Counting from zero to a hundred.", "icon": "🔢" }
+      ]
+    },
+    {
+      "key": "a1-about-me", "cefr": "A1", "title": "About me",
+      "description": "Age, work, study and the people close to you.",
+      "skills": [
+        { "key": "age-birthday", "title": "Age and birthdays", "description": "How old you are and when you were born.", "icon": "🎂" },
+        { "key": "jobs", "title": "Work and study", "description": "Jobs, studies and where you work.", "icon": "💼" },
+        { "key": "family", "title": "Family", "description": "Parents, siblings and relatives.", "icon": "👪" }
+      ]
+    },
+    {
+      "key": "a1-people", "cefr": "A1", "title": "People",
+      "description": "Friends, looks and personality.",
+      "skills": [
+        { "key": "friends", "title": "Friends and partners", "description": "Friends, partners and people you meet.", "icon": "🫶" },
+        { "key": "appearance", "title": "Appearance", "description": "Describing how people look.", "icon": "🧑" },
+        { "key": "personality", "title": "Personality", "description": "Kind, funny, shy and more.", "icon": "✨" }
+      ]
+    },
+    {
+      "key": "a1-everyday", "cefr": "A1", "title": "Everyday life",
+      "description": "Days, time and your daily routine.",
+      "skills": [
+        { "key": "days", "title": "Days of the week", "description": "Monday to Sunday, today and tomorrow.", "icon": "📅" },
+        { "key": "time", "title": "Telling the time", "description": "Hours, minutes and times of day.", "icon": "⏰" },
+        { "key": "routine", "title": "Daily routine", "description": "Waking up, working, sleeping.", "icon": "🌅" },
+        { "key": "basic-verbs", "title": "Basic verbs", "description": "Have, go, make, want and friends.", "icon": "⚙️" }
+      ]
+    },
+    {
+      "key": "a1-food-drink", "cefr": "A1", "title": "Food and drink",
+      "description": "Order, eat and say what you like.",
+      "skills": [
+        { "key": "drinks", "title": "Drinks", "description": "Coffee, tea, water and more.", "icon": "☕" },
+        { "key": "food", "title": "Food", "description": "Everyday food and meals.", "icon": "🍞" },
+        { "key": "cafe", "title": "At the café", "description": "Ordering and paying.", "icon": "🧾" },
+        { "key": "likes", "title": "Likes and dislikes", "description": "What you love and what you don't.", "icon": "❤️" }
+      ]
+    },
+    {
+      "key": "a1-around-town", "cefr": "A1", "title": "Around town",
+      "description": "Places, getting around and shopping.",
+      "skills": [
+        { "key": "places", "title": "Places in town", "description": "Station, supermarket, park.", "icon": "🏙️" },
+        { "key": "transport", "title": "Getting around", "description": "Bus, train, bike and car.", "icon": "🚲" },
+        { "key": "directions", "title": "Directions", "description": "Left, right, straight on.", "icon": "🧭" },
+        { "key": "shopping", "title": "Shopping", "description": "Prices, sizes and paying.", "icon": "🛍️" }
+      ]
+    },
+    {
+      "key": "a1-free-time", "cefr": "A1", "title": "Free time",
+      "description": "Hobbies, music, sport and weekends.",
+      "skills": [
+        { "key": "hobbies", "title": "Hobbies", "description": "Reading, cooking, travelling.", "icon": "🎨" },
+        { "key": "music", "title": "Music and films", "description": "What you listen to and watch.", "icon": "🎵" },
+        { "key": "sport", "title": "Sport", "description": "Playing, watching and staying fit.", "icon": "⚽" },
+        { "key": "weekend", "title": "The weekend", "description": "Plans, invitations and free time.", "icon": "🎉" }
+      ]
+    },
+    {
+      "key": "a1-home", "cefr": "A1", "title": "At home",
+      "description": "Your home, things around you and colours.",
+      "skills": [
+        { "key": "home", "title": "Home and rooms", "description": "Flat, kitchen, bedroom.", "icon": "🏠" },
+        { "key": "things", "title": "Everyday things", "description": "Phone, keys, bag and more.", "icon": "🔑" },
+        { "key": "colours", "title": "Colours", "description": "Red, blue, green and friends.", "icon": "🎨" }
+      ]
+    },
+    {
+      "key": "a2-time-weather", "cefr": "A2", "title": "Time and weather",
+      "description": "Months, seasons, weather and making plans.",
+      "skills": [
+        { "key": "months", "title": "Months", "description": "January to December.", "icon": "🗓️" },
+        { "key": "weather", "title": "Weather and seasons", "description": "Sun, rain, summer and winter.", "icon": "🌦️" },
+        { "key": "plans", "title": "Making plans", "description": "Next week, later and appointments.", "icon": "📌" }
+      ]
+    },
+    {
+      "key": "a2-travel", "cefr": "A2", "title": "Travel",
+      "description": "Holidays, hotels and getting there.",
+      "skills": [
+        { "key": "holidays", "title": "Holidays", "description": "Beach, mountains and sightseeing.", "icon": "🏖️" },
+        { "key": "hotel", "title": "At the hotel", "description": "Rooms, bookings and keys.", "icon": "🛎️" },
+        { "key": "journey", "title": "The journey", "description": "Tickets, platforms and delays.", "icon": "✈️" }
+      ]
+    },
+    {
+      "key": "a2-health-feelings", "cefr": "A2", "title": "Health and feelings",
+      "description": "Your body, feeling ill and emotions.",
+      "skills": [
+        { "key": "body", "title": "Body and health", "description": "Head, stomach and the doctor.", "icon": "🩺" },
+        { "key": "feelings", "title": "Feelings", "description": "Happy, tired, nervous, excited.", "icon": "😊" }
+      ]
+    },
+    {
+      "key": "a2-past", "cefr": "A2", "title": "Talking about the past",
+      "description": "Yesterday, last weekend and your story.",
+      "skills": [
+        { "key": "yesterday", "title": "Yesterday", "description": "What you did and where you went.", "icon": "⏪" },
+        { "key": "life-story", "title": "Your story", "description": "Where you grew up and what changed.", "icon": "📖" }
+      ]
+    },
+    {
+      "key": "a2-getting-to-know", "cefr": "A2", "title": "Getting to know someone",
+      "description": "Meeting up, opinions and keeping a conversation going.",
+      "skills": [
+        { "key": "meeting-up", "title": "Meeting up", "description": "Suggesting a time and place.", "icon": "☕" },
+        { "key": "opinions", "title": "Opinions", "description": "I think, I agree, in my opinion.", "icon": "💬" },
+        { "key": "chatting", "title": "Keeping the chat going", "description": "Questions that start real conversations.", "icon": "📱" }
+      ]
+    }
+  ]
+}

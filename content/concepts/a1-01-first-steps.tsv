@@ -1,0 +1,57 @@
+# Unit A1.1 — First steps: greetings, introductions, courtesy
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- greetings
+hello	w	interjection		greetings		hello	hallo	hola	hallo	merhaba		
+good-morning	p			greetings		good morning	guten Morgen	buenos días	goedemorgen	günaydın	You see your neighbour at eight in the morning.	
+good-evening	p			greetings		good evening	guten Abend	buenas tardes	goedenavond	iyi akşamlar	You walk into a restaurant at seven in the evening.	
+good-night	p			greetings		good night	gute Nacht	buenas noches	goedenacht | welterusten	iyi geceler	You are going to bed.	
+goodbye	p			greetings		goodbye	auf Wiedersehen	adiós	tot ziens	hoşça kal	You leave a shop and say goodbye to the shop assistant.	
+see-you-later	p			greetings		see you later	bis später	hasta luego	tot later	sonra görüşürüz	You leave, but you will see your friend again tonight.	
+see-you-tomorrow	p			greetings		see you tomorrow	bis morgen	hasta mañana	tot morgen	yarın görüşürüz	You finish work and will see your colleague the next day.	
+how-are-you	p			greetings		How are you? | How are you doing?	Wie geht's? | Wie geht es dir?	¿Qué tal? | ¿Cómo estás?	Hoe gaat het? | Hoe gaat het met je?	Nasılsın?	You want to know how a friend is doing.	social
+im-fine	p			greetings		I'm fine. | I am fine.	Mir geht's gut. | Mir geht es gut.	Estoy bien.	Het gaat goed. | Goed.	İyiyim.	Someone asks how you are and all is well.	
+and-you	p			greetings		And you?	Und dir? | Und du?	¿Y tú?	En jij? | En met jou?	Ya sen?	You want to ask the same question back.	
+welcome	w	interjection		greetings		welcome	willkommen	bienvenido | bienvenida	welkom	hoş geldin | hoş geldiniz	A friend arrives at your home for the first time.	
+s.greet-morning	s			greetings		Good morning! How are you?	Guten Morgen! Wie [geht:verb] es dir?	¡Buenos días! ¿Cómo [estás:verb]?	Goedemorgen! Hoe [gaat:verb] het met je?	Günaydın! [Nasılsın:adverb]?		
+s.im-fine-thanks	s			greetings		I'm fine, thanks. And you?	Mir geht es [gut:adverb], danke. Und dir?	Estoy [bien:adverb], gracias. ¿Y tú?	Het gaat [goed:adverb], dank je. En met jou?	İyiyim, [teşekkürler:interjection]. Ya sen?		
+s.nice-day	s			greetings		Have a nice day! | Have a good day!	Einen schönen [Tag:noun] noch!	¡Que tengas un buen [día:noun]!	Nog een fijne [dag:noun]!	İyi [günler:noun]!	You say goodbye to a friend in the morning.	
+s.how-was-day	s			greetings		How was your day?	Wie war dein [Tag:noun]?	¿Qué tal tu [día:noun]?	Hoe was je [dag:noun]?	[Günün:noun] nasıl geçti?		social
+s.sleep-well	s			greetings		Good night, sleep well!	Gute Nacht, [schlaf:verb] gut!	¡Buenas noches, que [duermas:verb] bien!	Goedenacht, [slaap:verb] lekker!	İyi geceler, iyi [uykular:noun]!	You say good night to a friend by text.	
+s.long-time	s			greetings		Hi! Long time no see.	Hallo! Lange nicht [gesehen:verb].	¡Hola! ¡Cuánto [tiempo:noun] sin verte!	Hoi! Lang niet [gezien:verb].	Merhaba! Görüşmeyeli [uzun:adjective] zaman oldu.	You meet a friend you haven't seen for months.	
+# ---- introductions
+name	w	noun		introductions		name	der Name	el nombre	de naam	isim | ad		
+i	w	pronoun		introductions	pronouns	I	ich	yo	ik	ben		
+you-informal	w	pronoun		introductions	pronouns	you	du	tú	jij | je	sen		gloss=you (informal)
+you-formal	w	pronoun		introductions	pronouns	you	Sie	usted	u	siz		gloss=you (formal)
+he	w	pronoun		introductions	pronouns	he	er	él	hij	o		
+she	w	pronoun		introductions	pronouns	she	sie	ella	zij | ze	o		
+we	w	pronoun		introductions	pronouns	we	wir	nosotros | nosotras	wij | we	biz		
+nice-to-meet-you	p			introductions		nice to meet you	freut mich	encantado | encantada | mucho gusto	leuk je te ontmoeten | aangenaam	memnun oldum | tanıştığıma memnun oldum	Someone has just told you their name.	
+s.my-name-anna	s			introductions		Hi, my name is Anna. | Hi, I'm Anna.	Hallo, ich [heiße:verb] Anna.	Hola, me [llamo:verb] Anna.	Hoi, ik [heet:verb] Anna.	Merhaba, benim [adım:noun] Anna.		
+s.whats-your-name	s			introductions		What's your name? | What is your name?	Wie [heißt:verb] du?	¿Cómo te [llamas:verb]?	Hoe [heet:verb] je?	Senin [adın:noun] ne? | Adın ne?	You want to know someone's name.	social
+s.i-am-tom	s			introductions		I'm Tom, and you?	Ich bin Tom, und [du:pronoun]?	Soy Tom, ¿y [tú:pronoun]?	Ik ben Tom, en [jij:pronoun]?	Ben Tom, ya [sen:pronoun]?		
+s.nice-to-meet	s			introductions		Nice to meet you, Maria.	Schön, dich [kennenzulernen:verb], Maria.	Encantado de [conocerte:verb], María.	Leuk je te [ontmoeten:verb], Maria.	Tanıştığıma [memnun:adjective] oldum, Maria.		
+s.this-is-friend	s			introductions		This is my friend Ali.	Das ist mein [Freund:noun] Ali.	Este es mi [amigo:noun] Ali.	Dit is mijn [vriend:noun] Ali.	Bu benim [arkadaşım:noun] Ali.	You introduce a friend to someone new.	
+s.where-live	s			introductions		Where do you live?	Wo [wohnst:verb] du?	¿Dónde [vives:verb]?	Waar [woon:verb] je?	Nerede [yaşıyorsun:verb]?		social
+s.i-live-in	s			introductions		I live in Berlin.	Ich [wohne:verb] in Berlin.	[Vivo:verb] en Berlín.	Ik [woon:verb] in Berlijn.	Berlin'de [yaşıyorum:verb].		
+# ---- courtesy
+please	w	interjection		courtesy		please	bitte	por favor	alsjeblieft | alstublieft	lütfen		
+thank-you	p			courtesy		thank you | thanks	danke	gracias	dank je | dank u | bedankt	teşekkür ederim | teşekkürler | sağ ol	Someone holds the door open for you.	
+thanks-a-lot	p			courtesy		thank you very much	vielen Dank	muchas gracias	heel erg bedankt	çok teşekkür ederim	A stranger helped you carry a heavy suitcase.	
+youre-welcome	p			courtesy		you're welcome	gern geschehen | bitte schön	de nada	graag gedaan	rica ederim	Someone thanks you for your help.	
+sorry	w	interjection		courtesy		sorry	Entschuldigung	perdón | lo siento	sorry	özür dilerim | pardon	You bump into someone in the street.	
+excuse-me	p			courtesy		excuse me	entschuldigen Sie	disculpe	pardon	affedersiniz	You want to ask a stranger a question.	
+yes	w	interjection		courtesy	yes-no	yes	ja	sí	ja	evet		
+no	w	interjection		courtesy	yes-no	no	nein	no	nee	hayır		
+okay	w	interjection		courtesy	yes-no	okay | ok	okay | ok	vale	oké | oké	tamam		
+of-course	p			courtesy	yes-no	of course	natürlich | klar	claro | por supuesto	natuurlijk	tabii | tabii ki	A friend asks if you can help.	
+no-problem	p			courtesy		no problem	kein Problem	no hay problema | no pasa nada	geen probleem	sorun değil	A friend apologises for being two minutes late.	
+s.coffee-please	s			courtesy		A coffee, please.	Einen Kaffee, [bitte:interjection].	Un café, por [favor:noun].	Een koffie, [alstublieft:interjection].	Bir kahve, [lütfen:interjection].	You order at a café.	
+s.thanks-help	s			courtesy		Thank you for your help!	Danke für deine [Hilfe:noun]!	¡Gracias por tu [ayuda:noun]!	Bedankt voor je [hulp:noun]!	[Yardımın:noun] için teşekkürler!	A friend helped you move house.	
+s.sorry-late	s			courtesy		Sorry, I'm late.	Entschuldigung, ich bin [spät:adverb] dran.	Perdón, llego [tarde:adverb].	Sorry, ik ben [laat:adverb].	Özür dilerim, [geç:adverb] kaldım.	You arrive ten minutes after the time you agreed.	
+s.dont-understand	s			courtesy		Sorry, I don't understand.	Entschuldigung, ich [verstehe:verb] das nicht.	Perdón, no [entiendo:verb].	Sorry, ik [begrijp:verb] het niet.	Özür dilerim, [anlamıyorum:verb].	Someone speaks too fast and you lost the thread.	
+s.slowly	s			courtesy		Can you speak more slowly, please?	Kannst du bitte [langsamer:adverb] sprechen?	¿Puedes hablar más [despacio:adverb], por favor?	Kun je alsjeblieft wat [langzamer:adverb] praten?	Lütfen biraz daha [yavaş:adverb] konuşur musun?	Your partner talks very fast in a voice message.	social
+s.repeat	s			courtesy		Can you repeat that, please?	Kannst du das bitte [wiederholen:verb]?	¿Puedes [repetirlo:verb], por favor?	Kun je dat alsjeblieft [herhalen:verb]?	Lütfen [tekrar:adverb] eder misin?	You didn't catch what someone said.	
+s.no-problem	s			courtesy		No problem, it happens.	Kein [Problem:noun], das passiert.	No hay [problema:noun], pasa a veces.	Geen [probleem:noun], dat gebeurt.	[Sorun:noun] değil, olur böyle.		
+s.yes-of-course	s			courtesy	yes-no	Yes, of course!	Ja, [natürlich:adverb]!	¡Sí, [claro:adverb]!	Ja, [natuurlijk:adverb]!	Evet, [tabii:adverb] ki!	A friend asks you: "Can you help me?"	

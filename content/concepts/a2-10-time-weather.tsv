@@ -1,0 +1,53 @@
+# Unit A2.1 — Time and weather: months, weather and seasons, making plans
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- months (month names come from CLDR)
+month	w	noun		months	time-units	month	der Monat	el mes	de maand	ay		
+date	w	noun		months	time-units	date	das Datum	la fecha	de datum	tarih		gloss=date (day of the month)
+next	w	adjective		months	sequence	next	nächste	próximo | próxima	volgende	gelecek | önümüzdeki		
+last	w	adjective		months	sequence	last	letzte	pasado | pasada	vorige | vorig	geçen		gloss=last (the one before)
+s.what-date	s			months		What's the date today?	Welches [Datum:noun] ist heute?	¿Qué [fecha:noun] es hoy?	Welke [datum:noun] is het vandaag?	Bugün ayın [kaçı:noun]?		
+s.holiday-august	s			months		I'm going on holiday in August. | I'm going on vacation in August.	Im [August:noun] fahre ich in Urlaub.	En [agosto:noun] me voy de vacaciones.	In [augustus:noun] ga ik op vakantie.	[Ağustosta:noun] tatile gidiyorum.		
+s.moving-next-month	s			months		Next month I'm moving to Berlin.	Nächsten [Monat:noun] ziehe ich nach Berlin.	El [mes:noun] que viene me mudo a Berlín.	Volgende [maand:noun] verhuis ik naar Berlijn.	Gelecek [ay:noun] Berlin'e taşınıyorum.		
+s.born-march	s			months		I was born in March.	Ich bin im [März:noun] geboren.	Nací en [marzo:noun].	Ik ben in [maart:noun] geboren.	[Martta:noun] doğdum.		
+s.favourite-month	s			months		Which month do you like best?	Welchen [Monat:noun] magst du am liebsten?	¿Qué [mes:noun] te gusta más?	Welke [maand:noun] vind je het leukst?	En çok hangi [ayı:noun] seversin?		social
+s.last-year-spain	s			months		Last year I was in Spain.	[Letztes:adjective] Jahr war ich in Spanien.	El año [pasado:adjective] estuve en España.	[Vorig:adjective] jaar was ik in Spanje.	[Geçen:adjective] yıl İspanya'daydım.		
+s.december-cold	s			months		December is very cold here.	Der [Dezember:noun] ist hier sehr kalt.	En [diciembre:noun] hace mucho frío aquí.	Hier is het in [december:noun] erg koud.	Burada [aralık:noun] ayı çok soğuk.		
+# ---- weather and seasons
+weather	w	noun		weather	weather	weather	das Wetter	el tiempo	het weer	hava		
+sun	w	noun		weather	weather	sun	die Sonne	el sol	de zon	güneş		
+rain	w	noun		weather	weather	rain	der Regen	la lluvia	de regen	yağmur		
+snow	w	noun		weather	weather	snow	der Schnee	la nieve	de sneeuw	kar		
+wind	w	noun		weather	weather	wind	der Wind	el viento	de wind	rüzgar | rüzgâr		
+summer	w	noun		weather	seasons	summer	der Sommer	el verano	de zomer	yaz		
+winter	w	noun		weather	seasons	winter	der Winter	el invierno	de winter	kış		
+spring	w	noun		weather	seasons	spring	der Frühling	la primavera	de lente	ilkbahar | bahar		
+autumn	w	noun		weather	seasons	autumn | fall	der Herbst	el otoño	de herfst	sonbahar		
+sunny	w	adjective		weather	weather-adj	sunny	sonnig	soleado | soleada	zonnig	güneşli		
+to-rain	w	verb		weather	weather-verbs	to rain	regnen	llover	regenen	yağmur yağmak		
+s.weather-today	s			weather		What's the weather like today?	Wie ist das [Wetter:noun] heute?	¿Qué [tiempo:noun] hace hoy?	Hoe is het [weer:noun] vandaag?	Bugün [hava:noun] nasıl?		social
+s.raining-again	s			weather		It's raining again.	Es [regnet:verb] schon wieder.	Está [lloviendo:verb] otra vez.	Het [regent:verb] weer.	Yine yağmur [yağıyor:verb].		
+s.sunny-warm	s			weather		It's sunny and warm.	Es ist [sonnig:adjective] und warm.	Hace [sol:noun] y calor.	Het is [zonnig:adjective] en warm.	Hava [güneşli:adjective] ve sıcak.		
+s.love-summer	s			weather		I love summer.	Ich liebe den [Sommer:noun].	Me encanta el [verano:noun].	Ik hou van de [zomer:noun].	[Yazı:noun] çok severim.		
+s.snow-winter	s			weather		In winter there is a lot of snow.	Im Winter gibt es viel [Schnee:noun].	En invierno hay mucha [nieve:noun].	In de winter is er veel [sneeuw:noun].	Kışın çok [kar:noun] yağar.		
+s.going-to-rain	s			weather		Take an umbrella, it's going to rain.	Nimm einen Schirm mit, es wird [regnen:verb].	Llévate un paraguas, va a [llover:verb].	Neem een paraplu mee, het gaat [regenen:verb].	Şemsiye al, yağmur [yağacak:verb].	Your friend is leaving and dark clouds are coming.	
+s.favourite-season	s			weather		What's your favourite season? | What's your favorite season?	Was ist deine [Lieblingsjahreszeit:noun]?	¿Cuál es tu [estación:noun] favorita?	Wat is je favoriete [seizoen:noun]?	En sevdiğin [mevsim:noun] hangisi?		social
+s.windy-today	s			weather		It's very windy today.	Heute ist es sehr [windig:adjective].	Hoy hace mucho [viento:noun].	Het waait vandaag [hard:adverb].	Bugün hava çok [rüzgarlı:adjective].		
+# ---- making plans
+appointment	w	noun		plans	plans	appointment	der Termin	la cita	de afspraak	randevu		
+idea	w	noun		plans	plans	idea	die Idee	la idea	het idee	fikir		
+to-meet-up	w	verb		plans	social-verbs	to meet up	sich treffen	quedar	afspreken	buluşmak		
+to-plan	w	verb		plans	social-verbs	to plan	planen	planear	plannen	planlamak		
+to-cancel	w	verb		plans	social-verbs	to cancel	absagen	cancelar	afzeggen	iptal etmek		
+to-wait	w	verb		plans	social-verbs	to wait	warten	esperar	wachten	beklemek		
+later	w	adverb		plans	time-adverbs	later	später	más tarde | luego	later	sonra		
+soon	w	adverb		plans	time-adverbs	soon	bald	pronto	binnenkort | snel	yakında		
+next-week	w	adverb		plans	time-adverbs	next week	nächste Woche	la semana que viene | la próxima semana	volgende week	gelecek hafta		
+s.meet-next-week	s			plans		Shall we meet next week?	Wollen wir uns nächste Woche [treffen:verb]?	¿[Quedamos:verb] la semana que viene?	Zullen we volgende week [afspreken:verb]?	Gelecek hafta [buluşalım:verb] mı?		social
+s.appointment-ten	s			plans		I have an appointment at ten.	Ich habe um zehn einen [Termin:noun].	Tengo una [cita:noun] a las diez.	Ik heb om tien uur een [afspraak:noun].	Saat onda bir [randevum:noun] var.		
+s.have-to-cancel	s			plans		Sorry, I have to cancel.	Tut mir leid, ich muss [absagen:verb].	Lo siento, tengo que [cancelar:verb].	Sorry, ik moet [afzeggen:verb].	Kusura bakma, [iptal:noun] etmem gerekiyor.	You're ill and can't come to the meeting.	
+s.good-idea	s			plans		Good idea!	Gute [Idee:noun]!	¡Buena [idea:noun]!	Goed [idee:noun]!	İyi [fikir:noun]!	A friend suggests something you like.	
+s.wait-entrance	s			plans		I'll wait for you at the entrance.	Ich [warte:verb] am Eingang auf dich.	Te [espero:verb] en la entrada.	Ik [wacht:verb] bij de ingang op je.	Seni girişte [bekliyorum:verb].	You arrived first and tell your friend where you are.	
+s.what-time-suits	s			plans		What time suits you? | What time works for you?	Welche Uhrzeit [passt:verb] dir?	¿A qué hora te [viene:verb] bien?	Hoe laat [past:verb] het jou?	Sana saat kaç [uyar:verb]?		social
+s.talk-soon	s			plans		See you soon! | Talk soon!	Bis [bald:adverb]!	¡Hasta [pronto:adverb]!	Tot [snel:adverb]!	[Görüşmek:noun] üzere!	You end a chat with someone you'll see again soon.	
+s.ten-minutes-late	s			plans		I'm running ten minutes late.	Ich komme zehn Minuten [später:adverb].	Llego diez minutos [tarde:adverb].	Ik ben tien minuten [later:adverb].	On dakika [gecikeceğim:verb].	Your bus is stuck in traffic on the way to meet a friend.	

@@ -7,7 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "next typegen && tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "node --test scripts/content/content.test.ts",
+    "test:db": "supabase/tests/run.sh",
+    "content:validate": "node scripts/content/validate.ts",
+    "content:build": "node scripts/content/build-seed.ts",
+    "content:import:cldr": "node scripts/content/import-cldr.ts",
+    "content:import:tatoeba": "node scripts/content/import-tatoeba.ts",
+    "content:import:wikidata": "node scripts/content/import-wikidata.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

@@ -1,0 +1,77 @@
+# Unit A1.8 — Free time: hobbies, music and films, sport, the weekend
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- hobbies
+hobby	w	noun		hobbies	leisure	hobby	das Hobby	la afición | el pasatiempo	de hobby	hobi		
+to-read	w	verb		hobbies	leisure-verbs	to read	lesen	leer	lezen	okumak		
+book	w	noun		hobbies	leisure	book	das Buch	el libro	het boek	kitap		
+to-travel	w	verb		hobbies	leisure-verbs	to travel	reisen	viajar	reizen	seyahat etmek | gezmek		
+to-dance	w	verb		hobbies	leisure-verbs	to dance	tanzen	bailar	dansen	dans etmek		
+to-paint	w	verb		hobbies	leisure-verbs	to paint	malen	pintar	schilderen	resim yapmak		
+photo	w	noun		hobbies	leisure	photo | picture	das Foto	la foto	de foto	fotoğraf		
+game	w	noun		hobbies	leisure	game	das Spiel	el juego	het spel	oyun		
+to-play	w	verb		hobbies	leisure-verbs	to play	spielen	jugar	spelen	oynamak		gloss=to play (a game)
+free-time	w	noun		hobbies	leisure	free time	die Freizeit	el tiempo libre	de vrije tijd	boş zaman		
+nature	w	noun		hobbies	leisure	nature	die Natur	la naturaleza	de natuur	doğa		
+s.free-time-do	s			hobbies		What do you do in your free time?	Was machst du in deiner [Freizeit:noun]?	¿Qué haces en tu tiempo [libre:adjective]?	Wat doe je in je [vrije:adjective] tijd?	Boş [zamanında:noun] ne yaparsın?		social
+s.like-reading	s			hobbies		I like reading. | I like to read.	Ich [lese:verb] gern.	Me gusta [leer:verb].	Ik [lees:verb] graag.	[Okumayı:verb] severim.		
+s.love-travelling	s			hobbies		I love travelling. | I love traveling.	Ich [reise:verb] sehr gern.	Me encanta [viajar:verb].	Ik [reis:verb] heel graag.	[Seyahat:noun] etmeyi çok severim.		
+s.video-games	s			hobbies		Do you play video games?	[Spielst:verb] du Videospiele?	¿[Juegas:verb] a videojuegos?	[Speel:verb] je videogames?	Video oyunları [oynar:verb] mısın?		social
+s.good-book	s			hobbies		I'm reading a good book right now.	Ich lese gerade ein gutes [Buch:noun].	Estoy leyendo un [libro:noun] muy bueno.	Ik lees nu een goed [boek:noun].	Şu an güzel bir [kitap:noun] okuyorum.		
+s.in-nature	s			hobbies		I like being in nature.	Ich bin gern in der [Natur:noun].	Me gusta estar en la [naturaleza:noun].	Ik ben graag in de [natuur:noun].	[Doğada:noun] olmayı severim.		
+s.many-photos	s			hobbies		I take a lot of photos.	Ich mache viele [Fotos:noun].	Hago muchas [fotos:noun].	Ik maak veel [foto's:noun].	Çok [fotoğraf:noun] çekerim.		
+s.your-hobbies	s			hobbies		What are your hobbies?	Was sind deine [Hobbys:noun]?	¿Cuáles son tus [aficiones:noun]?	Wat zijn je [hobby's:noun]?	[Hobilerin:noun] neler?		social
+# ---- music and films
+music	w	noun		music	culture	music	die Musik	la música	de muziek	müzik		
+song	w	noun		music	culture	song	das Lied | der Song	la canción	het liedje | het nummer	şarkı		
+concert	w	noun		music	culture	concert	das Konzert	el concierto	het concert	konser		
+film	w	noun		music	culture	film | movie	der Film	la película	de film	film		
+series	w	noun		music	culture	series | TV series	die Serie	la serie	de serie	dizi		
+guitar	w	noun		music	instruments	guitar	die Gitarre	la guitarra	de gitaar	gitar		
+to-listen	w	verb		music	senses	to listen	hören | zuhören	escuchar	luisteren	dinlemek		
+to-sing	w	verb		music	leisure-verbs	to sing	singen	cantar	zingen	şarkı söylemek		
+to-watch	w	verb		music	senses	to watch	schauen | ansehen	ver	kijken	izlemek		
+boring	w	adjective		music	opinion-adj	boring	langweilig	aburrido | aburrida	saai	sıkıcı		
+s.what-music	s			music		What music do you like? | What kind of music do you like?	Welche [Musik:noun] hörst du gerne? | Welche Musik hörst du gern?	¿Qué [música:noun] te gusta?	Naar welke [muziek:noun] luister je graag?	Ne tür [müzik:noun] dinlersin?		social
+s.favourite-song	s			music		This is my favourite song. | This is my favorite song.	Das ist mein [Lieblingslied:noun].	Esta es mi [canción:noun] favorita.	Dit is mijn [favoriete:adjective] nummer.	Bu en sevdiğim [şarkı:noun].		
+s.concert-together	s			music		Shall we go to a concert together?	Wollen wir zusammen auf ein [Konzert:noun] gehen?	¿Vamos juntos a un [concierto:noun]?	Zullen we samen naar een [concert:noun] gaan?	Birlikte bir [konsere:noun] gidelim mi?		social
+s.spanish-series	s			music		I'm watching a Spanish series.	Ich schaue gerade eine spanische [Serie:noun].	Estoy viendo una [serie:noun] española.	Ik kijk een Spaanse [serie:noun].	İspanyol bir [dizi:noun] izliyorum.		
+s.film-boring	s			music		The film was boring. | The movie was boring.	Der Film war [langweilig:adjective].	La película fue [aburrida:adjective].	De film was [saai:adjective].	Film [sıkıcıydı:adjective].		
+s.play-guitar	s			music		I play the guitar.	Ich spiele [Gitarre:noun].	Toco la [guitarra:noun].	Ik speel [gitaar:noun].	[Gitar:noun] çalarım.		
+s.recommend-film	s			music		Can you recommend a good film? | Can you recommend a good movie?	Kannst du mir einen guten [Film:noun] empfehlen?	¿Me recomiendas una buena [película:noun]?	Kun je een goede [film:noun] aanraden?	İyi bir [film:noun] önerebilir misin?		social
+s.music-cooking	s		A2	music		I listen to music while I cook.	Ich höre Musik, während ich [koche:verb].	Escucho música mientras [cocino:verb].	Ik luister naar muziek terwijl ik [kook:verb].	Yemek yaparken müzik [dinlerim:verb].		
+# ---- sport
+sport	w	noun		sport	sport	sport | sports	der Sport	el deporte	de sport	spor		
+football	w	noun		sport	sport	football | soccer	der Fußball	el fútbol	het voetbal	futbol		
+tennis	w	noun		sport	sport	tennis	das Tennis	el tenis	het tennis	tenis		
+gym	w	noun		sport	town-places	gym	das Fitnessstudio	el gimnasio	de sportschool	spor salonu		
+team	w	noun		sport	sport	team	die Mannschaft | das Team	el equipo	het team	takım		
+match	w	noun		sport	sport	match | game	das Spiel	el partido	de wedstrijd	maç		gloss=match (sport)
+to-swim	w	verb		sport	sport-verbs	to swim	schwimmen	nadar	zwemmen	yüzmek		
+to-run	w	verb		sport	sport-verbs	to run | to go running	joggen | laufen	correr	hardlopen	koşmak		
+to-win	w	verb		sport	sport-verbs	to win	gewinnen	ganar	winnen	kazanmak		
+to-lose	w	verb		sport	sport-verbs	to lose	verlieren	perder	verliezen	kaybetmek		
+s.football-saturday	s			sport		I play football on Saturdays. | I play soccer on Saturdays.	Ich spiele samstags [Fußball:noun].	Juego al [fútbol:noun] los sábados.	Ik [voetbal:verb] op zaterdag.	Cumartesi günleri [futbol:noun] oynarım.		
+s.do-sport	s			sport		Do you do any sport? | Do you play any sports?	Machst du [Sport:noun]?	¿Haces [deporte:noun]?	Doe je aan [sport:noun]?	[Spor:noun] yapar mısın?		social
+s.work-out	s			sport		I work out three times a week.	Ich [trainiere:verb] dreimal pro Woche.	[Entreno:verb] tres veces por semana.	Ik [sport:verb] drie keer per week.	Haftada üç kez spor [yapıyorum:verb].		
+s.team-won	s			sport		Our team won!	Unsere [Mannschaft:noun] hat gewonnen!	¡Nuestro [equipo:noun] ha ganado!	Ons [team:noun] heeft gewonnen!	[Takımımız:noun] kazandı!	Your favourite club has just won the final.	
+s.swim-sea	s			sport		I love swimming in the sea.	Ich [schwimme:verb] gern im Meer.	Me encanta [nadar:verb] en el mar.	Ik [zwem:verb] graag in de zee.	Denizde [yüzmeyi:verb] çok severim.		
+s.watch-match	s			sport		Shall we watch the match together? | Shall we watch the game together?	Wollen wir das [Spiel:noun] zusammen schauen?	¿Vemos el [partido:noun] juntos?	Zullen we samen de [wedstrijd:noun] kijken?	[Maçı:noun] birlikte izleyelim mi?		social
+s.go-running	s			sport		I go running every morning.	Ich gehe jeden Morgen [joggen:verb].	Salgo a [correr:verb] todas las mañanas.	Ik ga elke ochtend [hardlopen:verb].	Her sabah [koşuya:noun] çıkarım.		
+# ---- the weekend
+plan	w	noun		weekend	plans	plan	der Plan	el plan	het plan	plan		
+invitation	w	noun		weekend	plans	invitation	die Einladung	la invitación	de uitnodiging	davet		
+to-invite	w	verb		weekend	social-verbs	to invite	einladen	invitar	uitnodigen	davet etmek		
+free	w	adjective		weekend	availability	free	frei	libre	vrij	boş | müsait		gloss=free (not busy)
+busy	w	adjective		weekend	availability	busy	beschäftigt	ocupado | ocupada	druk	meşgul		
+to-relax	w	verb		weekend	routine-verbs	to relax | to rest	entspannen	descansar | relajarse	ontspannen	dinlenmek		
+maybe	w	adverb		weekend	modality	maybe | perhaps	vielleicht	quizás | tal vez	misschien	belki		
+great	w	adjective		weekend	opinion-adj	great	toll | super	genial	geweldig | super	harika		
+s.plans-saturday	s			weekend		Do you have plans for Saturday?	Hast du am Samstag schon [Pläne:noun]?	¿Tienes [planes:noun] para el sábado?	Heb je [plannen:noun] voor zaterdag?	Cumartesi için [planın:noun] var mı?		social
+s.free-sunday	s			weekend		I'm free on Sunday.	Am Sonntag bin ich [frei:adjective].	El domingo estoy [libre:adjective].	Zondag ben ik [vrij:adjective].	Pazar günü [boşum:adjective].		
+s.busy-weekend	s			weekend		Sorry, I'm busy this weekend.	Leider habe ich dieses Wochenende keine [Zeit:noun].	Lo siento, este fin de semana estoy [ocupado:adjective]. | Lo siento, este fin de semana estoy ocupada.	Sorry, dit weekend heb ik het [druk:adjective].	Kusura bakma, bu hafta sonu [meşgulüm:adjective].	A friend invites you, but you already have plans.	
+s.maybe-next-time	s			weekend		Maybe next time!	[Vielleicht:adverb] nächstes Mal!	¡[Quizás:adverb] la próxima vez!	[Misschien:adverb] de volgende keer!	[Belki:adverb] bir dahaki sefere!	You can't come today but want to meet another time.	
+s.invite-dinner	s			weekend		I'd like to invite you to dinner.	Ich möchte dich zum Essen [einladen:verb].	Me gustaría [invitarte:verb] a cenar.	Ik wil je graag [uitnodigen:verb] voor een etentje.	Seni yemeğe [davet:noun] etmek istiyorum.		social
+s.relax-home	s			weekend		On Sunday I relax at home.	Am Sonntag [entspanne:verb] ich zu Hause.	El domingo [descanso:verb] en casa.	Op zondag [ontspan:verb] ik thuis.	Pazar günü evde [dinlenirim:verb].		
+s.sounds-great	s			weekend		That sounds great!	Das klingt [toll:adjective]!	¡Suena [genial:adjective]!	Dat klinkt [geweldig:adjective]!	Kulağa [harika:adjective] geliyor!	A friend suggests a trip to the lake and you love the idea.	
+s.how-was-weekend	s			weekend		How was your weekend?	Wie war dein [Wochenende:noun]?	¿Qué tal tu fin de [semana:noun]?	Hoe was je [weekend:noun]?	Hafta [sonun:noun] nasıl geçti?		social

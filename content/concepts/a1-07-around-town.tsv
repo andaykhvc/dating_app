@@ -1,0 +1,84 @@
+# Unit A1.7 — Around town: places, transport, directions, shopping
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- places in town
+station	w	noun		places	town-places	station	der Bahnhof	la estación	het station	istasyon | gar		
+supermarket	w	noun		places	town-places	supermarket	der Supermarkt	el supermercado	de supermarkt	süpermarket | market		
+park	w	noun		places	town-places	park	der Park	el parque	het park	park		
+museum	w	noun		places	town-places	museum	das Museum	el museo	het museum	müze		
+restaurant	w	noun		places	town-places	restaurant	das Restaurant	el restaurante	het restaurant	restoran		
+bank	w	noun		places	town-places	bank	die Bank	el banco	de bank	banka		
+pharmacy	w	noun		places	town-places	pharmacy | chemist	die Apotheke	la farmacia	de apotheek	eczane		
+hospital	w	noun		places	town-places	hospital	das Krankenhaus	el hospital	het ziekenhuis	hastane		
+street	w	noun		places	town-places	street	die Straße	la calle	de straat	sokak | cadde		
+square	w	noun		places	town-places	square	der Platz	la plaza	het plein	meydan		gloss=square (in a town)
+cinema	w	noun		places	town-places	cinema | movie theater	das Kino	el cine	de bioscoop	sinema		
+city-centre	w	noun		places	town-places	city centre | city center | downtown	die Innenstadt | das Zentrum	el centro	het centrum	şehir merkezi | merkez		
+open	w	adjective		places	opening	open	offen | geöffnet	abierto | abierta	open	açık		
+closed	w	adjective		places	opening	closed	geschlossen	cerrado | cerrada	gesloten | dicht	kapalı		
+s.where-station	s			places		Where is the station?	Wo ist der [Bahnhof:noun]?	¿Dónde está la [estación:noun]?	Waar is het [station:noun]?	[İstasyon:noun] nerede?	You've just arrived in a new city and need a train.	
+s.supermarket-near	s			places		Is there a supermarket near here?	Gibt es hier in der Nähe einen [Supermarkt:noun]?	¿Hay un [supermercado:noun] cerca de aquí?	Is er een [supermarkt:noun] in de buurt?	Yakında bir [süpermarket:noun] var mı?	You need to buy food in an unfamiliar neighbourhood.	
+s.meet-park	s			places		Let's meet in the park.	Treffen wir uns im [Park:noun].	Quedamos en el [parque:noun].	Laten we in het [park:noun] afspreken.	[Parkta:noun] buluşalım.	The weather is nice and you suggest meeting outside.	social
+s.museum-closed	s			places		The museum is closed on Mondays.	Das Museum ist montags [geschlossen:adjective].	El museo está [cerrado:adjective] los lunes.	Het museum is op maandag [gesloten:adjective].	Müze pazartesi günleri [kapalı:adjective].		
+s.live-centre	s			places		I live in the city centre. | I live in the city center. | I live downtown.	Ich wohne in der [Innenstadt:noun].	Vivo en el [centro:noun].	Ik woon in het [centrum:noun].	Şehir [merkezinde:noun] oturuyorum.		
+s.favourite-place	s			places		What's your favourite place in your city? | What's your favorite place in your city?	Was ist dein [Lieblingsort:noun] in deiner Stadt?	¿Cuál es tu [lugar:noun] favorito de tu ciudad?	Wat is je favoriete [plek:noun] in je stad?	Şehrinde en sevdiğin [yer:noun] neresi?		social
+s.pharmacy-open	s			places		Is the pharmacy open?	Ist die Apotheke [geöffnet:adjective]? | Hat die Apotheke offen?	¿Está [abierta:adjective] la farmacia?	Is de apotheek [open:adjective]?	Eczane [açık:adjective] mı?		
+# ---- getting around
+bus	w	noun		transport	vehicles	bus	der Bus	el autobús	de bus	otobüs		
+train	w	noun		transport	vehicles	train	der Zug	el tren	de trein	tren		
+car	w	noun		transport	vehicles	car	das Auto	el coche	de auto	araba		
+bike	w	noun		transport	vehicles	bike | bicycle	das Fahrrad	la bicicleta	de fiets	bisiklet		
+tram	w	noun		transport	vehicles	tram	die Straßenbahn	el tranvía	de tram	tramvay		
+metro	w	noun		transport	vehicles	underground | metro | subway	die U-Bahn	el metro	de metro	metro		
+plane	w	noun		transport	vehicles	plane | airplane	das Flugzeug	el avión	het vliegtuig	uçak		
+ticket	w	noun		transport	travel-things	ticket	die Fahrkarte | das Ticket	el billete	het kaartje	bilet		
+stop	w	noun		transport	travel-things	stop	die Haltestelle	la parada	de halte	durak		gloss=stop (bus or tram stop)
+on-foot	w	adverb		transport	manner	on foot	zu Fuß	a pie | andando	te voet | lopend	yürüyerek		
+to-drive	w	verb		transport	motion	to drive	fahren	conducir	rijden	araba sürmek		
+to-walk	w	verb		transport	motion	to walk	laufen | zu Fuß gehen	caminar | andar	lopen	yürümek		
+s.by-bike	s			transport		I go to work by bike.	Ich fahre mit dem [Fahrrad:noun] zur Arbeit.	Voy al trabajo en [bicicleta:noun].	Ik ga met de [fiets:noun] naar mijn werk.	İşe [bisikletle:noun] gidiyorum.		
+s.bus-stop-where	s			transport		Where is the bus stop?	Wo ist die [Haltestelle:noun]?	¿Dónde está la [parada:noun] de autobús?	Waar is de [bushalte:noun]?	Otobüs [durağı:noun] nerede?		
+s.one-ticket	s			transport		One ticket to Amsterdam, please.	Eine [Fahrkarte:noun] nach Amsterdam, bitte.	Un [billete:noun] para Ámsterdam, por favor.	Een [kaartje:noun] naar Amsterdam, alstublieft.	Amsterdam'a bir [bilet:noun], lütfen.	You're at the ticket office of a train station.	
+s.train-late	s			transport		The train is late. | The train is delayed.	Der [Zug:noun] hat Verspätung.	El [tren:noun] llega tarde.	De [trein:noun] heeft vertraging.	[Tren:noun] gecikti.		
+s.walk-there	s			transport		We can walk there.	Wir können zu [Fuß:noun] gehen.	Podemos ir [andando:verb].	We kunnen [lopen:verb].	Oraya [yürüyebiliriz:verb].	Your friend suggests a taxi, but the place is close.	
+s.no-car	s			transport		I don't have a car.	Ich habe kein [Auto:noun].	No tengo [coche:noun].	Ik heb geen [auto:noun].	[Arabam:noun] yok.		
+s.how-get-work	s			transport		How do you get to work?	Wie kommst du zur [Arbeit:noun]?	¿Cómo vas al [trabajo:noun]?	Hoe ga je naar je [werk:noun]?	İşe nasıl [gidiyorsun:verb]?		social
+# ---- directions
+left	w	adverb		directions	direction	left	links	a la izquierda	links	sola | sol		gloss=left (direction)
+right	w	adverb		directions	direction	right	rechts	a la derecha	rechts	sağa | sağ		gloss=right (direction)
+straight-on	w	adverb		directions	direction	straight on | straight ahead	geradeaus	todo recto | recto	rechtdoor	düz | dümdüz		
+here	w	adverb		directions	location	here	hier	aquí	hier	burada		
+there	w	adverb		directions	location	there	dort | da	allí | ahí	daar	orada		
+near	w	adverb		directions	distance	near | close	in der Nähe | nah	cerca	dichtbij	yakın		
+far	w	adverb		directions	distance	far	weit	lejos	ver	uzak		
+next-to	w	preposition		directions	location	next to	neben	al lado de	naast	yanında		
+corner	w	noun		directions	town-places	corner	die Ecke	la esquina	de hoek	köşe		
+map	w	noun		directions	travel-things	map	der Stadtplan | die Karte	el mapa	de plattegrond | de kaart	harita		
+to-turn	w	verb		directions	motion	to turn	abbiegen	girar	afslaan	dönmek		
+s.turn-left	s			directions		Turn left at the corner.	Bieg an der Ecke [links:adverb] ab.	Gira a la [izquierda:noun] en la esquina.	Ga op de hoek [linksaf:adverb].	Köşeden [sola:adverb] dön.		
+s.straight-then-right	s			directions		Go straight on, then right. | Go straight ahead, then right.	Geh [geradeaus:adverb], dann rechts.	Sigue todo [recto:adverb] y luego a la derecha.	Ga [rechtdoor:adverb] en dan rechts.	[Düz:adverb] git, sonra sağa dön.		
+s.is-it-far	s			directions		Is it far from here?	Ist es [weit:adverb] von hier?	¿Está [lejos:adverb] de aquí?	Is het [ver:adverb] hiervandaan?	Buradan [uzak:adverb] mı?		
+s.very-close	s			directions		It's very close.	Es ist ganz in der [Nähe:noun].	Está muy [cerca:adverb].	Het is heel [dichtbij:adverb].	Çok [yakın:adverb].	A tourist asks if the station is far, but it's only two minutes away.	
+s.next-to-bank	s			directions		The café is next to the bank.	Das Café ist [neben:preposition] der Bank.	La cafetería está al [lado:noun] del banco.	Het café is [naast:preposition] de bank.	Kafe bankanın [yanında:noun].		
+s.im-lost	s			directions		Excuse me, I'm lost.	Entschuldigung, ich habe mich [verlaufen:verb].	Perdone, estoy [perdido:adjective]. | Perdone, estoy perdida.	Pardon, ik ben [verdwaald:adjective].	Affedersiniz, [kayboldum:verb].	You can't find your hotel and ask a stranger.	
+s.show-on-map	s			directions		Can you show me on the map?	Kannst du es mir auf der [Karte:noun] zeigen?	¿Me lo puedes enseñar en el [mapa:noun]?	Kun je het me op de [kaart:noun] laten zien?	Haritada [gösterebilir:verb] misin?		
+# ---- shopping
+shop	w	noun		shopping	town-places	shop | store	das Geschäft | der Laden	la tienda	de winkel	dükkan | mağaza		
+price	w	noun		shopping	money	price	der Preis	el precio	de prijs	fiyat		
+money	w	noun		shopping	money	money	das Geld	el dinero	het geld	para		
+expensive	w	adjective		shopping	cost	expensive	teuer	caro | cara	duur	pahalı		
+cheap	w	adjective		shopping	cost	cheap	billig | günstig	barato | barata	goedkoop	ucuz		
+size	w	noun		shopping	clothes	size	die Größe	la talla	de maat	beden		gloss=size (clothes)
+clothes	w	noun		shopping	clothes	clothes	die Kleidung	la ropa	de kleren | de kleding	kıyafet | giysi		
+shoes	w	noun		shopping	clothes	shoes	die Schuhe {pl}	los zapatos	de schoenen	ayakkabı		
+to-buy	w	verb		shopping	money-verbs	to buy	kaufen	comprar	kopen	satın almak | almak		
+to-cost	w	verb		shopping	money-verbs	to cost	kosten	costar	kosten	tutmak		
+to-try-on	w	verb		shopping	clothes-verbs	to try on	anprobieren	probarse	passen	denemek		
+s.how-much	s			shopping		How much does it cost? | How much is it?	Wie viel [kostet:verb] das?	¿Cuánto [cuesta:verb]?	Hoeveel [kost:verb] het?	Bu ne [kadar:adverb]?	You want to know the price of a jacket.	
+s.too-expensive	s			shopping		That's too expensive.	Das ist zu [teuer:adjective].	Es demasiado [caro:adjective].	Dat is te [duur:adjective].	Bu çok [pahalı:adjective].		
+s.try-this-on	s			shopping		Can I try this on?	Kann ich das [anprobieren:verb]?	¿Puedo [probármelo:verb]?	Mag ik dit [passen:verb]?	Bunu [deneyebilir:verb] miyim?	You like a shirt in a clothes shop.	
+s.bigger-size	s		A2	shopping		Do you have this in a bigger size?	Haben Sie das in einer [größeren:adjective] Größe?	¿Lo tiene en una talla más [grande:adjective]?	Heeft u dit in een [grotere:adjective] maat?	Bunun daha [büyük:adjective] bedeni var mı?		
+s.just-looking	s			shopping		I'm just looking, thanks.	Ich schaue nur, [danke:interjection].	Solo estoy [mirando:verb], gracias.	Ik kijk alleen even, [dank:noun] je.	Sadece [bakıyorum:verb], teşekkürler.	A shop assistant asks if you need help.	
+s.new-shoes	s			shopping		I want to buy new shoes.	Ich will neue [Schuhe:noun] kaufen.	Quiero comprar [zapatos:noun] nuevos.	Ik wil nieuwe [schoenen:noun] kopen.	Yeni [ayakkabı:noun] almak istiyorum.		
+s.shops-sunday	s			shopping		Are the shops open on Sunday?	Haben die [Geschäfte:noun] am Sonntag offen?	¿Las [tiendas:noun] abren el domingo?	Zijn de [winkels:noun] op zondag open?	[Dükkanlar:noun] pazar günü açık mı?		
+s.market-cheap	s			shopping		Fruit is cheap at the market.	Auf dem Markt ist Obst [billig:adjective].	En el mercado la fruta es [barata:adjective].	Op de markt is fruit [goedkoop:adjective].	Pazarda meyve [ucuz:adjective].		

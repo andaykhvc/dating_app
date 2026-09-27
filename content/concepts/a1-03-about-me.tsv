@@ -1,0 +1,61 @@
+# Unit A1.3 — About me: age, work and study, family
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- age and birthdays
+age	w	noun		age-birthday	age	age	das Alter	la edad	de leeftijd	yaş		
+year	w	noun		age-birthday	time-units	year	das Jahr	el año	het jaar	yıl | sene		
+birthday	w	noun		age-birthday	celebration	birthday	der Geburtstag	el cumpleaños	de verjaardag	doğum günü		
+old	w	adjective		age-birthday	age-adj	old	alt	viejo | mayor	oud	yaşlı		gloss=old (of a person)
+young	w	adjective		age-birthday	age-adj	young	jung	joven	jong	genç		
+party	w	noun		age-birthday	celebration	party	die Party | das Fest	la fiesta	het feest	parti		
+gift	w	noun		age-birthday	celebration	present | gift	das Geschenk	el regalo	het cadeau	hediye		
+cake	w	noun		age-birthday	celebration	cake	der Kuchen	la tarta	de taart	pasta		
+to-celebrate	w	verb		age-birthday	celebration	to celebrate	feiern	celebrar	vieren	kutlamak		
+s.how-old	s			age-birthday		How old are you?	Wie [alt:adjective] bist du?	¿Cuántos [años:noun] tienes?	Hoe [oud:adjective] ben je?	Kaç [yaşındasın:noun]?		social
+s.im-25	s			age-birthday		I'm twenty-five years old. | I'm 25 years old.	Ich bin fünfundzwanzig [Jahre:noun] alt.	Tengo veinticinco [años:noun].	Ik ben vijfentwintig [jaar:noun] oud.	Yirmi beş [yaşındayım:noun].		
+s.when-birthday	s			age-birthday		When is your birthday?	Wann hast du [Geburtstag:noun]?	¿Cuándo es tu [cumpleaños:noun]?	Wanneer ben je [jarig:adjective]?	Doğum [günün:noun] ne zaman?		social
+s.happy-birthday	s			age-birthday		Happy birthday!	Alles Gute zum [Geburtstag:noun]!	¡Feliz [cumpleaños:noun]!	Gefeliciteerd met je [verjaardag:noun]!	Doğum [günün:noun] kutlu olsun!	It is your friend's birthday today.	
+s.birthday-may	s			age-birthday		My birthday is in May.	Mein Geburtstag ist im [Mai:noun].	Mi cumpleaños es en [mayo:noun].	Mijn verjaardag is in [mei:noun].	Doğum günüm [mayısta:noun].		
+s.party-saturday	s			age-birthday		We're celebrating on Saturday.	Wir [feiern:verb] am Samstag.	[Celebramos:verb] el sábado.	We [vieren:verb] het op zaterdag.	Cumartesi [kutluyoruz:verb].		
+s.thanks-gift	s			age-birthday		Thank you for the present! | Thank you for the gift!	Danke für das [Geschenk:noun]!	¡Gracias por el [regalo:noun]!	Bedankt voor het [cadeau:noun]!	[Hediye:noun] için teşekkürler!	A friend gives you a present.	
+# ---- work and study
+work	w	noun		jobs	work	work | job	die Arbeit	el trabajo	het werk	iş		
+to-work	w	verb		jobs	work	to work	arbeiten	trabajar	werken	çalışmak		
+to-study	w	verb		jobs	study	to study	studieren	estudiar	studeren	okumak | ders çalışmak		gloss=to study (at university)
+student	w	noun		jobs	professions	student	der Student | die Studentin	el estudiante | la estudiante	de student	öğrenci		
+teacher	w	noun		jobs	professions	teacher	der Lehrer | die Lehrerin	el profesor | la profesora	de leraar | de lerares	öğretmen		
+doctor	w	noun		jobs	professions	doctor	der Arzt | die Ärztin	el médico | la médica	de dokter | de arts	doktor		
+engineer	w	noun		jobs	professions	engineer	der Ingenieur | die Ingenieurin	el ingeniero | la ingeniera	de ingenieur	mühendis		
+waiter	w	noun		jobs	professions	waiter	der Kellner | die Kellnerin	el camarero | la camarera	de ober | de serveerster	garson		
+cook	w	noun		jobs	professions	cook | chef	der Koch | die Köchin	el cocinero | la cocinera	de kok	aşçı		
+office	w	noun		jobs	workplaces	office	das Büro	la oficina	het kantoor	ofis		
+company	w	noun		jobs	workplaces	company	die Firma	la empresa	het bedrijf	şirket		
+university	w	noun		jobs	workplaces	university	die Universität | die Uni	la universidad	de universiteit	üniversite		
+colleague	w	noun		jobs	professions	colleague	der Kollege | die Kollegin	el colega | la colega	de collega	iş arkadaşı		
+s.what-do-you-do	s			jobs		What do you do for a living? | What do you do?	Was [machst:verb] du beruflich?	¿A qué te [dedicas:verb]?	Wat voor [werk:noun] doe je?	Ne iş [yapıyorsun:verb]?		social
+s.im-teacher	s			jobs		I'm a teacher. | I am a teacher.	Ich bin [Lehrer:noun]. | Ich bin Lehrerin.	Soy [profesor:noun]. | Soy profesora.	Ik ben [leraar:noun]. | Ik ben lerares.	Ben [öğretmenim:noun].		
+s.work-office	s			jobs		I work in an office.	Ich [arbeite:verb] in einem Büro.	[Trabajo:verb] en una oficina.	Ik [werk:verb] op een kantoor.	Bir ofiste [çalışıyorum:verb].		
+s.study-university	s			jobs		I study at the university.	Ich [studiere:verb] an der Universität.	[Estudio:verb] en la universidad.	Ik [studeer:verb] aan de universiteit.	Üniversitede [okuyorum:verb].		
+s.like-job	s			jobs		Do you like your job?	Magst du deine [Arbeit:noun]?	¿Te gusta tu [trabajo:noun]?	Vind je je [werk:noun] leuk?	[İşini:noun] seviyor musun?		social
+s.work-from-home	s			jobs		Today I'm working from home.	[Heute:adverb] arbeite ich von zu Hause.	Hoy [trabajo:verb] desde casa.	Vandaag [werk:verb] ik thuis.	Bugün evden [çalışıyorum:verb].		
+s.colleagues-nice	s			jobs		My colleagues are very nice.	Meine [Kollegen:noun] sind sehr nett.	Mis [compañeros:noun] son muy simpáticos.	Mijn [collega's:noun] zijn heel aardig.	İş [arkadaşlarım:noun] çok iyi.		
+# ---- family
+family	w	noun		family	family	family	die Familie	la familia	de familie | het gezin	aile		
+mother	w	noun		family	family	mother	die Mutter	la madre	de moeder	anne		
+father	w	noun		family	family	father	der Vater	el padre	de vader	baba		
+parents	w	noun		family	family	parents	die Eltern {pl}	los padres	de ouders	anne baba | ebeveyn		
+brother	w	noun		family	family	brother	der Bruder	el hermano	de broer	erkek kardeş | abi | ağabey		
+sister	w	noun		family	family	sister	die Schwester	la hermana	de zus	kız kardeş | abla		
+son	w	noun		family	family	son	der Sohn	el hijo	de zoon	oğul		
+daughter	w	noun		family	family	daughter	die Tochter	la hija	de dochter	kız | kız evlat		gloss=daughter
+child	w	noun		family	family	child	das Kind	el niño | la niña	het kind	çocuk		
+grandmother	w	noun		family	family	grandmother | grandma	die Oma | die Großmutter	la abuela	de oma	büyükanne | anneanne | babaanne		
+grandfather	w	noun		family	family	grandfather | grandpa	der Opa | der Großvater	el abuelo	de opa	büyükbaba | dede		
+s.big-family	s			family		I have a big family.	Ich habe eine große [Familie:noun].	Tengo una [familia:noun] grande.	Ik heb een grote [familie:noun].	Büyük bir [ailem:noun] var.		
+s.two-sisters	s			family		I have two sisters.	Ich habe zwei [Schwestern:noun].	Tengo dos [hermanas:noun].	Ik heb twee [zussen:noun].	İki kız [kardeşim:noun] var.		
+s.have-siblings	s			family		Do you have brothers or sisters? | Do you have siblings?	Hast du [Geschwister:noun]?	¿Tienes [hermanos:noun]?	Heb je broers of [zussen:noun]?	[Kardeşin:noun] var mı?		social
+s.parents-live	s			family		My parents live in Izmir.	Meine [Eltern:noun] wohnen in Izmir.	Mis [padres:noun] viven en Esmirna.	Mijn [ouders:noun] wonen in Izmir.	Annem ve babam İzmir'de [yaşıyor:verb].		
+s.brother-older	s		A2	family		My brother is older than me.	Mein Bruder ist [älter:adjective] als ich.	Mi hermano es [mayor:adjective] que yo.	Mijn broer is [ouder:adjective] dan ik.	Abim benden [büyük:adjective].		
+s.mother-cooks	s			family		My mother cooks very well.	Meine Mutter [kocht:verb] sehr gut.	Mi madre [cocina:verb] muy bien.	Mijn moeder [kookt:verb] heel goed.	Annem çok iyi yemek [yapar:verb].		
+s.visit-grandma	s			family		On Sunday I'm visiting my grandmother.	Am Sonntag [besuche:verb] ich meine Oma.	El domingo [visito:verb] a mi abuela.	Zondag [bezoek:verb] ik mijn oma.	Pazar günü büyükannemi [ziyaret:noun] ediyorum.		
+s.see-family-often	s			family		Do you see your family often?	Siehst du deine Familie [oft:adverb]?	¿Ves a tu familia a [menudo:adverb]?	Zie je je familie [vaak:adverb]?	Aileni [sık:adverb] sık görüyor musun?		social

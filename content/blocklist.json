@@ -1,0 +1,8 @@
+{
+  "_comment": "Tripwire for bulk imports, not a moderation system. Matching is on whole words, case-insensitive; accents count (Turkish sık ≠ sik). Extend as imports reveal gaps.",
+  "en": ["fuck", "fucking", "shit", "bitch", "cunt", "whore", "slut", "nigger", "faggot", "retard", "rape", "kill"],
+  "de": ["fick", "ficken", "scheiße", "scheisse", "hure", "schlampe", "fotze", "arschloch", "neger", "schwuchtel", "vergewaltigen", "töten"],
+  "es": ["puta", "puto", "mierda", "joder", "coño", "cabrón", "maricón", "follar", "violar", "matar"],
+  "nl": ["kut", "neuken", "hoer", "klootzak", "lul", "kanker", "tering", "flikker", "verkrachten", "vermoorden"],
+  "tr": ["siktir", "sik", "orospu", "amk", "piç", "yarrak", "göt", "ibne", "tecavüz", "öldürmek"]
+}

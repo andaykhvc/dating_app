@@ -1,0 +1,56 @@
+# Unit A1.4 — People: friends and partners, appearance, personality
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- friends and partners
+friend	w	noun		friends	people	friend	der Freund | die Freundin	el amigo | la amiga	de vriend | de vriendin	arkadaş		
+partner	w	noun		friends	people	partner | boyfriend | girlfriend	der Partner | die Partnerin	la pareja	de partner	sevgili | partner		
+husband	w	noun		friends	people	husband	der Ehemann | der Mann	el marido	de man	koca | eş		
+wife	w	noun		friends	people	wife	die Ehefrau | die Frau	la esposa | la mujer	de vrouw	karı | eş		
+man	w	noun		friends	people	man	der Mann	el hombre	de man	adam | erkek		
+woman	w	noun		friends	people	woman	die Frau	la mujer	de vrouw	kadın		
+people	w	noun		friends	people	people	die Leute {pl}	la gente	de mensen	insanlar		
+neighbour	w	noun		friends	people	neighbour | neighbor	der Nachbar | die Nachbarin	el vecino | la vecina	de buurman | de buurvrouw	komşu		
+to-meet	w	verb		friends	social-verbs	to meet	kennenlernen	conocer	ontmoeten	tanışmak		gloss=to meet (for the first time)
+together	w	adverb		friends	manner	together	zusammen	juntos | juntas	samen	birlikte		
+s.best-friend	s			friends		My best friend lives in Madrid.	Mein bester [Freund:noun] wohnt in Madrid.	Mi mejor [amigo:noun] vive en Madrid.	Mijn beste [vriend:noun] woont in Madrid.	En iyi [arkadaşım:noun] Madrid'de yaşıyor.		
+s.how-met	s		A2	friends		How did you meet?	Wie habt ihr euch [kennengelernt:verb]?	¿Cómo os [conocisteis:verb]?	Hoe hebben jullie elkaar [leren:verb] kennen?	Nasıl [tanıştınız:verb]?		
+s.have-partner	s			friends		Do you have a partner?	Hast du einen [Partner:noun]? | Hast du eine Partnerin?	¿Tienes [pareja:noun]?	Heb je een [partner:noun]?	[Sevgilin:noun] var mı?		
+s.go-out-friends	s			friends		I often go out with friends.	Ich gehe oft mit [Freunden:noun] aus.	Salgo a menudo con [amigos:noun].	Ik ga vaak uit met [vrienden:noun].	Sık sık [arkadaşlarımla:noun] dışarı çıkarım.		
+s.neighbour-friendly	s			friends		My neighbour is very friendly. | My neighbor is very friendly.	Mein [Nachbar:noun] ist sehr freundlich.	Mi [vecino:noun] es muy amable.	Mijn [buurman:noun] is heel vriendelijk.	[Komşum:noun] çok nazik.		
+s.meet-new-people	s			friends		I like meeting new people.	Ich lerne gern neue [Leute:noun] kennen.	Me gusta conocer [gente:noun] nueva.	Ik ontmoet graag nieuwe [mensen:noun].	Yeni [insanlarla:noun] tanışmayı severim.		
+s.do-together	s			friends		Shall we do something together?	Wollen wir [zusammen:adverb] etwas machen?	¿Hacemos algo [juntos:adverb]?	Zullen we [samen:adverb] iets doen?	[Birlikte:adverb] bir şey yapalım mı?	You'd like to suggest meeting up with a new friend.	social
+# ---- appearance
+tall	w	adjective		appearance	looks	tall	groß	alto | alta	lang	uzun boylu		
+short	w	adjective		appearance	looks	short	klein	bajo | baja	klein	kısa boylu		gloss=short (height)
+hair	w	noun		appearance	body-looks	hair	die Haare {pl}	el pelo	het haar	saç		
+eyes	w	noun		appearance	body-looks	eyes	die Augen {pl}	los ojos	de ogen	gözler		
+beard	w	noun		appearance	body-looks	beard	der Bart	la barba	de baard	sakal		
+glasses	w	noun		appearance	accessories	glasses	die Brille	las gafas	de bril	gözlük		
+beautiful	w	adjective		appearance	looks	beautiful | pretty	schön | hübsch	guapo | guapa | bonito	mooi	güzel		
+blond	w	adjective		appearance	looks	blond | blonde	blond	rubio | rubia	blond	sarışın		
+long	w	adjective		appearance	looks	long	lang	largo | larga	lang	uzun		
+to-wear	w	verb		appearance	clothes-verbs	to wear	tragen	llevar	dragen	giymek | takmak		
+s.long-hair	s			appearance		She has long hair.	Sie hat lange [Haare:noun].	Ella tiene el [pelo:noun] largo.	Ze heeft lang [haar:noun].	Onun uzun [saçları:noun] var.		
+s.tall-beard	s			appearance		He is tall and has a beard.	Er ist [groß:adjective] und hat einen Bart.	Es [alto:adjective] y tiene barba.	Hij is [lang:adjective] en heeft een baard.	O uzun [boylu:adjective] ve sakallı.		
+s.blue-eyes	s			appearance		My sister has blue eyes.	Meine Schwester hat blaue [Augen:noun].	Mi hermana tiene los [ojos:noun] azules.	Mijn zus heeft blauwe [ogen:noun].	Kız kardeşimin mavi [gözleri:noun] var.		
+s.wear-glasses	s			appearance		I wear glasses.	Ich trage eine [Brille:noun].	Llevo [gafas:noun].	Ik draag een [bril:noun].	[Gözlük:noun] takıyorum.		
+s.great-photo	s			appearance		You look great in that photo!	Du siehst auf dem Foto [toll:adjective] aus!	¡Sales muy [bien:adverb] en esa foto!	Je ziet er [geweldig:adjective] uit op die foto!	O fotoğrafta [harika:adjective] görünüyorsun!	You like a match's profile picture.	social
+s.look-like	s			appearance		What does he look like?	Wie [sieht:verb] er aus?	¿Cómo [es:verb] él?	Hoe [ziet:verb] hij eruit?	[Görünüşü:noun] nasıl?		
+# ---- personality
+person	w	noun		personality	people	person	der Mensch	la persona	de persoon	insan | kişi		
+friendly	w	adjective		personality	character	friendly	freundlich	amable	vriendelijk	nazik | cana yakın		
+nice	w	adjective		personality	character	nice	nett	simpático | simpática	aardig	hoş | sevimli		gloss=nice (of a person)
+funny	w	adjective		personality	character	funny	lustig	divertido | divertida	grappig	komik | eğlenceli		
+shy	w	adjective		personality	character	shy	schüchtern	tímido | tímida	verlegen	utangaç		
+smart	w	adjective		personality	character	smart | clever	klug | intelligent	inteligente	slim	akıllı		
+calm	w	adjective		personality	character	calm	ruhig	tranquilo | tranquila	rustig	sakin		
+lazy	w	adjective		personality	character	lazy	faul	perezoso | perezosa	lui	tembel		
+patient	w	adjective		personality	character	patient	geduldig	paciente	geduldig	sabırlı		
+curious	w	adjective		personality	character	curious	neugierig	curioso | curiosa	nieuwsgierig	meraklı		
+s.bit-shy	s			personality		I'm a bit shy at first.	Am Anfang bin ich etwas [schüchtern:adjective].	Al principio soy un poco [tímido:adjective]. | Al principio soy un poco tímida.	In het begin ben ik een beetje [verlegen:adjective].	Başta biraz [utangaçım:adjective].		
+s.friend-funny	s			personality		My friend is really funny.	Mein Freund ist echt [lustig:adjective].	Mi amigo es muy [divertido:adjective].	Mijn vriend is echt [grappig:adjective].	Arkadaşım çok [komik:adjective].		
+s.describe-you	s		A2	personality		How would your friends describe you?	Wie würden deine Freunde dich [beschreiben:verb]?	¿Cómo te [describirían:verb] tus amigos?	Hoe zouden je vrienden je [omschrijven:verb]?	Arkadaşların seni nasıl [anlatır:verb]?		social
+s.patient-teacher	s			personality		Our teacher is very patient.	Unsere Lehrerin ist sehr [geduldig:adjective].	Nuestra profesora es muy [paciente:adjective].	Onze lerares is heel [geduldig:adjective].	Öğretmenimiz çok [sabırlı:adjective].		
+s.calm-person	s			personality		I'm a calm person.	Ich bin ein ruhiger [Mensch:noun].	Soy una persona [tranquila:adjective].	Ik ben een [rustig:adjective] persoon.	Ben [sakin:adjective] biriyim.		
+s.curious-cultures	s			personality		I'm curious about other cultures.	Ich bin [neugierig:adjective] auf andere Kulturen.	Tengo [curiosidad:noun] por otras culturas.	Ik ben [nieuwsgierig:adjective] naar andere culturen.	Başka kültürleri çok [merak:noun] ediyorum.		
+s.what-kind-person	s			personality		What kind of person are you?	Was für ein [Mensch:noun] bist du?	¿Qué tipo de [persona:noun] eres?	Wat voor [persoon:noun] ben jij?	Nasıl bir [insansın:noun]?		social

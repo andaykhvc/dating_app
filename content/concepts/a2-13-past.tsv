@@ -1,0 +1,42 @@
+# Unit A2.4 — Talking about the past: yesterday, your story
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- yesterday
+last-night	w	adverb		yesterday	time-adverbs	last night	gestern Abend	anoche	gisteravond	dün akşam | dün gece		
+ago	w	adverb		yesterday	time-adverbs	ago	vor	hace	geleden	önce		
+already	w	adverb		yesterday	time-adverbs	already	schon	ya	al	zaten | çoktan		
+first	w	adverb		yesterday	sequence-adverbs	first	zuerst	primero	eerst	ilk önce | önce		gloss=first (before anything else)
+afterwards	w	adverb		yesterday	sequence-adverbs	afterwards | then	danach	después	daarna	sonra		
+to-happen	w	verb		yesterday	core-verbs	to happen	passieren	pasar	gebeuren	olmak		
+s.did-yesterday	s			yesterday		What did you do yesterday?	Was hast du gestern [gemacht:verb]?	¿Qué [hiciste:verb] ayer?	Wat heb je gisteren [gedaan:verb]?	Dün ne [yaptın:verb]?		social
+s.went-cinema	s			yesterday		Yesterday I went to the cinema. | Yesterday I went to the movies.	Gestern bin ich ins Kino [gegangen:verb].	Ayer [fui:verb] al cine.	Gisteren [ging:verb] ik naar de bioscoop.	Dün sinemaya [gittim:verb].		
+s.stayed-home	s			yesterday		Last night I stayed at home.	Gestern Abend bin ich zu Hause [geblieben:verb].	Anoche me [quedé:verb] en casa.	Gisteravond ben ik thuis [gebleven:verb].	Dün akşam evde [kaldım:verb].		
+s.met-friend-city	s			yesterday		I met a friend in town.	Ich habe eine Freundin in der Stadt [getroffen:verb].	[Quedé:verb] con una amiga en el centro.	Ik heb een vriendin in de stad [ontmoet:verb].	Şehirde bir arkadaşımla [buluştum:verb].		
+s.ate-too-much	s			yesterday		I ate too much.	Ich habe zu viel [gegessen:verb].	[Comí:verb] demasiado.	Ik heb te veel [gegeten:verb].	Çok fazla [yedim:verb].		
+s.two-days-ago	s			yesterday		I arrived two days ago.	Ich bin vor zwei [Tagen:noun] angekommen.	Llegué hace dos [días:noun].	Ik ben twee [dagen:noun] geleden aangekomen.	İki [gün:noun] önce geldim.		
+s.slept-well	s			yesterday		Did you sleep well?	Hast du gut [geschlafen:verb]?	¿Has [dormido:verb] bien?	Heb je goed [geslapen:verb]?	İyi [uyudun:verb] mu?	You see a friend in the morning after they stayed at yours.	social
+s.already-seen	s			yesterday		I've already seen that film. | I've already seen that movie.	Den Film habe ich [schon:adverb] gesehen.	[Ya:adverb] he visto esa película.	Die film heb ik [al:adverb] gezien.	O filmi [zaten:adverb] izledim.		
+s.party-fun	s			yesterday		The party was really fun.	Die Party war echt [lustig:adjective].	La fiesta fue muy [divertida:adjective].	Het feest was echt [leuk:adjective].	Parti çok [eğlenceliydi:adjective].		
+s.first-ate-then-danced	s			yesterday		First we ate, then we danced.	Zuerst haben wir gegessen, dann [getanzt:verb].	Primero comimos y después [bailamos:verb].	Eerst aten we, daarna [dansten:verb] we.	Önce yemek yedik, sonra [dans:noun] ettik.		
+s.what-happened	s			yesterday		What happened?	Was ist [passiert:verb]?	¿Qué ha [pasado:verb]?	Wat is er [gebeurd:verb]?	Ne [oldu:verb]?	A friend sends you a message that just says: "You won't believe this…"	
+# ---- your story
+life	w	noun		life-story	life	life	das Leben	la vida	het leven	hayat		
+childhood	w	noun		life-story	life	childhood	die Kindheit	la infancia	de jeugd | de kindertijd	çocukluk		
+school	w	noun		life-story	life	school	die Schule	el colegio | la escuela	de school	okul		
+village	w	noun		life-story	geography	village	das Dorf	el pueblo	het dorp	köy		
+dream	w	noun		life-story	life	dream	der Traum	el sueño	de droom	hayal | rüya		
+future	w	noun		life-story	life	future	die Zukunft	el futuro	de toekomst	gelecek		
+to-grow-up	w	verb		life-story	life-verbs	to grow up	aufwachsen	crecer	opgroeien	büyümek		
+to-move	w	verb		life-story	life-verbs	to move	umziehen	mudarse	verhuizen	taşınmak		gloss=to move (house)
+to-be-born	w	verb		life-story	life-verbs	to be born	geboren werden	nacer	geboren worden	doğmak		
+to-change	w	verb		life-story	life-verbs	to change	sich ändern | sich verändern	cambiar	veranderen	değişmek		
+in-the-past	w	adverb		life-story	time-adverbs	in the past | before	früher	antes	vroeger	eskiden		
+s.where-grow-up	s			life-story		Where did you grow up?	Wo bist du [aufgewachsen:verb]?	¿Dónde [creciste:verb]?	Waar ben je [opgegroeid:verb]?	Nerede [büyüdün:verb]?		social
+s.grew-up-village	s			life-story		I grew up in a small village.	Ich bin in einem kleinen [Dorf:noun] aufgewachsen.	Crecí en un [pueblo:noun] pequeño.	Ik ben in een klein [dorp:noun] opgegroeid.	Küçük bir [köyde:noun] büyüdüm.		
+s.moved-here	s			life-story		I moved here three years ago.	Ich bin vor drei Jahren hierher [gezogen:verb].	Me [mudé:verb] aquí hace tres años.	Ik ben drie jaar geleden hierheen [verhuisd:verb].	Üç yıl önce buraya [taşındım:verb].		
+s.used-to-live	s			life-story		I used to live in Madrid.	[Früher:adverb] habe ich in Madrid gewohnt.	[Antes:adverb] vivía en Madrid.	[Vroeger:adverb] woonde ik in Madrid.	[Eskiden:adverb] Madrid'de yaşıyordum.		
+s.school-ankara	s			life-story		I went to school in Ankara.	Ich bin in Ankara zur [Schule:noun] gegangen.	Fui al [colegio:noun] en Ankara.	Ik ben in Ankara naar [school:noun] gegaan.	Ankara'da [okula:noun] gittim.		
+s.dream-job	s			life-story		What's your dream job?	Was ist dein [Traumjob:noun]?	¿Cuál es el trabajo de tus [sueños:noun]?	Wat is je [droombaan:noun]?	Hayalindeki [iş:noun] ne?		social
+s.life-changed	s			life-story		My life has changed a lot.	Mein Leben hat sich sehr [verändert:verb].	Mi vida ha [cambiado:verb] mucho.	Mijn leven is erg [veranderd:verb].	Hayatım çok [değişti:verb].		
+s.future-abroad	s			life-story		In the future I'd like to live abroad.	In [Zukunft:noun] möchte ich im Ausland leben.	En el [futuro:noun] me gustaría vivir en el extranjero.	In de [toekomst:noun] wil ik in het buitenland wonen.	[Gelecekte:noun] yurt dışında yaşamak istiyorum.		
+s.happy-childhood	s			life-story		I had a happy childhood.	Ich hatte eine glückliche [Kindheit:noun].	Tuve una [infancia:noun] feliz.	Ik had een gelukkige [jeugd:noun].	Mutlu bir [çocukluğum:noun] oldu.		

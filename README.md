@@ -56,8 +56,9 @@ npx supabase db push
 ```
 
 `supabase/migrations/` runs in filename order: enums, tables by domain, indexes,
-RLS policies, the trusted functions, the shaped read functions, and the storage
-bucket.
+RLS policies, the trusted functions, the shaped read functions, the storage
+bucket, the `999x` fix-ups, and the learning-content engine (`99990`–`99993`,
+numbered so they sort after the fix-ups: the CLI compares versions as strings).
 
 ### 4. Seed the content
 
@@ -68,9 +69,11 @@ into the Supabase SQL Editor, or use `psql` with your connection string:
 for f in supabase/seed/*.sql; do psql "$DATABASE_URL" -f "$f"; done
 ```
 
-This loads 3 launch languages, 24 interests, the 7 game templates, 18 mission
-templates, and playable content plus a starter word/sentence/prompt library for
-English, German and Spanish.
+This loads the languages, 24 interests, the 7 game templates, 18 mission
+templates and the original challenge content, then (files `0010`–`0014`) the
+learning course: 14 A1–A2 units, 44 skills, 133 lessons and 836 concepts in
+German, Spanish, Dutch, Turkish and English, with their provenance. The seed
+files are idempotent — re-run them after any content change.
 
 ### 5. Auth settings
 
@@ -117,12 +120,17 @@ src/
     (app)/                 the authenticated shell with bottom navigation
   components/              ui primitives, layout, hand-drawn icons
   features/                auth, onboarding, discovery, matching, chat,
-                           games, profile, progress
+                           games, learn, profile, progress
   lib/                     supabase clients, image compression, dates
   types/                   domain types mirroring the SQL function results
+content/                   course content as TSV + JSON (source of truth)
+scripts/content/           importers, validator, seed builder, unit tests
 supabase/
   migrations/              schema, indexes, RLS, functions
-  seed/                    languages, interests, missions, game content
+  seed/                    languages, interests, missions, game content,
+                           generated course content (0010–0014)
+  tests/                   scratch-database test runner + SQL test suite
+docs/                      content system and licensing research
 ```
 
 ### Where the trust boundary sits
@@ -169,6 +177,34 @@ client never sees the answer to.
 
 ---
 
+### The learning course
+
+The Learn tab (route `/play`) holds a structured A1–A2 course for German,
+Spanish, Dutch, Turkish and English, built on a language-agnostic content
+model: a *concept* ("coffee", "What music do you like?") is written once per
+language, and every direction — Turkish→German, German→Turkish, Spanish→Dutch —
+is served by the same rows. Lessons are generated in Postgres from concepts
+(13 mechanics, distractors picked by part of speech and topic), graded
+server-side, and fed into a Leitner spaced-repetition queue. XP flows through
+the same `grant_xp()` as everything else.
+
+Each lesson ends with a phrase worth trying on a real person. **Ask a match**
+opens that chat with the phrase in the composer — unsent, editable — and
+actually sending it earns XP.
+
+Content lives in `content/` as TSV, is validated and compiled to seed SQL by
+`scripts/content/`, and every row records its source and licence; the public
+`/licenses` page is generated from that. No AI and no external API are called
+while anyone learns.
+
+Everything about it — schema, pipeline, validation rules, exercise engine, SRS,
+licences, and how to add content or a language — is in
+**[docs/content-system.md](docs/content-system.md)**. The licensing research
+behind the source choices is in
+[docs/open-content-licensing.md](docs/open-content-licensing.md).
+
+---
+
 ## Cost decisions
 
 The free tiers are the design constraint, not an afterthought:
@@ -193,17 +229,17 @@ The free tiers are the design constraint, not an afterthought:
 
 ## Scaling the content library
 
-The seed is deliberately small — it establishes the shape, not the volume. The
-targets (~500 words, ~1,000 sentences, ~100 prompts per language) are reached by
-bulk-loading `vocabulary_words`, `example_sentences` and `conversation_prompts`,
-which already carry `source`, `source_license` and `source_url` columns for
-exactly that. Import a CSV through Supabase Studio or `psql \copy`; no schema
-change and no migration is involved. Keep the licence metadata populated when
-you bring in an external dataset.
+The course content grows by adding rows to `content/` (hand-written, or via
+the CLDR, Tatoeba and Wikidata importers) and rebuilding the seed — no schema
+change, no migration, no code. See
+[docs/content-system.md](docs/content-system.md#how-to).
 
-Adding a language is one row in `languages` with `is_launch_language = true`,
-plus `game_content` rows for it. The onboarding pickers and the daily challenge
-read that flag, so no code changes.
+Adding a language is a `content/languages.json` entry, its translations, and a
+course entry in `content/curriculum.json`. The onboarding pickers, the Learn tab
+and the lesson generator pick it up from the data.
+
+The original `vocabulary_words` / `example_sentences` tables are superseded by
+`concepts` / `concept_translations` and no longer read by the app.
 
 ---
 
@@ -243,4 +279,18 @@ npx tsc --noEmit
 
 ```bash
 npm run build
+```
+
+```bash
+npm test                    # content pipeline unit tests
+```
+
+```bash
+npm run content:validate    # content quality rules
+```
+
+```bash
+# Every migration + seed on a scratch local Postgres, then end-to-end lesson,
+# SRS, XP, RLS and social-phrase checks in eight learning directions.
+PGHOST=/tmp PGPORT=5432 PGUSER=postgres npm run test:db
 ```
