@@ -41,5 +41,10 @@ yarn-error.log*
 next-env.d.ts
 
 # supabase CLI
+# The CLI actually writes its cache to supabase/.temp (no leading dot on
+# "supabase" -- that's this project's existing supabase/ directory), not
+# .supabase/.temp; keeping the old pattern too in case an older CLI version
+# or a different machine still uses it.
 .supabase/.temp/
+supabase/.temp/
 .mcp.json
