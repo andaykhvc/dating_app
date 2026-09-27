@@ -295,7 +295,10 @@ keeps the streak).
 | No mistakes at all (lesson or review) | +5 |
 | A learned phrase actually sent to a match | +10 (max 3 a day) |
 
-The existing daily challenge, missions and corrections keep their XP unchanged.
+Lesson and review XP needs at least half of the first attempts right; a
+weaker session still counts as practice (progress, SRS) but earns nothing, so
+replays and reviews cannot be farmed by guessing. The existing daily
+challenge, missions and corrections keep their XP unchanged.
 
 ## Using it with a match
 

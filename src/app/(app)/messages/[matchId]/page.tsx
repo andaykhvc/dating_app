@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser, getMatches } from "@/lib/supabase/queries";
 import { MESSAGE_PAGE_SIZE } from "@/lib/constants";
 import { one } from "@/lib/utils";
+import { loadSharedPhrase } from "@/features/learn/server";
 import type { ChatMessage } from "@/types/domain";
 
 const SELECT =
@@ -36,10 +37,9 @@ export default async function ChatPage({
   // Independent reads, so they go out together rather than one after another.
   // RLS already limits messages to members, so fetching before the membership
   // check below leaks nothing. The user and the match list are shared with the
-  // layouts above through the request cache.
-  // A phrase shared from a lesson ("Ask a match") prefills the composer. RLS
-  // limits phrase_shares to the sharer's own rows, and the match must agree.
-  const [user, matches, { data: rows }, { data: share }] = await Promise.all([
+  // layouts above through the request cache. A phrase shared from a lesson
+  // ("Ask a match") comes along to prefill the composer.
+  const [user, matches, { data: rows }, share] = await Promise.all([
     getCurrentUser(),
     getMatches(),
     supabase
@@ -48,13 +48,7 @@ export default async function ChatPage({
       .eq("match_id", matchId)
       .order("id", { ascending: false })
       .limit(MESSAGE_PAGE_SIZE),
-    shareId
-      ? supabase
-          .from("phrase_shares")
-          .select("text, match_id, used_at, language_code")
-          .eq("id", shareId)
-          .maybeSingle()
-      : Promise.resolve({ data: null }),
+    shareId ? loadSharedPhrase(supabase, shareId, matchId) : Promise.resolve(null),
   ]);
 
   const match = matches.find((m) => m.match_id === matchId);
@@ -72,11 +66,7 @@ export default async function ChatPage({
         match={match}
         viewerId={user!.id}
         initialMessages={messages}
-        initialDraft={
-          share && share.match_id === matchId && !share.used_at
-            ? { text: share.text, languageCode: share.language_code }
-            : null
-        }
+        initialDraft={share}
       />
     </>
   );

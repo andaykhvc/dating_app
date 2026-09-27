@@ -4,7 +4,9 @@
 -- Everything that decides a right answer runs here, for the same reason the
 -- existing game engine grades in Postgres: the browser never holds an answer
 -- key it has not already committed against, and XP is only ever granted by
--- code that just validated something. Generation is deterministic SQL over
+-- code that just validated something. The one deliberate exception is
+-- listening: the device speaks the text, so listen_choice / listen_type carry
+-- it in `speak`. They are low-stakes, and XP needs a mostly-correct session. Generation is deterministic SQL over
 -- our own tables -- no AI, no external API, no per-question network cost.
 
 -- ---------------------------------------------------------------------------
@@ -281,19 +283,23 @@ as $$
   ),
   cand as (
     select distinct on (public.learn_fold(word))
-      -- Outside German, capitalisation is positional, not grammatical: show a
-      -- mid-sentence option in lower case ("pazartesi", not "Pazartesi").
-      case when t.language_code <> 'de' and left(t.answer, 1) = lower(left(t.answer, 1))
-           then lower(replace(left(word, 1), 'İ', 'i')) || substr(word, 2)
-           else word end as word,
+      -- Options wear the answer's case so case never gives it away: a gap at
+      -- the start of a sentence gets capitalised options, and outside German
+      -- (where case is positional) a mid-sentence gap gets lower-case ones.
+      case
+        when t.cloze_index = 0 then upper(left(word, 1)) || substr(word, 2)
+        when t.language_code <> 'de' and left(t.answer, 1) = lower(left(t.answer, 1))
+          then lower(replace(left(word, 1), 'İ', 'i')) || substr(word, 2)
+        else word
+      end as word,
       score, random() as r
     from raw, t
     where word is not null
       and public.learn_fold(word) <> t.answer_fold
       and not (public.learn_fold(word) = any (t.sentence_folds))
-      -- In German, same capitalisation as the answer: a noun gap must not be
-      -- the only capitalised option (or the only lower-case one).
-      and (t.language_code <> 'de'
+      -- Mid-sentence in German, case is grammar: a noun gap must not be the
+      -- only capitalised option (or the only lower-case one).
+      and (t.language_code <> 'de' or t.cloze_index = 0
            or (left(word, 1) = lower(left(word, 1))) = (left(t.answer, 1) = lower(left(t.answer, 1))))
     order by public.learn_fold(word), score desc, random()
   )
@@ -1226,14 +1232,24 @@ begin
     raise exception 'This lesson is already over' using errcode = 'check_violation';
   end if;
 
-  v_ex := v_s.exercises -> p_index;
-  if v_ex is null then
+  -- Bounds first: jsonb `-> -1` counts from the end, which would let one
+  -- exercise be answered under a second key to read its answer.
+  if p_index is null or p_index < 0 or p_index >= jsonb_array_length(v_s.exercises) then
     raise exception 'No such exercise' using errcode = 'check_violation';
   end if;
+  v_ex := v_s.exercises -> p_index;
 
-  -- Idempotent: a double tap or a retried request gets the first verdict.
+  -- Idempotent: a double tap or a retried request gets the first verdict,
+  -- including the retry it queued (the client may never have seen it).
   if v_s.results ? p_index::text then
-    return (v_s.results -> p_index::text) || jsonb_build_object('appended', null);
+    v_result := v_s.results -> p_index::text;
+    return v_result || jsonb_build_object('appended', case
+      when v_result ? 'appended_index' then jsonb_build_object(
+        'index', (v_result ->> 'appended_index')::int,
+        'type', v_s.exercises -> (v_result ->> 'appended_index')::int ->> 'type',
+        'payload', v_s.exercises -> (v_result ->> 'appended_index')::int -> 'payload',
+        'is_retry', true)
+    end);
   end if;
 
   if v_ex ->> 'type' = 'new_words' then
@@ -1278,6 +1294,7 @@ begin
         'type', v_retry ->> 'type',
         'payload', v_retry -> 'payload',
         'is_retry', true);
+      v_result := v_result || jsonb_build_object('appended_index', jsonb_array_length(v_s.exercises) - 1);
     end if;
   end if;
 
@@ -1312,10 +1329,10 @@ declare
   v_first_time boolean := false;
   v_xp smallint;
   v_perfect boolean;
+  v_earns boolean;
   v_phrase jsonb;
   v_next jsonb;
   v_skill bigint;
-  v_ord bigint;
   e record;
 begin
   if v_uid is null then
@@ -1354,13 +1371,19 @@ begin
 
   v_score := case when v_graded = 0 then 100 else round(100.0 * v_first_right / v_graded) end;
   v_perfect := not v_any_wrong and v_graded > 0;
+  -- XP rewards learning, not clicking through: a session with fewer than half
+  -- of its first attempts right still counts as practice (progress, SRS) but
+  -- earns nothing, so replays and reviews cannot be farmed by guessing.
+  v_earns := v_graded > 0 and v_score >= 50;
 
   if v_s.mode = 'lesson' then
     v_first_time := not exists (
       select 1 from user_lesson_progress
       where user_id = v_uid and language_code = v_s.language_code
         and lesson_id = v_s.lesson_id and times_completed > 0);
-    v_xp := (case when v_first_time then 15 else 5 end) + (case when v_perfect then 5 else 0 end);
+    v_xp := case when v_earns
+      then (case when v_first_time then 15 else 5 end) + (case when v_perfect then 5 else 0 end)
+      else 0 end;
 
     insert into user_lesson_progress as p (
       user_id, language_code, lesson_id, times_completed, best_score, last_score,
@@ -1372,13 +1395,14 @@ begin
       last_score = excluded.last_score,
       last_completed_at = now();
   else
-    v_xp := 10 + (case when v_perfect then 5 else 0 end);
+    v_xp := case when v_earns then 10 + (case when v_perfect then 5 else 0 end) else 0 end;
   end if;
 
   update lesson_sessions
   set status = 'completed', completed_at = now(), xp_awarded = v_xp, score = v_score
   where id = p_session_id;
 
+  -- grant_xp ignores zero, so a sub-50 % session leaves the ledger alone.
   perform public.grant_xp(
     v_uid, v_xp,
     (case when v_s.mode = 'lesson' then 'lesson_completed' else 'review_completed' end)::xp_reason,
@@ -1405,14 +1429,13 @@ begin
              random()
     limit 1;
 
-    select cl.ord into v_ord
-    from public.learn_course_lessons(v_s.language_code, v_s.known_language_code) cl
-    where cl.lesson_id = v_s.lesson_id;
-
+    with cl as materialized (
+      select * from public.learn_course_lessons(v_s.language_code, v_s.known_language_code)
+    )
     select jsonb_build_object('id', cl.lesson_id, 'title', cl.lesson_title)
       into v_next
-    from public.learn_course_lessons(v_s.language_code, v_s.known_language_code) cl
-    where cl.ord > coalesce(v_ord, 0)
+    from cl
+    where cl.ord > coalesce((select c2.ord from cl c2 where c2.lesson_id = v_s.lesson_id), 0)
       and not exists (select 1 from user_lesson_progress p
                       where p.user_id = v_uid and p.language_code = v_s.language_code
                         and p.lesson_id = cl.lesson_id)
@@ -1445,7 +1468,7 @@ $$;
 create or replace function public.get_learn_overview()
 returns jsonb
 language plpgsql
-volatile
+stable
 security definer
 set search_path = public
 as $$
@@ -1458,6 +1481,7 @@ declare
   v_units jsonb;
   v_next jsonb;
   v_srs jsonb;
+  v_lessons jsonb;
 begin
   if v_uid is null then
     raise exception 'Not authenticated' using errcode = '28000';
@@ -1475,13 +1499,10 @@ begin
 
   v_known := public.learn_known_language(v_native, v_target);
 
-  create temp table if not exists pg_temp.learn_ov_lessons (
-    lesson_id bigint, lesson_key text, lesson_title text, lesson_type text,
-    lesson_position smallint, skill_id bigint, unit_id bigint, ord bigint, playable int
-  ) on commit drop;
-  truncate pg_temp.learn_ov_lessons;
-  insert into pg_temp.learn_ov_lessons
-  select * from public.learn_course_lessons(v_target, v_known);
+  -- The course's lesson list is computed once and held as a value (no temp
+  -- table: that would be catalog DDL on every Learn-tab load).
+  select coalesce(jsonb_agg(to_jsonb(cl)), '[]'::jsonb) into v_lessons
+  from public.learn_course_lessons(v_target, v_known) cl;
 
   select coalesce(jsonb_agg(jsonb_build_object(
     'id', u.id, 'key', u.key, 'cefr_level', u.cefr_level, 'title', u.title,
@@ -1502,18 +1523,18 @@ begin
             'completed', coalesce(ulp.times_completed, 0) > 0,
             'best_score', ulp.best_score
           ) order by ol.ord)
-          from pg_temp.learn_ov_lessons ol
+          from jsonb_to_recordset(v_lessons) as ol(lesson_id bigint, lesson_title text, lesson_type text, skill_id bigint, unit_id bigint, ord bigint)
           left join user_lesson_progress ulp
             on ulp.user_id = v_uid and ulp.language_code = v_target and ulp.lesson_id = ol.lesson_id
           where ol.skill_id = s.id)
       ) order by s.position), '[]'::jsonb)
       from skills s
       where s.unit_id = u.id
-        and exists (select 1 from pg_temp.learn_ov_lessons ol where ol.skill_id = s.id))
+        and exists (select 1 from jsonb_to_recordset(v_lessons) as ol(lesson_id bigint, lesson_title text, lesson_type text, skill_id bigint, unit_id bigint, ord bigint) where ol.skill_id = s.id))
   ) order by u.cefr_level, u.position), '[]'::jsonb)
   into v_units
   from units u
-  where exists (select 1 from pg_temp.learn_ov_lessons ol where ol.unit_id = u.id);
+  where exists (select 1 from jsonb_to_recordset(v_lessons) as ol(lesson_id bigint, lesson_title text, lesson_type text, skill_id bigint, unit_id bigint, ord bigint) where ol.unit_id = u.id);
 
   -- Next up: the first lesson not completed yet, in course order. A learner
   -- who said they are A2 starts at the first A2 unit they have not finished.
@@ -1521,7 +1542,7 @@ begin
            'id', ol.lesson_id, 'title', ol.lesson_title, 'lesson_type', ol.lesson_type,
            'skill_title', s.title, 'unit_title', u.title, 'cefr_level', u.cefr_level)
     into v_next
-  from pg_temp.learn_ov_lessons ol
+  from jsonb_to_recordset(v_lessons) as ol(lesson_id bigint, lesson_title text, lesson_type text, skill_id bigint, unit_id bigint, ord bigint)
   join skills s on s.id = ol.skill_id
   join units u on u.id = ol.unit_id
   where not exists (
@@ -1552,10 +1573,10 @@ begin
                 from languages where code = v_known),
       'level', v_level,
       'title', (select title from courses where language_code = v_target),
-      'lessons_total', (select count(*) from pg_temp.learn_ov_lessons),
+      'lessons_total', jsonb_array_length(v_lessons),
       'lessons_completed', (
         select count(*) from user_lesson_progress p
-        join pg_temp.learn_ov_lessons ol on ol.lesson_id = p.lesson_id
+        join jsonb_to_recordset(v_lessons) as ol(lesson_id bigint, lesson_title text, lesson_type text, skill_id bigint, unit_id bigint, ord bigint) on ol.lesson_id = p.lesson_id
         where p.user_id = v_uid and p.language_code = v_target and p.times_completed > 0)),
     'review', v_srs,
     'next_lesson', v_next,
@@ -1610,10 +1631,13 @@ begin
     raise exception 'That phrase is not available' using errcode = 'check_violation';
   end if;
 
-  -- Re-sharing the same phrase with the same person reuses the pending row.
+  -- Re-sharing the same phrase with the same person reuses the pending row,
+  -- as long as it is still inside the 14 days the message trigger honours.
   select id into v_id from phrase_shares
   where user_id = v_uid and match_id = p_match_id and concept_id = p_concept_id
-    and used_at is null;
+    and used_at is null and created_at > now() - interval '14 days'
+  order by created_at desc
+  limit 1;
 
   if v_id is null then
     insert into phrase_shares (user_id, match_id, concept_id, language_code, text)
@@ -1642,6 +1666,7 @@ begin
   if not exists (
     select 1 from phrase_shares
     where user_id = new.sender_id and match_id = new.match_id and used_at is null
+      and created_at > now() - interval '14 days'
   ) then
     return null;
   end if;

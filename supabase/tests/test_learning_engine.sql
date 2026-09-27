@@ -262,6 +262,61 @@ begin
 end $$;
 
 -- ---------------------------------------------------------------------------
+-- Answer-key integrity: no second key via negative indices; a repeated call
+-- still reports the retry it queued; guessing earns no XP.
+-- ---------------------------------------------------------------------------
+do $$
+declare
+  v_uid uuid := '00000000-0000-0000-0000-000000000005';
+  v_session jsonb;
+  v_id uuid;
+  v_n int;
+  v_first jsonb;
+  v_again jsonb;
+  v_done jsonb;
+  v_denied boolean;
+  v_idx int;
+begin
+  perform pg_temp.as_user(v_uid);
+  v_session := start_review(false);
+  v_id := (v_session ->> 'session_id')::uuid;
+  v_n := jsonb_array_length(v_session -> 'exercises');
+
+  begin
+    perform answer_lesson_exercise(v_id, -1, '{"choice": "x"}');
+    v_denied := false;
+  exception when check_violation then v_denied := true;
+  end;
+  perform pg_temp.check(v_denied, 'negative exercise index rejected');
+  begin
+    perform answer_lesson_exercise(v_id, v_n, '{"choice": "x"}');
+    v_denied := false;
+  exception when check_violation then v_denied := true;
+  end;
+  perform pg_temp.check(v_denied, 'out-of-range exercise index rejected');
+
+  -- Everything wrong; the first miss queues a retry that a repeated call returns too.
+  for v_idx in 0 .. v_n - 1 loop
+    v_first := answer_lesson_exercise(v_id, v_idx, '{"choice": "zzz", "text": "zzz", "tokens": ["zzz"], "value": null, "pairs": {}}');
+    if v_idx = 0 then
+      v_again := answer_lesson_exercise(v_id, 0, '{}');
+      perform pg_temp.check(v_again -> 'appended' ->> 'index' = v_first -> 'appended' ->> 'index',
+        format('replayed answer reports its retry: %s / %s', v_first, v_again));
+    end if;
+  end loop;
+  -- Answer the queued retries too (at most three).
+  for v_idx in v_n .. v_n + 2 loop
+    begin
+      perform answer_lesson_exercise(v_id, v_idx, '{"choice": "zzz"}');
+    exception when check_violation then null;
+    end;
+  end loop;
+  v_done := complete_lesson_session(v_id);
+  perform pg_temp.check((v_done ->> 'xp_awarded')::int = 0, format('guessing earns no XP: %s', v_done));
+  perform pg_temp.as_owner();
+end $$;
+
+-- ---------------------------------------------------------------------------
 -- Spaced repetition rules
 -- ---------------------------------------------------------------------------
 do $$

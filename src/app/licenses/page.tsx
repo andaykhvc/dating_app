@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BackIcon } from "@/components/icons";
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/queries";
 import { APP_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = { title: "Licenses & attributions" };
@@ -31,13 +32,16 @@ const LANGUAGE_NAMES: Record<string, string> = {
  */
 export default async function LicensesPage() {
   const supabase = await createClient();
-  const { data } = await supabase.rpc("get_content_attributions");
+  const [{ data }, user] = await Promise.all([
+    supabase.rpc("get_content_attributions"),
+    getCurrentUser(),
+  ]);
   const sources = (data ?? []) as Attribution[];
 
   return (
     <main className="safe-top mx-auto w-full max-w-2xl px-gutter pb-16 pt-6 md:pt-10">
       <Link
-        href="/profile/settings"
+        href={user ? "/profile/settings" : "/"}
         className="-ml-2 inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted hover:bg-sunken hover:text-ink"
       >
         <BackIcon className="size-4" /> Back

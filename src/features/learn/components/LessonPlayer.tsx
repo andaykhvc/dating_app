@@ -130,6 +130,17 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
     [answer, busy, exercise, exercises, initial.session_id, result, results, advance, speech],
   );
 
+  // Everything answered but never finished (tab closed on the last screen,
+  // or finishing failed): finish now rather than showing an empty lesson.
+  useEffect(() => {
+    if (initial.status === "in_progress" && current >= exercises.length && exercises.length > 0) {
+      const timer = setTimeout(finish, 0);
+      return () => clearTimeout(timer);
+    }
+    // Only when the session is first opened.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Enter checks, then continues — the keyboard path through a whole lesson.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -217,11 +228,15 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
           </div>
         ) : (
           <div className="my-auto flex flex-col items-center gap-3 py-16 text-center">
-            {busy && <span className="size-8 animate-spin rounded-full border-2 border-brand border-t-transparent" />}
-            {error && (
-              <Button onClick={finish} variant="secondary">
-                Try again
-              </Button>
+            {busy ? (
+              <span className="size-8 animate-spin rounded-full border-2 border-brand border-t-transparent" />
+            ) : (
+              <>
+                {error && <p role="alert" className="text-sm text-negative">{error}</p>}
+                <Button onClick={finish} variant="secondary">
+                  {error ? "Try again" : "Finish lesson"}
+                </Button>
+              </>
             )}
           </div>
         )}
