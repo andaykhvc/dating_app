@@ -46,10 +46,13 @@ export function ChatThread({
   match,
   viewerId,
   initialMessages,
+  initialDraft = null,
 }: {
   match: MatchSummary;
   viewerId: string;
   initialMessages: ChatMessage[];
+  /** A phrase brought over from a lesson; lands in the composer, unsent. */
+  initialDraft?: { text: string; languageCode: string } | null;
 }) {
   const [messages, setMessages] = useState(initialMessages);
   const [mission, setMission] = useState<MatchMission | null>(match.mission);
@@ -71,6 +74,12 @@ export function ChatThread({
   const isActive = match.status === "active";
 
   useVisualViewportHeight(rootRef);
+
+  // The ?phrase= link has done its job once the draft is in the composer; a
+  // refresh or a back-navigation should not put it there again.
+  useEffect(() => {
+    if (initialDraft) window.history.replaceState(null, "", `/messages/${match.match_id}`);
+  }, [initialDraft, match.match_id]);
 
   const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
     const el = scrollerRef.current;
@@ -359,6 +368,12 @@ export function ChatThread({
         onCancelReply={() => setReplyTo(null)}
         onSend={handleSend}
         disabled={!isActive}
+        initialValue={initialDraft?.text}
+        draftNote={
+          initialDraft
+            ? "From your lesson — change it however you like. Sending it earns +10 XP."
+            : undefined
+        }
       />
 
       <CorrectionComposer

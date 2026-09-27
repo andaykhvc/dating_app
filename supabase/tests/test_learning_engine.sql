@@ -234,6 +234,34 @@ begin
 end $$;
 
 -- ---------------------------------------------------------------------------
+-- "Can't listen now" skips are shown the answer and not scored
+-- ---------------------------------------------------------------------------
+do $$
+declare
+  v_uid uuid := '00000000-0000-0000-0000-000000000004';
+  v_session jsonb;
+  v_id uuid;
+  v_idx int;
+  v_res jsonb;
+begin
+  perform pg_temp.as_user(v_uid);
+  v_session := start_review(true);
+  v_id := (v_session ->> 'session_id')::uuid;
+  select (e ->> 'index')::int into v_idx
+  from jsonb_array_elements(v_session -> 'exercises') e
+  where e ->> 'type' in ('listen_choice', 'listen_type') limit 1;
+  if v_idx is not null then
+    v_res := answer_lesson_exercise(v_id, v_idx, '{"skip": true}');
+    perform pg_temp.check(v_res ->> 'graded' = 'false' and v_res ->> 'note' = 'skipped'
+      and v_res -> 'appended' = 'null'::jsonb, format('skip is ungraded: %s', v_res));
+  end if;
+  v_res := answer_lesson_exercise(v_id, 0, '{"skip": true}');
+  perform pg_temp.check(v_res ->> 'graded' = 'true' or (v_session -> 'exercises' -> 0 ->> 'type') in ('listen_choice', 'listen_type'),
+    'skip only applies to listening exercises');
+  perform pg_temp.as_owner();
+end $$;
+
+-- ---------------------------------------------------------------------------
 -- Spaced repetition rules
 -- ---------------------------------------------------------------------------
 do $$

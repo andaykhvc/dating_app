@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
@@ -89,6 +90,14 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
           <li>Report and block are in the menu at the top of every chat.</li>
         </ul>
       </section>
+
+      <Link
+        href="/licenses"
+        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+      >
+        Licenses &amp; attributions
+        <span aria-hidden className="text-faint">›</span>
+      </Link>
 
       <Button variant="secondary" fullWidth onClick={signOut}>
         Sign out

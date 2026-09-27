@@ -68,7 +68,10 @@ export default function LandingPage() {
           <OAuthButtons />
 
           <p className="pt-2 text-center text-xs text-faint">
-            18+ only. Report and block are always one tap away.
+            18+ only. Report and block are always one tap away.{" "}
+            <Link href="/licenses" className="underline hover:text-muted">
+              Licenses
+            </Link>
           </p>
         </div>
       </div>

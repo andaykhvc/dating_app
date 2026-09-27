@@ -24,17 +24,22 @@ function flatten(row: Record<string, unknown>): ChatMessage {
 
 export default async function ChatPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ matchId: string }>;
+  searchParams: Promise<{ phrase?: string | string[] }>;
 }) {
-  const { matchId } = await params;
+  const [{ matchId }, { phrase }] = await Promise.all([params, searchParams]);
   const supabase = await createClient();
+  const shareId = typeof phrase === "string" && /^[0-9a-f-]{36}$/i.test(phrase) ? phrase : null;
 
   // Independent reads, so they go out together rather than one after another.
   // RLS already limits messages to members, so fetching before the membership
   // check below leaks nothing. The user and the match list are shared with the
   // layouts above through the request cache.
-  const [user, matches, { data: rows }] = await Promise.all([
+  // A phrase shared from a lesson ("Ask a match") prefills the composer. RLS
+  // limits phrase_shares to the sharer's own rows, and the match must agree.
+  const [user, matches, { data: rows }, { data: share }] = await Promise.all([
     getCurrentUser(),
     getMatches(),
     supabase
@@ -43,6 +48,13 @@ export default async function ChatPage({
       .eq("match_id", matchId)
       .order("id", { ascending: false })
       .limit(MESSAGE_PAGE_SIZE),
+    shareId
+      ? supabase
+          .from("phrase_shares")
+          .select("text, match_id, used_at, language_code")
+          .eq("id", shareId)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
   ]);
 
   const match = matches.find((m) => m.match_id === matchId);
@@ -60,6 +72,11 @@ export default async function ChatPage({
         match={match}
         viewerId={user!.id}
         initialMessages={messages}
+        initialDraft={
+          share && share.match_id === matchId && !share.used_at
+            ? { text: share.text, languageCode: share.language_code }
+            : null
+        }
       />
     </>
   );

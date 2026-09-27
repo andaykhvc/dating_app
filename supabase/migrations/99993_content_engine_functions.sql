@@ -1238,6 +1238,11 @@ begin
 
   if v_ex ->> 'type' = 'new_words' then
     v_result := jsonb_build_object('correct', null, 'note', null, 'solution', null, 'graded', false);
+  elsif v_ex ->> 'type' in ('listen_choice', 'listen_type') and coalesce((p_answer ->> 'skip')::boolean, false) then
+    -- "Can't listen now": no voice on this device, or no headphones. Shown
+    -- the answer, not scored, SRS untouched.
+    v_result := jsonb_build_object('correct', null, 'note', 'skipped',
+      'solution', v_ex ->> 'solution', 'expected', v_ex -> 'answer', 'graded', false);
   else
     v_grade := public.learn_grade(v_ex, p_answer);
 
@@ -1246,15 +1251,14 @@ begin
       perform public.learn_record_result(v_uid, v_s.language_code, v_pc.concept_id, v_pc.ok);
     end loop;
 
+    -- Once the learner has committed, the key is theirs to see: the right
+    -- option is highlighted, the right pairs are shown.
     v_result := jsonb_build_object(
       'correct', (v_grade ->> 'correct')::boolean,
       'note', v_grade ->> 'note',
       'solution', v_ex ->> 'solution',
+      'expected', v_ex -> 'answer',
       'graded', true);
-
-    if v_ex ->> 'type' = 'match_pairs' then
-      v_result := v_result || jsonb_build_object('pairs', v_ex -> 'answer' -> 'pairs');
-    end if;
 
     -- A miss comes back once at the end of the lesson (at most three times
     -- per session), with its options reshuffled.
@@ -1337,6 +1341,7 @@ begin
       raise exception 'Answer every exercise first' using errcode = 'check_violation';
     end if;
     continue when e.ex ->> 'type' = 'new_words';
+    continue when (v_s.results -> e.i::text ->> 'graded')::boolean is false;
     if (v_s.results -> e.i::text ->> 'correct')::boolean is false then
       v_any_wrong := true;
     end if;
@@ -1744,7 +1749,8 @@ as $$
       from (select source_author, count(*) as n from concept_translations
             where source_id = s.id and status = 'active' and source_author is not null
             group by source_author limit 500) a) end
-  ) order by s.source_type, s.name), '[]'::jsonb)
+  ) order by case s.source_type when 'editorial' then 0 when 'reference_data' then 1 else 2 end,
+             s.name), '[]'::jsonb)
   from content_sources s
   where s.is_enabled;
 $$;

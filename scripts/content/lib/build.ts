@@ -75,7 +75,13 @@ export function deriveLessons(model: Model): Lesson[] {
 }
 
 function titleFor(concepts: Concept[]): string {
-  const names = concepts.slice(0, 3).map((c) => c.gloss.replace(/^to /, "").replace(/[.?!]$/, ""));
+  // "Hello, good morning, how are you…": first word capitalised, the rest in
+  // running-text case unless they are proper nouns (Monday, Germany).
+  const names = concepts.slice(0, 3).map((c, i) => {
+    const g = c.gloss.replace(/^to /, "").replace(/\s*\([^)]*\)/g, "").replace(/[.?!]$/, "");
+    if (i === 0) return g.charAt(0).toUpperCase() + g.slice(1);
+    return c.proper || /^I\b/.test(g) ? g : g.charAt(0).toLowerCase() + g.slice(1);
+  });
   const title = names.join(", ") + (concepts.length > 3 ? "…" : "");
   return title.length > 60 ? `${title.slice(0, 57)}…` : title;
 }
