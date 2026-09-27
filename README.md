@@ -72,8 +72,15 @@ for f in supabase/seed/*.sql; do psql "$DATABASE_URL" -f "$f"; done
 This loads the languages, 24 interests, the 7 game templates, 18 mission
 templates and the original challenge content, then (files `0010`–`0014`) the
 learning course: 14 A1–A2 units, 44 skills, 133 lessons and 836 concepts in
-German, Spanish, Dutch, Turkish and English, with their provenance. The seed
-files are idempotent — re-run them after any content change.
+German, Spanish, Dutch, Turkish and English, with their provenance. Only the
+course files (`0010`–`0014`) are safe to re-run; `0001`–`0007` are run once.
+
+### Updating an existing project
+
+After the first setup, new migrations and course content are applied from
+GitHub: **Actions → Deploy database → Run workflow** (dry run first). It needs
+one repository secret, `SUPABASE_DB_URL`. Setup and first-run steps are in
+[docs/deploying-the-database.md](docs/deploying-the-database.md).
 
 ### 5. Auth settings
 

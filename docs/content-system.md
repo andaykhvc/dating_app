@@ -353,8 +353,12 @@ syntax), then:
 ```bash
 npm run content:validate
 npm run content:build
-for f in supabase/seed/001*_learn_*.sql; do psql "$DATABASE_URL" -f "$f"; done
 ```
+
+Commit the changed `content/` and `supabase/seed/001*_learn_*.sql` files, merge,
+then apply them with **Actions → Deploy database**
+([how](./deploying-the-database.md)) or locally:
+`for f in supabase/seed/001*_learn_*.sql; do psql "$DATABASE_URL" -f "$f"; done`.
 
 ### Disable bad content
 Fastest, in the database (sticks across rebuilds):
