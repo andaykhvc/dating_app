@@ -1,0 +1,59 @@
+# Unit A2.2 — Travel: holidays, at the hotel, the journey
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- holidays
+holiday	w	noun		holidays	travel	holiday | vacation	der Urlaub	las vacaciones	de vakantie	tatil		
+beach	w	noun		holidays	landscape	beach	der Strand	la playa	het strand	plaj | sahil		
+sea	w	noun		holidays	landscape	sea	das Meer	el mar	de zee	deniz		
+mountain	w	noun		holidays	landscape	mountain	der Berg	la montaña	de berg	dağ		
+suitcase	w	noun		holidays	travel-things	suitcase	der Koffer	la maleta	de koffer	bavul		
+passport	w	noun		holidays	travel-things	passport	der Reisepass | der Pass	el pasaporte	het paspoort	pasaport		
+tourist	w	noun		holidays	people	tourist	der Tourist | die Touristin	el turista | la turista	de toerist	turist		
+trip	w	noun		holidays	travel	trip | journey	die Reise	el viaje	de reis	gezi | yolculuk		
+to-visit	w	verb		holidays	travel-verbs	to visit	besuchen | besichtigen	visitar	bezoeken	ziyaret etmek | gezmek		
+abroad	w	adverb		holidays	location	abroad	im Ausland	en el extranjero	in het buitenland	yurt dışında		
+s.where-holiday	s			holidays		Where are you going on holiday? | Where are you going on vacation?	Wohin fährst du in den [Urlaub:noun]?	¿Adónde vas de [vacaciones:noun]?	Waar ga je op [vakantie:noun]?	[Tatile:noun] nereye gidiyorsun?		social
+s.beach-or-mountains	s			holidays		Do you prefer the beach or the mountains?	Magst du lieber [Strand:noun] oder Berge?	¿Prefieres la [playa:noun] o la montaña?	Heb je liever het [strand:noun] of de bergen?	[Denizi:noun] mi dağı mı tercih edersin?		social
+s.suitcase-heavy	s			holidays		My suitcase is too heavy.	Mein [Koffer:noun] ist zu schwer.	Mi [maleta:noun] pesa demasiado.	Mijn [koffer:noun] is te zwaar.	[Bavulum:noun] çok ağır.		
+s.forgot-passport	s			holidays		Oh no, I forgot my passport!	Oh nein, ich habe meinen [Pass:noun] vergessen!	¡Ay no, he olvidado el [pasaporte:noun]!	O nee, ik ben mijn [paspoort:noun] vergeten!	Eyvah, [pasaportumu:noun] unuttum!	You're at the airport and look in your bag.	
+s.trip-great	s			holidays		The trip was great.	Die [Reise:noun] war toll.	El [viaje:noun] fue genial.	De [reis:noun] was geweldig.	[Gezi:noun] harikaydı.		
+s.visited-old-town	s			holidays		We visited the old town.	Wir haben die Altstadt [besichtigt:verb].	[Visitamos:verb] el casco antiguo.	We hebben de oude stad [bezocht:verb].	Eski şehri [gezdik:verb].		
+s.lived-abroad	s			holidays		Have you ever lived abroad?	Hast du schon mal im [Ausland:noun] gelebt?	¿Has vivido alguna vez en el [extranjero:noun]?	Heb je ooit in het [buitenland:noun] gewoond?	Hiç yurt [dışında:noun] yaşadın mı?		social
+s.first-time-istanbul	s			holidays		It's my first time in Istanbul.	Ich bin zum ersten [Mal:noun] in Istanbul.	Es mi primera [vez:noun] en Estambul.	Het is mijn eerste [keer:noun] in Istanbul.	İstanbul'a ilk [kez:noun] geliyorum.		
+# ---- at the hotel
+hotel	w	noun		hotel	accommodation	hotel	das Hotel	el hotel	het hotel	otel		
+reservation	w	noun		hotel	accommodation	reservation | booking	die Reservierung	la reserva	de reservering	rezervasyon		
+double-room	w	noun		hotel	accommodation	double room	das Doppelzimmer	la habitación doble	de tweepersoonskamer	çift kişilik oda		
+reception	w	noun		hotel	accommodation	reception	die Rezeption	la recepción	de receptie	resepsiyon		
+towel	w	noun		hotel	objects	towel	das Handtuch	la toalla	de handdoek	havlu		
+wifi	w	noun		hotel	objects	wifi | wi-fi	das WLAN	el wifi	de wifi	wifi | kablosuz internet		
+floor	w	noun		hotel	accommodation	floor	der Stock | die Etage	la planta	de verdieping	kat		gloss=floor (storey of a building)
+lift	w	noun		hotel	accommodation	lift | elevator	der Aufzug	el ascensor	de lift	asansör		
+to-book	w	verb		hotel	travel-verbs	to book	buchen | reservieren	reservar	boeken | reserveren	rezervasyon yapmak | ayırtmak		
+s.have-reservation	s			hotel		I have a reservation. | I have a booking.	Ich habe eine [Reservierung:noun].	Tengo una [reserva:noun].	Ik heb een [reservering:noun].	[Rezervasyonum:noun] var.	You arrive at the hotel reception.	
+s.double-two-nights	s			hotel		A double room for two nights, please.	Ein [Doppelzimmer:noun] für zwei Nächte, bitte.	Una habitación [doble:adjective] para dos noches, por favor.	Een [tweepersoonskamer:noun] voor twee nachten, alstublieft.	İki gece için çift kişilik bir [oda:noun], lütfen.		
+s.breakfast-included	s			hotel		Is breakfast included?	Ist das [Frühstück:noun] inklusive?	¿El [desayuno:noun] está incluido?	Is het [ontbijt:noun] inbegrepen?	[Kahvaltı:noun] dahil mi?		
+s.wifi-password	s			hotel		What's the wifi password? | What's the wi-fi password?	Wie lautet das [WLAN-Passwort:noun]?	¿Cuál es la [contraseña:noun] del wifi?	Wat is het [wachtwoord:noun] van de wifi?	Wifi [şifresi:noun] ne?		
+s.third-floor	s			hotel		Your room is on the third floor.	Ihr Zimmer ist im dritten [Stock:noun].	Su habitación está en la tercera [planta:noun].	Uw kamer is op de derde [verdieping:noun].	Odanız üçüncü [katta:noun].		
+s.no-towels	s			hotel		There are no towels in the room.	Im Zimmer gibt es keine [Handtücher:noun].	No hay [toallas:noun] en la habitación.	Er zijn geen [handdoeken:noun] in de kamer.	Odada [havlu:noun] yok.		
+s.lift-broken	s			hotel		The lift isn't working. | The elevator isn't working.	Der [Aufzug:noun] funktioniert nicht.	El [ascensor:noun] no funciona.	De [lift:noun] doet het niet.	[Asansör:noun] çalışmıyor.		
+s.booked-hotel	s			hotel		I booked a hotel near the beach.	Ich habe ein Hotel am Strand [gebucht:verb].	He [reservado:verb] un hotel cerca de la playa.	Ik heb een hotel bij het strand [geboekt:verb].	Plaja yakın bir otel [ayırttım:verb].		
+# ---- the journey
+airport	w	noun		journey	travel-places	airport	der Flughafen	el aeropuerto	het vliegveld	havalimanı | havaalanı		
+flight	w	noun		journey	travel	flight	der Flug	el vuelo	de vlucht	uçuş		
+platform	w	noun		journey	travel-places	platform	das Gleis	el andén	het perron	peron		
+departure	w	noun		journey	travel	departure	die Abfahrt	la salida	het vertrek	kalkış		
+arrival	w	noun		journey	travel	arrival	die Ankunft	la llegada	de aankomst	varış		
+delay	w	noun		journey	travel	delay	die Verspätung	el retraso	de vertraging	gecikme | rötar		
+luggage	w	noun		journey	travel-things	luggage | baggage	das Gepäck	el equipaje	de bagage	bagaj		
+to-arrive	w	verb		journey	travel-verbs	to arrive	ankommen	llegar	aankomen	varmak		
+to-depart	w	verb		journey	travel-verbs	to leave | to depart	abfahren	salir	vertrekken	hareket etmek		gloss=to leave (of a train or bus)
+to-change-trains	w	verb		journey	travel-verbs	to change | to transfer	umsteigen	hacer transbordo	overstappen	aktarma yapmak		gloss=to change (trains)
+s.which-platform	s			journey		Which platform does the train leave from?	Von welchem [Gleis:noun] fährt der Zug?	¿De qué [andén:noun] sale el tren?	Van welk [perron:noun] vertrekt de trein?	Tren hangi [perondan:noun] kalkıyor?		
+s.flight-delayed	s			journey		My flight is delayed.	Mein [Flug:noun] hat Verspätung.	Mi [vuelo:noun] tiene retraso.	Mijn [vlucht:noun] heeft vertraging.	[Uçuşum:noun] rötarlı.		
+s.change-utrecht	s			journey		You have to change in Utrecht.	Du musst in Utrecht [umsteigen:verb].	Tienes que hacer [transbordo:noun] en Utrecht.	Je moet in Utrecht [overstappen:verb].	Utrecht'te [aktarma:noun] yapman gerekiyor.		
+s.when-arrive	s			journey		When do you arrive?	Wann [kommst:verb] du an?	¿Cuándo [llegas:verb]?	Hoe laat [kom:verb] je aan?	Ne zaman [varıyorsun:verb]?		social
+s.pick-up-airport	s			journey		I'll pick you up from the airport.	Ich hole dich vom [Flughafen:noun] ab.	Te recojo en el [aeropuerto:noun].	Ik haal je op van het [vliegveld:noun].	Seni [havalimanından:noun] alırım.	A friend is flying in to visit you.	
+s.luggage-missing	s			journey		My luggage hasn't arrived.	Mein [Gepäck:noun] ist nicht angekommen.	Mi [equipaje:noun] no ha llegado.	Mijn [bagage:noun] is niet aangekomen.	[Bagajım:noun] gelmedi.	You wait at the baggage belt but your bag never appears.	
+s.good-trip	s			journey		Have a good trip!	Gute [Reise:noun]!	¡Buen [viaje:noun]!	Goede [reis:noun]!	İyi [yolculuklar:noun]!	Your friend is leaving for the airport.	
+s.train-five-minutes	s			journey		The train leaves in five minutes.	Der Zug fährt in fünf Minuten [ab:adverb].	El tren sale en cinco [minutos:noun].	De trein vertrekt over vijf [minuten:noun].	Tren beş dakika [sonra:adverb] kalkıyor.		

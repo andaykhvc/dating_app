@@ -1,0 +1,66 @@
+# Unit A1.9 — At home: home and rooms, everyday things, colours
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- home and rooms
+house	w	noun		home	home	house	das Haus	la casa	het huis	ev		
+flat	w	noun		home	home	flat | apartment	die Wohnung	el piso | el apartamento	het appartement	daire		
+room	w	noun		home	rooms	room	das Zimmer	la habitación	de kamer	oda		
+kitchen	w	noun		home	rooms	kitchen	die Küche	la cocina	de keuken	mutfak		
+bedroom	w	noun		home	rooms	bedroom	das Schlafzimmer	el dormitorio	de slaapkamer	yatak odası		
+bathroom	w	noun		home	rooms	bathroom	das Badezimmer | das Bad	el baño	de badkamer	banyo		
+living-room	w	noun		home	rooms	living room	das Wohnzimmer	el salón	de woonkamer	oturma odası | salon		
+balcony	w	noun		home	rooms	balcony	der Balkon	el balcón	het balkon	balkon		
+bed	w	noun		home	furniture	bed	das Bett	la cama	het bed	yatak		
+window	w	noun		home	furniture	window	das Fenster	la ventana	het raam	pencere		
+door	w	noun		home	furniture	door	die Tür	la puerta	de deur	kapı		
+rent	w	noun		home	money	rent	die Miete	el alquiler	de huur	kira		
+big	w	adjective		home	size	big | large	groß	grande	groot	büyük		
+small	w	adjective		home	size	small | little	klein	pequeño | pequeña	klein	küçük		
+s.small-flat	s			home		I live in a small flat. | I live in a small apartment.	Ich wohne in einer kleinen [Wohnung:noun].	Vivo en un [piso:noun] pequeño.	Ik woon in een klein [appartement:noun].	Küçük bir [dairede:noun] oturuyorum.		
+s.two-rooms	s			home		The flat has two rooms. | The apartment has two rooms.	Die Wohnung hat zwei [Zimmer:noun].	El piso tiene dos [habitaciones:noun].	Het appartement heeft twee [kamers:noun].	Dairenin iki [odası:noun] var.		
+s.in-kitchen	s			home		I'm in the kitchen.	Ich bin in der [Küche:noun].	Estoy en la [cocina:noun].	Ik ben in de [keuken:noun].	[Mutfaktayım:noun].		
+s.balcony-view	s			home		My balcony has a nice view.	Mein Balkon hat eine schöne [Aussicht:noun].	Mi balcón tiene unas [vistas:noun] bonitas.	Mijn balkon heeft een mooi [uitzicht:noun].	Balkonumun [manzarası:noun] çok güzel.		
+s.rent-expensive	s			home		The rent is very expensive.	Die [Miete:noun] ist sehr teuer.	El [alquiler:noun] es muy caro.	De [huur:noun] is heel duur.	[Kira:noun] çok pahalı.		
+s.close-window	s			home		Can you close the window?	Kannst du das [Fenster:noun] zumachen?	¿Puedes cerrar la [ventana:noun]?	Kun je het [raam:noun] dichtdoen?	[Pencereyi:noun] kapatabilir misin?	It's getting cold in the room.	
+s.live-alone	s			home		Do you live alone?	Wohnst du [allein:adverb]?	¿Vives [solo:adjective]? | ¿Vives sola?	Woon je [alleen:adverb]?	[Yalnız:adverb] mı yaşıyorsun?		social
+s.home-like	s			home		What's your home like?	Wie ist deine [Wohnung:noun]?	¿Cómo es tu [casa:noun]?	Hoe is je [huis:noun]?	[Evin:noun] nasıl?		social
+# ---- everyday things
+phone	w	noun		things	objects	phone | mobile	das Handy	el móvil	de telefoon | de mobiel	telefon		
+key	w	noun		things	objects	key	der Schlüssel	la llave	de sleutel	anahtar		
+bag	w	noun		things	objects	bag	die Tasche	el bolso	de tas	çanta		
+wallet	w	noun		things	objects	wallet	das Portemonnaie | der Geldbeutel	la cartera	de portemonnee	cüzdan		
+laptop	w	noun		things	objects	laptop	der Laptop	el portátil	de laptop	dizüstü bilgisayar | laptop		
+computer	w	noun		things	objects	computer	der Computer	el ordenador	de computer	bilgisayar		
+umbrella	w	noun		things	objects	umbrella	der Regenschirm	el paraguas	de paraplu	şemsiye		
+watch	w	noun		things	objects	watch	die Uhr	el reloj	het horloge	kol saati | saat		gloss=watch (on your wrist)
+chair	w	noun		things	furniture	chair	der Stuhl	la silla	de stoel	sandalye		
+to-look-for	w	verb		things	object-verbs	to look for	suchen	buscar	zoeken	aramak		
+to-find	w	verb		things	object-verbs	to find	finden	encontrar	vinden	bulmak		
+to-forget	w	verb		things	object-verbs	to forget	vergessen	olvidar	vergeten	unutmak		
+s.where-keys	s			things		Where are my keys?	Wo sind meine [Schlüssel:noun]?	¿Dónde están mis [llaves:noun]?	Waar zijn mijn [sleutels:noun]?	[Anahtarlarım:noun] nerede?	You're about to leave the house and can't find them.	
+s.phone-empty	s			things		My phone battery is dead. | My phone is dead.	Mein [Handy:noun] ist leer.	Mi [móvil:noun] no tiene batería.	Mijn [telefoon:noun] is leeg.	[Telefonumun:noun] şarjı bitti.	You can't reply to messages any more.	
+s.forgot-umbrella	s			things		I forgot my umbrella.	Ich habe meinen [Regenschirm:noun] vergessen.	He olvidado mi [paraguas:noun].	Ik ben mijn [paraplu:noun] vergeten.	[Şemsiyemi:noun] unuttum.		
+s.looking-wallet	s			things		I'm looking for my wallet.	Ich [suche:verb] mein Portemonnaie.	[Busco:verb] mi cartera. | Estoy buscando mi cartera.	Ik [zoek:verb] mijn portemonnee.	Cüzdanımı [arıyorum:verb].		
+s.new-laptop	s			things		I need a new laptop.	Ich brauche einen neuen [Laptop:noun].	Necesito un [portátil:noun] nuevo.	Ik heb een nieuwe [laptop:noun] nodig.	Yeni bir [laptopa:noun] ihtiyacım var.		
+s.found-it	s			things		I found it!	Ich habe es [gefunden:verb]!	¡Lo he [encontrado:verb]!	Ik heb het [gevonden:verb]!	[Buldum:verb]!	You finally see the keys you were looking for.	
+s.bag-heavy	s			things		My bag is very heavy.	Meine [Tasche:noun] ist sehr schwer.	Mi [bolso:noun] pesa mucho.	Mijn [tas:noun] is heel zwaar.	[Çantam:noun] çok ağır.		
+# ---- colours
+colour	w	noun		colours	colours	colour | color	die Farbe	el color	de kleur	renk		
+red	w	adjective		colours	colours	red	rot	rojo | roja	rood	kırmızı		
+blue	w	adjective		colours	colours	blue	blau	azul	blauw	mavi		
+green	w	adjective		colours	colours	green	grün	verde	groen	yeşil		
+yellow	w	adjective		colours	colours	yellow	gelb	amarillo | amarilla	geel	sarı		
+black	w	adjective		colours	colours	black	schwarz	negro | negra	zwart	siyah		
+white	w	adjective		colours	colours	white	weiß	blanco | blanca	wit	beyaz		
+grey	w	adjective		colours	colours	grey | gray	grau	gris	grijs	gri		
+brown	w	adjective		colours	colours	brown	braun	marrón	bruin	kahverengi		
+pink	w	adjective		colours	colours	pink	rosa	rosa	roze	pembe		
+orange	w	adjective		colours	colours	orange	orange	naranja	oranje	turuncu		
+dark	w	adjective		colours	shades	dark	dunkel	oscuro | oscura	donker	koyu		
+s.favourite-colour	s			colours		What's your favourite colour? | What's your favorite color?	Was ist deine [Lieblingsfarbe:noun]?	¿Cuál es tu [color:noun] favorito?	Wat is je [lievelingskleur:noun]?	En sevdiğin [renk:noun] ne?		social
+s.car-red	s			colours		My car is red.	Mein Auto ist [rot:adjective].	Mi coche es [rojo:adjective].	Mijn auto is [rood:adjective].	Arabam [kırmızı:adjective].		
+s.blue-jacket	s			colours		I like the blue jacket.	Mir gefällt die [blaue:adjective] Jacke.	Me gusta la chaqueta [azul:adjective].	Ik vind de [blauwe:adjective] jas mooi.	[Mavi:adjective] ceketi beğendim.		
+s.black-white-cat	s			colours		The cat is black and white.	Die Katze ist schwarz und [weiß:adjective].	El gato es negro y [blanco:adjective].	De kat is zwart en [wit:adjective].	Kedi siyah [beyaz:adjective].		
+s.sky-grey	s			colours		The sky is grey today. | The sky is gray today.	Der Himmel ist heute [grau:adjective].	El cielo está [gris:adjective] hoy.	De lucht is vandaag [grijs:adjective].	Bugün gökyüzü [gri:adjective].		
+s.dark-colours	s			colours		I usually wear dark colours. | I usually wear dark colors.	Ich trage meistens dunkle [Farben:noun].	Normalmente llevo [colores:noun] oscuros.	Ik draag meestal donkere [kleuren:noun].	Genelde koyu [renkler:noun] giyerim.		
+s.yellow-flowers	s			colours		The flowers are yellow.	Die Blumen sind [gelb:adjective].	Las flores son [amarillas:adjective].	De bloemen zijn [geel:adjective].	Çiçekler [sarı:adjective].		

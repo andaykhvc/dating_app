@@ -1,0 +1,60 @@
+# Unit A2.5 — Getting to know someone: meeting up, opinions, keeping the chat going
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- meeting up
+meeting-point	w	noun		meeting-up	plans	meeting point	der Treffpunkt	el punto de encuentro	het ontmoetingspunt	buluşma yeri		
+entrance	w	noun		meeting-up	town-places	entrance	der Eingang	la entrada	de ingang	giriş		
+tonight	w	adverb		meeting-up	time-adverbs	tonight | this evening	heute Abend	esta noche	vanavond	bu akşam		
+video-call	w	noun		meeting-up	communication	video call	der Videoanruf	la videollamada	het videogesprek	görüntülü arama		
+to-suggest	w	verb		meeting-up	social-verbs	to suggest	vorschlagen	proponer	voorstellen	önermek		
+sounds-good	p			meeting-up	reactions	sounds good	klingt gut	suena bien	klinkt goed	olur | iyi fikir	A friend suggests a time and it works for you.	
+why-not	p			meeting-up	reactions	Why not?	Warum nicht?	¿Por qué no?	Waarom niet?	Neden olmasın?	Someone suggests something new and you're open to it.	
+lets-go	p			meeting-up	reactions	Let's go!	Los geht's!	¡Vamos!	Kom op! | Laten we gaan!	Hadi gidelim!	Everyone is ready to leave.	
+s.coffee-sometime	s			meeting-up		Would you like to get a coffee sometime?	Hast du Lust, mal einen [Kaffee:noun] zu trinken?	¿Te apetece tomar un [café:noun] algún día?	Heb je zin om een keer [koffie:noun] te drinken?	Bir ara [kahve:noun] içmeye ne dersin?	You've been chatting for a while and want to meet in person.	social
+s.where-meet	s			meeting-up		Where shall we meet?	Wo [treffen:verb] wir uns?	¿Dónde [quedamos:verb]?	Waar [spreken:verb] we af?	Nerede [buluşalım:verb]?		social
+s.how-about-six	s			meeting-up		How about six o'clock?	Wie wäre es um [sechs:numeral]?	¿Qué tal a las [seis:numeral]?	Wat dacht je van [zes:numeral] uur?	Saat [altıya:numeral] ne dersin?		social
+s.see-you-tonight	s			meeting-up		See you tonight!	Bis heute [Abend:noun]!	¡Hasta esta [noche:noun]!	Tot [vanavond:adverb]!	Bu [akşam:noun] görüşürüz!	You've agreed to meet a friend later today.	
+s.im-here	s			meeting-up		I'm here, where are you?	Ich bin [da:adverb], wo bist du?	Ya estoy [aquí:adverb], ¿dónde estás?	Ik ben er, [waar:adverb] ben jij?	[Geldim:verb], neredesin?	You're at the meeting point but can't see your friend.	
+s.nice-evening	s			meeting-up		It was a really nice evening.	Es war ein sehr schöner [Abend:noun].	Fue una [noche:noun] muy bonita.	Het was een heel leuke [avond:noun].	Çok güzel bir [akşamdı:noun].	You write to someone after meeting up.	social
+s.again-soon	s			meeting-up		Let's do this again soon!	Lass uns das bald [wiederholen:verb]!	¡Tenemos que [repetirlo:verb] pronto!	Laten we dit snel [nog:adverb] eens doen!	Bunu yakında yine [yapalım:verb]!	You had a great time and want to meet again.	social
+s.video-call	s			meeting-up		Shall we do a video call?	Wollen wir einen [Videoanruf:noun] machen?	¿Hacemos una [videollamada:noun]?	Zullen we [videobellen:verb]?	Görüntülü [konuşalım:verb] mı?		social
+# ---- opinions
+opinion	w	noun		opinions	opinion	opinion	die Meinung	la opinión	de mening	görüş | fikir		
+to-think	w	verb		opinions	opinion-verbs	to think	denken | glauben	pensar | creer	denken	düşünmek		
+to-agree	w	verb		opinions	opinion-verbs	to agree	zustimmen	estar de acuerdo	het eens zijn	katılmak		
+correct	w	adjective		opinions	opinion-adj	right | correct	richtig	correcto | correcta	juist	doğru		gloss=right (correct)
+wrong	w	adjective		opinions	opinion-adj	wrong	falsch	incorrecto | incorrecta	fout	yanlış		
+interesting	w	adjective		opinions	opinion-adj	interesting	interessant	interesante	interessant	ilginç		
+important	w	adjective		opinions	opinion-adj	important	wichtig	importante	belangrijk	önemli		
+exactly	w	interjection		opinions	reactions	exactly	genau	exacto | exactamente	precies	aynen | kesinlikle		
+in-my-opinion	p			opinions	opinion	in my opinion	meiner Meinung nach	en mi opinión	volgens mij	bence	You want to give your view in a discussion.	
+i-think-so	p			opinions	reactions	I think so.	Ich glaube schon.	Creo que sí.	Ik denk het wel.	Sanırım öyle.	Someone asks if the shop is still open; you're fairly sure it is.	
+s.what-do-you-think	s			opinions		What do you think?	Was [denkst:verb] du?	¿Qué [piensas:verb]?	Wat [denk:verb] jij? | Wat vind jij?	Sen ne [düşünüyorsun:verb]?		social
+s.agree-with-you	s			opinions		I agree with you.	Ich bin deiner [Meinung:noun].	Estoy de [acuerdo:noun] contigo.	Ik ben het met je [eens:adverb].	Sana [katılıyorum:verb].	Your friend says exactly what you were thinking.	
+s.see-differently	s			opinions		I don't agree. | I see it differently.	Das sehe ich [anders:adverb].	No estoy de [acuerdo:noun].	Daar ben ik het niet mee [eens:adverb].	Ben öyle [düşünmüyorum:verb].	Your friend says the film was great, but you didn't like it.	
+s.really-interesting	s			opinions		That's really interesting!	Das ist echt [interessant:adjective]!	¡Qué [interesante:adjective]!	Wat [interessant:adjective]!	Bu çok [ilginç:adjective]!	A match tells you something surprising about their country.	
+s.film-too-long	s			opinions		In my opinion, the film is too long.	Meiner [Meinung:noun] nach ist der Film zu lang.	En mi [opinión:noun], la película es demasiado larga.	Volgens mij is de film te [lang:adjective].	Bence film çok [uzun:adjective].		
+s.family-important	s			opinions		Family is very important to me.	Familie ist mir sehr [wichtig:adjective].	La familia es muy [importante:adjective] para mí.	Familie is heel [belangrijk:adjective] voor mij.	Aile benim için çok [önemli:adjective].		
+s.thats-right	s			opinions		Yes, that's right.	Ja, das ist [richtig:adjective].	Sí, es [verdad:noun].	Ja, dat [klopt:verb].	Evet, [doğru:adjective].	Someone checks that you're from Izmir, and you are.	
+s.good-idea-think	s			opinions		I think it's a good idea.	Ich finde, das ist eine gute [Idee:noun].	Creo que es una buena [idea:noun].	Ik vind het een goed [idee:noun].	Bence iyi bir [fikir:noun].		
+# ---- keeping the chat going
+question	w	noun		chatting	communication	question	die Frage	la pregunta	de vraag	soru		
+answer	w	noun		chatting	communication	answer | reply	die Antwort	la respuesta	het antwoord	cevap		
+message	w	noun		chatting	communication	message	die Nachricht	el mensaje	het bericht	mesaj		
+to-ask	w	verb		chatting	communication	to ask	fragen	preguntar	vragen	sormak		
+to-reply	w	verb		chatting	communication	to answer | to reply	antworten	responder | contestar	antwoorden	cevap vermek | cevaplamak		
+to-write	w	verb		chatting	communication	to write	schreiben	escribir	schrijven	yazmak		
+to-call	w	verb		chatting	communication	to call	anrufen	llamar	bellen	aramak		gloss=to call (on the phone)
+by-the-way	p			chatting	reactions	by the way	übrigens	por cierto	trouwens	bu arada	You want to change the subject in a chat.	
+really-question	p			chatting	reactions	Really?	Wirklich?	¿En serio?	Echt?	Gerçekten mi?	A friend tells you something surprising.	
+what-a-pity	p			chatting	reactions	what a pity | what a shame	schade	qué pena	jammer	ne yazık	Your friend can't come to your party.	
+s.whats-new	s			chatting		What's new?	Was gibt's [Neues:noun]?	¿Qué hay de [nuevo:adjective]?	Wat is er [nieuw:adjective]?	Ne var ne yok?		social
+s.thanks-message	s			chatting		Thanks for your message!	Danke für deine [Nachricht:noun]!	¡Gracias por tu [mensaje:noun]!	Bedankt voor je [bericht:noun]!	[Mesajın:noun] için teşekkürler!	Someone you like has just written to you.	
+s.can-i-ask	s			chatting		Can I ask you something?	Darf ich dich etwas [fragen:verb]?	¿Te puedo [preguntar:verb] algo?	Mag ik je iets [vragen:verb]?	Sana bir şey [sorabilir:verb] miyim?		social
+s.late-reply	s			chatting		Sorry for the late reply.	Entschuldige die späte [Antwort:noun].	Perdona por tardar en [contestar:verb].	Sorry voor mijn late [reactie:noun].	Geç [cevap:noun] verdiğim için özür dilerim.	You see a message you forgot to answer yesterday.	
+s.call-later	s			chatting		Can I call you later?	Kann ich dich später [anrufen:verb]?	¿Te puedo [llamar:verb] luego?	Kan ik je straks [bellen:verb]?	Seni sonra [arayabilir:verb] miyim?		social
+s.really-funny	s			chatting		Really? That's funny!	Wirklich? Das ist [lustig:adjective]!	¿En serio? ¡Qué [gracioso:adjective]!	Echt? Wat [grappig:adjective]!	Gerçekten mi? Çok [komik:adjective]!	A friend tells you a surprising, funny story.	
+s.by-the-way-tomorrow	s			chatting		By the way, what are you doing tomorrow?	Übrigens, was machst du [morgen:adverb]?	Por cierto, ¿qué haces [mañana:adverb]?	Trouwens, wat doe je [morgen:adverb]?	Bu arada, [yarın:adverb] ne yapıyorsun?		social
+s.what-a-pity-another	s			chatting		What a pity! Maybe another time.	[Schade:interjection]! Vielleicht ein anderes Mal.	¡Qué [pena:noun]! Quizás otro día.	[Jammer:interjection]! Misschien een andere keer.	Ne [yazık:noun]! Belki başka zaman.		
+s.write-german	s			chatting		You can write to me in German.	Du kannst mir auf Deutsch [schreiben:verb].	Me puedes [escribir:verb] en alemán.	Je kunt me in het Duits [schrijven:verb].	Bana Almanca [yazabilirsin:verb].		social
+s.tell-me-more	s			chatting		Tell me more!	Erzähl mir [mehr:adverb]!	¡Cuéntame [más:adverb]!	Vertel [meer:adverb]!	Daha fazla [anlat:verb]!	Your match mentions they just got back from an adventure.	social
