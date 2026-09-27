@@ -1,0 +1,70 @@
+name: Deploy database
+
+# Applies pending migrations and loads the course content into the live
+# Supabase project. Runs only when started by hand (Actions → Deploy database
+# → Run workflow): a database change should never happen as a side effect of a
+# merge.
+#
+# One-time setup — see docs/deploying-the-database.md:
+#   Settings → Secrets and variables → Actions → New repository secret
+#   SUPABASE_DB_URL = the Session pooler connection string, password included
+#                     (percent-encoded if it has special characters)
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: show what would happen, change nothing"
+        type: boolean
+        default: true
+      seed_course:
+        description: "Also load the course content (supabase/seed/001*_learn_*.sql; safe to re-run)"
+        type: boolean
+        default: true
+      mark_applied_through:
+        description: "Only if the first run stopped and asked for it: last migration already in the database (e.g. 9998)"
+        type: string
+        default: ""
+
+# Two deploys at once could both try to apply the same migration.
+concurrency:
+  group: deploy-database
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Migrate and seed
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Lets you require an approval before this runs, under Settings →
+    # Environments → supabase-production (optional).
+    environment: supabase-production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          # Same pinned CLI as the CI workflow.
+          version: "2.118.0"
+
+      - name: Check the secret is set
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::error::Add the SUPABASE_DB_URL secret first (see docs/deploying-the-database.md)."
+            exit 1
+          fi
+
+      - name: Install psql
+        run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+
+      - name: Migrate and seed
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          SEED_COURSE: ${{ inputs.seed_course }}
+          MARK_APPLIED_THROUGH: ${{ inputs.mark_applied_through }}
+        run: scripts/db/deploy.sh
