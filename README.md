@@ -140,6 +140,27 @@ supabase/
 docs/                      content system and licensing research
 ```
 
+### Home Screen installation
+
+The final onboarding screen and Settings → **Add to Home Screen** share a
+device-aware installation guide. Installation is optional; **Start swiping**
+still completes onboarding normally. The root install provider keeps a browser
+install offer available across client-side navigation.
+
+On supported Chromium browsers, **Install Lingua Match** opens the browser's
+confirmation dialog when `beforeinstallprompt` is available. Dismissals and
+errors fall back to manual instructions. iPhone/iPad users get Safari's Share →
+Add to Home Screen steps, including desktop-mode iPads. Desktop guidance and
+manual device selection are also available. Standalone mode and `appinstalled`
+replace the guide with a ready state; no permanent installed flag is stored.
+
+The existing manifest and icons provide standalone launching at `/discover`.
+This feature adds no offline caching; using the app still needs a connection.
+Native installation requires user confirmation and should also be checked on
+physical iOS Safari and Android Chrome devices before release. See
+[Apple's installation steps](https://support.apple.com/en-lamr/guide/iphone/iphea86e5236/ios)
+and [MDN's install prompt lifecycle](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt).
+
 ### Where the trust boundary sits
 
 Every table has RLS enabled, and anything with no policy for an operation is
@@ -289,7 +310,7 @@ npm run build
 ```
 
 ```bash
-npm test                    # content pipeline unit tests
+npm test                    # content pipeline and app-install lifecycle tests
 ```
 
 ```bash

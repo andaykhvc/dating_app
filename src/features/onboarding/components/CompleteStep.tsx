@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { LogoMark } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
+import { InstallGuide } from "@/features/install/InstallGuide";
 
 export function CompleteStep() {
   const router = useRouter();
@@ -44,22 +45,12 @@ export function CompleteStep() {
         You are set up
       </h1>
       <p className="mt-3 text-sm leading-relaxed text-muted">
-        Here is how it works: swipe through people who match your languages. When
-        you both say yes, we hand you a mission — something real to talk about
-        from the very first message.
+        Your next language partner is waiting. Add the app for a quick way back
+        to your conversations and daily practice.
       </p>
 
-      <div className="mt-8 grid gap-3 text-left short:mt-6">
-        {[
-          ["Discover", "Swipe through language partners."],
-          ["Match", "A mission arrives with every match."],
-          ["Play", "Daily challenges, XP and your streak."],
-        ].map(([title, body]) => (
-          <div key={title} className="rounded-2xl border border-line bg-raised p-4">
-            <p className="text-sm font-semibold text-ink">{title}</p>
-            <p className="mt-0.5 text-xs text-muted">{body}</p>
-          </div>
-        ))}
+      <div className="mt-8 rounded-3xl border border-line bg-raised p-5 short:mt-6">
+        <InstallGuide />
       </div>
 
       {error && (
@@ -71,6 +62,9 @@ export function CompleteStep() {
       <Button size="lg" fullWidth className="mt-8" onClick={finish} loading={saving}>
         Start swiping
       </Button>
+      <p className="mt-3 text-xs leading-relaxed text-muted">
+        Adding the app is optional. You can also do it later in Settings.
+      </p>
     </div>
   );
 }
