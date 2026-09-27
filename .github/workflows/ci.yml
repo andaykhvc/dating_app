@@ -1,0 +1,150 @@
+name: CI
+
+# Validates every PR into main (and main itself, after merge, in case two
+# individually-fine PRs conflict once combined). Every job here checks code;
+# nothing here deploys anything -- Vercel's own GitHub integration handles
+# preview deployments independently of this workflow.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# A new push to the same PR cancels whatever CI was still running for the
+# previous one, so we don't burn minutes validating a commit nobody cares
+# about anymore.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# The default GITHUB_TOKEN only needs to read the repo to check it out.
+permissions:
+  contents: read
+
+env:
+  # Pinned Supabase CLI version, bumped deliberately rather than tracking
+  # `latest` -- a CLI upgrade changing local-stack behaviour shouldn't be
+  # able to turn this workflow red without a corresponding diff to review.
+  SUPABASE_CLI_VERSION: "2.118.0"
+
+jobs:
+  typecheck:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  build:
+    name: Next.js Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build
+        # Only NEXT_PUBLIC_* values are read, and only at runtime inside
+        # request handlers -- every route that touches Supabase is dynamic
+        # (server-rendered on demand), so nothing here is ever called during
+        # the static build itself. These are placeholders, not real
+        # credentials, so the build catches a missing/renamed env var without
+        # needing any GitHub Secret.
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://ci-placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
+
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: No .env file committed
+        # The one class of "secret file" this repo could plausibly leak: a
+        # real .env/.env.local/.env.production checked in by mistake. Every
+        # actual secret this app depends on (Supabase URL/anon key) is
+        # public-by-design (NEXT_PUBLIC_*); there is no service-role key or
+        # server-side secret anywhere in the client, so there's nothing more
+        # sensitive than that to scan the diff's *content* for without
+        # risking noisy false positives on words like "key" or "secret" that
+        # legitimately appear in comments and docs (the README itself
+        # explains why there's no service-role key).
+        run: |
+          if git ls-files | grep -E '(^|/)\.env(\.[^.]+)?$' | grep -vE '\.env\.example$'; then
+            echo "::error::A .env-style file is tracked in git. Remove it and rotate anything it contained."
+            exit 1
+          fi
+          echo "No .env* file is tracked."
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Dependency audit (high/critical only)
+        # Low/moderate advisories are frequent and often not exploitable in
+        # this app; only high/critical should ever block a merge.
+        run: npm audit --audit-level=high
+
+  supabase-migrations:
+    name: Supabase / Migrations
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: ${{ env.SUPABASE_CLI_VERSION }}
+
+      # `db start` boots ONLY the local Postgres container (the same image
+      # the full stack uses, so auth.*/storage.* schemas, the auth/storage/
+      # realtime roles, and the supabase_realtime publication that the
+      # migrations below depend on all exist) -- not the full docker-compose
+      # stack (gotrue, postgrest, storage-api, kong, studio, ...), which this
+      # check has no use for and which would only make it slower.
+      #
+      # This is entirely local and ephemeral: a fresh container on a
+      # GitHub-hosted runner, gone when the job ends. It never touches the
+      # real project, needs no Supabase account, and needs no secrets.
+      - name: Start local Postgres
+        run: supabase db start
+
+      # The actual check: wipe that fresh database and re-apply every
+      # migration in supabase/migrations, in filename order, from scratch.
+      # If any migration is broken, unordered, or depends on something a
+      # later migration creates, this fails.
+      - name: Apply full migration history from scratch
+        run: supabase db reset --local --no-seed
+
+      # A second, independent check on the schema this history produces:
+      # the CLI's own linter (unused PL/pgSQL variables, type errors, etc.),
+      # not the responsibility of `db reset` above.
+      - name: Lint the resulting schema
+        run: supabase db lint --local --fail-on error
+
+      - name: Stop containers
+        if: always()
+        run: supabase stop --no-backup
