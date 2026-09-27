@@ -1321,7 +1321,6 @@ as $$
 declare
   v_uid uuid := auth.uid();
   v_s lesson_sessions%rowtype;
-  v_total int;
   v_graded int := 0;
   v_first_right int := 0;
   v_any_wrong boolean := false;
@@ -1350,7 +1349,6 @@ begin
     raise exception 'This lesson was abandoned' using errcode = 'check_violation';
   end if;
 
-  v_total := jsonb_array_length(v_s.exercises);
   for e in
     select (idx - 1)::int as i, ex from jsonb_array_elements(v_s.exercises) with ordinality t(ex, idx)
   loop
