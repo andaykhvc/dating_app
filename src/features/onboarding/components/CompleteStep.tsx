@@ -35,7 +35,7 @@ export function CompleteStep() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-16 text-center">
+    <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-gutter pb-safe-12 pt-safe-12 text-center short:pb-safe-8 short:pt-safe-8 lg:py-16">
       <div className="animate-pop mx-auto flex size-20 items-center justify-center rounded-3xl bg-brand-soft text-brand">
         <LogoMark className="size-11" />
       </div>
@@ -49,7 +49,7 @@ export function CompleteStep() {
         from the very first message.
       </p>
 
-      <div className="mt-8 space-y-3 text-left">
+      <div className="mt-8 grid gap-3 text-left short:mt-6">
         {[
           ["Discover", "Swipe through language partners."],
           ["Match", "A mission arrives with every match."],

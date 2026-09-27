@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import { ChatThread } from "@/features/chat/components/ChatThread";
+import { SyncConversations } from "@/features/chat/ConversationsContext";
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser, getMatches } from "@/lib/supabase/queries";
 import { MESSAGE_PAGE_SIZE } from "@/lib/constants";
 import { one } from "@/lib/utils";
-import type { ChatMessage, MatchSummary } from "@/types/domain";
+import type { ChatMessage } from "@/types/domain";
 
 const SELECT =
   "id, match_id, sender_id, body, reply_to_message_id, delivery_state, created_at, " +
@@ -28,29 +30,37 @@ export default async function ChatPage({
   const { matchId } = await params;
   const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Independent reads, so they go out together rather than one after another.
+  // RLS already limits messages to members, so fetching before the membership
+  // check below leaks nothing. The user and the match list are shared with the
+  // layouts above through the request cache.
+  const [user, matches, { data: rows }] = await Promise.all([
+    getCurrentUser(),
+    getMatches(),
+    supabase
+      .from("messages")
+      .select(SELECT)
+      .eq("match_id", matchId)
+      .order("id", { ascending: false })
+      .limit(MESSAGE_PAGE_SIZE),
+  ]);
 
-  const { data: matchesData } = await supabase.rpc("get_matches");
-  const match = ((matchesData ?? []) as MatchSummary[]).find(
-    (m) => m.match_id === matchId,
-  );
-
+  const match = matches.find((m) => m.match_id === matchId);
   if (!match) notFound();
-
-  const { data: rows } = await supabase
-    .from("messages")
-    .select(SELECT)
-    .eq("match_id", matchId)
-    .order("id", { ascending: false })
-    .limit(MESSAGE_PAGE_SIZE);
 
   const messages = ((rows ?? []) as unknown as Record<string, unknown>[])
     .map(flatten)
     .reverse();
 
   return (
-    <ChatThread match={match} viewerId={user!.id} initialMessages={messages} />
+    <>
+      <SyncConversations matches={matches.filter((m) => m.status === "active")} />
+      <ChatThread
+        key={matchId}
+        match={match}
+        viewerId={user!.id}
+        initialMessages={messages}
+      />
+    </>
   );
 }

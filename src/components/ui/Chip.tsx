@@ -48,7 +48,7 @@ export function SelectableChip({
       disabled={disabled}
       aria-pressed={selected}
       className={cn(
-        "rounded-full border px-4 py-2 text-sm font-medium transition-all",
+        "min-h-10 rounded-full border px-4 py-2 text-sm font-medium transition-all",
         "active:scale-[0.97] disabled:opacity-40",
         selected
           ? "border-brand bg-brand text-brand-ink"

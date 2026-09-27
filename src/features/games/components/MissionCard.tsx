@@ -67,14 +67,14 @@ export function MissionCard({
   const pct = Math.round((steps / mission.target_steps) * 100);
 
   return (
-    <div className="border-b border-line bg-accent-soft/60">
+    <div className="shrink-0 border-b border-line bg-accent-soft/60">
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
-        className="mx-auto flex w-full max-w-md items-center gap-3 px-5 py-3 text-left"
+        className="mx-auto flex w-full max-w-3xl items-center gap-3 px-gutter py-2.5 text-left short:py-2"
       >
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-base">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-base short:size-8">
           🎯
         </span>
         <span className="min-w-0 flex-1">
@@ -96,7 +96,7 @@ export function MissionCard({
       </button>
 
       {expanded && (
-        <div className="mx-auto max-w-md space-y-3 px-5 pb-4">
+        <div className="mx-auto max-w-3xl space-y-3 px-gutter pb-4">
           <p className="text-sm leading-relaxed text-muted">
             {mission.description}
           </p>
@@ -113,7 +113,7 @@ export function MissionCard({
               type="button"
               onClick={markStep}
               disabled={busy || steps >= mission.target_steps}
-              className="rounded-full bg-accent px-4 py-2 text-xs font-bold text-white disabled:opacity-50"
+              className="min-h-10 rounded-full bg-accent px-4 py-2 text-xs font-bold text-white transition-transform active:scale-95 disabled:opacity-50"
             >
               {steps >= mission.target_steps
                 ? "Done"
@@ -124,7 +124,7 @@ export function MissionCard({
               (sessionId ? (
                 <Link
                   href={`/play/session/${sessionId}`}
-                  className="rounded-full border border-accent/40 px-4 py-2 text-xs font-bold text-accent"
+                  className="flex min-h-10 items-center rounded-full border border-accent/40 px-4 py-2 text-xs font-bold text-accent"
                 >
                   Open challenge
                 </Link>
@@ -133,7 +133,7 @@ export function MissionCard({
                   type="button"
                   onClick={openChallenge}
                   disabled={startingGame}
-                  className="rounded-full border border-accent/40 px-4 py-2 text-xs font-bold text-accent disabled:opacity-50"
+                  className="min-h-10 rounded-full border border-accent/40 px-4 py-2 text-xs font-bold text-accent disabled:opacity-50"
                 >
                   {startingGame ? "Loading…" : "Play it as a challenge"}
                 </button>

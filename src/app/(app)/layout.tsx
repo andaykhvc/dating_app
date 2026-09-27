@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { BottomNav } from "@/components/layout/BottomNav";
+import { SideNav } from "@/components/layout/SideNav";
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/supabase/queries";
 
 /**
  * The onboarding gate lives here rather than in the proxy: this layout already
@@ -8,12 +10,10 @@ import { createClient } from "@/lib/supabase/server";
  * would add a database round trip to every single request.
  */
 export default async function AppLayout({ children }: LayoutProps<"/">) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const user = await getCurrentUser();
   if (!user) redirect("/login");
+
+  const supabase = await createClient();
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -23,10 +23,15 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
 
   if (!profile?.onboarding_completed_at) redirect("/onboarding/basics");
 
+  // Phones: content over a bottom tab bar. Tablet and up: a side rail (a full
+  // sidebar on wide screens) next to the content column.
   return (
-    <div className="flex min-h-dvh flex-col">
-      <div className="flex flex-1 flex-col">{children}</div>
-      <BottomNav />
+    <div className="flex min-h-dvh">
+      <SideNav />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex flex-1 flex-col">{children}</div>
+        <BottomNav />
+      </div>
     </div>
   );
 }

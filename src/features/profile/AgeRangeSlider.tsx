@@ -33,7 +33,8 @@ export function AgeRangeSlider({
             onChange={(e) =>
               onChange(Math.min(Number(e.target.value), max), max)
             }
-            className="w-full accent-[var(--brand)]"
+            // The track stays thin; the taller box is a bigger thumb target.
+            className="h-8 w-full cursor-pointer accent-[var(--brand)]"
           />
         </label>
         <label className="block">
@@ -46,7 +47,7 @@ export function AgeRangeSlider({
             onChange={(e) =>
               onChange(min, Math.max(Number(e.target.value), min))
             }
-            className="w-full accent-[var(--brand)]"
+            className="h-8 w-full cursor-pointer accent-[var(--brand)]"
           />
         </label>
       </div>

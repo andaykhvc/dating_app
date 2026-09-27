@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
@@ -23,7 +23,16 @@ export function MatchCelebration({
   onDismiss: () => void;
 }) {
   const router = useRouter();
+  const titleId = useId();
   const [mission, setMission] = useState<MatchMission | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onDismiss();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onDismiss]);
 
   useEffect(() => {
     let cancelled = false;
@@ -56,16 +65,27 @@ export function MatchCelebration({
   }, [matchId]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-surface/95 px-6 backdrop-blur-md">
+    // Scrolls inside itself, so the buttons are never stranded below the fold
+    // of a short phone or a phone turned sideways.
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+      className="animate-fade fixed inset-x-0 top-0 z-50 h-svh overflow-y-auto overscroll-contain bg-surface/95 backdrop-blur-md"
+    >
+      <div className="flex min-h-full items-center justify-center px-gutter pb-safe-8 pt-safe-8">
       <div className="animate-rise w-full max-w-sm text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
           It&apos;s a match
         </p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink">
+        <h2
+          id={titleId}
+          className="mt-2 text-3xl font-bold tracking-tight text-ink [overflow-wrap:anywhere]"
+        >
           You and {partner.first_name}
         </h2>
 
-        <div className="animate-pop mx-auto mt-7 flex justify-center">
+        <div className="animate-pop mx-auto mt-7 flex justify-center short:mt-5">
           <Avatar
             storagePath={partner.primary_photo_path}
             name={partner.first_name}
@@ -75,7 +95,7 @@ export function MatchCelebration({
           />
         </div>
 
-        <div className="mt-8 rounded-3xl border border-line bg-raised p-5 text-left">
+        <div className="mt-8 rounded-3xl border border-line bg-raised p-5 text-left short:mt-5">
           <p className="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-accent">
             Today&apos;s mission
           </p>
@@ -108,6 +128,7 @@ export function MatchCelebration({
             Keep swiping
           </Button>
         </div>
+      </div>
       </div>
     </div>
   );

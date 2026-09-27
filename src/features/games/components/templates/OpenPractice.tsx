@@ -26,7 +26,7 @@ export function AskYourPartner({ session, onSubmit, result, submitting, onDone }
   const [answer, setAnswer] = useState("");
 
   return (
-    <div className="flex flex-1 flex-col gap-7">
+    <div className="flex flex-1 flex-col gap-6 md:gap-8">
       <Instructions>
         Answer it yourself, then send it to a partner in chat.
       </Instructions>
@@ -40,16 +40,14 @@ export function AskYourPartner({ session, onSubmit, result, submitting, onDone }
         disabled={result !== null}
       />
 
-      <div className="mt-auto">
-        <GameFooter
-          result={result}
-          submitting={submitting}
-          canSubmit={answer.trim().length > 0}
-          submitLabel="I answered it"
-          onSubmit={() => onSubmit({ answer: answer.trim() })}
-          onDone={onDone}
-        />
-      </div>
+      <GameFooter
+        result={result}
+        submitting={submitting}
+        canSubmit={answer.trim().length > 0}
+        submitLabel="I answered it"
+        onSubmit={() => onSubmit({ answer: answer.trim() })}
+        onDone={onDone}
+      />
     </div>
   );
 }
@@ -65,7 +63,7 @@ export function ConversationMission({
     ?.payload as unknown as ConversationMissionPayload;
 
   return (
-    <div className="flex flex-1 flex-col gap-7">
+    <div className="flex flex-1 flex-col gap-6 md:gap-8">
       <Prompt>{payload?.instructions}</Prompt>
 
       {payload?.suggested_questions?.length > 0 && (
@@ -76,7 +74,7 @@ export function ConversationMission({
           {payload.suggested_questions.map((question) => (
             <div
               key={question}
-              className="rounded-2xl border border-line bg-raised px-4 py-3 text-sm text-ink"
+              className="rounded-2xl border border-line bg-raised px-4 py-3 text-sm text-ink [overflow-wrap:anywhere]"
             >
               {question}
             </div>
@@ -84,16 +82,14 @@ export function ConversationMission({
         </div>
       )}
 
-      <div className="mt-auto">
-        <GameFooter
-          result={result}
-          submitting={submitting}
-          canSubmit
-          submitLabel="We did it"
-          onSubmit={() => onSubmit({})}
-          onDone={onDone}
-        />
-      </div>
+      <GameFooter
+        result={result}
+        submitting={submitting}
+        canSubmit
+        submitLabel="We did it"
+        onSubmit={() => onSubmit({})}
+        onDone={onDone}
+      />
     </div>
   );
 }
@@ -102,8 +98,8 @@ export function VoiceChallenge({ session, onSubmit, result, submitting, onDone }
   const payload = session.content?.payload as unknown as VoiceChallengePayload;
 
   return (
-    <div className="flex flex-1 flex-col gap-7">
-      <div className="mx-auto flex size-20 items-center justify-center rounded-3xl bg-accent-soft text-3xl">
+    <div className="flex flex-1 flex-col gap-6 md:gap-8">
+      <div className="mx-auto flex size-20 items-center justify-center rounded-3xl bg-accent-soft text-3xl short:size-16">
         🎙️
       </div>
       <Prompt>{payload?.instructions}</Prompt>
@@ -112,16 +108,14 @@ export function VoiceChallenge({ session, onSubmit, result, submitting, onDone }
         Nothing is scored — saying it out loud is the whole exercise.
       </Instructions>
 
-      <div className="mt-auto">
-        <GameFooter
-          result={result}
-          submitting={submitting}
-          canSubmit
-          submitLabel="I recorded it"
-          onSubmit={() => onSubmit({})}
-          onDone={onDone}
-        />
-      </div>
+      <GameFooter
+        result={result}
+        submitting={submitting}
+        canSubmit
+        submitLabel="I recorded it"
+        onSubmit={() => onSubmit({})}
+        onDone={onDone}
+      />
     </div>
   );
 }
@@ -138,7 +132,7 @@ export function CorrectionChallenge({
   const [sentence, setSentence] = useState("");
 
   return (
-    <div className="flex flex-1 flex-col gap-7">
+    <div className="flex flex-1 flex-col gap-6 md:gap-8">
       <Instructions>
         Write a sentence in the language you are learning, then send it in chat.
         Your partner taps it to suggest a correction — you both earn XP.
@@ -149,7 +143,9 @@ export function CorrectionChallenge({
           <p className="text-xs font-semibold uppercase tracking-wide text-faint">
             Or fix this one
           </p>
-          <p className="mt-1.5 text-base text-ink">{payload.seed_sentence}</p>
+          <p className="mt-1.5 text-base text-ink [overflow-wrap:anywhere]">
+            {payload.seed_sentence}
+          </p>
           {payload.hint && (
             <p className="mt-1.5 text-xs italic text-muted">{payload.hint}</p>
           )}
@@ -164,16 +160,14 @@ export function CorrectionChallenge({
         disabled={result !== null}
       />
 
-      <div className="mt-auto">
-        <GameFooter
-          result={result}
-          submitting={submitting}
-          canSubmit={sentence.trim().length > 0}
-          submitLabel="Done"
-          onSubmit={() => onSubmit({ answer: sentence.trim() })}
-          onDone={onDone}
-        />
-      </div>
+      <GameFooter
+        result={result}
+        submitting={submitting}
+        canSubmit={sentence.trim().length > 0}
+        submitLabel="Done"
+        onSubmit={() => onSubmit({ answer: sentence.trim() })}
+        onDone={onDone}
+      />
     </div>
   );
 }

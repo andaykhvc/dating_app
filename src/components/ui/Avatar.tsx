@@ -1,4 +1,4 @@
-import { photoUrl } from "@/lib/photos";
+import { ThumbImage } from "@/components/ui/ThumbImage";
 import { cn } from "@/lib/utils";
 
 /** Deterministic hue from the user id, so the fallback is stable per person. */
@@ -21,37 +21,31 @@ export function Avatar({
   size?: number;
   className?: string;
 }) {
-  const url = photoUrl(storagePath);
   const initial = name?.trim().charAt(0).toUpperCase() ?? "?";
 
+  // The initial sits underneath the photo, so there is a stable placeholder of
+  // the final size while the image loads and no layout shift when it arrives.
   return (
     <span
       className={cn(
         "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full",
         className,
       )}
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, background: initialTone(userId) }}
     >
-      {url ? (
-        // Storage serves already-compressed WebP, so next/image would only add
-        // an optimisation hop that costs money on Vercel's free tier.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={url}
+      <span
+        aria-hidden={storagePath ? true : undefined}
+        className="font-semibold text-white"
+        style={{ fontSize: size * 0.4 }}
+      >
+        {initial}
+      </span>
+      {storagePath && (
+        <ThumbImage
+          storagePath={storagePath}
           alt={name ?? "Profile photo"}
-          className="size-full object-cover"
-          loading="lazy"
+          className="absolute inset-0 size-full object-cover"
         />
-      ) : (
-        <span
-          className="flex size-full items-center justify-center font-semibold text-white"
-          style={{
-            background: initialTone(userId),
-            fontSize: size * 0.4,
-          }}
-        >
-          {initial}
-        </span>
       )}
     </span>
   );

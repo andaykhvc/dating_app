@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/discover",
     scope: "/",
     display: "standalone",
-    orientation: "portrait",
+    // No orientation lock: tablets and foldables get a real layout in both.
     background_color: "#faf7f2",
     theme_color: "#3b2fe8",
     categories: ["education", "social", "lifestyle"],

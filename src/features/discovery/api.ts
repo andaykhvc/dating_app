@@ -1,6 +1,11 @@
 import { createClient } from "@/lib/supabase/client";
 import { DISCOVERY_BATCH_SIZE } from "@/lib/constants";
-import type { DiscoveryCard, SwipeAction, SwipeResult } from "@/types/domain";
+import type {
+  DiscoveryCard,
+  ProfileCard,
+  SwipeAction,
+  SwipeResult,
+} from "@/types/domain";
 
 export async function fetchDiscoveryBatch(
   limit = DISCOVERY_BATCH_SIZE,
@@ -28,4 +33,17 @@ export async function recordSwipe(
   });
   if (error) throw error;
   return data as SwipeResult;
+}
+
+/**
+ * The full card — every interest and the whole photo gallery. Only fetched
+ * when someone opens a person's details, never per card in the deck.
+ */
+export async function fetchProfileCard(userId: string): Promise<ProfileCard | null> {
+  const supabase = createClient();
+  const { data, error } = await supabase.rpc("get_profile_card", {
+    p_user_id: userId,
+  });
+  if (error) throw error;
+  return (data ?? null) as ProfileCard | null;
 }

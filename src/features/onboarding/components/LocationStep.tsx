@@ -46,7 +46,7 @@ export function LocationStep({
       loading={saving}
       error={error}
     >
-      <div className="space-y-5">
+      <div className="grid items-start gap-5 sm:grid-cols-2 sm:gap-4">
         <Field label="Country">
           <Select value={country} onChange={(e) => setCountry(e.target.value)}>
             <option value="">Select a country</option>
