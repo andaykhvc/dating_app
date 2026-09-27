@@ -1,0 +1,22 @@
+{
+  "en": {
+    "name": "English", "nativeName": "English", "flag": "🇬🇧", "speechLocale": "en-GB",
+    "nounArticles": {}, "core": true
+  },
+  "de": {
+    "name": "German", "nativeName": "Deutsch", "flag": "🇩🇪", "speechLocale": "de-DE",
+    "nounArticles": { "der": "m", "die": "f", "das": "n" }, "core": true
+  },
+  "es": {
+    "name": "Spanish", "nativeName": "Español", "flag": "🇪🇸", "speechLocale": "es-ES",
+    "nounArticles": { "el": "m", "la": "f", "los": "pl", "las": "pl" }, "core": true
+  },
+  "nl": {
+    "name": "Dutch", "nativeName": "Nederlands", "flag": "🇳🇱", "speechLocale": "nl-NL",
+    "nounArticles": { "de": "c", "het": "n" }, "core": true
+  },
+  "tr": {
+    "name": "Turkish", "nativeName": "Türkçe", "flag": "🇹🇷", "speechLocale": "tr-TR",
+    "nounArticles": {}, "core": true
+  }
+}

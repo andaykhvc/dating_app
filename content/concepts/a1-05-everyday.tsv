@@ -1,0 +1,76 @@
+# Unit A1.5 — Everyday life: days, time, routine, basic verbs
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- days (weekday names come from CLDR)
+day	w	noun		days	time-units	day	der Tag	el día	de dag	gün		
+week	w	noun		days	time-units	week	die Woche	la semana	de week	hafta		
+weekend	w	noun		days	time-units	weekend	das Wochenende	el fin de semana	het weekend	hafta sonu		
+today	w	adverb		days	time-adverbs	today	heute	hoy	vandaag	bugün		
+tomorrow	w	adverb		days	time-adverbs	tomorrow	morgen	mañana	morgen	yarın		
+yesterday	w	adverb		days	time-adverbs	yesterday	gestern	ayer	gisteren	dün		
+every-day	w	adverb		days	frequency	every day	jeden Tag	todos los días	elke dag	her gün		
+s.what-day	s			days		What day is it today?	Welcher [Tag:noun] ist heute?	¿Qué [día:noun] es hoy?	Welke [dag:noun] is het vandaag?	Bugün günlerden [ne:pronoun]?		
+s.today-monday	s			days		Today is Monday.	Heute ist [Montag:noun].	Hoy es [lunes:noun].	Vandaag is het [maandag:noun].	Bugün [pazartesi:noun].		
+s.see-you-friday	s			days		See you on Friday!	Bis [Freitag:noun]!	¡Hasta el [viernes:noun]!	Tot [vrijdag:noun]!	[Cuma:noun] günü görüşürüz!	You'll meet your friend again at the end of the week.	
+s.weekend-doing	s			days		What are you doing at the weekend? | What are you doing this weekend?	Was machst du am [Wochenende:noun]?	¿Qué haces el fin de [semana:noun]?	Wat doe je dit [weekend:noun]?	Hafta [sonu:noun] ne yapıyorsun?		social
+s.monday-to-friday	s			days		I work from Monday to Friday.	Ich arbeite von Montag bis [Freitag:noun].	Trabajo de lunes a [viernes:noun].	Ik werk van maandag tot [vrijdag:noun].	Pazartesiden [cumaya:noun] kadar çalışıyorum.		
+s.tomorrow-free	s			days		Tomorrow I'm free. | I'm free tomorrow.	[Morgen:adverb] habe ich frei.	[Mañana:adverb] estoy libre.	[Morgen:adverb] ben ik vrij.	[Yarın:adverb] boşum.		
+s.learn-every-day	s			days		I learn Dutch every day.	Ich lerne jeden [Tag:noun] Niederländisch.	Aprendo neerlandés todos los [días:noun].	Ik leer elke [dag:noun] Nederlands.	Her [gün:noun] Felemenkçe öğreniyorum.		
+# ---- time
+time	w	noun		time	time-units	time	die Zeit	el tiempo	de tijd	zaman | vakit		gloss=time (that passes)
+hour	w	noun		time	time-units	hour	die Stunde	la hora	het uur	saat		
+minute	w	noun		time	time-units	minute	die Minute	el minuto	de minuut	dakika		
+morning	w	noun		time	times-of-day	morning	der Morgen	la mañana	de ochtend	sabah		
+afternoon	w	noun		time	times-of-day	afternoon	der Nachmittag	la tarde	de middag	öğleden sonra		
+evening	w	noun		time	times-of-day	evening	der Abend	la tarde | la noche	de avond	akşam		
+night	w	noun		time	times-of-day	night	die Nacht	la noche	de nacht	gece		
+now	w	adverb		time	time-adverbs	now	jetzt	ahora	nu	şimdi		
+early	w	adverb		time	time-adverbs	early	früh	temprano	vroeg	erken		
+late	w	adverb		time	time-adverbs	late	spät	tarde	laat	geç		
+when	w	adverb		time	question-words	when	wann	cuándo	wanneer	ne zaman		
+s.what-time	s			time		What time is it?	Wie [spät:adjective] ist es?	¿Qué [hora:noun] es?	Hoe [laat:adjective] is het?	[Saat:noun] kaç?	You want to know the time.	
+s.three-oclock	s			time		It's three o'clock.	Es ist [drei:numeral] Uhr.	Son las [tres:numeral].	Het is [drie:numeral] uur.	Saat [üç:numeral].		
+s.half-seven	s			time		We're meeting at half past seven.	Wir treffen uns um [halb:adjective] acht.	Quedamos a las siete y [media:noun].	We spreken om [half:adjective] acht af.	Yedi [buçukta:noun] buluşuyoruz.		
+s.evening-home	s			time		In the evening I'm usually at home.	Am [Abend:noun] bin ich meistens zu Hause.	Por la [noche:noun] normalmente estoy en casa.	In de [avond:noun] ben ik meestal thuis.	[Akşamları:noun] genelde evdeyim.		
+s.call-at-eight	s			time		I'll call you at eight.	Ich rufe dich um [acht:numeral] an.	Te llamo a las [ocho:numeral].	Ik bel je om [acht:numeral] uur.	Seni saat [sekizde:numeral] ararım.		
+s.when-time	s			time		When do you have time?	Wann hast du [Zeit:noun]?	¿Cuándo tienes [tiempo:noun]?	Wanneer heb je [tijd:noun]?	Ne zaman [vaktin:noun] var?		social
+s.no-time-now	s			time		I don't have time right now.	Ich habe gerade keine [Zeit:noun].	Ahora no tengo [tiempo:noun].	Ik heb nu geen [tijd:noun].	Şu an [vaktim:noun] yok.	A friend calls while you're in a meeting.	
+# ---- daily routine
+to-wake-up	w	verb		routine	routine-verbs	to wake up	aufwachen	despertarse	wakker worden	uyanmak		
+to-get-up	w	verb		routine	routine-verbs	to get up	aufstehen	levantarse	opstaan	kalkmak		
+to-shower	w	verb		routine	routine-verbs	to shower | to take a shower	duschen	ducharse	douchen	duş almak		
+to-have-breakfast	w	verb		routine	routine-verbs	to have breakfast	frühstücken	desayunar	ontbijten	kahvaltı yapmak		
+to-sleep	w	verb		routine	routine-verbs	to sleep	schlafen	dormir	slapen	uyumak		
+breakfast	w	noun		routine	meals	breakfast	das Frühstück	el desayuno	het ontbijt	kahvaltı		
+usually	w	adverb		routine	frequency	usually	normalerweise | meistens	normalmente	meestal | normaal	genelde | genellikle		
+always	w	adverb		routine	frequency	always	immer	siempre	altijd	her zaman | hep		
+never	w	adverb		routine	frequency	never	nie	nunca	nooit	asla | hiç		
+often	w	adverb		routine	frequency	often	oft	a menudo	vaak	sık sık		
+s.get-up-seven	s			routine		I get up at seven.	Ich [stehe:verb] um sieben auf.	Me [levanto:verb] a las siete.	Ik [sta:verb] om zeven uur op.	Saat yedide [kalkarım:verb].		
+s.shower-morning	s			routine		I shower in the morning.	Ich [dusche:verb] morgens.	Me [ducho:verb] por la mañana.	Ik [douche:verb] in de ochtend.	Sabahları duş [alırım:verb].		
+s.never-breakfast	s			routine		I never have breakfast.	Ich frühstücke [nie:adverb].	[Nunca:adverb] desayuno.	Ik ontbijt [nooit:adverb].	[Hiç:adverb] kahvaltı yapmam.		
+s.bed-late	s			routine		I usually go to bed late.	Ich gehe meistens [spät:adverb] ins Bett.	Normalmente me acuesto [tarde:adverb].	Ik ga meestal [laat:adverb] naar bed.	Genelde [geç:adverb] yatarım.		
+s.when-get-up	s			routine		What time do you get up?	Wann [stehst:verb] du auf?	¿A qué hora te [levantas:verb]?	Hoe laat [sta:verb] je op?	Saat kaçta [kalkıyorsun:verb]?		social
+s.always-tired	s			routine		In the morning I'm always tired.	Morgens bin ich [immer:adverb] müde.	Por la mañana [siempre:adverb] estoy cansado. | Por la mañana siempre estoy cansada.	In de ochtend ben ik [altijd:adverb] moe.	Sabahları [hep:adverb] yorgunum.		
+s.sleep-eight	s			routine		I sleep eight hours.	Ich [schlafe:verb] acht Stunden.	[Duermo:verb] ocho horas.	Ik [slaap:verb] acht uur.	Sekiz saat [uyurum:verb].		
+s.morning-person	s			routine		Are you a morning person?	Bist du ein [Morgenmensch:noun]?	¿Eres una persona [madrugadora:adjective]?	Ben jij een [ochtendmens:noun]?	Sabah [insanı:noun] mısın?		social
+# ---- basic verbs
+to-have	w	verb		basic-verbs	core-verbs	to have	haben	tener	hebben	sahip olmak		
+to-be	w	verb		basic-verbs	core-verbs	to be	sein	ser | estar	zijn	olmak		
+to-go	w	verb		basic-verbs	motion	to go	gehen	ir	gaan	gitmek		
+to-do	w	verb		basic-verbs	core-verbs	to do | to make	machen	hacer	doen | maken	yapmak		
+to-want	w	verb		basic-verbs	core-verbs	to want	wollen	querer	willen	istemek		
+to-see	w	verb		basic-verbs	senses	to see	sehen	ver	zien	görmek		
+to-say	w	verb		basic-verbs	communication	to say	sagen	decir	zeggen	söylemek		
+to-know	w	verb		basic-verbs	core-verbs	to know	wissen	saber	weten	bilmek		gloss=to know (a fact)
+to-take	w	verb		basic-verbs	core-verbs	to take	nehmen	tomar | coger	nemen	almak		
+to-give	w	verb		basic-verbs	core-verbs	to give	geben	dar	geven	vermek		
+to-need	w	verb		basic-verbs	core-verbs	to need	brauchen	necesitar	nodig hebben	ihtiyacı olmak		
+s.what-doing	s			basic-verbs		What are you doing?	Was [machst:verb] du?	¿Qué [haces:verb]?	Wat [doe:verb] je?	Ne [yapıyorsun:verb]?		social
+s.dont-know	s			basic-verbs		I don't know.	Ich [weiß:verb] es nicht.	No [sé:verb].	Ik [weet:verb] het niet.	[Bilmiyorum:verb].	Someone asks you a question and you have no idea.	
+s.want-go-home	s			basic-verbs		I want to go home.	Ich [will:verb] nach Hause gehen.	[Quiero:verb] ir a casa.	Ik [wil:verb] naar huis gaan.	Eve gitmek [istiyorum:verb].		
+s.need-help	s			basic-verbs		I need help.	Ich [brauche:verb] Hilfe.	[Necesito:verb] ayuda.	Ik heb hulp [nodig:adjective].	Yardıma [ihtiyacım:noun] var.	You're lost and want to ask someone for help.	
+s.give-number	s			basic-verbs		Can you give me your number?	Kannst du mir deine Nummer [geben:verb]?	¿Me [das:verb] tu número?	Kun je me je nummer [geven:verb]?	Numaranı [verir:verb] misin?		
+s.see-you-soon	s			basic-verbs		I hope to see you soon.	Ich hoffe, dich bald zu [sehen:verb].	Espero [verte:verb] pronto.	Ik hoop je snel te [zien:verb].	Umarım seni yakında [görürüm:verb].		
+s.what-did-say	s			basic-verbs		What did you say?	Was hast du [gesagt:verb]?	¿Qué has [dicho:verb]?	Wat [zei:verb] je?	Ne [dedin:verb]?		
+s.have-dog	s			basic-verbs		I have a dog.	Ich [habe:verb] einen Hund.	[Tengo:verb] un perro.	Ik [heb:verb] een hond.	Bir [köpeğim:noun] var.		

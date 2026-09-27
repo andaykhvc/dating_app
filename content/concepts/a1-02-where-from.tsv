@@ -1,0 +1,58 @@
+# Unit A1.2 — Where you're from: countries, languages, numbers
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- countries (country names themselves come from CLDR: concepts/cldr.tsv)
+country	w	noun		countries	geography	country	das Land	el país	het land	ülke		
+city	w	noun		countries	geography	city	die Stadt	la ciudad	de stad	şehir		
+to-come	w	verb		countries	motion	to come	kommen	venir	komen	gelmek		
+to-live	w	verb		countries	home-verbs	to live	wohnen	vivir	wonen	yaşamak | oturmak		gloss=to live (somewhere)
+where	w	adverb		countries	question-words	where	wo	dónde	waar	nerede		
+s.where-from	s			countries		Where are you from?	Woher [kommst:verb] du?	¿De dónde [eres:verb]?	Waar [kom:verb] je vandaan?	Nerelisin? | Nereden geliyorsun?	You want to know which country someone comes from.	social
+s.from-turkey	s			countries		I'm from Turkey. | I'm from Türkiye.	Ich komme aus der [Türkei:noun].	Soy de [Turquía:noun].	Ik kom uit [Turkije:noun].	[Türkiye'den:noun] geliyorum. | Türkiyeliyim.		
+s.live-netherlands	s			countries		I live in the Netherlands.	Ich wohne in den [Niederlanden:noun].	Vivo en los [Países:noun] Bajos.	Ik woon in [Nederland:noun].	[Hollanda'da:noun] yaşıyorum.		
+s.born-in	s			countries		I was born in Istanbul.	Ich bin in Istanbul [geboren:verb].	[Nací:verb] en Estambul.	Ik ben in Istanbul [geboren:verb].	İstanbul'da [doğdum:verb].		
+s.germany-beautiful	s			countries		Germany is a beautiful country.	Deutschland ist ein schönes [Land:noun].	Alemania es un [país:noun] bonito.	Duitsland is een mooi [land:noun].	Almanya güzel bir [ülke:noun].		
+s.which-city	s			countries		Which city are you from?	Aus welcher [Stadt:noun] kommst du?	¿De qué [ciudad:noun] eres?	Uit welke [stad:noun] kom je?	Hangi [şehirdensin:noun]?		social
+s.city-big	s			countries		Is your city big?	Ist deine Stadt [groß:adjective]?	¿Tu ciudad es [grande:adjective]?	Is jouw stad [groot:adjective]?	Şehrin [büyük:adjective] mü?		social
+# ---- languages (language names come from CLDR)
+to-speak	w	verb		languages	communication	to speak	sprechen	hablar	spreken	konuşmak		
+to-learn	w	verb		languages	learning	to learn	lernen	aprender	leren	öğrenmek		
+to-understand	w	verb		languages	learning	to understand	verstehen	entender	begrijpen	anlamak		
+language	w	noun		languages	learning	language	die Sprache	el idioma | la lengua	de taal	dil		
+word	w	noun		languages	learning	word	das Wort	la palabra	het woord	kelime		
+native-language	w	noun		languages	learning	native language	die Muttersprache	la lengua materna	de moedertaal	ana dil		
+a-little	w	adverb		languages	quantity	a little	ein bisschen	un poco	een beetje	biraz		
+well	w	adverb		languages	manner	well	gut	bien	goed	iyi		gloss=well (adverb)
+s.speak-english	s			languages		Do you speak English?	[Sprichst:verb] du Englisch?	¿[Hablas:verb] inglés?	[Spreek:verb] je Engels?	İngilizce [konuşuyor:verb] musun?		social
+s.learning-german	s			languages		I'm learning German. | I am learning German.	Ich [lerne:verb] Deutsch.	[Aprendo:verb] alemán. | Estoy aprendiendo alemán.	Ik [leer:verb] Duits.	Almanca [öğreniyorum:verb].		
+s.speak-little	s			languages		I speak a little Spanish.	Ich spreche ein [bisschen:adverb] Spanisch.	Hablo un [poco:adverb] de español.	Ik spreek een [beetje:adverb] Spaans.	[Biraz:adverb] İspanyolca konuşuyorum.		
+s.native-turkish	s			languages		My native language is Turkish.	Meine [Muttersprache:noun] ist Türkisch.	Mi lengua [materna:adjective] es el turco.	Mijn [moedertaal:noun] is Turks.	Ana [dilim:noun] Türkçe.		
+s.what-does-mean	s			languages		What does this word mean?	Was [bedeutet:verb] dieses Wort?	¿Qué [significa:verb] esta palabra?	Wat [betekent:verb] dit woord?	Bu kelime ne [demek:verb]?	You see a word you don't know in a message.	
+s.how-say-german	s			languages		How do you say that in German?	Wie [sagt:verb] man das auf Deutsch?	¿Cómo se [dice:verb] eso en alemán?	Hoe [zeg:verb] je dat in het Duits?	Almancada bu nasıl [denir:verb]?	You know a word in English but not in German.	
+s.how-many-languages	s			languages		How many languages do you speak?	Wie viele [Sprachen:noun] sprichst du?	¿Cuántos [idiomas:noun] hablas?	Hoeveel [talen:noun] spreek je?	Kaç [dil:noun] konuşuyorsun?		social
+s.help-practise	s			languages		Can you help me practise? | Can you help me practice?	Kannst du mir beim [Üben:noun] helfen?	¿Me [ayudas:verb] a practicar?	Kun je me helpen met [oefenen:verb]?	Pratik yapmama [yardım:noun] eder misin?		social
+# ---- numbers
+zero	w	numeral		numbers	numbers	zero	null	cero	nul	sıfır		
+one	w	numeral		numbers	numbers	one	eins	uno	één | een	bir		
+two	w	numeral		numbers	numbers	two	zwei	dos	twee	iki		
+three	w	numeral		numbers	numbers	three	drei	tres	drie	üç		
+four	w	numeral		numbers	numbers	four	vier	cuatro	vier	dört		
+five	w	numeral		numbers	numbers	five	fünf	cinco	vijf	beş		
+six	w	numeral		numbers	numbers	six	sechs	seis	zes	altı		
+seven	w	numeral		numbers	numbers	seven	sieben	siete	zeven	yedi		
+eight	w	numeral		numbers	numbers	eight	acht	ocho	acht	sekiz		
+nine	w	numeral		numbers	numbers	nine	neun	nueve	negen	dokuz		
+ten	w	numeral		numbers	numbers	ten	zehn	diez	tien	on		
+eleven	w	numeral		numbers	numbers	eleven	elf	once	elf	on bir		
+twelve	w	numeral		numbers	numbers	twelve	zwölf	doce	twaalf	on iki		
+fifteen	w	numeral		numbers	numbers	fifteen	fünfzehn	quince	vijftien	on beş		
+twenty	w	numeral		numbers	numbers	twenty	zwanzig	veinte	twintig	yirmi		
+thirty	w	numeral		numbers	numbers	thirty	dreißig	treinta	dertig	otuz		
+fifty	w	numeral		numbers	numbers	fifty	fünfzig	cincuenta	vijftig	elli		
+hundred	w	numeral		numbers	numbers	a hundred | one hundred | hundred	hundert | einhundert	cien	honderd	yüz		
+s.phone-number	s			numbers		What's your phone number?	Wie ist deine [Telefonnummer:noun]?	¿Cuál es tu número de [teléfono:noun]?	Wat is je [telefoonnummer:noun]?	Telefon [numaran:noun] ne?		
+s.three-coffees	s			numbers		Three coffees, please.	[Drei:numeral] Kaffee, bitte.	[Tres:numeral] cafés, por favor.	[Drie:numeral] koffie, alstublieft.	[Üç:numeral] kahve, lütfen.	You order coffee for yourself and two friends.	
+s.costs-ten	s			numbers		It costs ten euros.	Das kostet [zehn:numeral] Euro.	Cuesta [diez:numeral] euros.	Het kost [tien:numeral] euro.	[On:numeral] euro tutuyor.		
+s.count-to-ten	s			numbers		I can count to ten.	Ich kann bis [zehn:numeral] zählen.	Sé contar hasta [diez:numeral].	Ik kan tot [tien:numeral] tellen.	[Ona:numeral] kadar sayabiliyorum.		
+s.number-twelve	s			numbers		I live at number twelve.	Ich wohne in Nummer [zwölf:numeral].	Vivo en el número [doce:numeral].	Ik woon op nummer [twaalf:numeral].	On [iki:numeral] numarada oturuyorum.		
+s.twenty-minutes	s			numbers		The bus comes in twenty minutes.	Der Bus kommt in [zwanzig:numeral] Minuten.	El autobús viene en [veinte:numeral] minutos.	De bus komt over [twintig:numeral] minuten.	Otobüs [yirmi:numeral] dakika sonra geliyor.		
