@@ -143,6 +143,13 @@ begin
        group by language_code) x),
     'every language has at least 300 texts');
   perform pg_temp.check(not exists (
+    select 1 from concept_translations ct
+    where ct.tokens is not null
+      and (cardinality(ct.folded_tokens) <> cardinality(ct.tokens)
+           or exists (select 1 from unnest(ct.tokens, ct.folded_tokens) u(t, f)
+                      where f is distinct from public.learn_fold(t)))),
+    'folded_tokens hold the fold of every token, in order');
+  perform pg_temp.check(not exists (
     select 1 from content_sources where is_enabled
       and (not commercial_use_allowed or not modification_allowed or share_alike)),
     'no enabled source with an unusable licence');

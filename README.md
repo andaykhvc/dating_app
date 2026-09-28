@@ -57,7 +57,7 @@ npx supabase db push
 
 `supabase/migrations/` runs in filename order: enums, tables by domain, indexes,
 RLS policies, the trusted functions, the shaped read functions, the storage
-bucket, the `999x` fix-ups, and the learning-content engine (`99990`–`99993`,
+bucket, the `999x` fix-ups, and the learning-content engine (`99990`–`99995`,
 numbered so they sort after the fix-ups: the CLI compares versions as strings).
 
 ### 4. Seed the content
