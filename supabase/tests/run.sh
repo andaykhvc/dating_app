@@ -20,6 +20,9 @@ done
 for f in $(ls supabase/seed/*.sql | sort); do
   "${PSQL[@]}" -d "$DB" -1 -f "$f" >/dev/null || { echo "✗ seed $f"; exit 1; }
 done
+# Freshly loaded tables have no planner statistics until autovacuum gets to
+# them, and lesson generation on empty statistics is ~20x slower.
+"${PSQL[@]}" -d "$DB" -c "analyze" >/dev/null
 echo "✓ migrations and seeds applied"
 
 for f in supabase/tests/test_*.sql; do

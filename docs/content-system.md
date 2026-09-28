@@ -91,7 +91,7 @@ gets it.
 
 ## Schema
 
-Migrations `99990`–`99993` (numbered to sort after the existing `999x`
+Migrations `99990`–`99995` (numbered to sort after the existing `999x`
 fix-ups, because the Supabase CLI orders versions as strings).
 
 | Table | Purpose | Client access (RLS) |
@@ -101,7 +101,7 @@ fix-ups, because the Supabase CLI orders versions as strings).
 | `courses` | Which target languages have a published course. | read |
 | `units`, `skills`, `lessons` | Curriculum. `language_code` null = shared; set = language-specific. `is_active` retires rows without breaking progress. | read |
 | `concepts` | Meanings, with kind, POS, CEFR, topic, skill, sense group, English gloss, situation (for "what would you say?"), `is_social`, `status`. | **none** (answer keys) |
-| `concept_translations` | Per-language text, alternatives, tiles, gap index + POS, gender, `status`, `source_id`, `source_external_id`, `source_author`, per-item `license`, generated `folded` column. Unique `(concept_id, language_code)`. | **none** |
+| `concept_translations` | Per-language text, alternatives, tiles, gap index + POS, gender, `status`, `source_id`, `source_external_id`, `source_author`, per-item `license`, generated `folded` and `folded_tokens` columns (accent-folded text and tokens, stored so queries never re-normalise). Unique `(concept_id, language_code)`. | **none** |
 | `lesson_concepts` | Which concepts a lesson draws from. | none |
 | `exercise_templates` | The 13 mechanics; `is_active = false` removes one from every generated lesson. | read |
 | `content_flags` | Learner reports and validator findings. | insert/read own |
@@ -447,14 +447,28 @@ that a shared phrase sent in chat earns XP once.
 
 ## Cost and performance
 
-Measured on the local suite (≈ 850 concepts × 5 languages):
-`get_learn_overview` ≈ 20 ms / 12 KB, `start_lesson` ≈ 60–85 ms / 3–4 KB,
-`answer_lesson_exercise` one small round trip per answer. Nothing loads whole
-datasets client-side; there are no Realtime subscriptions for learning; every
-generation query is bounded by the lesson's concepts or the learner's due items
-and served by the indexes in `99992`. Seed files total ≈ 0.5 MB. At the target
-scale (≈ 1,500 words and 2,000 sentences per language) distractor queries stay
-within a few thousand indexed rows per language.
+Measured on the local suite (≈ 1,100 concepts × 5 languages, A1–B1):
+`get_learn_overview` ≈ 20–30 ms, `start_lesson` ≈ 25–55 ms,
+`start_review` ≈ 20 ms, `answer_lesson_exercise` one small round trip per
+answer. Nothing loads whole datasets client-side; there are no Realtime
+subscriptions for learning. Wrong-answer candidates are ranked over the
+language's pool (a few thousand indexed rows), so generation cost grows with
+the pool, not just the lesson.
+
+What keeps that cheap is the rule that **the hot path never normalises text**.
+`learn_fold()` is a regex-heavy function, so folded text and folded tokens are
+stored (`folded`, `folded_tokens`) and the distractor queries compare stored
+values. Before migration `99995` they re-folded the pool on every call
+(≈ 180,000 calls per lesson); with the `search_path` pinned on the helper, as
+the database linter requires, each of those calls was also expensive, and
+`start_lesson` took ≈ 0.9 s. If you add a query that ranks or filters candidates
+by folded text, use the stored columns.
+
+Fresh loads have no planner statistics until autovacuum runs, and lesson
+generation on missing statistics is ≈ 20× slower. The test runner and
+`scripts/db/deploy.sh` therefore run `ANALYZE` after seeding.
+
+Seed files total ≈ 1.3 MB.
 
 ## Known limitations
 

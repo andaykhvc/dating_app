@@ -97,6 +97,12 @@ if [ "$SEED_COURSE" = "true" ]; then
       psql "$SUPABASE_DB_URL" -X -q -1 -v ON_ERROR_STOP=1 -f "$f" > /dev/null
     fi
   done
+  if [ "$DRY_RUN" != "true" ]; then
+    # Fresh rows have no planner statistics until autovacuum catches up, and
+    # lesson generation on stale statistics is ~20x slower.
+    psql "$SUPABASE_DB_URL" -X -q -v ON_ERROR_STOP=1 \
+      -c "analyze concepts, concept_translations, lesson_concepts, lessons, skills, units" > /dev/null
+  fi
   echo "::endgroup::"
 fi
 
