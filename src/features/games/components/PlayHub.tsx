@@ -13,6 +13,7 @@ import { startGameSession } from "@/features/games/api";
 import { CourseCard, Syllabus } from "@/features/learn/components/CourseOverview";
 import type { LearnOverview } from "@/features/learn/types";
 import type { UserProgress } from "@/types/domain";
+import { LeaderboardLink } from "@/features/progress/components/LeaderboardLink";
 
 type PracticeTemplate = {
   game_template_id: number;
@@ -97,6 +98,7 @@ export function PlayHub({
           </section>
         )}
 
+        <LeaderboardLink />
         <CourseCard overview={learn} />
 
         {daily && (

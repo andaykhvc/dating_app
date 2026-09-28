@@ -145,6 +145,18 @@ jobs:
       - name: Lint the resulting schema
         run: supabase db lint --local --fail-on error
 
+      - name: Test XP rankings and profile access
+        env:
+          PGHOST: 127.0.0.1
+          PGPORT: "54322"
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGDATABASE: postgres
+        run: |
+          command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+          psql -X -q -v ON_ERROR_STOP=1 -f supabase/seed/0001_reference.sql
+          psql -X -q -v ON_ERROR_STOP=1 -f supabase/tests/test_leaderboard.sql
+
       - name: Stop containers
         if: always()
         run: supabase stop --no-backup

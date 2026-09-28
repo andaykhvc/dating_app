@@ -11,6 +11,7 @@ import {
   XPBar,
 } from "@/features/progress/components/ProgressBadges";
 import { ProfilePhotos } from "@/features/profile/ProfilePhotos";
+import { LeaderboardLink } from "@/features/progress/components/LeaderboardLink";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/supabase/queries";
 import {
@@ -166,6 +167,8 @@ export default async function ProfilePage() {
               </dl>
             </Card>
           )}
+
+          <LeaderboardLink />
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
             <Card>
