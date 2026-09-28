@@ -1,0 +1,59 @@
+# Unit B1.2 — Work and ambitions: at work, job hunting, career goals
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- workplace
+boss	w	noun		workplace	office	boss	der Chef | die Chefin	el jefe | la jefa	de baas	patron
+meeting	w	noun		workplace	office	meeting	die Besprechung | das Meeting	la reunión	de vergadering	toplantı
+deadline	w	noun		workplace	office	deadline	die Frist	la fecha límite	de deadline	son tarih
+project	w	noun		workplace	office	project	das Projekt	el proyecto	het project	proje
+email	w	noun		workplace	office	email	die E-Mail	el correo electrónico | el email	de e-mail	e-posta
+good-job	p			workplace	reactions	Good job!	Gut gemacht!	¡Buen trabajo!	Goed gedaan!	Aferin! | İyi iş çıkardın!	A colleague finishes a difficult task.
+keep-me-posted	p			workplace	office	Keep me posted.	Halt mich auf dem Laufenden.	Mantenme informado. | Mantenme informada.	Hou me op de hoogte.	Beni haberdar et.	You ask a colleague to update you on a project's progress.
+on-time	p			workplace	office	on time	pünktlich	a tiempo	op tijd	zamanında
+s.have-meeting-ten	s			workplace		I have a meeting at ten.	Ich habe um zehn eine [Besprechung:noun].	Tengo una [reunión:noun] a las diez.	Ik heb om tien uur een [vergadering:noun].	Saat onda bir [toplantım:noun] var.
+s.finish-project-friday	s			workplace		We need to finish this project by Friday.	Wir müssen dieses [Projekt:noun] bis Freitag fertigstellen.	Tenemos que terminar este [proyecto:noun] antes del viernes.	We moeten dit [project:noun] voor vrijdag afmaken.	Bu [projeyi:noun] cumaya kadar bitirmemiz gerekiyor.
+s.deadline-tomorrow	s			workplace		The deadline is tomorrow.	Die [Frist:noun] ist morgen.	La fecha [límite:noun] es mañana.	De [deadline:noun] is morgen.	Son [tarih:noun] yarın.
+s.working-remotely-today	s			workplace		I usually work from home on Fridays.	Ich arbeite freitags meistens im [Homeoffice:noun].	Normalmente [trabajo:verb] desde casa los viernes.	Ik werk vrijdags meestal [thuis:adverb].	Cuma günleri genelde evden [çalışırım:verb].
+s.busy-week-work	s			workplace		This week has been really busy at work.	Diese Woche war wirklich [stressig:adjective] auf der Arbeit.	Esta semana ha sido muy [ocupada:adjective] en el trabajo.	Deze week was echt [druk:adjective] op het werk.	Bu hafta işte gerçekten [yoğundu:adjective].
+s.get-promoted-month	s			workplace		She got promoted last month.	Sie wurde letzten Monat [befördert:verb].	La [ascendieron:verb] el mes pasado.	Ze is vorige maand [gepromoveerd:verb].	Geçen ay [terfi:noun] aldı.
+s.stressed-lately	s			workplace		I've been quite stressed at work lately.	Ich war in letzter Zeit ziemlich [gestresst:adjective] auf der Arbeit.	Últimamente he estado bastante [estresado:adjective] en el trabajo. | Últimamente he estado bastante estresada en el trabajo.	Ik ben de laatste tijd nogal [gestrest:adjective] op het werk.	Son zamanlarda işte oldukça [stresliyim:adjective].
+s.enjoy-my-job	s			workplace		I really enjoy my job.	Meine Arbeit macht mir wirklich [Spaß:noun].	Realmente [disfruto:verb] mi trabajo.	Ik [geniet:verb] echt van mijn werk.	İşimi gerçekten [seviyorum:verb].		social
+s.team-new-project	s			workplace		Our team is working on a new project.	Unser [Team:noun] arbeitet an einem neuen Projekt.	Nuestro [equipo:noun] está trabajando en un proyecto nuevo.	Ons [team:noun] werkt aan een nieuw project.	[Takımımız:noun] yeni bir proje üzerinde çalışıyor.
+# ---- job-hunting
+cv	w	noun		job-hunting	careers	CV	der Lebenslauf	el currículum | el CV	het cv	özgeçmiş
+interview	w	noun		job-hunting	careers	interview	das Vorstellungsgespräch	la entrevista	het sollicitatiegesprek	iş görüşmesi
+to-apply	w	verb		job-hunting	careers	to apply	sich bewerben	postularse | solicitar	solliciteren	başvurmak
+experience	w	noun		job-hunting	careers	experience	die Erfahrung	la experiencia	de ervaring	deneyim
+skill	w	noun		job-hunting	careers	skill	die Fähigkeit	la habilidad	de vaardigheid	yetenek | beceri
+salary	w	noun		job-hunting	careers	salary	das Gehalt	el salario | el sueldo	het salaris	maaş
+to-hire	w	verb		job-hunting	careers	to hire	einstellen	contratar	aannemen	işe almak
+years-of-experience	p			job-hunting	careers	years of experience	Jahre Erfahrung	años de experiencia	jaar ervaring	yıllık deneyim
+full-time	p			job-hunting	careers	full-time	Vollzeit	a tiempo completo	voltijd	tam zamanlı
+job-offer	p			job-hunting	careers	job offer	das Jobangebot	la oferta de trabajo	het baanaanbod	iş teklifi
+s.applying-job	s			job-hunting		I'm applying for a new job.	Ich [bewerbe:verb] mich auf eine neue Stelle.	Estoy [solicitando:verb] un nuevo trabajo.	Ik [solliciteer:verb] naar een nieuwe baan.	Yeni bir işe [başvuruyorum:verb].
+s.interview-tomorrow	s			job-hunting		I have a job interview tomorrow.	Ich habe morgen ein [Vorstellungsgespräch:noun].	Mañana tengo una [entrevista:noun] de trabajo.	Ik heb morgen een [sollicitatiegesprek:noun].	Yarın bir iş [görüşmem:noun] var.
+s.nervous-interview	s			job-hunting		I'm a bit nervous about the interview.	Ich bin ein bisschen [nervös:adjective] wegen des Gesprächs.	Estoy un poco [nervioso:adjective] por la entrevista. | Estoy un poco nerviosa por la entrevista.	Ik ben een beetje [nerveus:adjective] voor het gesprek.	Görüşme için biraz [gerginim:adjective].		social
+s.five-years-experience	s			job-hunting		I have five years of experience in marketing.	Ich habe fünf [Jahre:noun] Erfahrung im Marketing.	Tengo cinco [años:noun] de experiencia en marketing.	Ik heb vijf [jaar:noun] ervaring in marketing.	Pazarlamada beş yıllık [deneyimim:noun] var.
+s.update-cv	s			job-hunting		I need to update my CV.	Ich muss meinen [Lebenslauf:noun] aktualisieren.	Tengo que actualizar mi [currículum:noun].	Ik moet mijn [cv:noun] bijwerken.	[Özgeçmişimi:noun] güncellemem gerekiyor.
+s.got-job-offer	s			job-hunting		I got a job offer this week!	Ich habe diese Woche ein [Jobangebot:noun] bekommen!	¡Esta semana recibí una oferta de [trabajo:noun]!	Ik kreeg deze week een [baanaanbod:noun]!	Bu hafta bir iş [teklifi:noun] aldım!		social
+s.good-salary	s			job-hunting		The salary is quite good.	Das [Gehalt:noun] ist ziemlich gut.	El [salario:noun] es bastante bueno.	Het [salaris:noun] is best goed.	[Maaş:noun] oldukça iyi.
+s.hire-new-person	s			job-hunting		The company wants to hire a new person.	Die Firma möchte eine neue Person [einstellen:verb].	La empresa quiere [contratar:verb] a una persona nueva.	Het bedrijf wil een nieuwe persoon [aannemen:verb].	Şirket yeni biri işe [almak:verb] istiyor.
+s.what-skills	s			job-hunting		What skills do you need for this job?	Welche [Fähigkeiten:noun] braucht man für diesen Job?	¿Qué [habilidades:noun] se necesitan para este trabajo?	Welke [vaardigheden:noun] heb je nodig voor deze baan?	Bu iş için hangi [yetenekler:noun] gerekiyor?
+# ---- career-goals
+goal	w	noun		career-goals	career	goal	das Ziel	la meta | el objetivo	het doel	hedef
+opportunity	w	noun		career-goals	career	opportunity	die Gelegenheit | die Chance	la oportunidad	de kans	fırsat
+to-improve	w	verb		career-goals	career	to improve	verbessern	mejorar	verbeteren	geliştirmek
+ambitious	w	adjective		career-goals	career	ambitious	ehrgeizig	ambicioso | ambiciosa	ambitieus	hırslı
+achievement	w	noun		career-goals	career	achievement	der Erfolg	el logro	de prestatie	başarı
+career-path	p			career-goals	career	career path	der Karriereweg	la trayectoria profesional	het carrièrepad	kariyer yolu
+step-by-step	p			career-goals	career	step by step	Schritt für Schritt	paso a paso	stap voor stap	adım adım
+dream-job	p			career-goals	career	dream job	der Traumjob	el trabajo soñado	de droombaan	hayalindeki iş
+s.career-goal-five-years	s			career-goals		Where do you see yourself in five years?	Wo siehst du dich in fünf [Jahren:noun]?	¿Dónde te ves en cinco [años:noun]?	Waar zie je jezelf over vijf [jaar:noun]?	Beş yıl sonra kendini nerede [görüyorsun:verb]?		social
+s.my-goal-this-year	s			career-goals		My goal this year is to learn German.	Mein [Ziel:noun] dieses Jahr ist, Deutsch zu lernen.	Mi [meta:noun] este año es aprender alemán.	Mijn [doel:noun] dit jaar is Duits leren.	Bu yılki [hedefim:noun] Almanca öğrenmek.		social
+s.great-opportunity	s			career-goals		This job is a great opportunity for me.	Dieser Job ist eine großartige [Gelegenheit:noun] für mich.	Este trabajo es una gran [oportunidad:noun] para mí.	Deze baan is een geweldige [kans:noun] voor mij.	Bu iş benim için harika bir [fırsat:noun].
+s.want-to-improve	s			career-goals		I want to improve my English.	Ich möchte mein Englisch [verbessern:verb].	Quiero [mejorar:verb] mi inglés.	Ik wil mijn Engels [verbeteren:verb].	İngilizcemi [geliştirmek:verb] istiyorum.		social
+s.ambitious-person	s			career-goals		She's a very ambitious person.	Sie ist eine sehr [ehrgeizige:adjective] Person.	Es una persona muy [ambiciosa:adjective].	Ze is een erg [ambitieuze:adjective] persoon.	Çok [hırslı:adjective] bir insan.
+s.proud-achievement	s			career-goals		I'm really proud of this achievement.	Ich bin wirklich stolz auf diesen [Erfolg:noun].	Estoy muy orgulloso de este [logro:noun]. | Estoy muy orgullosa de este logro.	Ik ben echt trots op deze [prestatie:noun].	Bu [başarıyla:noun] gerçekten gurur duyuyorum.
+s.step-by-step-plan	s			career-goals		Let's take it step by step.	Lass uns das [Schritt:noun] für Schritt machen.	Vamos [paso:noun] a paso.	Laten we het [stap:noun] voor stap doen.	[Adım:noun] adım ilerleyelim.
+s.changing-career	s			career-goals		I'm thinking about changing my career.	Ich denke darüber nach, meine [Karriere:noun] zu wechseln.	Estoy pensando en cambiar de [carrera:noun].	Ik denk erover om van [carrière:noun] te veranderen.	[Kariyerimi:noun] değiştirmeyi düşünüyorum.		social
+s.dream-job-someday	s			career-goals		I hope to find my dream job someday.	Ich hoffe, eines Tages meinen [Traumjob:noun] zu finden.	Espero encontrar el trabajo de mis [sueños:noun] algún día.	Ik hoop ooit mijn [droombaan:noun] te vinden.	Umarım bir gün [hayalimdeki:adjective] işi bulurum.		social

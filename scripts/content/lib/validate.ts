@@ -11,6 +11,7 @@ import { fold, norm } from "./text.ts";
 export const LIMITS = {
   A1: { maxTokens: 9, maxChars: 60 },
   A2: { maxTokens: 12, maxChars: 90 },
+  B1: { maxTokens: 16, maxChars: 120 },
   word: { maxTokens: 4, maxChars: 40 },
 } as const;
 
@@ -65,7 +66,7 @@ export function validate(model: Model, blocklist: Record<string, string[]> = {})
     if (!/^[a-z0-9][a-z0-9_.-]*$/.test(c.key)) err("bad-key", `Concept key "${c.key}" must be lower-case a-z, 0-9, _ . -`, where);
     if (!skills.has(c.skill)) err("unknown-skill", `Concept "${c.key}" names unknown skill "${c.skill}"`, where);
     if (!CEFR.includes(c.cefr)) err("bad-cefr", `Concept "${c.key}" has CEFR "${c.cefr}"`, where);
-    if (c.cefr !== "A1" && c.cefr !== "A2") warn("beyond-a2", `Concept "${c.key}" is ${c.cefr}; this course targets A1–A2`, where);
+    if (c.cefr !== "A1" && c.cefr !== "A2" && c.cefr !== "B1") warn("beyond-b1", `Concept "${c.key}" is ${c.cefr}; this course targets A1–B1`, where);
     if (c.pos && !(POS as readonly string[]).includes(c.pos)) err("bad-pos", `Concept "${c.key}" has part of speech "${c.pos}"`, where);
     if (c.kind === "word" && !c.pos) err("missing-pos", `Word "${c.key}" needs a part of speech (distractors depend on it)`, where);
     if (!sourceIds.has(c.source)) err("unknown-source", `Concept "${c.key}" cites unknown source "${c.source}"`, where);
@@ -137,7 +138,7 @@ function checkText(
   }
 
   if (kind === "sentence") {
-    const limit = cefr === "A1" ? LIMITS.A1 : LIMITS.A2;
+    const limit = cefr === "A1" ? LIMITS.A1 : cefr === "A2" ? LIMITS.A2 : LIMITS.B1;
     if (t.tokens.length > limit.maxTokens) err("too-long", `${label} has ${t.tokens.length} words (max ${limit.maxTokens} at ${cefr})`, where);
     if (text.length > limit.maxChars) err("too-long", `${label} has ${text.length} characters (max ${limit.maxChars} at ${cefr})`, where);
     if (!/[.!?…]["»)]?$/.test(text)) err("no-final-punctuation", `${label} must end with . ! or ?`, where);

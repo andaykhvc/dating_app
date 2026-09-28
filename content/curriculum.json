@@ -134,6 +134,51 @@
         { "key": "opinions", "title": "Opinions", "description": "I think, I agree, in my opinion.", "icon": "💬" },
         { "key": "chatting", "title": "Keeping the chat going", "description": "Questions that start real conversations.", "icon": "📱" }
       ]
+    },
+    {
+      "key": "b1-opinions-debate", "cefr": "B1", "title": "Opinions and debate",
+      "description": "Comparing things, agreeing or not, and explaining why.",
+      "skills": [
+        { "key": "comparing", "title": "Comparing", "description": "Better, worse, more than, the most.", "icon": "⚖️" },
+        { "key": "agreeing-disagreeing", "title": "Agreeing and disagreeing", "description": "Making your point without an argument.", "icon": "🗯️" },
+        { "key": "giving-reasons", "title": "Giving reasons", "description": "Because, so, although, that's why.", "icon": "🧩" }
+      ]
+    },
+    {
+      "key": "b1-work-ambitions", "cefr": "B1", "title": "Work and ambitions",
+      "description": "Talking about your job, applying for one, and where you're headed.",
+      "skills": [
+        { "key": "workplace", "title": "At work", "description": "Colleagues, meetings and deadlines.", "icon": "🏢" },
+        { "key": "job-hunting", "title": "Job hunting", "description": "CVs, interviews and applications.", "icon": "📋" },
+        { "key": "career-goals", "title": "Career goals", "description": "Experience, plans and what's next.", "icon": "🎯" }
+      ]
+    },
+    {
+      "key": "b1-technology-life", "cefr": "B1", "title": "Technology and daily life",
+      "description": "Apps, messaging and life online.",
+      "skills": [
+        { "key": "devices-apps", "title": "Devices and apps", "description": "Phones, apps and everyday tech trouble.", "icon": "📱" },
+        { "key": "online-communication", "title": "Online communication", "description": "Profiles, notifications and video calls.", "icon": "💻" },
+        { "key": "social-media", "title": "Social media", "description": "Posting, sharing and staying in touch.", "icon": "📸" }
+      ]
+    },
+    {
+      "key": "b1-wellbeing-world", "cefr": "B1", "title": "Wellbeing and the world",
+      "description": "Looking after yourself and talking about the bigger picture.",
+      "skills": [
+        { "key": "health-lifestyle", "title": "Health and lifestyle", "description": "Habits, stress and staying well.", "icon": "🧘" },
+        { "key": "environment-society", "title": "Environment and society", "description": "Climate, recycling and the news.", "icon": "🌍" },
+        { "key": "culture-differences", "title": "Culture and differences", "description": "Customs, traditions and comparing places.", "icon": "🎭" }
+      ]
+    },
+    {
+      "key": "b1-future-adventures", "cefr": "B1", "title": "Future and adventures",
+      "description": "Plans, dreams and what you'd do if you could.",
+      "skills": [
+        { "key": "future-plans", "title": "Future plans", "description": "Goals, intentions and what's next.", "icon": "🔭" },
+        { "key": "conditionals-dreams", "title": "Dreams and possibilities", "description": "If I could, I would...", "icon": "💭" },
+        { "key": "travel-adventures", "title": "Travel and adventures", "description": "Trips, experiences and stories worth telling.", "icon": "🗺️" }
+      ]
     }
   ]
 }

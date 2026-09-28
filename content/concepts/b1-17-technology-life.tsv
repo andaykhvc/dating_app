@@ -1,0 +1,63 @@
+# Unit B1.3 — Technology and daily life: devices and apps, online communication, social media
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- devices-apps
+app	w	noun		devices-apps	tech	app	die App	la aplicación | la app	de app	uygulama
+password	w	noun		devices-apps	tech	password	das Passwort	la contraseña	het wachtwoord	şifre
+to-download	w	verb		devices-apps	tech	to download	herunterladen	descargar	downloaden	indirmek
+battery	w	noun		devices-apps	tech	battery	der Akku	la batería	de batterij	pil | batarya
+screen	w	noun		devices-apps	tech	screen	der Bildschirm	la pantalla	het scherm	ekran
+to-charge	w	verb		devices-apps	tech	to charge	aufladen	cargar	opladen	şarj etmek
+to-update	w	verb		devices-apps	tech	to update	aktualisieren	actualizar	updaten | bijwerken	güncellemek
+low-battery	p			devices-apps	tech	low battery	wenig Akku	poca batería	bijna leeg	az pil
+its-not-working	p			devices-apps	tech	It's not working.	Es funktioniert nicht.	No funciona.	Het werkt niet.	Çalışmıyor.	You try to open an app and nothing happens.
+to-restart	p			devices-apps	tech	to restart	neu starten	reiniciar	herstarten	yeniden başlatmak
+s.phone-battery-dead	s			devices-apps		My battery always dies at the worst moment.	Mein Akku geht immer im schlechtesten [Moment:noun] leer.	Mi batería siempre se acaba en el peor [momento:noun].	Mijn batterij is altijd leeg op het slechtste [moment:noun].	Pilim hep en kötü [anda:noun] bitiyor.
+s.forgot-password	s			devices-apps		I forgot my password again.	Ich habe mein [Passwort:noun] wieder vergessen.	Se me olvidó otra vez la [contraseña:noun].	Ik ben mijn [wachtwoord:noun] weer vergeten.	[Şifremi:noun] yine unuttum.
+s.download-this-app	s			devices-apps		Can you download this app?	Kannst du diese [App:noun] herunterladen?	¿Puedes descargar esta [aplicación:noun]?	Kun je deze [app:noun] downloaden?	Bu [uygulamayı:noun] indirebilir misin?		social
+s.screen-broken	s			devices-apps		My screen is broken.	Mein [Bildschirm:noun] ist kaputt.	Mi [pantalla:noun] está rota.	Mijn [scherm:noun] is kapot.	[Ekranım:noun] kırık.
+s.charging-phone	s			devices-apps		I'm charging my phone.	Ich lade mein Handy [auf:adverb].	Estoy [cargando:verb] el móvil.	Ik [laad:verb] mijn telefoon op.	Telefonumu [şarj:noun] ediyorum.
+s.app-not-working	s			devices-apps		This app isn't working properly.	Diese App funktioniert nicht [richtig:adverb].	Esta aplicación no funciona [bien:adverb].	Deze app werkt niet [goed:adverb].	Bu uygulama düzgün [çalışmıyor:verb].
+s.need-update	s			devices-apps		You need to update the app.	Du musst die App [aktualisieren:verb].	Tienes que [actualizar:verb] la aplicación.	Je moet de app [updaten:verb].	Uygulamayı [güncellemen:verb] gerekiyor.
+s.which-apps-use	s			devices-apps		Which apps do you use most?	Welche Apps [benutzt:verb] du am meisten?	¿Qué aplicaciones [usas:verb] más?	Welke apps [gebruik:verb] jij het meest?	En çok hangi uygulamaları [kullanıyorsun:verb]?		social
+s.restart-phone	s			devices-apps		Try restarting your phone.	Versuch, dein Handy neu zu [starten:verb].	Intenta [reiniciar:verb] tu móvil.	Probeer je telefoon te [herstarten:verb].	Telefonunu yeniden [başlatmayı:verb] dene.
+# ---- online-communication
+profile	w	noun		online-communication	communication-online	profile	das Profil	el perfil	het profiel	profil
+notification	w	noun		online-communication	communication-online	notification	die Benachrichtigung	la notificación	de melding	bildirim
+to-block	w	verb		online-communication	communication-online	to block	blockieren	bloquear	blokkeren	engellemek
+connection	w	noun		online-communication	communication-online	connection	die Verbindung	la conexión	de verbinding	bağlantı
+microphone	w	noun		online-communication	communication-online	microphone	das Mikrofon	el micrófono	de microfoon	mikrofon
+camera	w	noun		online-communication	communication-online	camera	die Kamera	la cámara	de camera	kamera
+to-mute	w	verb		online-communication	communication-online	to mute	stummschalten	silenciar	dempen	sessize almak
+missed-call	p			online-communication	communication-online	missed call	der verpasste Anruf	la llamada perdida	de gemiste oproep	cevapsız arama
+no-signal	p			online-communication	communication-online	no signal	kein Empfang	sin señal	geen bereik	sinyal yok
+to-be-online	p			online-communication	communication-online	to be online	online sein	estar en línea	online zijn	çevrimiçi olmak
+s.update-profile-picture	s			online-communication		I need to update my profile picture.	Ich muss mein [Profilbild:noun] aktualisieren.	Tengo que actualizar mi foto de [perfil:noun].	Ik moet mijn [profielfoto:noun] bijwerken.	[Profil:noun] fotoğrafımı güncellemem gerekiyor.
+s.turned-off-notifications	s			online-communication		I turned off notifications for that app.	Ich habe die [Benachrichtigungen:noun] für diese App ausgeschaltet.	Desactivé las [notificaciones:noun] de esa aplicación.	Ik heb de [meldingen:noun] van die app uitgezet.	O uygulamanın [bildirimlerini:noun] kapattım.
+s.bad-connection	s			online-communication		Sorry, I have a bad connection.	Entschuldigung, ich habe eine schlechte [Verbindung:noun].	Perdón, tengo mala [conexión:noun].	Sorry, ik heb een slechte [verbinding:noun].	Üzgünüm, [bağlantım:noun] kötü.		social
+s.camera-not-working	s			online-communication		My camera isn't working.	Meine [Kamera:noun] funktioniert nicht.	Mi [cámara:noun] no funciona.	Mijn [camera:noun] werkt niet.	[Kameram:noun] çalışmıyor.
+s.mute-microphone	s			online-communication		Can you mute your microphone, please?	Kannst du dein [Mikrofon:noun] bitte stummschalten?	¿Puedes silenciar tu [micrófono:noun], por favor?	Kun je je [microfoon:noun] alsjeblieft dempen?	[Mikrofonunu:noun] kapatabilir misin lütfen?
+s.block-number	s			online-communication		I blocked that number.	Ich habe die Nummer [blockiert:verb].	[Bloqueé:verb] ese número.	Ik heb dat nummer [geblokkeerd:verb].	O numarayı [engelledim:verb].
+s.missed-your-call	s			online-communication		Sorry, I missed your call.	Entschuldigung, ich habe deinen Anruf [verpasst:verb].	Perdón, [perdí:verb] tu llamada.	Sorry, ik heb je oproep [gemist:verb].	Üzgünüm, aramanı [kaçırdım:verb].		social
+s.prefer-texting	s			online-communication		I prefer texting to calling.	Ich schreibe lieber, als zu [telefonieren:verb].	Prefiero escribir a [llamar:verb].	Ik app liever dan te [bellen:verb].	Aramaktansa yazışmayı [tercih:noun] ederim.		social
+s.can-we-video-call	s			online-communication		Can we video call later tonight?	Können wir heute Abend später einen [Videoanruf:noun] machen?	¿Podemos hacer una [videollamada:noun] más tarde esta noche?	Kunnen we vanavond later [videobellen:verb]?	Bu akşam daha sonra görüntülü [arama:noun] yapabilir miyiz?		social
+# ---- social-media
+to-post	w	verb		social-media	social-media	to post	posten | veröffentlichen	publicar	posten	yayınlamak
+to-share	w	verb		social-media	social-media	to share	teilen	compartir	delen	paylaşmak
+follower	w	noun		social-media	social-media	follower	der Follower	el seguidor | la seguidora	de volger	takipçi
+comment	w	noun		social-media	social-media	comment	der Kommentar	el comentario	de reactie	yorum
+to-upload	w	verb		social-media	social-media	to upload	hochladen	subir	uploaden	yüklemek
+hashtag	w	noun		social-media	social-media	hashtag	der Hashtag	el hashtag	de hashtag	hashtag
+story	w	noun		social-media	social-media	story	die Story	la historia	de story	hikaye		gloss=story (social media post)
+to-go-viral	p			social-media	social-media	to go viral	viral gehen	hacerse viral	viral gaan	viral olmak
+to-tag-someone	p			social-media	social-media	to tag someone	jemanden markieren	etiquetar a alguien	iemand taggen	birini etiketlemek
+public-account	p			social-media	social-media	public account	das öffentliche Konto	la cuenta pública	het openbare account	herkese açık hesap
+s.posted-photo	s			social-media		I posted a new photo today.	Ich habe heute ein neues Foto [gepostet:verb].	Hoy [publiqué:verb] una foto nueva.	Ik heb vandaag een nieuwe foto [gepost:verb].	Bugün yeni bir fotoğraf [yayınladım:verb].		social
+s.share-this-funny	s			social-media		I have to share this, it's so funny.	Das muss ich [teilen:verb], es ist so lustig.	Tengo que [compartir:verb] esto, es muy gracioso.	Dit moet ik [delen:verb], het is zo grappig.	Bunu [paylaşmalıyım:verb], çok komik.		social
+s.many-followers	s			social-media		She has a lot of followers.	Sie hat viele [Follower:noun].	Tiene muchos [seguidores:noun].	Ze heeft veel [volgers:noun].	Çok fazla [takipçisi:noun] var.
+s.leave-comment	s			social-media		Leave a comment if you like it.	Hinterlasse einen [Kommentar:noun], wenn es dir gefällt.	Deja un [comentario:noun] si te gusta.	Laat een [reactie:noun] achter als je het leuk vindt.	Beğenirsen [yorum:noun] bırak.
+s.upload-video	s			social-media		I'm going to upload this video tonight.	Ich werde dieses Video heute Abend [hochladen:verb].	Voy a [subir:verb] este vídeo esta noche.	Ik ga deze video vanavond [uploaden:verb].	Bu videoyu bu akşam [yükleyeceğim:verb].
+s.use-hashtags	s			social-media		Do you use hashtags on your posts?	Benutzt du [Hashtags:noun] bei deinen Beiträgen?	¿Usas [hashtags:noun] en tus publicaciones?	Gebruik jij [hashtags:noun] bij je posts?	Paylaşımlarında [hashtag:noun] kullanıyor musun?		social
+s.saw-your-story	s			social-media		I saw your story from the concert.	Ich habe deine [Story:noun] vom Konzert gesehen.	Vi tu [historia:noun] del concierto.	Ik zag je [story:noun] van het concert.	Konserden [hikayeni:noun] gördüm.		social
+s.too-much-time-social	s			social-media		I spend too much time on social media.	Ich verbringe zu viel [Zeit:noun] in sozialen Medien.	Paso demasiado [tiempo:noun] en las redes sociales.	Ik besteed te veel [tijd:noun] aan sociale media.	Sosyal medyada çok fazla [zaman:noun] geçiriyorum.		social
+s.video-went-viral	s			social-media		This video went viral last week.	Dieses Video ist letzte Woche [viral:adjective] gegangen.	Este vídeo se hizo [viral:adjective] la semana pasada.	Deze video ging vorige week [viral:adjective].	Bu video geçen hafta [viral:adjective] oldu.

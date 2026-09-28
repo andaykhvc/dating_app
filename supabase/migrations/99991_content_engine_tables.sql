@@ -1,6 +1,6 @@
 -- 99991_content_engine_tables.sql
 -- The language-learning content engine: provenance, language-agnostic
--- concepts, the A1–A2 curriculum, and per-user learning state.
+-- concepts, the A1–B1 curriculum, and per-user learning state.
 --
 -- Shape in one paragraph: a *concept* is one meaning ("coffee", "What music do
 -- you like?"). It is realised once per language in *concept_translations*. The
