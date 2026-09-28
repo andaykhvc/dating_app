@@ -1,0 +1,60 @@
+# Unit B1.4 — Wellbeing and the world: health and lifestyle, environment and society, culture and differences
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- health-lifestyle
+habit	w	noun		health-lifestyle	wellbeing	habit	die Gewohnheit	el hábito	de gewoonte	alışkanlık
+to-exercise	w	verb		health-lifestyle	wellbeing	to exercise	Sport treiben | trainieren	hacer ejercicio	sporten	spor yapmak
+balance	w	noun		health-lifestyle	wellbeing	balance	das Gleichgewicht	el equilibrio	de balans	denge
+motivation	w	noun		health-lifestyle	wellbeing	motivation	die Motivation	la motivación	de motivatie	motivasyon
+to-unwind	w	verb		health-lifestyle	wellbeing	to unwind	zur Ruhe kommen	desconectar	tot rust komen	kafa dinlemek
+junk-food	w	noun		health-lifestyle	wellbeing	junk food	das Junkfood	la comida basura	junkfood	abur cubur
+work-life-balance	p			health-lifestyle	wellbeing	work-life balance	die Work-Life-Balance	el equilibrio entre trabajo y vida personal	de werk-privébalans	iş-yaşam dengesi
+to-take-care-of-yourself	p			health-lifestyle	wellbeing	to take care of yourself	auf sich aufpassen	cuidarse	goed voor jezelf zorgen	kendine iyi bakmak
+burned-out	p			health-lifestyle	wellbeing	burned out	ausgebrannt	quemado | quemada	opgebrand	tükenmiş
+s.good-habit	s			health-lifestyle		I'm trying to build a good habit.	Ich versuche, eine gute [Gewohnheit:noun] aufzubauen.	Estoy intentando crear un buen [hábito:noun].	Ik probeer een goede [gewoonte:noun] op te bouwen.	İyi bir [alışkanlık:noun] edinmeye çalışıyorum.		social
+s.exercise-three-times	s			health-lifestyle		I try to exercise three times a week.	Ich versuche, dreimal die Woche Sport zu [treiben:verb].	Intento [hacer:verb] ejercicio tres veces por semana.	Ik probeer drie keer per week te [sporten:verb].	Haftada üç kez spor [yapmaya:verb] çalışıyorum.		social
+s.work-life-balance-hard	s			health-lifestyle		It's hard to find a good work-life balance.	Es ist schwer, ein gutes [Gleichgewicht:noun] zu finden.	Es difícil encontrar un buen [equilibrio:noun].	Het is moeilijk om een goede [balans:noun] te vinden.	İyi bir [denge:noun] bulmak zor.
+s.lost-motivation	s			health-lifestyle		I've lost my motivation to go to the gym.	Ich habe meine [Motivation:noun] fürs Fitnessstudio verloren.	He perdido la [motivación:noun] para ir al gimnasio.	Ik ben mijn [motivatie:noun] voor de sportschool kwijt.	Spor salonuna gitme [motivasyonumu:noun] kaybettim.
+s.need-to-unwind	s			health-lifestyle		I really need to unwind after work.	Ich muss nach der Arbeit wirklich zur [Ruhe:noun] kommen.	Necesito [desconectar:verb] después del trabajo.	Ik moet echt tot [rust:noun] komen na het werk.	İşten sonra gerçekten kafa [dinlemem:verb] gerekiyor.
+s.eating-too-junk	s			health-lifestyle		I've been eating too much junk food lately.	Ich habe in letzter Zeit zu viel [Junkfood:noun] gegessen.	Últimamente he comido demasiada comida [basura:noun].	Ik heb de laatste tijd te veel [junkfood:noun] gegeten.	Son zamanlarda çok fazla abur cubur [yedim:verb].
+s.take-care-yourself	s			health-lifestyle		Please take care of yourself.	Bitte pass auf [dich:pronoun] auf.	Por favor, [cuídate:verb].	Zorg alsjeblieft goed voor [jezelf:pronoun].	Lütfen kendine iyi [bak:verb].		social
+s.feeling-burned-out	s			health-lifestyle		I've been feeling a bit burned out.	Ich fühle mich in letzter Zeit etwas [ausgebrannt:adjective].	Últimamente me he sentido un poco [quemado:adjective]. | Últimamente me he sentido un poco quemada.	Ik voel me de laatste tijd wat [opgebrand:adjective].	Son zamanlarda biraz [tükenmiş:adjective] hissediyorum.		social
+s.sleep-well-lately	s			health-lifestyle		I haven't been sleeping well lately.	Ich habe in letzter Zeit nicht gut [geschlafen:verb].	Últimamente no he [dormido:verb] bien.	Ik heb de laatste tijd niet goed [geslapen:verb].	Son zamanlarda iyi [uyuyamadım:verb].
+# ---- environment-society
+climate	w	noun		environment-society	environment	climate	das Klima	el clima	het klimaat	iklim
+to-recycle	w	verb		environment-society	environment	to recycle	recyceln	reciclar	recyclen	geri dönüştürmek
+plastic	w	noun		environment-society	environment	plastic	das Plastik	el plástico	het plastic	plastik
+environment	w	noun		environment-society	environment	environment	die Umwelt	el medio ambiente	het milieu	çevre
+pollution	w	noun		environment-society	environment	pollution	die Verschmutzung	la contaminación	de vervuiling	kirlilik
+solution	w	noun		environment-society	environment	solution	die Lösung	la solución	de oplossing	çözüm
+climate-change	p			environment-society	environment	climate change	der Klimawandel	el cambio climático	de klimaatverandering	iklim değişikliği
+renewable-energy	p			environment-society	environment	renewable energy	erneuerbare Energie	la energía renovable	hernieuwbare energie	yenilenebilir enerji
+public-transport	p			environment-society	environment	public transport	öffentliche Verkehrsmittel	el transporte público	het openbaar vervoer	toplu taşıma
+s.recycle-everything	s			environment-society		We try to recycle everything at home.	Wir versuchen, zu Hause alles zu [recyceln:verb].	Intentamos [reciclar:verb] todo en casa.	We proberen thuis alles te [recyclen:verb].	Evde her şeyi geri [dönüştürmeye:verb] çalışıyoruz.		social
+s.worried-climate	s			environment-society		I'm worried about climate change.	Ich mache mir Sorgen um den [Klimawandel:noun].	Me preocupa el cambio [climático:adjective].	Ik maak me zorgen om de [klimaatverandering:noun].	[İklim:noun] değişikliği konusunda endişeliyim.		social
+s.avoid-plastic	s			environment-society		I try to avoid single-use plastic.	Ich versuche, Einwegplastik zu [vermeiden:verb].	Intento evitar el [plástico:noun] de un solo uso.	Ik probeer wegwerpplastic te [vermijden:verb].	Tek kullanımlık [plastikten:noun] kaçınmaya çalışıyorum.
+s.take-public-transport	s			environment-society		I take public transport instead of driving.	Ich nutze öffentliche [Verkehrsmittel:noun] statt Auto zu fahren.	Uso el transporte [público:adjective] en vez de conducir.	Ik neem het openbaar [vervoer:noun] in plaats van te rijden.	Araba yerine toplu [taşıma:noun] kullanıyorum.		social
+s.bad-for-environment	s			environment-society		Plastic bags are bad for the environment.	Plastiktüten sind schlecht für die [Umwelt:noun].	Las bolsas de plástico son malas para el medio [ambiente:noun].	Plastic tassen zijn slecht voor het [milieu:noun].	Plastik torbalar [çevre:noun] için kötü.
+s.air-pollution-city	s			environment-society		Air pollution is a big problem in this city.	Luftverschmutzung ist ein großes Problem in dieser [Stadt:noun].	La contaminación del aire es un gran problema en esta [ciudad:noun].	Luchtvervuiling is een groot probleem in deze [stad:noun].	Hava [kirliliği:noun] bu şehirde büyük bir sorun.
+s.solar-energy-solution	s			environment-society		Solar energy could be part of the solution.	Solarenergie könnte Teil der [Lösung:noun] sein.	La energía solar podría ser parte de la [solución:noun].	Zonne-energie zou deel van de [oplossing:noun] kunnen zijn.	Güneş enerjisi [çözümün:noun] bir parçası olabilir.
+s.what-do-think-environment	s			environment-society		What do you think we can do for the environment?	Was denkst du, können wir für die [Umwelt:noun] tun?	¿Qué crees que podemos hacer por el medio [ambiente:noun]?	Wat denk je dat we voor het [milieu:noun] kunnen doen?	[Çevre:noun] için ne yapabiliriz sence?		social
+s.switching-renewable	s			environment-society		More countries are switching to renewable energy.	Immer mehr Länder wechseln zu erneuerbarer [Energie:noun].	Cada vez más países cambian a energía [renovable:adjective].	Steeds meer landen stappen over op hernieuwbare [energie:noun].	Daha çok ülke yenilenebilir [enerjiye:noun] geçiyor.
+# ---- culture-differences
+custom	w	noun		culture-differences	culture	custom	die Sitte | der Brauch	la costumbre	het gebruik	adet
+tradition	w	noun		culture-differences	culture	tradition	die Tradition	la tradición	de traditie	gelenek
+typical	w	adjective		culture-differences	culture	typical	typisch	típico | típica	typisch	tipik
+surprising	w	adjective		culture-differences	culture	surprising	überraschend	sorprendente	verrassend	şaşırtıcı
+foreigner	w	noun		culture-differences	culture	foreigner	der Ausländer | die Ausländerin	el extranjero | la extranjera	de buitenlander	yabancı
+to-get-used-to	w	verb		culture-differences	culture	to get used to	sich gewöhnen an	acostumbrarse a	wennen aan	alışmak
+culture-shock	p			culture-differences	culture	culture shock	der Kulturschock	el choque cultural	de cultuurschok	kültür şoku
+it-depends-country	p			culture-differences	culture	It depends on the country.	Das kommt auf das Land an.	Depende del país.	Dat hangt van het land af.	Ülkeye göre değişir.	Someone asks if people are usually on time where you're from.
+back-home	p			culture-differences	culture	back home	bei uns zu Hause	en mi país	bij ons thuis	bizim orada		gloss=back home (in my country)
+s.interesting-custom	s			culture-differences		That's a really interesting custom.	Das ist ein wirklich interessanter [Brauch:noun].	Esa es una [costumbre:noun] muy interesante.	Dat is een heel interessant [gebruik:noun].	Bu gerçekten ilginç bir [gelenek:noun].		social
+s.different-traditions	s			culture-differences		Every country has different traditions.	Jedes Land hat andere [Traditionen:noun].	Cada país tiene [tradiciones:noun] diferentes.	Elk land heeft andere [tradities:noun].	Her ülkenin farklı [gelenekleri:noun] var.		social
+s.typical-german-food	s			culture-differences		Is this a typical German dish?	Ist das ein [typisches:adjective] deutsches Gericht?	¿Es este un plato [típico:adjective] alemán?	Is dit een [typisch:adjective] Duits gerecht?	Bu [tipik:adjective] bir Alman yemeği mi?		social
+s.surprised-how-different	s			culture-differences		I'm surprised how different things are here.	Ich bin überrascht, wie [anders:adjective] hier alles ist.	Me sorprende lo [diferente:adjective] que es todo aquí.	Ik ben verrast hoe [anders:adjective] alles hier is.	Buradaki her şeyin ne kadar [farklı:adjective] olduğuna şaşırdım.
+s.getting-used-to	s			culture-differences		I'm slowly getting used to life here.	Ich [gewöhne:verb] mich langsam an das Leben hier.	Poco a poco me estoy [acostumbrando:verb] a la vida aquí.	Ik [wen:verb] langzaam aan het leven hier.	Buradaki hayata yavaş yavaş [alışıyorum:verb].		social
+s.culture-shock-first	s			culture-differences		I had a real culture shock the first month.	Ich hatte den ersten Monat einen echten [Kulturschock:noun].	Tuve un verdadero choque [cultural:adjective] el primer mes.	Ik had de eerste maand een echte [cultuurschok:noun].	İlk ay gerçek bir kültür [şoku:noun] yaşadım.		social
+s.how-different-back-home	s			culture-differences		How is that different back home?	Wie ist das bei euch zu [Hause:noun] anders?	¿Cómo es eso diferente en tu [país:noun]?	Hoe is dat anders bij jullie [thuis:noun]?	Bu sizin memleketinizde nasıl [farklı:adjective]?		social
+s.foreigner-here	s			culture-differences		I feel like a foreigner here sometimes.	Ich fühle mich hier manchmal wie ein [Ausländer:noun].	A veces me siento como un [extranjero:noun] aquí. | A veces me siento como una extranjera aquí.	Ik voel me hier soms een [buitenlander:noun].	Bazen burada [yabancı:noun] gibi hissediyorum.
+s.depends-country-tip	s			culture-differences		Whether you tip depends on the country.	Ob man Trinkgeld gibt, [kommt:verb] auf das Land an.	Si dejas propina [depende:verb] del país.	Of je fooi geeft, [hangt:verb] van het land af.	Bahşiş verip vermemek ülkeye [göre:preposition] değişir.

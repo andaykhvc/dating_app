@@ -1,7 +1,7 @@
 # The learning-content engine
 
 How Lingua Match turns a manageable amount of hand-checked content into a large
-amount of varied, graded A1–A2 practice in German, Spanish, Dutch, Turkish and
+amount of varied, graded A1–B1 practice in German, Spanish, Dutch, Turkish and
 English — with no AI, no paid API and no per-question cost at runtime.
 
 - [Principles](#principles)
@@ -458,8 +458,8 @@ within a few thousand indexed rows per language.
 
 ## Known limitations
 
-- Seed volume: 836 concepts per language (474 words, 24 phrases, 338
-  sentences), 14 units, 44 skills, 133 lessons — a real foundation, not yet the
+- Seed volume: 1,106 concepts per language (565 words, 70 phrases, 471
+  sentences), 19 units, 59 skills, 173 lessons — a real foundation, not yet the
   1,500 / 2,000 target.
 - Editorial translations were written and cross-checked carefully but have not
   been reviewed by native-speaker editors; the report button and

@@ -1,0 +1,58 @@
+# Unit B1.5 — Future and adventures: future plans, dreams and possibilities, travel and adventures
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- future-plans
+intention	w	noun		future-plans	future	intention	die Absicht	la intención	het voornemen	niyet
+to-intend	w	verb		future-plans	future	to intend to	vorhaben	tener la intención de	van plan zijn	niyetinde olmak
+to-consider	w	verb		future-plans	future	to consider	in Betracht ziehen | überlegen	considerar	overwegen	göz önünde bulundurmak
+decision	w	noun		future-plans	future	decision	die Entscheidung	la decisión	de beslissing	karar
+to-decide	w	verb		future-plans	future	to decide	sich entscheiden	decidir	beslissen	karar vermek
+in-the-long-run	p			future-plans	future	in the long run	auf lange Sicht	a largo plazo	op de lange termijn	uzun vadede
+sooner-or-later	p			future-plans	future	sooner or later	früher oder später	tarde o temprano	vroeg of laat	er ya da geç
+no-rush	p			future-plans	future	no rush	kein Stress	sin prisa	geen haast	acelesi yok
+s.plan-to-move	s			future-plans		I'm planning to move next year.	Ich habe [vor:adverb], nächstes Jahr umzuziehen.	Tengo la intención de mudarme el año que [viene:verb].	Ik ben van [plan:noun] om volgend jaar te verhuizen.	Gelecek yıl taşınmayı [düşünüyorum:verb].		social
+s.not-sure-future	s			future-plans		I'm not sure what the future holds.	Ich bin mir nicht sicher, was die [Zukunft:noun] bringt.	No estoy seguro de lo que traerá el [futuro:noun]. | No estoy segura de lo que traerá el futuro.	Ik weet niet zeker wat de [toekomst:noun] brengt.	[Geleceğin:noun] ne getireceğinden emin değilim.		social
+s.considering-options	s			future-plans		I'm considering my options right now.	Ich [überlege:verb] gerade, welche Möglichkeiten ich habe.	Estoy [considerando:verb] mis opciones ahora mismo.	Ik [overweeg:verb] nu mijn opties.	Şu anda seçeneklerimi [değerlendiriyorum:verb].
+s.hard-decision	s			future-plans		This is a hard decision for me.	Das ist eine schwere [Entscheidung:noun] für mich.	Esta es una [decisión:noun] difícil para mí.	Dit is een moeilijke [beslissing:noun] voor mij.	Bu benim için zor bir [karar:noun].		social
+s.havent-decided	s			future-plans		I haven't decided yet.	Ich habe mich noch nicht [entschieden:verb].	Todavía no he [decidido:verb].	Ik heb nog niet [beslist:verb].	Henüz [karar:noun] vermedim.
+s.long-run-worth-it	s			future-plans		In the long run, it will be worth it.	Auf lange [Sicht:noun] wird es sich lohnen.	A largo [plazo:noun], valdrá la pena.	Op de lange [termijn:noun] zal het de moeite waard zijn.	Uzun [vadede:noun] buna değecek.
+s.sooner-later-decide	s			future-plans		Sooner or later, I'll have to decide.	Früher oder [später:adverb] muss ich mich entscheiden.	Tarde o [temprano:adverb], tendré que decidir.	Vroeg of [laat:adverb] moet ik beslissen.	Er ya da [geç:adjective] karar vermem gerekecek.
+s.no-rush-decide	s			future-plans		There's no rush, take your time.	Es gibt keinen [Stress:noun], lass dir Zeit.	No hay [prisa:noun], tómate tu tiempo.	Er is geen [haast:noun], neem je tijd.	[Acelesi:noun] yok, acele etme.		social
+s.excited-whats-next	s			future-plans		I'm excited to see what's next.	Ich bin gespannt, was als [Nächstes:pronoun] kommt.	Tengo ganas de ver qué [sigue:verb].	Ik ben benieuwd wat er [hierna:adverb] komt.	Sırada ne olduğunu görmek için [heyecanlıyım:adjective].		social
+# ---- conditionals-dreams
+to-imagine	w	verb		conditionals-dreams	hypothetical	to imagine	sich vorstellen	imaginar	je voorstellen	hayal etmek
+possibility	w	noun		conditionals-dreams	hypothetical	possibility	die Möglichkeit	la posibilidad	de mogelijkheid	olasılık
+wish	w	noun		conditionals-dreams	hypothetical	wish	der Wunsch	el deseo	de wens	dilek
+to-wish	w	verb		conditionals-dreams	hypothetical	to wish	sich wünschen	desear	wensen	dilemek
+unlikely	w	adjective		conditionals-dreams	hypothetical	unlikely	unwahrscheinlich	poco probable	onwaarschijnlijk	pek olası değil
+if-i-could	p			conditionals-dreams	hypothetical	if I could	wenn ich könnte	si pudiera	als ik kon	eğer yapabilseydim
+what-if	p			conditionals-dreams	hypothetical	What if...?	Was wäre, wenn...?	¿Y si...?	Wat als...?	Peki ya...?
+in-a-perfect-world	p			conditionals-dreams	hypothetical	in a perfect world	in einer perfekten Welt	en un mundo perfecto	in een perfecte wereld	mükemmel bir dünyada
+s.if-had-time	s			conditionals-dreams		If I had more time, I would travel more.	Wenn ich mehr Zeit hätte, würde ich mehr [reisen:verb].	Si tuviera más tiempo, [viajaría:verb] más.	Als ik meer tijd had, zou ik meer [reizen:verb].	Daha fazla zamanım olsa, daha çok [seyahat:noun] ederdim.		social
+s.what-would-you-do	s			conditionals-dreams		What would you do if you won the lottery?	Was würdest du tun, wenn du im Lotto [gewinnen:verb] würdest?	¿Qué [harías:verb] si ganaras la lotería?	Wat zou jij doen als je de loterij [won:verb]?	Piyangoyu kazansan ne [yapardın:verb]?		social
+s.would-live-abroad	s			conditionals-dreams		I would love to live abroad for a year.	Ich würde wirklich gern ein Jahr im [Ausland:noun] leben.	Me encantaría vivir un año en el [extranjero:noun].	Ik zou heel graag een jaar in het [buitenland:noun] wonen.	Bir yıl yurt [dışında:noun] yaşamayı çok isterdim.		social
+s.imagine-living-here	s			conditionals-dreams		Can you imagine living here?	Kannst du dir vorstellen, hier zu [leben:verb]?	¿Te puedes [imaginar:verb] viviendo aquí?	Kun je je [voorstellen:verb] om hier te wonen?	Burada yaşamayı [hayal:noun] edebiliyor musun?		social
+s.wish-could-fly	s			conditionals-dreams		I wish I could fly.	Ich wünschte, ich könnte [fliegen:verb].	Ojalá pudiera [volar:verb].	Ik wou dat ik kon [vliegen:verb].	Keşke [uçabilseydim:verb].
+s.possibility-of-moving	s			conditionals-dreams		There's a possibility I might move to Berlin.	Es besteht die [Möglichkeit:noun], dass ich nach Berlin ziehe.	Existe la [posibilidad:noun] de que me mude a Berlín.	Er is een [mogelijkheid:noun] dat ik naar Berlijn verhuis.	Berlin'e taşınma [olasılığım:noun] var.		social
+s.unlikely-but-possible	s			conditionals-dreams		It's unlikely, but not impossible.	Es ist [unwahrscheinlich:adjective], aber nicht unmöglich.	Es poco [probable:adjective], pero no imposible.	Het is [onwaarschijnlijk:adjective], maar niet onmogelijk.	Pek [olası:adjective] değil ama imkansız da değil.
+s.in-perfect-world	s			conditionals-dreams		In a perfect world, everyone would be kind.	In einer perfekten [Welt:noun] wären alle nett.	En un mundo perfecto, todos serían [amables:adjective].	In een perfecte [wereld:noun] zou iedereen aardig zijn.	Mükemmel bir [dünyada:noun] herkes kibar olurdu.
+s.make-a-wish	s			conditionals-dreams		Close your eyes and make a wish.	Schließ die Augen und mach einen [Wunsch:noun].	Cierra los ojos y pide un [deseo:noun].	Doe je ogen dicht en doe een [wens:noun].	Gözlerini kapat ve bir [dilek:noun] tut.		social
+# ---- travel-adventures
+adventure	w	noun		travel-adventures	travel	adventure	das Abenteuer	la aventura	het avontuur	macera
+to-explore	w	verb		travel-adventures	travel	to explore	erkunden	explorar	verkennen	keşfetmek
+memory	w	noun		travel-adventures	travel	memory	die Erinnerung	el recuerdo	de herinnering	anı
+destination	w	noun		travel-adventures	travel	destination	das Reiseziel	el destino	de bestemming	varış noktası
+backpack	w	noun		travel-adventures	travel	backpack	der Rucksack	la mochila	de rugzak	sırt çantası
+unforgettable	w	adjective		travel-adventures	travel	unforgettable	unvergesslich	inolvidable	onvergetelijk	unutulmaz
+off-the-beaten-path	p			travel-adventures	travel	off the beaten path	abseits der Touristenpfade	fuera de lo típico	weg van de toeristenpaden	turistik olmayan yerler
+trip-of-a-lifetime	p			travel-adventures	travel	the trip of a lifetime	die Reise meines Lebens	el viaje de mi vida	de reis van mijn leven	hayatımın yolculuğu
+to-pack-your-bags	p			travel-adventures	travel	to pack your bags	die Koffer packen	hacer las maletas	de koffers pakken	bavulları toplamak
+s.best-adventure	s			travel-adventures		That was the best adventure of my life.	Das war das größte [Abenteuer:noun] meines Lebens.	Esa fue la mejor [aventura:noun] de mi vida.	Dat was het beste [avontuur:noun] van mijn leven.	Bu hayatımın en iyi [macerasıydı:noun].		social
+s.explore-new-city	s			travel-adventures		I love exploring a new city on foot.	Ich [erkunde:verb] gerne eine neue Stadt zu Fuß.	Me encanta [explorar:verb] una ciudad nueva a pie.	Ik [verken:verb] graag een nieuwe stad te voet.	Yeni bir şehri yürüyerek [keşfetmeyi:verb] seviyorum.		social
+s.favourite-memory-trip	s			travel-adventures		What's your favourite memory from a trip?	Was ist deine liebste [Erinnerung:noun] von einer Reise?	¿Cuál es tu mejor [recuerdo:noun] de un viaje?	Wat is jouw fijnste [herinnering:noun] aan een reis?	Bir geziden en güzel [anın:noun] ne?		social
+s.dream-destination	s			travel-adventures		Japan is my dream destination.	Japan ist mein [Traumreiseziel:noun].	Japón es mi [destino:noun] soñado.	Japan is mijn [droombestemming:noun].	Japonya benim hayalimdeki [varış:noun] noktası.		social
+s.pack-backpack	s			travel-adventures		I only took a backpack for the whole trip.	Ich habe nur einen [Rucksack:noun] für die ganze Reise mitgenommen.	Solo llevé una [mochila:noun] para todo el viaje.	Ik had maar een [rugzak:noun] voor de hele reis.	Bütün gezi için sadece bir sırt [çantası:noun] aldım.
+s.unforgettable-trip	s			travel-adventures		It was an unforgettable trip.	Es war eine [unvergessliche:adjective] Reise.	Fue un viaje [inolvidable:adjective].	Het was een [onvergetelijke:adjective] reis.	[Unutulmaz:adjective] bir geziydi.		social
+s.off-beaten-path-place	s			travel-adventures		We found a place off the beaten path.	Wir haben einen Ort [abseits:adverb] der Touristenpfade gefunden.	Encontramos un lugar fuera de lo [típico:adjective].	We vonden een plek [weg:adverb] van de toeristenpaden.	Turistik olmayan bir [yer:noun] bulduk.
+s.pack-bags-tonight	s			travel-adventures		I need to pack my bags tonight.	Ich muss heute Abend meine [Koffer:noun] packen.	Tengo que hacer las [maletas:noun] esta noche.	Ik moet vanavond mijn [koffers:noun] pakken.	Bu akşam [bavullarımı:noun] toplamam gerekiyor.
+s.spontaneous-trip	s			travel-adventures		Let's plan a spontaneous trip somewhere.	Lass uns eine [spontane:adjective] Reise irgendwohin planen.	Planeemos un viaje [espontáneo:adjective] a algún sitio.	Laten we een [spontane:adjective] reis ergens heen plannen.	[Spontane:adjective] bir gezi planlayalım.		social

@@ -60,5 +60,5 @@ Nouns take their article in de/es/nl (`der Kaffee`, `el café`, `de koffie`);
 the article-less form is accepted automatically. English verbs are written
 `to eat`; `eat` is accepted automatically.
 
-Keep sentences short and natural: A1 ≤ 9 words, A2 ≤ 12 words, one sentence,
-final `. ! ?`, Spanish questions with `¿`.
+Keep sentences short and natural: A1 ≤ 9 words, A2 ≤ 12 words, B1 ≤ 16 words,
+one sentence, final `. ! ?`, Spanish questions with `¿`.

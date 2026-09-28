@@ -1,0 +1,60 @@
+# Unit B1.1 — Opinions and debate: comparing, agreeing and disagreeing, giving reasons
+# Editorial content: written for Lingua Match. See content/README.md for the cell syntax.
+key	kind	pos	cefr	skill	topic	en	de	es	nl	tr	situation	flags
+# ---- comparing
+better	w	adjective		comparing	comparison	better	besser	mejor	beter	daha iyi
+worse	w	adjective		comparing	comparison	worse	schlechter	peor	slechter	daha kötü
+similar	w	adjective		comparing	comparison	similar	ähnlich	parecido | parecida	vergelijkbaar	benzer
+different	w	adjective		comparing	comparison	different	anders | unterschiedlich	diferente	anders | verschillend	farklı
+to-compare	w	verb		comparing	comparison	to compare	vergleichen	comparar	vergelijken	karşılaştırmak
+quality	w	noun		comparing	comparison	quality	die Qualität	la calidad	de kwaliteit	kalite
+comparison	w	noun		comparing	comparison	comparison	der Vergleich	la comparación	de vergelijking	karşılaştırma
+much-better	p			comparing	comparison	much better	viel besser	mucho mejor	veel beter	çok daha iyi	Someone asks if the new phone is better than the old one, and it clearly is.
+the-same	p			comparing	comparison	the same	das Gleiche | dasselbe	lo mismo	hetzelfde	aynı
+not-as-good	p			comparing	comparison	not as good	nicht so gut	no tan bueno | no tan buena	niet zo goed	o kadar iyi değil	You compare two cafés and one has worse coffee.
+s.easier-than	s			comparing		Dutch is easier than German for me.	Niederländisch ist für mich [einfacher:adjective] als Deutsch.	El neerlandés es más [fácil:adjective] que el alemán para mí.	Nederlands is voor mij [makkelijker:adjective] dan Duits.	Hollandaca benim için Almancadan daha [kolay:adjective].
+s.better-than-expected	s			comparing		This restaurant is better than I expected.	Dieses Restaurant ist [besser:adjective], als ich erwartet habe.	Este restaurante es [mejor:adjective] de lo que esperaba.	Dit restaurant is [beter:adjective] dan ik verwachtte.	Bu restoran beklediğimden daha [iyi:adjective].
+s.traffic-worse	s			comparing		Traffic here is worse than in my city.	Der Verkehr hier ist [schlimmer:adjective] als in meiner Stadt.	El tráfico aquí es [peor:adjective] que en mi ciudad.	Het verkeer hier is [erger:adjective] dan in mijn stad.	Buradaki trafik benim şehrimden daha [kötü:adjective].
+s.similar-taste	s			comparing		Our taste in music is similar.	Unser Musikgeschmack ist [ähnlich:adjective].	Nuestro gusto musical es [parecido:adjective].	Onze muzieksmaak is [vergelijkbaar:adjective].	Müzik zevkimiz [benzer:adjective].		social
+s.which-better	s			comparing		Which one do you think is better?	Welches findest du [besser:adjective]?	¿Cuál crees que es [mejor:adjective]?	Welke vind jij [beter:adjective]?	Hangisinin daha [iyi:adjective] olduğunu düşünüyorsun?		social
+s.best-restaurant	s			comparing		This is the best restaurant in the city.	Das ist das [beste:adjective] Restaurant der Stadt.	Este es el [mejor:adjective] restaurante de la ciudad.	Dit is het [beste:adjective] restaurant van de stad.	Bu şehrin en [iyi:adjective] restoranı.
+s.compare-prices	s			comparing		Let's compare prices before we decide.	Lass uns die Preise [vergleichen:verb], bevor wir uns entscheiden.	[Comparemos:verb] los precios antes de decidir.	Laten we de prijzen [vergelijken:verb] voordat we beslissen.	Karar vermeden önce fiyatları [karşılaştıralım:verb].
+s.not-as-good-as	s			comparing		This coffee isn't as good as yours.	Dieser Kaffee ist nicht so [gut:adjective] wie deiner.	Este café no es tan [bueno:adjective] como el tuyo.	Deze koffie is niet zo [goed:adjective] als die van jou.	Bu kahve seninki kadar [iyi:adjective] değil.		social
+s.quality-important	s			comparing		For me, quality is more important than price.	Für mich ist Qualität [wichtiger:adjective] als der Preis.	Para mí, la calidad es más [importante:adjective] que el precio.	Voor mij is kwaliteit [belangrijker:adjective] dan de prijs.	Benim için kalite fiyattan daha [önemli:adjective].
+# ---- agreeing-disagreeing
+to-disagree	w	verb		agreeing-disagreeing	opinion-verbs	to disagree	nicht zustimmen | widersprechen	no estar de acuerdo	het oneens zijn	katılmamak
+argument	w	noun		agreeing-disagreeing	opinion	argument | point	das Argument	el argumento	het argument	argüman		gloss=argument (a reasoned point, not a fight)
+point-of-view	w	noun		agreeing-disagreeing	opinion	point of view	der Standpunkt	el punto de vista	het standpunt	bakış açısı
+partly	w	adverb		agreeing-disagreeing	opinion	partly	teilweise	en parte	deels	kısmen
+absolutely	w	adverb		agreeing-disagreeing	reactions	absolutely	absolut | total	totalmente | absolutamente	absoluut | helemaal	kesinlikle
+i-see-your-point	p			agreeing-disagreeing	reactions	I see your point.	Ich verstehe deinen Standpunkt.	Entiendo tu punto de vista.	Ik snap je punt.	Ne demek istediğini anlıyorum.	Your match makes a fair point, even though you still disagree.	social
+good-point	p			agreeing-disagreeing	reactions	Good point!	Guter Punkt!	¡Buen punto!	Goed punt!	İyi bir nokta!	A friend says something in a discussion that changes your mind a little.	social
+on-the-other-hand	p			agreeing-disagreeing	reactions	On the other hand...	Andererseits...	Por otro lado...	Aan de andere kant...	Öte yandan...
+s.completely-agree	s			agreeing-disagreeing		I completely agree with you.	Ich stimme dir [total:adverb] zu.	Estoy [completamente:adverb] de acuerdo contigo.	Ik ben het [helemaal:adverb] met je eens.	Sana [tamamen:adverb] katılıyorum.		social
+s.dont-agree	s			agreeing-disagreeing		I don't agree with that.	Da stimme ich [nicht:adverb] zu.	No estoy de [acuerdo:noun] con eso.	Daarmee ben ik het [niet:adverb] eens.	Buna [katılmıyorum:verb].
+s.have-a-point	s			agreeing-disagreeing		You have a point, but I still disagree.	Du hast recht, aber ich bin [trotzdem:adverb] anderer Meinung.	Tienes [razón:noun], pero sigo sin estar de acuerdo.	Je hebt een [punt:noun], maar ik ben het nog steeds oneens.	Haklısın ama yine de [katılmıyorum:verb].
+s.partly-right	s			agreeing-disagreeing		You're partly right.	Du hast [teilweise:adverb] recht.	Tienes razón en [parte:noun].	Je hebt [deels:adverb] gelijk.	[Kısmen:adverb] haklısın.
+s.thats-not-true	s			agreeing-disagreeing		I don't think that's true.	Ich glaube nicht, dass das [stimmt:verb].	No creo que eso sea [verdad:noun].	Ik denk niet dat dat [klopt:verb].	Bunun [doğru:adjective] olduğunu düşünmüyorum.
+s.agree-to-disagree	s			agreeing-disagreeing		Let's agree to disagree.	Lass uns einfach [unterschiedlicher:adjective] Meinung sein.	Aceptemos que pensamos [diferente:adjective].	Laten we gewoon een andere [mening:noun] hebben.	[Farklı:adjective] düşünüyoruz, sorun değil.
+s.what-do-you-mean	s			agreeing-disagreeing		What exactly do you mean?	Was [genau:adverb] meinst du?	¿Qué quieres decir [exactamente:adverb]?	Wat bedoel je [precies:adverb]?	[Tam:adverb] olarak ne demek istiyorsun?		social
+s.you-might-be-right	s			agreeing-disagreeing		You might be right, actually.	Vielleicht hast du [tatsächlich:adverb] recht.	Puede que tengas [razón:noun], la verdad.	Misschien heb je [eigenlijk:adverb] wel gelijk.	[Aslında:adverb] haklı olabilirsin.
+# ---- giving-reasons
+reason	w	noun		giving-reasons	reasoning	reason	der Grund	la razón | el motivo	de reden	sebep | neden
+because-of	w	preposition		giving-reasons	reasoning	because of	wegen	por	vanwege | door	yüzünden
+although	w	conjunction		giving-reasons	reasoning	although	obwohl	aunque	hoewel | ook al	gerçi
+so-conjunction	w	conjunction		giving-reasons	reasoning	so	also	así que	dus	yani		gloss=so (drawing a conclusion)
+in-order-to	w	conjunction		giving-reasons	reasoning	in order to	um zu	para	om te	için
+advantage	w	noun		giving-reasons	reasoning	advantage	der Vorteil	la ventaja	het voordeel	avantaj
+disadvantage	w	noun		giving-reasons	reasoning	disadvantage	der Nachteil	la desventaja	het nadeel	dezavantaj
+for-example	p			giving-reasons	reasoning	for example	zum Beispiel	por ejemplo	bijvoorbeeld	örneğin
+the-main-reason	p			giving-reasons	reasoning	the main reason	der Hauptgrund	la razón principal	de belangrijkste reden	asıl sebep
+thats-why	p			giving-reasons	reasoning	that's why	deshalb	por eso	daarom	bu yüzden
+in-my-experience	p			giving-reasons	reasoning	in my experience	meiner Erfahrung nach	según mi experiencia	in mijn ervaring	deneyimlerime göre
+s.because-busy	s			giving-reasons		I can't come because I'm busy.	Ich kann nicht kommen, weil ich [beschäftigt:adjective] bin.	No puedo venir porque estoy [ocupado:adjective]. | No puedo venir porque estoy ocupada.	Ik kan niet komen omdat ik het [druk:adjective] heb.	[Meşgul:adjective] olduğum için gelemiyorum.
+s.although-raining	s			giving-reasons		Although it's raining, we're going for a walk.	[Obwohl:conjunction] es regnet, gehen wir spazieren.	[Aunque:conjunction] está lloviendo, vamos a dar un paseo.	[Hoewel:conjunction] het regent, gaan we wandelen.	Yağmur yağmasına [rağmen:conjunction] yürüyüşe çıkıyoruz.
+s.so-tired	s			giving-reasons		I'm really tired, so I'm going to bed early.	Ich bin sehr müde, [also:conjunction] gehe ich früh ins Bett.	Estoy muy cansado, así que me voy a la cama [temprano:adverb]. | Estoy muy cansada, así que me voy a la cama temprano.	Ik ben erg moe, [dus:conjunction] ik ga vroeg naar bed.	Çok [yorgunum:adjective], bu yüzden erken yatacağım.
+s.reason-learning	s			giving-reasons		The main reason I'm learning Spanish is my partner.	Der [Hauptgrund:noun], warum ich Spanisch lerne, ist mein Partner. | Der Hauptgrund, warum ich Spanisch lerne, ist meine Partnerin.	La [razón:noun] principal por la que aprendo español es mi pareja.	De belangrijkste [reden:noun] dat ik Spaans leer, is mijn partner.	İspanyolca öğrenmemin asıl [sebebi:noun] partnerim.		social
+s.advantage-remote	s			giving-reasons		The advantage of working from home is more free time.	Der [Vorteil:noun] vom Homeoffice ist mehr Freizeit.	La [ventaja:noun] de trabajar desde casa es más tiempo libre.	Het [voordeel:noun] van thuiswerken is meer vrije tijd.	Evden çalışmanın [avantajı:noun] daha fazla boş zaman.
+s.in-order-to-learn	s			giving-reasons		I watch films in order to practise my English.	Ich schaue Filme, um mein Englisch zu [üben:verb].	Veo películas para [practicar:verb] mi inglés.	Ik kijk films om mijn Engels te [oefenen:verb].	İngilizcemi pratik yapmak için film [izliyorum:verb].		social
+s.for-example-hobby	s			giving-reasons		For example, I love hiking and photography.	Zum [Beispiel:noun] liebe ich Wandern und Fotografie.	Por [ejemplo:noun], me encanta el senderismo y la fotografía.	Bijvoorbeeld hou ik van wandelen en [fotografie:noun].	Örneğin, doğa yürüyüşünü ve [fotoğrafçılığı:noun] seviyorum.		social
+s.no-particular-reason	s			giving-reasons		I don't have a particular reason, I just like it.	Ich habe keinen besonderen [Grund:noun], es gefällt mir einfach.	No tengo una [razón:noun] especial, simplemente me gusta.	Ik heb geen speciale [reden:noun], ik vind het gewoon leuk.	Özel bir [sebebim:noun] yok, sadece hoşuma gidiyor.

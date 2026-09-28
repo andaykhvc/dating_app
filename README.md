@@ -71,7 +71,7 @@ for f in supabase/seed/*.sql; do psql "$DATABASE_URL" -f "$f"; done
 
 This loads the languages, 24 interests, the 7 game templates, 18 mission
 templates and the original challenge content, then (files `0010`–`0014`) the
-learning course: 14 A1–A2 units, 44 skills, 133 lessons and 836 concepts in
+learning course: 19 A1–B1 units, 59 skills, 173 lessons and 1,106 concepts in
 German, Spanish, Dutch, Turkish and English, with their provenance. Only the
 course files (`0010`–`0014`) are safe to re-run; `0001`–`0007` are run once.
 
@@ -186,7 +186,7 @@ client never sees the answer to.
 
 ### The learning course
 
-The Learn tab (route `/play`) holds a structured A1–A2 course for German,
+The Learn tab (route `/play`) holds a structured A1–B1 course for German,
 Spanish, Dutch, Turkish and English, built on a language-agnostic content
 model: a *concept* ("coffee", "What music do you like?") is written once per
 language, and every direction — Turkish→German, German→Turkish, Spanish→Dutch —
