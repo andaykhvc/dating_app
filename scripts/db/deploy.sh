@@ -26,6 +26,8 @@ MARK_APPLIED_THROUGH="${MARK_APPLIED_THROUGH:-}"
 SUPABASE="${SUPABASE:-supabase}"
 SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/null}"
 
+scripts/db/check-migration-versions.sh
+
 versions=()
 psql_q() { psql "$SUPABASE_DB_URL" -X -q -At -v ON_ERROR_STOP=1 -c "$1"; }
 say() { echo "$*"; echo "$*" >> "$SUMMARY"; }

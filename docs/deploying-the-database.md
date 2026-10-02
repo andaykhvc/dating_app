@@ -56,13 +56,14 @@ has and how many lessons are active.
    with the CLI, so Supabase has no record of them. Run it again (still a dry
    run) with **mark_applied_through** set to `9998`, the last migration from
    before the learning course. The summary should then say it would apply
-   exactly these six:
+   exactly these seven:
    - `99990_learning_enums.sql`
    - `99991_content_engine_tables.sql`
    - `99992_content_engine_rls_indexes.sql`
    - `99993_content_engine_functions.sql`
    - `99994_security_lint_fixes.sql`
    - `99995_learn_query_performance.sql`
+   - `99996_xp_leaderboard.sql`
 3. Run it for real: untick **Dry run** and keep the same
    **mark_applied_through** value if you needed it in step 2.
 4. The summary should show **1,106** texts for each of de, en, es, nl and tr,
