@@ -1,5 +1,6 @@
 -- Generated with `supabase migration new xp_leaderboard`, then renumbered to
--- follow this repository's legacy 9999x history (CLI sorts versions as strings).
+-- follow this repository's legacy 9999x history. Version 99996 follows the
+-- already-applied 99995 lesson-performance migration.
 -- Keep profiles and progress own-row-only. Expose only a shaped, read-only RPC.
 create schema if not exists private;
 revoke all on schema private from public, anon;

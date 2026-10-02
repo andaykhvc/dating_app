@@ -120,6 +120,11 @@ jobs:
         with:
           version: ${{ env.SUPABASE_CLI_VERSION }}
 
+      # Supabase records the numeric filename prefix as a primary key. Catch
+      # branch-merge collisions before starting Postgres or applying anything.
+      - name: Check migration versions are unique
+        run: scripts/db/check-migration-versions.sh
+
       # `db start` boots ONLY the local Postgres container (the same image
       # the full stack uses, so auth.*/storage.* schemas, the auth/storage/
       # realtime roles, and the supabase_realtime publication that the
