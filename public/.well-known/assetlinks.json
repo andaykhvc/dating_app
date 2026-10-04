@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.linguamatch.app",
+      "sha256_cert_fingerprints": [
+        "DE:31:3C:88:67:D9:13:97:8D:7B:C3:D9:47:49:39:F4:F9:AA:03:0C:5A:14:DC:6B:24:96:5A:D5:A0:6D:CA:98"
+      ]
+    }
+  }
+]

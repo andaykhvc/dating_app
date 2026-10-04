@@ -1,0 +1,163 @@
+name: Android APK
+
+# Builds the Android app (a Trusted Web Activity: a thin shell that opens the
+# deployed site full-screen in Chrome) and publishes the signed APK as a
+# GitHub Release.
+#
+# - Actions -> Android APK -> Run workflow: builds and creates a release
+#   tagged android-v<version>.
+# - Pushing a tag like android-v1.2.0 does the same for that tag.
+# - PRs that touch the Android setup only build it, as a check; nothing is
+#   released.
+#
+# Web changes reach the app without a new APK, because the APK only loads the
+# site. Release again only when android/twa-manifest.json, the icons or
+# public/.well-known/assetlinks.json change.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version name, e.g. 1.2.0 (blank: 1.0.<run number>)"
+        required: false
+        type: string
+  push:
+    tags: ["android-v*"]
+  pull_request:
+    branches: [main]
+    paths:
+      - "android/**"
+      - "public/.well-known/**"
+      - ".github/workflows/android-release.yml"
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    name: Build APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      # Creating the release and its tag.
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Work out the version
+        id: version
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            name="${GITHUB_REF_NAME#android-v}"
+          elif [ -n "$INPUT_VERSION" ]; then
+            name="${INPUT_VERSION#v}"
+          else
+            name="1.0.${GITHUB_RUN_NUMBER}"
+          fi
+          if ! printf '%s' "$name" | grep -Eq '^[0-9]+(\.[0-9]+)*([-.][0-9A-Za-z.]+)?$'; then
+            echo "::error::'$name' is not a version like 1.2.0"
+            exit 1
+          fi
+          # Android only installs an update whose versionCode is higher than
+          # the installed one; the run number only ever goes up.
+          echo "code=${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "tag=android-v$name" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: android/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+          cache-dependency-path: android/twa-manifest.json
+
+      - name: Generate the Android project
+        env:
+          APP_VERSION_CODE: ${{ steps.version.outputs.code }}
+          APP_VERSION_NAME: ${{ steps.version.outputs.name }}
+        run: |
+          npm ci --prefix android
+          node android/generate.mjs
+
+      - name: Build unsigned APK
+        working-directory: android/build/twa
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Sign APK
+        id: sign
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::The ANDROID_KEYSTORE_BASE64 / ANDROID_KEYSTORE_PASSWORD / ANDROID_KEY_ALIAS / ANDROID_KEY_PASSWORD secrets are not set."
+            exit 1
+          fi
+          build_tools="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)"
+          unsigned=android/build/twa/app/build/outputs/apk/release/app-release-unsigned.apk
+          apk="lingua-match-${VERSION_NAME}.apk"
+
+          keystore="$RUNNER_TEMP/release.keystore"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$keystore"
+
+          "$build_tools/zipalign" -p -f 4 "$unsigned" "$RUNNER_TEMP/aligned.apk"
+          "$build_tools/apksigner" sign \
+            --ks "$keystore" \
+            --ks-key-alias "$ANDROID_KEY_ALIAS" \
+            --ks-pass env:ANDROID_KEYSTORE_PASSWORD \
+            --key-pass env:ANDROID_KEY_PASSWORD \
+            --out "$apk" "$RUNNER_TEMP/aligned.apk"
+          rm -f "$keystore"
+
+          # The site only lets the app open full-screen (no URL bar) when the
+          # signing key matches public/.well-known/assetlinks.json.
+          signed="$("$build_tools/apksigner" verify --print-certs "$apk" \
+            | sed -n 's/.*certificate SHA-256 digest: //p' | head -1 | tr 'a-f' 'A-F')"
+          expected="$(jq -r '.[0].target.sha256_cert_fingerprints[]' public/.well-known/assetlinks.json | tr -d ':')"
+          if ! printf '%s\n' "$expected" | grep -qx "$signed"; then
+            echo "::error::APK is signed with $signed, which is not in public/.well-known/assetlinks.json"
+            exit 1
+          fi
+
+          echo "apk=$apk" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.sign.outputs.apk }}
+          path: ${{ steps.sign.outputs.apk }}
+          if-no-files-found: error
+
+      - name: Publish release
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APK: ${{ steps.sign.outputs.apk }}
+          TAG: ${{ steps.version.outputs.tag }}
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
+        run: |
+          notes="Lingua Match ${VERSION_NAME} (versionCode ${VERSION_CODE}) for Android.
+
+          Download **${APK}** below on your phone and open it. Android asks once to allow installs from your browser or file manager.
+
+          The app opens https://dating-app-ruddy.vercel.app, so it always runs the latest web version."
+          gh release create "$TAG" "$APK" \
+            --target "$GITHUB_SHA" \
+            --title "Android ${VERSION_NAME}" \
+            --notes "$notes"
