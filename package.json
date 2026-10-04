@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test scripts/content/content.test.ts scripts/install.test.ts",
+    "test": "node --test scripts/content/content.test.ts scripts/install.test.ts scripts/lint-glob.test.mjs",
     "test:db": "supabase/tests/run.sh",
     "content:validate": "node scripts/content/validate.ts",
     "content:build": "node scripts/content/build-seed.ts",
@@ -32,5 +32,10 @@
     "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@next/eslint-plugin-next": {
+      "fast-glob": "npm:tinyglobby@0.2.17"
+    }
   }
 }

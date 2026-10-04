@@ -331,7 +331,7 @@ npm run build
 ```
 
 ```bash
-npm test                    # content pipeline and app-install lifecycle tests
+npm test                    # content pipeline, app-install and lint compatibility tests
 ```
 
 ```bash
@@ -343,3 +343,11 @@ npm run content:validate    # content quality rules
 # SRS, XP, RLS and social-phrase checks in eight learning directions.
 PGHOST=/tmp PGPORT=5432 PGUSER=postgres npm run test:db
 ```
+
+The `@next/eslint-plugin-next` dependency has a scoped `fast-glob` →
+`tinyglobby` override to remove the unpatched `braces` dependency
+([GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm)).
+This plugin uses `globSync` with `onlyDirectories`; `scripts/lint-glob.test.mjs`
+checks directory matching and the internal-link rule with the replacement.
+Keep the override scoped to this caller: the two libraries differ in other
+options and directory-expansion behavior. CI still audits all dependencies.
