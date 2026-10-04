@@ -1,0 +1,11 @@
+{
+  "name": "lingua-match-android",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.mjs"
+  },
+  "dependencies": {
+    "@bubblewrap/core": "1.25.0"
+  }
+}

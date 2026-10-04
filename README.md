@@ -161,6 +161,27 @@ physical iOS Safari and Android Chrome devices before release. See
 [Apple's installation steps](https://support.apple.com/en-lamr/guide/iphone/iphea86e5236/ios)
 and [MDN's install prompt lifecycle](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt).
 
+### Android APK
+
+`android/` packages the deployed site as a Trusted Web Activity: a ~1 MB APK
+that opens https://dating-app-ruddy.vercel.app full-screen in Chrome. Because
+it uses Chrome, sessions and Google/Apple sign-in behave exactly as on the
+web, and web changes reach the app without a new APK.
+
+**Actions → Android APK → Run workflow** builds it and publishes
+`lingua-match-<version>.apk` as a GitHub Release (pushing an `android-v1.2.0`
+tag does the same). `android/twa-manifest.json` holds the package id, colours
+and icons; `android/generate.mjs` turns it into a Gradle project with
+`@bubblewrap/core` at build time, so no generated Android code is committed.
+
+The APK is signed with the key in the `ANDROID_KEYSTORE_BASE64`,
+`ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD`
+repository secrets. Keep that key: phones only accept updates signed with the
+same one. Its SHA-256 fingerprint is in `public/.well-known/assetlinks.json`,
+which is what lets the app hide Chrome's URL bar; the workflow fails if the
+two disagree. If the domain changes, update `host` and the URLs in
+`twa-manifest.json`.
+
 ### Where the trust boundary sits
 
 Every table has RLS enabled, and anything with no policy for an operation is
