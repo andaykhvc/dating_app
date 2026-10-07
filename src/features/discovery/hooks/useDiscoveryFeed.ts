@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchDiscoveryBatch } from "@/features/discovery/api";
+import { freshCards } from "@/features/discovery/feed";
 import type { DiscoveryCard } from "@/types/domain";
 
 /**
@@ -21,6 +22,10 @@ export function useDiscoveryFeed(initial: DiscoveryCard[]) {
   // A refill can land before the swipe that removed someone has been written,
   // in which case the server still returns them. Remember who has gone.
   const dismissed = useRef(new Set<string>());
+  const current = useRef(cards);
+  useEffect(() => {
+    current.current = cards;
+  }, [cards]);
 
   const refill = useCallback(async () => {
     if (inFlight.current) return;
@@ -29,14 +34,12 @@ export function useDiscoveryFeed(initial: DiscoveryCard[]) {
     setError(null);
     try {
       const batch = await fetchDiscoveryBatch();
-      setCards((prev) => {
-        const seen = new Set(prev.map((c) => c.id));
-        return [
-          ...prev,
-          ...batch.filter((c) => !seen.has(c.id) && !dismissed.current.has(c.id)),
-        ];
-      });
-      setExhausted(batch.length === 0);
+      const fresh = freshCards(current.current, batch, dismissed.current);
+      setCards((prev) => [...prev, ...freshCards(prev, batch, dismissed.current)]);
+      // "Nothing new" is what exhausted means. Counting the raw batch instead
+      // left the screen on "Looking for people…" for good whenever the server
+      // returned only the card that had just been swiped.
+      setExhausted(fresh.length === 0);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not load more people.");
     } finally {

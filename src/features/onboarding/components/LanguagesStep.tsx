@@ -6,6 +6,7 @@ import { Field, Select } from "@/components/ui/Field";
 import { SelectableChip } from "@/components/ui/Chip";
 import { StepShell } from "@/features/onboarding/components/StepShell";
 import { createClient } from "@/lib/supabase/client";
+import { saveLanguages } from "@/features/profile/saveLists";
 import { CEFR_DESCRIPTIONS } from "@/lib/constants";
 import { CEFR_LEVELS, type CefrLevel, type Language } from "@/types/domain";
 
@@ -41,31 +42,12 @@ export function LanguagesStep({
     const supabase = createClient();
     const userId = (await supabase.auth.getUser()).data.user!.id;
 
-    // Replace rather than merge: the MVP allows exactly one of each, so
-    // clearing first keeps a changed answer from leaving a stale row behind.
-    const { error: deleteError } = await supabase
-      .from("user_languages")
-      .delete()
-      .eq("user_id", userId);
-
-    if (deleteError) {
-      setError(deleteError.message);
-      setSaving(false);
-      return;
-    }
-
-    const { error: insertError } = await supabase.from("user_languages").insert([
-      { user_id: userId, language_code: native, role: "native", cefr_level: null },
-      {
-        user_id: userId,
-        language_code: learning,
-        role: "learning",
-        cefr_level: level,
-      },
-    ]);
-
-    if (insertError) {
-      setError(insertError.message);
+    // The MVP allows exactly one language of each role; saveLanguages writes
+    // the new pair before removing the old one, so a failure never leaves the
+    // person with none.
+    const failure = await saveLanguages(supabase, userId, { native, learning, level });
+    if (failure) {
+      setError(failure);
       setSaving(false);
       return;
     }

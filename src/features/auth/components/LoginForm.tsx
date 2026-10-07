@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
+import { safeNextPath } from "@/lib/redirect";
 
 const CALLBACK_ERRORS: Record<string, string> = {
   auth_callback_failed: "That didn't work — please try again.",
@@ -15,7 +16,8 @@ const CALLBACK_ERRORS: Record<string, string> = {
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next");
+  // "" when absent or not a plain same-site path.
+  const next = safeNextPath(searchParams.get("next"), "");
   const callbackError = searchParams.get("error");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +43,7 @@ export function LoginForm() {
       return;
     }
 
-    router.push(next && next.startsWith("/") ? next : "/discover");
+    router.push(next || "/discover");
     router.refresh();
   }
 
@@ -92,7 +94,7 @@ export function LoginForm() {
         <div className="h-px flex-1 bg-line" />
       </div>
 
-      <OAuthButtons next={next && next.startsWith("/") ? next : undefined} />
+      <OAuthButtons next={next || undefined} />
 
       <p className="text-center text-sm text-muted">
         New here?{" "}
