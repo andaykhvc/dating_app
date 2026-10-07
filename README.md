@@ -78,9 +78,25 @@ course files (`0010`–`0014`) are safe to re-run; `0001`–`0007` are run once.
 ### Updating an existing project
 
 After the first setup, new migrations and course content are applied from
-GitHub: **Actions → Deploy database → Run workflow** (dry run first). It needs
-one repository secret, `SUPABASE_DB_URL`. Setup and first-run steps are in
+GitHub: **Actions → Deploy database → Run workflow**. It needs one repository
+secret, `SUPABASE_DB_URL`. Setup and first-run steps are in
 [docs/deploying-the-database.md](docs/deploying-the-database.md).
+
+How to fill in the form:
+
+1. **Use workflow from:** pick `main`, unless you are testing a branch. A
+   branch that is behind the database stops with an explanation and changes
+   nothing.
+2. **1. Dry run:** leave it ticked the first time. It is a rehearsal that lists
+   what would run and writes nothing.
+3. **2. Also load the course content:** leave it ticked. Re-running it is safe.
+4. **3. mark_applied_through:** leave it empty. Fill it in only if a run
+   stopped and asked for it.
+5. Read the summary at the bottom of the run page. If it looks right, run it
+   again with **Dry run** unticked to apply it for real.
+
+If a run stops, the summary says why and what to do; the common cases are
+listed in the docs above.
 
 ### 5. Auth settings
 
@@ -169,8 +185,8 @@ it uses Chrome, sessions and Google/Apple sign-in behave exactly as on the
 web, and web changes reach the app without a new APK.
 
 **Actions → Android APK → Run workflow** builds it and publishes
-`lingua-match-<version>.apk` as a GitHub Release (pushing an `android-v1.2.0`
-tag does the same). `android/twa-manifest.json` holds the package id, colours
+`lingua-match-<version>.apk` as a GitHub Release. It only runs on demand: no
+push, tag or pull request triggers it. `android/twa-manifest.json` holds the package id, colours
 and icons; `android/generate.mjs` turns it into a Gradle project with
 `@bubblewrap/core` at build time, so no generated Android code is committed.
 

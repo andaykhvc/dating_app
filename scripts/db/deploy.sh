@@ -32,6 +32,20 @@ versions=()
 psql_q() { psql "$SUPABASE_DB_URL" -X -q -At -v ON_ERROR_STOP=1 -c "$1"; }
 say() { echo "$*"; echo "$*" >> "$SUMMARY"; }
 
+say "## Database deploy"
+say ""
+say "| Setting | Value |"
+say "| --- | --- |"
+say "| Branch | \`${GITHUB_REF_NAME:-local}\` |"
+if [ "$DRY_RUN" = "true" ]; then
+  say "| Mode | **Dry run**: shows what would happen, changes nothing |"
+else
+  say "| Mode | **Real run**: changes the live database |"
+fi
+say "| Load course content | $SEED_COURSE |"
+say "| mark_applied_through | ${MARK_APPLIED_THROUGH:-(not used)} |"
+say ""
+
 echo "::group::Database state"
 schema_exists=$(psql_q "select to_regclass('public.profiles') is not null")
 history_exists=$(psql_q "select to_regclass('supabase_migrations.schema_migrations') is not null")
@@ -41,6 +55,26 @@ if [ "$history_exists" = "t" ]; then
 fi
 echo "app schema present: $schema_exists; migrations recorded: $recorded"
 echo "::endgroup::"
+
+# The database may already hold migrations this branch does not have: they
+# were deployed from a newer branch (usually main). Pushing from an older
+# branch would fail with a confusing CLI error, so say what is wrong instead.
+if [ "$history_exists" = "t" ] && [ "$recorded" != "0" ]; then
+  missing=()
+  while IFS= read -r v; do
+    [ -n "$v" ] || continue
+    ls supabase/migrations/"${v}"_*.sql > /dev/null 2>&1 || missing+=("$v")
+  done < <(psql_q "select version from supabase_migrations.schema_migrations order by version")
+  if [ "${#missing[@]}" -gt 0 ]; then
+    say "### ✗ Stopped: this branch is behind the database"
+    say "The database already has these migrations, but branch \`${GITHUB_REF_NAME:-local}\` does not: **${missing[*]}**."
+    say ""
+    say "They were deployed from a newer branch (normally \`main\`). Nothing was changed."
+    say "**Fix:** run the workflow again and pick **main** in the *Use workflow from* dropdown,"
+    say "or merge \`main\` into this branch first. Do not use \`supabase migration repair\`."
+    exit 1
+  fi
+fi
 
 # A schema with no migration history means the migrations were applied by
 # hand. `db push` would then try to run all of them again and fail halfway,

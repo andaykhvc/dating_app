@@ -5,6 +5,10 @@ name: Deploy database
 # → Run workflow): a database change should never happen as a side effect of a
 # merge.
 #
+# Before you run it: in "Use workflow from" pick the branch that has the
+# migrations you want live, normally main. A branch that is behind the
+# database makes the run stop with an explanation; it never breaks anything.
+#
 # One-time setup — see docs/deploying-the-database.md:
 #   Settings → Secrets and variables → Actions → New repository secret
 #   SUPABASE_DB_URL = the Session pooler connection string, password included
@@ -13,15 +17,15 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Dry run: show what would happen, change nothing"
+        description: "1. Dry run (rehearsal)? ON = only show what would change, nothing is written. OFF = really update the live database. Always run ON first."
         type: boolean
         default: true
       seed_course:
-        description: "Also load the course content (supabase/seed/001*_learn_*.sql; safe to re-run)"
+        description: "2. Also load the course content (lessons and texts in every language)? Runs after the migrations; safe to repeat, it updates rows and never duplicates them."
         type: boolean
         default: true
       mark_applied_through:
-        description: "Only if the first run stopped and asked for it: last migration already in the database (e.g. 9998)"
+        description: "3. Leave EMPTY normally. Only fill in if a run stopped and told you to: the last migration already in the database, e.g. 9998."
         type: string
         default: ""
 

@@ -4,11 +4,9 @@ name: Android APK
 # deployed site full-screen in Chrome) and publishes the signed APK as a
 # GitHub Release.
 #
-# - Actions -> Android APK -> Run workflow: builds and creates a release
-#   tagged android-v<version>.
-# - Pushing a tag like android-v1.2.0 does the same for that tag.
-# - PRs that touch the Android setup only build it, as a check; nothing is
-#   released.
+# On demand only: Actions -> Android APK -> Run workflow builds the APK and
+# creates a release tagged android-v<version>. Nothing builds it automatically
+# (no tag or PR triggers).
 #
 # Web changes reach the app without a new APK, because the APK only loads the
 # site. Release again only when android/twa-manifest.json, the icons or
@@ -20,18 +18,10 @@ on:
         description: "Version name, e.g. 1.2.0 (blank: 1.0.<run number>)"
         required: false
         type: string
-  push:
-    tags: ["android-v*"]
-  pull_request:
-    branches: [main]
-    paths:
-      - "android/**"
-      - "public/.well-known/**"
-      - ".github/workflows/android-release.yml"
 
 concurrency:
   group: android-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -52,9 +42,7 @@ jobs:
         env:
           INPUT_VERSION: ${{ inputs.version }}
         run: |
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            name="${GITHUB_REF_NAME#android-v}"
-          elif [ -n "$INPUT_VERSION" ]; then
+          if [ -n "$INPUT_VERSION" ]; then
             name="${INPUT_VERSION#v}"
           else
             name="1.0.${GITHUB_RUN_NUMBER}"
@@ -144,7 +132,6 @@ jobs:
           if-no-files-found: error
 
       - name: Publish release
-        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
           APK: ${{ steps.sign.outputs.apk }}
