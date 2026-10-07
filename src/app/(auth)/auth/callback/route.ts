@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { safeNextPath } from "@/lib/redirect";
 
 /**
  * The only Route Handler in the app. Exchanging an email-confirmation code for
@@ -9,7 +10,7 @@ import { createClient } from "@/lib/supabase/server";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl;
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/onboarding/basics";
+  const next = safeNextPath(searchParams.get("next"), "/onboarding/basics");
 
   if (code) {
     const supabase = await createClient();

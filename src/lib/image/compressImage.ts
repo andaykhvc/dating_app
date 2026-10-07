@@ -51,9 +51,14 @@ async function encode(
 
   ctx.drawImage(bitmap, 0, 0, width, height);
 
-  const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve, "image/webp", quality),
-  );
+  const toBlob = (type: string) =>
+    new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, type, quality));
+
+  // A browser that cannot encode WebP (some Safari versions cannot) silently returns a PNG
+  // instead, which for a 1280px photo is several megabytes and over the
+  // bucket's 2 MB limit. JPEG at the same quality stays small.
+  let blob = await toBlob("image/webp");
+  if (blob && blob.type !== "image/webp") blob = await toBlob("image/jpeg");
 
   if (!blob) throw new Error("Could not process this image.");
   return blob;

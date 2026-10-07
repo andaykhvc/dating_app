@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { SelectableChip } from "@/components/ui/Chip";
 import { StepShell } from "@/features/onboarding/components/StepShell";
 import { createClient } from "@/lib/supabase/client";
+import { saveInterests } from "@/features/profile/saveLists";
 import type { Interest } from "@/types/domain";
 
 const MIN_INTERESTS = 2;
@@ -38,13 +39,9 @@ export function InterestsStep({
     const supabase = createClient();
     const userId = (await supabase.auth.getUser()).data.user!.id;
 
-    await supabase.from("user_interests").delete().eq("user_id", userId);
-    const { error: insertError } = await supabase
-      .from("user_interests")
-      .insert(selected.map((id) => ({ user_id: userId, interest_id: id })));
-
-    if (insertError) {
-      setError(insertError.message);
+    const failure = await saveInterests(supabase, userId, selected);
+    if (failure) {
+      setError(failure);
       setSaving(false);
       return;
     }

@@ -46,13 +46,15 @@ export function PhotoManager({
     const path = `${userId}/${crypto.randomUUID()}.webp`;
     try {
       const { full, thumb } = await compressImage(file);
-      const options = { contentType: "image/webp", upsert: false };
+      // Content type follows what the browser actually produced (WebP, or JPEG
+      // where WebP encoding is unavailable); the bucket allows both.
+      const typed = (blob: Blob) => ({ contentType: blob.type, upsert: false });
 
       // A failed thumbnail only costs bandwidth — avatars fall back to the
       // full photo — so only the full upload's error fails the step.
       const [fullUpload] = await Promise.all([
-        bucket.upload(path, full, options),
-        bucket.upload(thumbPath(path), thumb, options),
+        bucket.upload(path, full, typed(full)),
+        bucket.upload(thumbPath(path), thumb, typed(thumb)),
       ]);
       if (fullUpload.error) throw fullUpload.error;
 

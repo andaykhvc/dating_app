@@ -13,6 +13,7 @@ import { IntentionPicker } from "@/features/profile/IntentionPicker";
 import { AgeRangeSlider } from "@/features/profile/AgeRangeSlider";
 import { CountryPicker } from "@/features/profile/CountryPicker";
 import { createClient } from "@/lib/supabase/client";
+import { saveInterests, saveLanguages } from "@/features/profile/saveLists";
 import { CEFR_DESCRIPTIONS, COUNTRIES } from "@/lib/constants";
 import {
   CEFR_LEVELS,
@@ -113,28 +114,17 @@ export function EditProfileForm({
       return;
     }
 
-    await supabase.from("user_languages").delete().eq("user_id", userId);
-    const { error: langError } = await supabase.from("user_languages").insert([
-      { user_id: userId, language_code: form.native, role: "native", cefr_level: null },
-      {
-        user_id: userId,
-        language_code: form.learning,
-        role: "learning",
-        cefr_level: form.level,
-      },
-    ]);
+    const listError =
+      (await saveLanguages(supabase, userId, {
+        native: form.native,
+        learning: form.learning,
+        level: form.level,
+      })) ?? (await saveInterests(supabase, userId, form.interestIds));
 
-    if (langError) {
-      setError(langError.message);
+    if (listError) {
+      setError(listError);
       setSaving(false);
       return;
-    }
-
-    await supabase.from("user_interests").delete().eq("user_id", userId);
-    if (form.interestIds.length > 0) {
-      await supabase
-        .from("user_interests")
-        .insert(form.interestIds.map((id) => ({ user_id: userId, interest_id: id })));
     }
 
     router.push("/profile");

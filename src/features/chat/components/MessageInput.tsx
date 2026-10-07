@@ -26,6 +26,7 @@ export function MessageInput({
   const [value, setValue] = useState(initialValue);
   const [showNote, setShowNote] = useState(Boolean(draftNote && initialValue));
   const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -44,12 +45,17 @@ export function MessageInput({
     const body = value.trim();
     if (!body || sending) return;
     setSending(true);
+    setSendError(null);
     setShowNote(false);
     setValue("");
     try {
       await onSend(body);
     } catch {
-      setValue(body);
+      // Put the text back for another try, unless they have already started
+      // typing something else, and say what happened: the message used to
+      // vanish and reappear with no explanation.
+      setValue((typed) => typed || body);
+      setSendError("Message not sent. Check your connection and try again.");
     } finally {
       setSending(false);
     }
@@ -89,12 +95,24 @@ export function MessageInput({
         </div>
       )}
 
+      {sendError && (
+        <p
+          role="alert"
+          className="mx-auto max-w-3xl px-gutter pt-2 text-xs font-medium text-negative"
+        >
+          {sendError}
+        </p>
+      )}
+
       <div className="mx-auto flex max-w-3xl items-end gap-2 px-gutter py-2.5 md:py-3">
         {/* 16px text: anything smaller and iOS zooms the page on focus. */}
         <textarea
           ref={inputRef}
           value={value}
-          onChange={(e) => setValue(e.target.value.slice(0, 2000))}
+          onChange={(e) => {
+            setValue(e.target.value.slice(0, 2000));
+            setSendError(null);
+          }}
           onKeyDown={(e) => {
             // Enter while an IME is composing (Japanese, Chinese, Korean…)
             // confirms the characters; it must not send a half-typed message.
