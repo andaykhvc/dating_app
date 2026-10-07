@@ -41,9 +41,20 @@ itself: it only runs when started by hand from the Actions tab.
 
 | Option | What it does |
 | --- | --- |
-| **Dry run** (on by default) | Shows what would happen and changes nothing. Always start with this. |
-| **Also load the course content** (on by default) | After the migrations, runs `supabase/seed/001*_learn_*.sql`. Safe to repeat: it updates rows in place, never duplicates them. |
-| **mark_applied_through** (empty by default) | Only needed once, if the first run stops and asks for it (see below). |
+| **Use workflow from** (branch) | The branch whose migrations get applied. Pick **main** unless you are testing something. A branch that is behind the database makes the run stop with an explanation and change nothing. |
+| **1. Dry run** (on by default) | A rehearsal: shows which migrations and content files would run and changes nothing. Always run it first, then run again with it off. |
+| **2. Also load the course content** (on by default) | After the migrations, runs `supabase/seed/001*_learn_*.sql`. Safe to repeat: it updates rows in place, never duplicates them. |
+| **3. mark_applied_through** (empty by default) | Leave empty. Only fill it in if a run stopped and asked for it (see below). |
+
+The top of every run's summary repeats the branch and the options used, so you
+can tell afterwards what a run was.
+
+### If a run stops
+
+| Message | Meaning | What to do |
+| --- | --- | --- |
+| *this branch is behind the database* | The database has migrations that your branch lacks, because they were deployed from a newer branch. | Run again from **main**, or merge `main` into the branch. |
+| *the database has tables but no migration history* | The earlier migrations were pasted into the SQL editor. | Set **mark_applied_through** as described below. |
 
 Each run ends with a summary on the run's page: how many texts each language
 has and how many lessons are active.
