@@ -3,6 +3,7 @@ import { LogoMark } from "@/components/icons";
 import { HeroPreview } from "@/components/marketing/HeroPreview";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { APP_NAME, VALUE_PROPS } from "@/lib/constants";
+import { PrivacyLinks } from "@/components/legal/PrivacyLinks";
 
 export default function LandingPage() {
   return (
@@ -73,6 +74,7 @@ export default function LandingPage() {
               Licenses
             </Link>
           </p>
+          <footer><PrivacyLinks /></footer>
         </div>
       </div>
 

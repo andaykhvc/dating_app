@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/client";
 import { APP_NAME } from "@/lib/constants";
 import { InstallSettings } from "@/features/install/InstallSettings";
+import { PrivacyLinks } from "@/components/legal/PrivacyLinks";
 
 type BlockedUser = {
   user_id: string;
@@ -116,6 +117,10 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
         Licenses &amp; attributions
         <span aria-hidden className="text-faint">›</span>
       </Link>
+
+      <section className="rounded-3xl border border-line bg-raised p-3">
+        <PrivacyLinks />
+      </section>
 
       <Button variant="secondary" fullWidth onClick={signOut}>
         Sign out
