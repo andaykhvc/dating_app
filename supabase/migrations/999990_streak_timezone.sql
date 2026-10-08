@@ -1,4 +1,4 @@
--- 9999991_streak_timezone.sql
+-- 999990_streak_timezone.sql
 -- Streak fixes (issue #26).
 --
 -- Root causes:
@@ -309,3 +309,7 @@ begin
 end;
 $$;
 
+
+-- Version note: 999990 sorts after 99998 and before every other 99999x
+-- migration. Practice runs (999998) redefine get_play_overview too and include
+-- the effective-streak line above, so this one must run before it.
