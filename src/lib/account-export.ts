@@ -65,6 +65,8 @@ export const EXCLUDED_TABLES: Record<string, string> = {
   content_sources: "Content licensing records, not personal data.",
   content_import_batches: "Content import logs, not personal data.",
   courses: "Course content, not personal data.",
+  blocked_terms: "Moderation word list written by us, not personal data (and kept private on purpose).",
+  name_allowlist: "Moderation allow-list written by us, not personal data.",
   units: "Course content, not personal data.",
   skills: "Course content, not personal data.",
   lessons: "Course content, not personal data.",
