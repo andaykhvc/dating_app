@@ -75,6 +75,7 @@ export const EXCLUDED_TABLES: Record<string, string> = {
   lesson_concepts: "Course content, not personal data.",
   exercise_templates: "Course content, not personal data.",
   lesson_sessions: "Exported via a function that leaves out the answer-key column.",
+  practice_runs: "Holds the generated cards with their answer keys and is closed to the browser. What it earned is in xp_events and what was learned in concept_progress; a key-free summary can be added later.",
   data_export_requests: "Rate-limit bookkeeping for this export.",
 };
 
