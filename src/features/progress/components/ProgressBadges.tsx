@@ -37,7 +37,7 @@ export function StreakFlame({ days }: { days: number }) {
         "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
         alive ? "bg-accent-soft text-accent" : "bg-sunken text-faint",
       )}
-      title={alive ? `${days} day streak` : "No streak yet — earn XP today"}
+      title={alive ? `${days} day streak` : "No streak — practise today to start one"}
     >
       <FlameIcon className="size-3.5" />
       {days}
