@@ -488,3 +488,52 @@ Seed files total ≈ 1.3 MB.
 - Listening depends on device voices; there is no pronunciation scoring.
 - Match-pairs gives feedback once all pairs are made, because the key stays
   server-side.
+
+## Practice runs (Daily and Quick challenges)
+
+The Learn tab's Daily challenge and Quick challenges are generated from the same
+content as lessons: a **practice run** is a deck of five cards built by the same
+generators (`learn_compose` / `learn_build_exercise`), graded by `learn_grade`,
+recorded in `user_concept_progress` (spaced repetition) and paid in XP once, at
+the end. Missions and partner challenges still use the old `game_templates`
+engine and are not affected. Migration: `supabase/migrations/999998_practice_runs.sql`.
+
+| RPC | What it does |
+| :--- | :--- |
+| `start_practice_run(p_kind, p_exercise_type, p_audio)` | `p_kind` is `daily` or `quick`. `p_exercise_type` (quick only): `meaning`, `build`, `type`, `listen`, `mixed`. Returns the stripped run, or `{available:false, reason}` (`no_course`, `not_enough_content`) instead of an error. |
+| `get_practice_run(p_run_id)` | The same payload for a refresh or deep link, including answers already given. `null` for someone else's run. |
+| `answer_practice_card(p_run_id, p_card_index, p_answer)` | Grades one card; returns `{correct, note, solution, expected, graded}`. Idempotent: answering twice returns the first verdict. |
+| `finish_practice_run(p_run_id)` | Awards XP via `grant_xp()` and returns the summary. Idempotent: a second call grants nothing. |
+
+**Card choice.** Up to eight concepts are picked: two due for review, two already
+met, the rest new and at the learner's CEFR level (falling back to anything with
+both translations). `learn_compose` turns them into five exercises from a plan that
+depends on the style; slots the content cannot fill are skipped. Fewer than three
+cards means "not enough content yet".
+
+**Daily** is seeded from user + date (`setseed`, so the generators' `random()` is
+reproducible) and is the same all day: the first run of the day fixes the deck and
+repeats replay it (picking again would give another deck, because answering moves
+concepts between "new", "met" and "due"). An unfinished daily run is resumed.
+**Quick** is random on every call. "Today" is the UTC day, like the rest of the
+Play hub.
+
+**Answer keys never reach the client.** `practice_runs` has no client policy or
+grants (like `lesson_sessions`); cards are returned through
+`learn_strip_exercises`, and the key for a card is returned only after it has been
+answered.
+
+**XP rules** are constants in one place, `practice_rules()`:
+
+| | |
+| :--- | :--- |
+| Needed for any XP | 3 first-try correct answers out of 5 |
+| Daily | 15 XP for the first rewarded run of the day, 5 XP for later runs |
+| Quick | 10 XP |
+| Perfect run (5/5) | +5 XP |
+
+Skipped listening cards are not scored (like in lessons).
+
+`get_play_overview()` takes `daily_challenge` and `practice` from this engine; the
+keys keep their old shape (`game_template_id` is now `null`, new `kind`/`style`).
+`completed_today` reflects completed daily runs. Tests: `supabase/tests/test_practice_runs.sql`.

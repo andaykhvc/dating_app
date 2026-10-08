@@ -7,7 +7,7 @@ import { Instruction, type ExerciseProps } from "./shared";
 /** Four tints so each pairing is visibly "these two belong together". */
 const PAIR_TINTS = [
   "border-brand bg-brand-soft text-brand",
-  "border-accent bg-accent-soft text-accent",
+  "border-accent bg-accent-soft text-accent-ink",
   "border-[#0e7c86] bg-[#e1f4f5] text-[#0e7c86] dark:border-[#4fd1db] dark:bg-[#10292b] dark:text-[#4fd1db]",
   "border-[#9b3bb0] bg-[#f6e8fa] text-[#9b3bb0] dark:border-[#d88ae9] dark:bg-[#2a1830] dark:text-[#d88ae9]",
 ];

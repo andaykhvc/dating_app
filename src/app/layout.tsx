@@ -4,6 +4,7 @@ import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
 import { ThemeSync } from "@/features/appearance/ThemeSync";
 import { THEME_COLORS, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { InstallAppProvider } from "@/features/install/InstallAppProvider";
+import { LegalLinks } from "@/components/legal/LegalLinks";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -52,6 +53,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <ThemeSync />
         <InstallAppProvider>{children}</InstallAppProvider>
+        <footer className="safe-bottom border-t border-line px-gutter py-4">
+          <LegalLinks />
+        </footer>
       </body>
     </html>
   );

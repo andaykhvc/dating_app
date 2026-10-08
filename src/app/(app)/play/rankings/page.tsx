@@ -29,7 +29,7 @@ function RankingRow({
       <span
         className={cn(
           "w-9 shrink-0 text-center text-sm font-bold tabular-nums",
-          entry.rank <= 3 ? "text-accent" : "text-muted",
+          entry.rank <= 3 ? "text-accent-ink" : "text-muted",
         )}
       >
         #{entry.rank}
