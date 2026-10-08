@@ -14,7 +14,7 @@ export const privacyEn: PrivacyPolicy = {
     "Messages are available in the app to the participants in the relevant match. Profile photos can be accessed publicly through their image URLs.",
     "Exercise answers and progress support lessons, reviews, XP, and rankings.",
     "The reviewed app code has no advertising trackers, analytics SDKs, or Firebase push integration.",
-    "The electronic privacy contact, production infrastructure, retention rules, and consent for sensitive information must be completed before this notice is approved.",
+    "Production infrastructure, retention rules, and consent for sensitive information must be completed before this notice is approved.",
   ],
   sections: [
     {
@@ -23,7 +23,7 @@ export const privacyEn: PrivacyPolicy = {
         "The controller (Verantwortlicher) under Article 4(7) GDPR is the person or organisation identified below, who determines why and how personal data is processed. Lingua Match is the product name, not a substitute for the controller's legal identity.",
         "Use the contact details below for privacy requests. Whether a data protection officer must be appointed, and their contact details where applicable, needs a separate assessment. An empty field does not mean that assessment has been completed.",
       ],
-      gap: "The operator has supplied the legal name and postal address shown below. The email address and DPO assessment are still outstanding. Privacy requests can already be sent to the postal address.",
+      gap: "The DPO appointment assessment and any required DPO contact details remain outstanding. Privacy requests can be sent by email or post using the contact details above.",
     },
     {
       id: "scope-sources", title: "2. Scope, minimum age, and sources of data",
@@ -169,7 +169,7 @@ export const privacyEn: PrivacyPolicy = {
         "Withdrawal of consent under Article 7(3) for future processing, without affecting the lawfulness of prior processing. Withdrawal must be as easy as giving consent.",
         "Rights concerning Article 22 decisions where such processing is introduced and the statutory conditions apply.",
       ],
-      gap: "Settings currently has no self-service account deletion or data download. You can write to the postal address in section 1; an electronic contact is still to be supplied. The controller must ensure timely handling, including identity checks, gathering records, and actually carrying out erasure.",
+      gap: "Settings currently has no self-service account deletion or data download. You can send requests by email or post using the contact details in section 1. The controller must ensure timely handling, including identity checks, gathering records, and actually carrying out erasure.",
       links: [{ label: "European Commission — data-subject rights", href: sources.rights }],
     },
     {
@@ -191,7 +191,7 @@ export const privacyEn: PrivacyPolicy = {
         "The version and review date appear at the top of this notice. Changes in features, recipients, or purposes require the text to be reviewed. Updating this text does not create a legal basis or replace consent required for a new purpose.",
         "German is the primary editorial edition; this English version describes the same reviewed implementation. That editorial order does not limit statutory rights or mandatory information duties in a language people can understand.",
       ],
-      gap: "Approval remains pending for the electronic contact address, the DPO assessment, actual providers/regions/contracts, transfer safeguards, retention, cookie audit, and sensitive-data consent. The draft marking remains visible until these are resolved.",
+      gap: "Approval remains pending for the DPO assessment, actual providers/regions/contracts, transfer safeguards, retention, cookie audit, and sensitive-data consent. The draft marking remains visible until these are resolved.",
     },
   ],
 };

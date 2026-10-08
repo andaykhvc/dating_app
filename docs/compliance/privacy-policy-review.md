@@ -1,6 +1,6 @@
 # Datenschutz: Prüfgrundlage und offene Freigabe
 
-Stand: 8. Oktober 2026 · Version `2026-10-08-draft.1` · Issue #39, Teil von #17.
+Stand: 8. Oktober 2026 · Version `2026-10-08-draft.2` · Issue #39, Teil von #17.
 
 Die deutsche Fassung ist primär verfasst, die englische Ausgabe erläutert denselben Stand. Beide sind **Entwürfe zur menschlichen/rechtlichen Prüfung**. Diese Umsetzung stellt keine rechtliche Freigabe und keine Fertigstellung der übrigen Compliance-Issues dar.
 
@@ -8,7 +8,7 @@ Die deutsche Fassung ist primär verfasst, die englische Ausgabe erläutert dens
 
 `docs/compliance/data-inventory.md` aus #37 liegt auf dem geprüften Basisstand `eac3ea5` noch nicht vor. Nach der ausdrücklichen Prioritätsanweisung des Betreibers in #39 wurde daher direkt aus Code und Migrationen gearbeitet. Die folgende Zuordnung ist die begrenzte Prüfgrundlage dieses Textes; sie ersetzt nicht das umfassende Verarbeitungsverzeichnis aus #37. Nach dessen Fertigstellung sind Abweichungen mit beiden Sprachfassungen abzugleichen.
 
-Die gemeinsame Betreiberkonfiguration aus #41 liegt noch nicht vor. Deshalb wird `src/lib/legal.ts` hier eingeführt; #41 soll sie weiterverwenden. Vom Betreiber am 8. Oktober bestätigt: **Anday Sahin Kahveci, Wundtstr. 5, 01217 Dresden, Deutschland**. Die E-Mail-Adresse wird später geliefert. Keine Telefonnummer, Gesellschaftsform, Register-/USt-ID oder DPO-Angabe wurde erfunden. Die Postanschrift ist bereits als Weg für Datenschutzanträge angegeben.
+Die gemeinsame Betreiberkonfiguration aus #41 liegt noch nicht vor. Deshalb wird `src/lib/legal.ts` hier eingeführt; #41 soll sie weiterverwenden. Vom Betreiber am 8. Oktober bestätigt: **Anday Sahin Kahveci, Wundtstr. 5, 01217 Dresden, Deutschland**. Die ebenfalls bestätigte allgemeine Kontakt- und Datenschutzadresse lautet **contact@linguamatch.online**. Keine Telefonnummer, Gesellschaftsform, Register-/USt-ID oder DPO-Angabe wurde erfunden. Datenschutzanträge können per E-Mail oder an die Postanschrift gerichtet werden.
 
 ## Abgleich mit dem geprüften Code
 
@@ -38,7 +38,7 @@ Die 16 Abschnitte beider Seiten behandeln Verantwortlichen/Kontakt/DPO, direkte 
 
 Vor dem Entfernen der Entwurfskennzeichnung:
 
-- Elektronische Kontaktadresse ergänzen und tatsächliche Bearbeitung postalischer/elektronischer Anträge organisatorisch sicherstellen. DPO-Benennungspflicht prüfen.
+- Die tatsächliche Bearbeitung postalischer/elektronischer Anträge organisatorisch sicherstellen. DPO-Benennungspflicht prüfen.
 - Vertragsgrundlage, freiwillige Felder und Interessenabwägungen je Zweck prüfen; sensible Verarbeitung mit expliziter Einwilligung und Widerrufsverfahren aus #42 klären.
 - Vertragliche Anbieteridentität, AV-Verträge, Projekt-/Funktions-/Logregionen, Unterauftragnehmer und einschlägige Drittlandgarantien bestätigen. Die veröffentlichten DPA-Templates beweisen keinen abgeschlossenen eigenen Vertrag.
 - **Vercels veröffentlichtes DPA, Schedule 1 Abschnitt 6, untersagt sensible Customer Data.** Den tatsächlichen Datenfluss, den geltenden Vertragsstand und die Vereinbarkeit prüfen; keine DSGVO-Zulässigkeit aus der Hosting-Wahl ableiten.
@@ -48,7 +48,7 @@ Vor dem Entfernen der Entwurfskennzeichnung:
 
 ## Konfiguration, Metadaten und Zugang
 
-`LEGAL_ENTITY` enthält die vom Betreiber bestätigten Name-/Adresswerte als Vorgabe. Öffentlich verwendete Overrides: `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` (echte Zeilenumbrüche), `NEXT_PUBLIC_LEGAL_EMAIL`, `NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL`, `NEXT_PUBLIC_LEGAL_DPO`. Für #41 sind zusätzlich `NEXT_PUBLIC_LEGAL_PHONE`, `NEXT_PUBLIC_LEGAL_FORM`, `NEXT_PUBLIC_LEGAL_REPRESENTATIVE`, `NEXT_PUBLIC_LEGAL_REGISTER`, `NEXT_PUBLIC_LEGAL_VAT_ID` vorgesehen; sie sind aktuell leer und werden nicht als Pflichtangaben für jeden Betreiber ausgegeben. Alle Werte sind öffentliche Kontaktdaten, keine Secrets. Die Datenschutzadresse fällt auf die allgemeine E-Mail zurück.
+`LEGAL_ENTITY` enthält die vom Betreiber bestätigten Name-/Adress-/E-Mail-Werte als Vorgabe. Öffentlich verwendete Overrides: `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` (echte Zeilenumbrüche), `NEXT_PUBLIC_LEGAL_EMAIL`, `NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL`, `NEXT_PUBLIC_LEGAL_DPO`. Für #41 sind zusätzlich `NEXT_PUBLIC_LEGAL_PHONE`, `NEXT_PUBLIC_LEGAL_FORM`, `NEXT_PUBLIC_LEGAL_REPRESENTATIVE`, `NEXT_PUBLIC_LEGAL_REGISTER`, `NEXT_PUBLIC_LEGAL_VAT_ID` vorgesehen; sie sind aktuell leer und werden nicht als Pflichtangaben für jeden Betreiber ausgegeben. Alle Werte sind öffentliche Kontaktdaten, keine Secrets. Die Datenschutzadresse fällt auf die allgemeine E-Mail zurück.
 
 Die Seiten sind statisch, verwenden keine Kontoabfragen und umgehen nur für die **exakten** Pfade `/datenschutz` und `/privacy` den Auth-Refresh. App-Pfade bleiben geschützt. Landeseite, gemeinsames Auth-Layout und Einstellungen verlinken beide Fassungen. Es gibt auf diesem Basisstand keine Sitemap-/Robots-Datei zur Erweiterung. Jede Seite hat ihren eigenen Canonical, gegenseitige Sprachalternativen und `x-default` zur deutschen Fassung. `NEXT_PUBLIC_SITE_URL` legt den Ursprung fest; Vorgabe ist die bestehende App-Domain. Im Entwurfsmodus und bei fehlenden notwendigen Betreiberangaben gilt `noindex, follow`. Öffentliche Konfiguration wird beim Build übernommen; Änderungen erfordern einen neuen Build. Änderungen der Betreiberanschrift verlangen zusätzlich einen erneuten Abgleich der im Text genannten Aufsichtsbehörde.
 
@@ -78,7 +78,7 @@ Der geprüfte Ablauf ist: öffentliche Navigation → exakter Legal-Pfad im Prox
 | Build | `npm run build` erfolgreich mit denselben Platzhalter-Supabase-Werten wie CI; beide Legal-Routen als `○ (Static)` ausgegeben. |
 | Browser → Seiten | Installiertes Chrome, frische Kontexte ohne Login: jeweils HTTP 200 für DE/EN bei 390 × 844 und 1280 × 900, hell/dunkel (acht Kombinationen). |
 | Darstellung / Navigation | Kein horizontaler Überlauf, keine doppelten IDs, alle 16 Inhaltsanker vorhanden, Links mindestens 44 px hoch, sichtbarer Tastaturfokus, Sprachwechsel erfolgreich. Zwölf Screenshots einschließlich Betreiberabschnitt: `docs/screenshots/privacy/`. |
-| Metadaten | Tatsächlich gerendert: jeweiliger Canonical, DE/EN/`x-default`, `noindex, follow`; sichtbarer Entwurfsbanner, Name/Postadresse und fehlende E-Mail. |
+| Metadaten | Tatsächlich gerendert: jeweiliger Canonical, DE/EN/`x-default`, `noindex, follow`; sichtbarer Entwurfsbanner, Name/Postadresse sowie die bestätigte E-Mail mit funktionierendem `mailto:`-Link. |
 | Entry-Points | Beide Links auf `/`, `/login`, `/signup`, `/verify-email`; Aufruf der deutschen Fassung jeweils erfolgreich. Settings-Integration am Code geprüft; keine angemeldete Settings-Sitzung gegen Produktion getestet. |
 | Auth-Grenze / Backend | `/profile/settings` führt abgemeldet weiterhin zu `/login`. Keine Supabase-Browserrequests oder uncaught Browserfehler bei den Legal-Seiten; der Proxy gibt dort vor Client-Erstellung/`getUser()` zurück. |
 | Server | Produktionsserver startete mit `✓ Ready`; bei der Browserprüfung keine Serverfehler ausgegeben. |

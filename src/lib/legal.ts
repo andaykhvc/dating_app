@@ -14,12 +14,12 @@ export type LegalEntity = {
 
 const value = (input: string | undefined) => input?.trim() || null;
 
-// Name/address were supplied by the owner. Missing facts remain null.
+// Name/address/email were supplied by the owner. Missing facts remain null.
 // These are deliberately public contact details, never credentials.
 export const LEGAL_ENTITY: LegalEntity = {
   name: value(process.env.NEXT_PUBLIC_LEGAL_NAME) ?? "Anday Sahin Kahveci",
   address: value(process.env.NEXT_PUBLIC_LEGAL_ADDRESS) ?? "Wundtstr. 5\n01217 Dresden\nDeutschland",
-  email: value(process.env.NEXT_PUBLIC_LEGAL_EMAIL),
+  email: value(process.env.NEXT_PUBLIC_LEGAL_EMAIL) ?? "contact@linguamatch.online",
   privacyEmail: value(process.env.NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL),
   phone: value(process.env.NEXT_PUBLIC_LEGAL_PHONE),
   legalForm: value(process.env.NEXT_PUBLIC_LEGAL_FORM),

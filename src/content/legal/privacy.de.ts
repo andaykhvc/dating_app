@@ -14,7 +14,7 @@ export const privacyDe: PrivacyPolicy = {
     "Nachrichten sind innerhalb der App den Beteiligten des jeweiligen Matches zugänglich. Profilfotos sind über ihre Bildadresse öffentlich abrufbar.",
     "Wir verarbeiten Lernantworten und Fortschritte für Übungen, Wiederholungen, XP und Ranglisten.",
     "Der geprüfte App-Code enthält keine Werbetracker, keine Analyse-SDKs und keine Firebase-Push-Integration.",
-    "Elektronischer Datenschutzkontakt, konkrete Infrastruktur, Löschfristen und die Einwilligung für sensible Angaben müssen vor einer endgültigen Veröffentlichung vervollständigt werden.",
+    "Konkrete Infrastruktur, Löschfristen und die Einwilligung für sensible Angaben müssen vor einer endgültigen Veröffentlichung vervollständigt werden.",
   ],
   sections: [
     {
@@ -23,7 +23,7 @@ export const privacyDe: PrivacyPolicy = {
         "Verantwortlicher im Sinne des Art. 4 Nr. 7 DSGVO ist die nachstehend bezeichnete Person oder Gesellschaft, die über Zwecke und Mittel der Verarbeitung entscheidet. Lingua Match ist die Produktbezeichnung; sie ersetzt nicht die rechtliche Identität des Verantwortlichen.",
         "Für Datenschutzanfragen verwenden Sie die unten angegebene Kontaktadresse. Ob ein Datenschutzbeauftragter zu benennen ist und gegebenenfalls dessen Kontaktdaten, ist gesondert zu prüfen. Eine nicht ausgefüllte Angabe bedeutet nicht, dass diese Prüfung bereits erfolgt ist.",
       ],
-      gap: "Name und Postanschrift wurden vom Betreiber angegeben. Die E-Mail-Adresse steht noch aus; auch die Prüfung einer Benennungspflicht für einen Datenschutzbeauftragten ist offen. Datenschutzanfragen können bereits an die angegebene Postanschrift gerichtet werden.",
+      gap: "Die Prüfung einer Benennungspflicht für einen Datenschutzbeauftragten und gegebenenfalls dessen Kontaktdaten ist noch offen. Datenschutzanfragen können per E-Mail oder schriftlich an die oben angegebenen Kontaktdaten gerichtet werden.",
     },
     {
       id: "scope-sources", title: "2. Anwendungsbereich, Mindestalter und Datenquellen",
@@ -169,7 +169,7 @@ export const privacyDe: PrivacyPolicy = {
         "Widerruf einer Einwilligung nach Art. 7 Abs. 3 DSGVO jederzeit mit Wirkung für die Zukunft. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt. Der Widerruf darf nicht schwieriger sein als die Erteilung.",
         "Die Rechte bei Entscheidungen nach Art. 22 DSGVO, soweit eine solche Entscheidung eingesetzt wird und die gesetzlichen Voraussetzungen erfüllt sind.",
       ],
-      gap: "Eine selbst bedienbare Funktion „Konto löschen“ oder „Meine Daten herunterladen“ gibt es in den derzeitigen Einstellungen noch nicht. Anträge können schriftlich an die Postanschrift in Abschnitt 1 gerichtet werden. Die elektronische Kontaktadresse steht noch aus. Der Verantwortliche muss die fristgerechte Bearbeitung einschließlich Identitätsprüfung, Datenzusammenstellung und tatsächlicher Löschung organisatorisch sicherstellen.",
+      gap: "Eine selbst bedienbare Funktion „Konto löschen“ oder „Meine Daten herunterladen“ gibt es in den derzeitigen Einstellungen noch nicht. Anträge können per E-Mail oder schriftlich an die in Abschnitt 1 angegebenen Kontaktdaten gerichtet werden. Der Verantwortliche muss die fristgerechte Bearbeitung einschließlich Identitätsprüfung, Datenzusammenstellung und tatsächlicher Löschung organisatorisch sicherstellen.",
       links: [{ label: "Europäische Kommission — Betroffenenrechte", href: sources.rights }],
     },
     {
@@ -191,7 +191,7 @@ export const privacyDe: PrivacyPolicy = {
         "Versionsnummer und Bearbeitungsstand dieser Erklärung finden Sie am Seitenanfang. Bei Änderungen der Funktionen, Empfänger oder Zwecke muss die Erklärung angepasst werden. Eine Textänderung allein ersetzt weder eine neue Rechtsgrundlage noch eine für neue Zwecke erforderliche Einwilligung.",
         "Die deutsche Fassung ist die primär erstellte Fassung dieses Entwurfs; die englische Ausgabe erläutert denselben geprüften Stand. Dadurch werden gesetzliche Rechte oder zwingende Informationspflichten in einer verständlichen Sprache nicht eingeschränkt.",
       ],
-      gap: "Freigabe ausstehend: elektronische Kontaktadresse, Datenschutzbeauftragten-Prüfung, tatsächliche Dienstleister/Regionen und Verträge, Drittlandgarantien, Löschkonzept, Cookie-Audit und ausdrückliche Einwilligung für sensible Daten. Bis zur Klärung bleibt die sichtbare Entwurfskennzeichnung bestehen.",
+      gap: "Freigabe ausstehend: Datenschutzbeauftragten-Prüfung, tatsächliche Dienstleister/Regionen und Verträge, Drittlandgarantien, Löschkonzept, Cookie-Audit und ausdrückliche Einwilligung für sensible Daten. Bis zur Klärung bleibt die sichtbare Entwurfskennzeichnung bestehen.",
     },
   ],
 };

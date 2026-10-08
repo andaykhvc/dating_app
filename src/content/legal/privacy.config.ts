@@ -1,5 +1,5 @@
 /** Both language editions share the consent/reference version and review date. */
-export const PRIVACY_VERSION = "2026-10-08-draft.1";
+export const PRIVACY_VERSION = "2026-10-08-draft.2";
 export const PRIVACY_LAST_UPDATED = "2026-10-08";
 
 export const PRIVACY_SOURCES = {
