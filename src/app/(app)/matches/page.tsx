@@ -5,6 +5,7 @@ import { PageBody } from "@/components/layout/Page";
 import { Avatar } from "@/components/ui/Avatar";
 import { getActiveMatches } from "@/lib/supabase/queries";
 import { COUNTRY_BY_CODE } from "@/lib/constants";
+import { FORWARD, PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Matches" };
 
@@ -12,7 +13,7 @@ export default async function MatchesPage() {
   const matches = await getActiveMatches();
 
   return (
-    <>
+    <PushTransition>
       <TopBar
         title="Matches"
         width="wide"
@@ -24,8 +25,8 @@ export default async function MatchesPage() {
       />
 
       {matches.length === 0 ? (
-        <div className="flex flex-1 flex-col items-center justify-center px-8 py-12 text-center">
-          <div className="flex size-16 items-center justify-center rounded-2xl bg-brand-soft text-2xl">
+        <div className="stagger flex flex-1 flex-col items-center justify-center px-8 py-12 text-center">
+          <div className="flex size-20 items-center justify-center rounded-[1.5rem] bg-brand-soft text-3xl shadow-[var(--shadow-card)]">
             🤝
           </div>
           <h2 className="mt-5 text-xl font-bold text-ink">No matches yet</h2>
@@ -35,7 +36,7 @@ export default async function MatchesPage() {
           </p>
           <Link
             href="/discover"
-            className="mt-6 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-brand-ink hover:bg-brand-strong"
+            className="press mt-6 rounded-full bg-brand px-6 py-3 text-[0.9375rem] font-semibold text-brand-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_8px_20px_-10px_var(--brand)] hover:bg-brand-strong"
           >
             Start swiping
           </Link>
@@ -43,7 +44,7 @@ export default async function MatchesPage() {
       ) : (
         <PageBody width="wide">
           {/* One column on phones, then as many ~20rem cards as fit. */}
-          <ul className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr))] md:gap-4">
+          <ul className="stagger grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr))] md:gap-4">
             {matches.map((match) => {
               const country = COUNTRY_BY_CODE.get(match.partner.country_code);
               const learning = match.partner.languages.find(
@@ -57,7 +58,8 @@ export default async function MatchesPage() {
                 <li key={match.match_id}>
                   <Link
                     href={`/messages/${match.match_id}`}
-                    className="flex h-full flex-col rounded-3xl border border-line bg-raised p-4 transition-colors hover:border-brand/40 active:bg-sunken md:p-5"
+                    {...FORWARD}
+                    className="flex h-full flex-col surface-card press-soft p-4 hover:brightness-[0.98] dark:hover:brightness-110 md:p-5"
                   >
                     <div className="flex items-center gap-3.5">
                       <Avatar
@@ -67,7 +69,7 @@ export default async function MatchesPage() {
                         size={56}
                       />
                       <div className="min-w-0 flex-1">
-                        <p className="truncate font-bold text-ink">
+                        <p className="truncate text-[1.0625rem] font-semibold tracking-[-0.015em] text-ink">
                           {match.partner.first_name}, {match.partner.age}
                         </p>
                         <p className="truncate text-xs text-muted">
@@ -86,7 +88,7 @@ export default async function MatchesPage() {
                     </div>
 
                     {match.mission && (
-                      <div className="mt-3.5 rounded-2xl bg-accent-soft px-4 py-3">
+                      <div className="mt-3.5 rounded-[1rem] bg-accent-soft px-4 py-3">
                         <p className="text-xs font-bold uppercase tracking-[0.12em] text-accent-ink">
                           Mission · {match.mission.steps_completed}/
                           {match.mission.target_steps}
@@ -118,6 +120,6 @@ export default async function MatchesPage() {
           </ul>
         </PageBody>
       )}
-    </>
+    </PushTransition>
   );
 }

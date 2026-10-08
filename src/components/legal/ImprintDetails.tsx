@@ -65,7 +65,7 @@ export function ImprintDetails({ language, entity = LEGAL_ENTITY }: { language: 
   }
 
   return (
-    <dl className="mt-5 space-y-5 rounded-3xl border border-line bg-raised p-5 sm:p-6">
+    <dl className="mt-5 space-y-5 surface-card p-5 sm:p-6">
       {fields.map((field) => (
         <div key={field.key} className="grid gap-1 sm:grid-cols-[12rem_1fr] sm:gap-5">
           <dt className="text-sm font-semibold leading-6 text-muted">{field.label}</dt>

@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
 import { advanceMission } from "@/features/chat/api";
 import { startGameSession } from "@/features/games/api";
 import type { MatchMission } from "@/types/domain";
-import { cn } from "@/lib/utils";
+import { SPRING, SPRING_SNAPPY, haptic } from "@/lib/motion";
 
 /**
  * Sits at the top of every thread. This is what stops a match turning into two
@@ -32,6 +33,7 @@ export function MissionCard({
     try {
       const result = await advanceMission(mission.match_mission_id);
       setSteps(result.steps_completed);
+      haptic(result.mission_completed ? [10, 50, 14] : 8);
       setFlash(
         result.mission_completed
           ? `Mission complete · +${result.xp_awarded} XP`
@@ -67,14 +69,14 @@ export function MissionCard({
   const pct = Math.round((steps / mission.target_steps) * 100);
 
   return (
-    <div className="shrink-0 border-b border-line bg-accent-soft/60">
+    <div className="relative z-[1] shrink-0 bg-accent-soft/70 shadow-[0_0.5px_0_var(--separator)] backdrop-blur-xl">
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
         className="mx-auto flex w-full max-w-3xl items-center gap-3 px-gutter py-2.5 text-left short:py-2"
       >
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-base short:size-8">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-[0.7rem] bg-accent/15 text-base short:size-8">
           🎯
         </span>
         <span className="min-w-0 flex-1">
@@ -85,26 +87,37 @@ export function MissionCard({
             {mission.title}
           </span>
         </span>
-        <span
-          className={cn(
-            "shrink-0 text-xs text-muted transition-transform",
-            expanded && "rotate-180",
-          )}
+        <motion.span
+          aria-hidden
+          animate={{ rotate: expanded ? 180 : 0 }}
+          transition={SPRING_SNAPPY}
+          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs text-accent-ink"
         >
           ▾
-        </span>
+        </motion.span>
       </button>
 
+      <AnimatePresence initial={false}>
       {expanded && (
+        <motion.div
+          key="details"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={SPRING}
+          className="overflow-hidden"
+        >
         <div className="mx-auto max-w-3xl space-y-3 px-gutter pb-4">
           <p className="text-sm leading-relaxed text-muted">
             {mission.description}
           </p>
 
           <div className="h-1.5 overflow-hidden rounded-full bg-accent/15">
-            <div
-              className="h-full rounded-full bg-accent transition-[width] duration-500"
-              style={{ width: `${pct}%` }}
+            <motion.div
+              className="h-full rounded-full bg-accent"
+              initial={false}
+              animate={{ width: `${pct}%` }}
+              transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
             />
           </div>
 
@@ -113,7 +126,7 @@ export function MissionCard({
               type="button"
               onClick={markStep}
               disabled={busy || steps >= mission.target_steps}
-              className="min-h-11 rounded-full bg-accent px-4 py-2 text-xs font-bold text-white transition-transform active:scale-95 disabled:opacity-50"
+              className="press min-h-11 rounded-full bg-accent px-4 py-2 text-xs font-bold text-white disabled:opacity-50"
             >
               {steps >= mission.target_steps
                 ? "Done"
@@ -123,8 +136,8 @@ export function MissionCard({
             {mission.game_template_id &&
               (sessionId ? (
                 <Link
-                  href={`/play/session/${sessionId}`}
-                  className="flex min-h-11 items-center rounded-full border border-accent/40 px-4 py-2 text-xs font-bold text-accent-ink"
+                  href={`/play/session/${sessionId}`} transitionTypes={["nav-forward"]}
+                  className="press flex min-h-11 items-center rounded-full bg-accent/12 px-4 py-2 text-xs font-bold text-accent-ink"
                 >
                   Open challenge
                 </Link>
@@ -133,7 +146,7 @@ export function MissionCard({
                   type="button"
                   onClick={openChallenge}
                   disabled={startingGame}
-                  className="min-h-11 rounded-full border border-accent/40 px-4 py-2 text-xs font-bold text-accent-ink disabled:opacity-50"
+                  className="press min-h-11 rounded-full bg-accent/12 px-4 py-2 text-xs font-bold text-accent-ink disabled:opacity-50"
                 >
                   {startingGame ? "Loading…" : "Play it as a challenge"}
                 </button>
@@ -141,12 +154,14 @@ export function MissionCard({
           </div>
 
           {flash && (
-            <p className="text-xs font-semibold text-accent-ink" role="status">
+            <p className="animate-pop text-xs font-semibold text-accent-ink" role="status">
               {flash}
             </p>
           )}
         </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </div>
   );
 }

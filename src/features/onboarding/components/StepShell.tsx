@@ -1,13 +1,23 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { BackIcon, LogoMark } from "@/components/icons";
 import { ONBOARDING_STEPS, stepIndex } from "@/features/onboarding/steps";
 import { APP_NAME } from "@/lib/constants";
+import { ProgressFill } from "@/components/ui/ProgressFill";
+import { SPRING } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+
+/**
+ * The step the user was last on. Each step is its own route, so the shell
+ * remounts on every move; remembering where we came from is what lets a step
+ * slide in from the right going forward and from the left going back.
+ */
+let lastStep = -1;
 
 /**
  * Phones: a progress bar pinned to the top and the Continue button pinned to
@@ -45,9 +55,15 @@ export function StepShell({
   const index = stepIndex(pathname);
   const steps = ONBOARDING_STEPS.slice(0, -1);
   const total = steps.length;
+  const [direction] = useState(() => (index >= lastStep ? 1 : -1));
+  const [cameForward] = useState(() => index > lastStep && lastStep !== -1);
+
+  useEffect(() => {
+    lastStep = index;
+  }, [index]);
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col px-gutter lg:grid lg:max-w-5xl lg:grid-cols-[15rem_minmax(0,1fr)] lg:items-start lg:gap-12 lg:py-12 xl:gap-16">
+    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col overflow-x-clip px-gutter lg:grid lg:max-w-5xl lg:grid-cols-[15rem_minmax(0,1fr)] lg:items-start lg:gap-12 lg:py-12 xl:gap-16">
       <aside className="hidden lg:sticky lg:top-12 lg:block">
         <Link href="/" className="flex items-center gap-2.5 text-brand">
           <LogoMark className="size-8" />
@@ -88,15 +104,15 @@ export function StepShell({
         </ol>
       </aside>
 
-      <div className="flex flex-1 flex-col lg:rounded-[var(--radius-card)] lg:border lg:border-line lg:bg-raised lg:p-10 lg:shadow-[0_18px_50px_-30px_rgba(0,0,0,0.25)] xl:p-12">
-        <div className="sticky top-0 z-10 -mx-gutter bg-surface/90 px-gutter pb-3 pt-safe-3 backdrop-blur-lg lg:hidden">
+      <div className="flex flex-1 flex-col lg:rounded-[var(--radius-card)] lg:bg-raised lg:p-10 lg:shadow-[var(--shadow-float)] xl:p-12">
+        <div className="material sticky top-0 z-10 -mx-gutter px-gutter pb-3 pt-safe-3 lg:hidden">
           <div className="flex min-h-11 items-center gap-2">
             {index > 0 && (
               <button
                 type="button"
                 onClick={() => router.back()}
                 aria-label="Go back"
-                className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+                className="press -ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-brand hover:bg-fill"
               >
                 <BackIcon className="size-5" />
               </button>
@@ -112,17 +128,26 @@ export function StepShell({
               {steps.map((step, i) => (
                 <span
                   key={step.path}
-                  className={cn(
-                    "h-1 flex-1 rounded-full transition-colors",
-                    i <= index ? "bg-brand" : "bg-line",
-                  )}
-                />
+                  className="h-1 flex-1 overflow-hidden rounded-full bg-fill-strong"
+                >
+                  {/* The step just reached fills on a spring; earlier ones are already full. */}
+                  {i < index || (i === index && !cameForward) ? (
+                    <span className="block h-full rounded-full bg-brand" />
+                  ) : i === index ? (
+                    <ProgressFill value={100} className="bg-brand" />
+                  ) : null}
+                </span>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="flex-1 pt-5 short:pt-3 lg:pt-0">
+        <motion.div
+          initial={{ opacity: 0, x: 36 * direction }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={SPRING}
+          className="flex-1 pt-5 short:pt-3 lg:pt-0"
+        >
           <p className="mb-2 text-xs font-semibold text-brand">
             Step {index + 1} of {total}
           </p>
@@ -135,7 +160,7 @@ export function StepShell({
             </p>
           )}
           <div className="mt-6 short:mt-5 lg:mt-8">{children}</div>
-        </div>
+        </motion.div>
 
         {error && (
           <p

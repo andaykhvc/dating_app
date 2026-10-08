@@ -3,6 +3,7 @@ import { TopBar } from "@/components/layout/TopBar";
 import { PlayHub, type PlayOverview } from "@/features/games/components/PlayHub";
 import type { LearnOverview } from "@/features/learn/types";
 import { createClient } from "@/lib/supabase/server";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Learn" };
 
@@ -18,7 +19,7 @@ export default async function PlayPage() {
   const course = (learn as LearnOverview | null)?.course;
 
   return (
-    <>
+    <PushTransition>
       <TopBar
         title="Learn"
         subtitle={
@@ -32,6 +33,6 @@ export default async function PlayPage() {
         overview={play as PlayOverview}
         learn={(learn as LearnOverview | null) ?? { course: null, review: null, next_lesson: null, units: [] }}
       />
-    </>
+    </PushTransition>
   );
 }

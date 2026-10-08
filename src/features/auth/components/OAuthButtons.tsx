@@ -70,7 +70,7 @@ export function OAuthButtons({ next, className }: Props) {
         <AppleLogo />
         {t("auth.apple")}
         {!APPLE_ENABLED && (
-          <span className="rounded-full bg-sunken px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-muted">
+          <span className="whitespace-nowrap rounded-full bg-fill px-2 py-0.5 text-xs font-semibold text-muted">
             <span className="sr-only">(</span>
             {t("auth.appleComingSoon")}
             <span className="sr-only">)</span>

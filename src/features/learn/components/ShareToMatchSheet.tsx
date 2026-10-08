@@ -86,7 +86,7 @@ export function ShareToMatchSheet({
                   type="button"
                   onClick={() => choose(m.match_id)}
                   disabled={opening !== null}
-                  className="flex w-full items-center gap-3 rounded-2xl px-2 py-2.5 text-left transition-colors hover:bg-sunken disabled:opacity-60"
+                  className="flex w-full items-center gap-3 rounded-2xl px-2 py-2.5 text-left transition-colors hover:bg-fill disabled:opacity-60"
                 >
                   <Avatar storagePath={m.partner.primary_photo_path} name={m.partner.first_name} userId={m.partner.id} size={44} />
                   <span className="min-w-0 flex-1">

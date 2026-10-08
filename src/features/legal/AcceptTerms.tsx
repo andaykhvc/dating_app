@@ -45,7 +45,7 @@ export function AcceptTerms({ mode }: { mode: "first" | "updated" }) {
           : "Before you continue, please read and accept how Lingua Match works."}
       </p>
 
-      <label className="mt-6 flex items-start gap-3 rounded-2xl bg-sunken p-4">
+      <label className="mt-6 flex items-start gap-3 rounded-[1rem] bg-fill p-4">
         <input
           type="checkbox"
           checked={agreed}

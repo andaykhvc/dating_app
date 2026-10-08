@@ -1,6 +1,7 @@
 import { FlameIcon } from "@/components/icons";
 import type { League, UserProgress } from "@/types/domain";
 import { cn } from "@/lib/utils";
+import { ProgressFill } from "@/components/ui/ProgressFill";
 
 const LEAGUE_STYLE: Record<League, string> = {
   bronze: "bg-[#f6e5d5] text-[#8a5a2b] dark:bg-[#2e2118] dark:text-[#d9a273]",
@@ -60,17 +61,14 @@ export function XPBar({ progress }: { progress: UserProgress }) {
         </span>
       </div>
       <div
-        className="h-2 overflow-hidden rounded-full bg-sunken"
+        className="h-2 overflow-hidden rounded-full bg-fill"
         role="progressbar"
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label="Progress to next level"
       >
-        <div
-          className="h-full rounded-full bg-accent transition-[width] duration-500"
-          style={{ width: `${pct}%` }}
-        />
+        <ProgressFill value={pct} className="bg-accent" />
       </div>
     </div>
   );

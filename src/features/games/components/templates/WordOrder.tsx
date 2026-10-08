@@ -92,7 +92,7 @@ export function WordOrder({
             type="button"
             onClick={() => setPicked((prev) => [...prev, tokenIndex])}
             disabled={result !== null}
-            className={`${TOKEN} border border-line bg-raised text-ink hover:border-brand/40 disabled:opacity-50`}
+            className={`${TOKEN} border border-transparent bg-raised text-ink shadow-[var(--shadow-card)] hover:border-brand/30 disabled:opacity-50`}
           >
             {payload.tokens[tokenIndex]}
           </button>

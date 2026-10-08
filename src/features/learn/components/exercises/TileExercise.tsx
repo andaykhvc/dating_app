@@ -77,7 +77,7 @@ export function TileExercise({ exercise, result, onChange, target }: ExercisePro
               onClick={() => set([...picked, i])}
               className={cn(
                 TILE,
-                "border border-line bg-raised text-ink hover:border-brand/40",
+                "border border-transparent bg-raised text-ink shadow-[var(--shadow-card)] hover:border-brand/30",
                 used && "border-dashed bg-sunken text-transparent",
                 result && !used && "opacity-50",
               )}

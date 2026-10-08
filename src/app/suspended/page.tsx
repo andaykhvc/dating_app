@@ -46,7 +46,7 @@ export default async function SuspendedPage() {
       <div className="mt-8 flex flex-col gap-3">
         <Link
           href="/guidelines"
-          className="flex h-12 items-center justify-center rounded-full border border-line bg-raised text-sm font-semibold text-ink hover:border-brand/40"
+          className="flex h-12 items-center justify-center press rounded-full bg-fill text-sm font-semibold text-ink hover:bg-fill-strong"
         >
           Community guidelines
         </Link>

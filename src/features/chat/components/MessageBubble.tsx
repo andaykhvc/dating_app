@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   CheckSmallIcon,
   DoubleCheckIcon,
@@ -9,6 +10,7 @@ import {
 } from "@/components/icons";
 import { LocalTime } from "@/components/ui/LocalTime";
 import type { ChatMessage } from "@/types/domain";
+import { SPRING_MOMENTUM, SPRING_SNAPPY } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,9 +24,12 @@ export function MessageBubble({
   isMine,
   onReply,
   onCorrect,
+  animateIn = false,
 }: {
   message: ChatMessage;
   isMine: boolean;
+  /** A message that arrived while the thread was open springs into place. */
+  animateIn?: boolean;
   onReply: () => void;
   onCorrect: () => void;
 }) {
@@ -38,15 +43,23 @@ export function MessageBubble({
   };
 
   return (
-    <div className={cn("group flex flex-col", isMine ? "items-end" : "items-start")}>
+    <motion.div
+      // Grows out of its own corner — from the right for yours, the left for
+      // theirs — so it is clear which side of the conversation it came from.
+      initial={animateIn ? { opacity: 0, y: 14, scale: 0.92 } : false}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={SPRING_MOMENTUM}
+      style={{ transformOrigin: isMine ? "100% 100%" : "0% 100%" }}
+      className={cn("group flex flex-col", isMine ? "items-end" : "items-start")}
+    >
       <div className="relative max-w-[min(80%,34rem)]">
         <div
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "cursor-default rounded-3xl px-4 py-2.5 transition-[filter]",
+            "cursor-default rounded-[1.375rem] px-4 py-2.5 transition-[filter,transform] duration-200 ease-ios active:scale-[0.98]",
             isMine
-              ? "rounded-br-lg bg-brand text-brand-ink"
-              : "rounded-bl-lg bg-raised text-ink ring-1 ring-line",
+              ? "rounded-br-md bg-brand bg-[linear-gradient(180deg,rgb(255_255_255/0.1),transparent)] text-brand-ink"
+              : "rounded-bl-md bg-raised text-ink shadow-[0_0_0_0.5px_var(--separator),0_1px_2px_rgb(0_0_0/0.04)]",
             open && "brightness-95",
           )}
         >
@@ -99,7 +112,7 @@ export function MessageBubble({
           className={cn(
             // Touch: a row of labelled buttons under the bubble, after a tap.
             "mt-1.5 gap-1.5",
-            open ? "flex" : "hidden",
+            open ? "animate-pop flex pointer-fine:animate-none" : "hidden",
             isMine && "justify-end",
             // Mouse: icons floating beside the bubble, on hover or focus.
             "pointer-fine:absolute pointer-fine:bottom-0 pointer-fine:mt-0 pointer-fine:flex pointer-fine:gap-0.5",
@@ -130,10 +143,15 @@ export function MessageBubble({
         </div>
       </div>
 
+      <AnimatePresence initial={false}>
       {correction && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: -6, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={SPRING_SNAPPY}
+          style={{ transformOrigin: isMine ? "100% 0%" : "0% 0%" }}
           className={cn(
-            "mt-1.5 max-w-[min(80%,34rem)] rounded-2xl border border-positive/30 bg-positive-soft px-3.5 py-2.5",
+            "mt-1.5 max-w-[min(80%,34rem)] rounded-[1.125rem] bg-positive-soft px-3.5 py-2.5 shadow-[0_0_0_0.5px_color-mix(in_oklab,var(--positive)_30%,transparent)]",
             isMine ? "rounded-tr-md" : "rounded-tl-md",
           )}
         >
@@ -148,9 +166,10 @@ export function MessageBubble({
               {correction.note}
             </p>
           )}
-        </div>
+        </motion.div>
       )}
-    </div>
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -173,11 +192,11 @@ function ActionButton({
       onClick={onClick}
       aria-label={ariaLabel}
       className={cn(
-        "flex h-9 items-center gap-1.5 rounded-full border border-line bg-raised px-3 text-xs font-semibold transition-colors",
-        "pointer-fine:w-8 pointer-fine:justify-center pointer-fine:border-0 pointer-fine:bg-transparent pointer-fine:px-0 pointer-fine:text-faint",
+        "press flex h-9 items-center gap-1.5 rounded-full bg-raised px-3 text-xs font-semibold shadow-[var(--shadow-card)]",
+        "pointer-fine:w-8 pointer-fine:justify-center pointer-fine:bg-transparent pointer-fine:px-0 pointer-fine:text-faint pointer-fine:shadow-none",
         tone === "brand"
           ? "text-brand pointer-fine:hover:bg-brand-soft pointer-fine:hover:text-brand"
-          : "text-ink pointer-fine:hover:bg-sunken pointer-fine:hover:text-ink",
+          : "text-ink pointer-fine:hover:bg-fill pointer-fine:hover:text-ink",
       )}
     >
       {children}

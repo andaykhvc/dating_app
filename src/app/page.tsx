@@ -8,7 +8,7 @@ import { APP_NAME, VALUE_PROPS } from "@/lib/constants";
 export default function LandingPage() {
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col px-gutter pb-safe-10 pt-safe-14 short:pt-safe-8 md:max-w-lg lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:content-center lg:items-center lg:gap-20 lg:py-16 xl:gap-28">
-      <div className="flex flex-1 flex-col lg:flex-none">
+      <div className="stagger flex flex-1 flex-col lg:flex-none">
         <AccountDeletedNotice />
         <div className="flex items-center gap-3 text-brand">
           <LogoMark className="size-10" />
@@ -17,12 +17,14 @@ export default function LandingPage() {
           </span>
         </div>
 
-        <h1 className="mt-12 text-[clamp(2.25rem,9vw,3.75rem)] font-bold leading-[1.05] tracking-tight text-ink short:mt-8 lg:mt-14">
+        <h1 className="mt-12 text-[clamp(2.5rem,10.5vw,4.25rem)] font-[750] leading-[1.02] tracking-[-0.035em] text-ink short:mt-8 lg:mt-14">
           Learn a language
           <br />
           with someone
           <br />
-          <span className="text-brand">real.</span>
+          <span className="bg-[linear-gradient(100deg,var(--brand),#8b5cf6_55%,var(--accent))] bg-clip-text text-transparent">
+            real.
+          </span>
         </h1>
 
         <p className="mt-5 text-base leading-relaxed text-muted lg:max-w-lg lg:text-lg">
@@ -31,15 +33,19 @@ export default function LandingPage() {
           say so.
         </p>
 
-        <ul className="mt-10 space-y-5 short:mt-7">
+        {/* An inset grouped list: three steps, one surface, hairlines between. */}
+        <ul className="surface-card grouped-rows mt-10 overflow-hidden [--row-inset:3.75rem] short:mt-7">
           {VALUE_PROPS.map((step, i) => (
-            <li key={step.title} className="flex gap-4">
-              <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-soft text-sm font-bold text-brand">
+            <li
+              key={step.title}
+              className="flex gap-3.5 px-4 py-3.5"
+            >
+              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-[0.6rem] bg-brand text-sm font-bold text-brand-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.2)]">
                 {i + 1}
               </span>
-              <div>
-                <h2 className="text-sm font-semibold text-ink">{step.title}</h2>
-                <p className="mt-1 text-sm leading-relaxed text-muted">
+              <div className="min-w-0">
+                <h2 className="text-[0.9375rem] font-semibold text-ink">{step.title}</h2>
+                <p className="mt-0.5 text-sm leading-relaxed text-muted">
                   {step.body}
                 </p>
               </div>
@@ -50,13 +56,13 @@ export default function LandingPage() {
         <div className="mt-auto space-y-3 pt-12 lg:mt-12 lg:max-w-sm lg:pt-0">
           <Link
             href="/signup"
-            className="flex h-14 w-full items-center justify-center rounded-full bg-brand text-base font-semibold text-brand-ink transition-colors hover:bg-brand-strong"
+            className="press flex h-14 w-full items-center justify-center rounded-full bg-brand text-base font-semibold text-brand-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_10px_24px_-12px_var(--brand)] hover:bg-brand-strong"
           >
             Create an account
           </Link>
           <Link
             href="/login"
-            className="flex h-14 w-full items-center justify-center rounded-full border border-line bg-raised text-base font-semibold text-ink transition-colors hover:border-brand/40"
+            className="flex h-14 w-full items-center justify-center press rounded-full bg-fill text-base font-semibold text-ink hover:bg-fill-strong"
           >
             I already have one
           </Link>

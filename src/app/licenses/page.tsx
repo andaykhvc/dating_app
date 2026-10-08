@@ -42,7 +42,7 @@ export default async function LicensesPage() {
     <main className="safe-top mx-auto w-full max-w-2xl px-gutter pb-16 pt-6 md:pt-10">
       <Link
         href={user ? "/profile/settings" : "/"}
-        className="-ml-2 inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted hover:bg-sunken hover:text-ink"
+        className="-ml-2 inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted hover:bg-fill hover:text-ink"
       >
         <BackIcon className="size-4" /> Back
       </Link>
@@ -63,7 +63,7 @@ export default async function LicensesPage() {
           const counts = Object.entries(s.item_counts ?? {});
           const total = counts.reduce((n, [, c]) => n + c, 0);
           return (
-            <li key={s.id} className="rounded-3xl border border-line bg-raised p-5 md:p-6">
+            <li key={s.id} className="surface-card p-5 md:p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                 <h2 className="text-base font-bold text-ink">
                   {s.source_url ? (

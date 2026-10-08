@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { SendIcon } from "@/components/icons";
 import type { ChatMessage } from "@/types/domain";
+import { cn } from "@/lib/utils";
 
 const MAX_HEIGHT_PX = 160;
 
@@ -62,23 +63,23 @@ export function MessageInput({
   }
 
   return (
-    <div className="safe-bottom safe-x shrink-0 border-t border-line bg-raised/95 backdrop-blur-lg">
+    <div className="material safe-bottom safe-x relative z-10 shrink-0 shadow-[0_-0.5px_0_var(--separator)]">
       {showNote && draftNote && (
-        <div className="mx-auto flex max-w-3xl items-center gap-2 border-b border-line px-gutter py-1.5">
+        <div className="animate-fade mx-auto flex max-w-3xl items-center gap-2 px-gutter py-1.5 shadow-[inset_0_-0.5px_0_var(--separator)]">
           <p className="min-w-0 flex-1 text-xs text-brand">{draftNote}</p>
           <button
             type="button"
             onClick={() => setShowNote(false)}
             aria-label="Dismiss"
-            className="-mr-2 flex size-9 shrink-0 items-center justify-center rounded-full text-lg leading-none text-faint hover:bg-sunken hover:text-ink"
+            className="press -mr-2 flex size-9 shrink-0 items-center justify-center rounded-full text-lg leading-none text-faint hover:bg-fill hover:text-ink"
           >
             ×
           </button>
         </div>
       )}
       {replyTo && (
-        <div className="mx-auto flex max-w-3xl items-center gap-2 border-b border-line px-gutter py-1.5">
-          <div className="min-w-0 flex-1 border-l-2 border-brand pl-2.5">
+        <div className="animate-rise mx-auto flex max-w-3xl items-center gap-2 px-gutter py-1.5 shadow-[inset_0_-0.5px_0_var(--separator)]">
+          <div className="min-w-0 flex-1 border-l-[3px] border-brand pl-2.5">
             <p className="text-xs font-semibold uppercase tracking-wide text-brand">
               Replying to
             </p>
@@ -88,7 +89,7 @@ export function MessageInput({
             type="button"
             onClick={onCancelReply}
             aria-label="Cancel reply"
-            className="-mr-2 flex size-9 shrink-0 items-center justify-center rounded-full text-lg leading-none text-faint hover:bg-sunken hover:text-ink"
+            className="press -mr-2 flex size-9 shrink-0 items-center justify-center rounded-full text-lg leading-none text-faint hover:bg-fill hover:text-ink"
           >
             ×
           </button>
@@ -104,7 +105,7 @@ export function MessageInput({
         </p>
       )}
 
-      <div className="mx-auto flex max-w-3xl items-end gap-2 px-gutter py-2.5 md:py-3">
+      <div className="mx-auto flex max-w-3xl items-end gap-2 px-gutter py-2 md:py-3">
         {/* 16px text: anything smaller and iOS zooms the page on focus. */}
         <textarea
           ref={inputRef}
@@ -126,7 +127,7 @@ export function MessageInput({
           enterKeyHint="send"
           aria-label="Message"
           placeholder={disabled ? "This conversation has ended" : "Write something…"}
-          className="min-h-11 flex-1 resize-none rounded-3xl border border-line bg-surface px-4 py-2.5 text-base leading-snug text-ink outline-none placeholder:text-faint focus:border-brand disabled:opacity-60"
+          className="min-h-11 flex-1 resize-none rounded-[1.375rem] border border-transparent bg-fill px-4 py-2.5 text-base leading-snug text-ink outline-none transition-[background-color,border-color] duration-200 ease-ios placeholder:text-faint focus:border-separator focus:bg-raised disabled:opacity-60"
         />
         <button
           type="button"
@@ -135,7 +136,12 @@ export function MessageInput({
           onClick={submit}
           disabled={!value.trim() || sending || disabled}
           aria-label="Send message"
-          className="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand text-brand-ink transition-transform hover:bg-brand-strong active:scale-90 disabled:opacity-40"
+          // Like iMessage: the send button grows into place once there is
+          // something to send, and steps back again when the field is empty.
+          className={cn(
+            "flex size-11 shrink-0 items-center justify-center rounded-full bg-brand text-brand-ink transition-[transform,opacity,background-color] duration-300 ease-ios hover:bg-brand-strong active:scale-90 disabled:cursor-not-allowed",
+            value.trim() ? "scale-100 opacity-100" : "scale-[0.82] opacity-35",
+          )}
         >
           <SendIcon />
         </button>

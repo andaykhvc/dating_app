@@ -4,7 +4,7 @@ import { TopBar } from "@/components/layout/TopBar";
 export default function DiscoverLoading() {
   return (
     <>
-      <TopBar title="Discover" />
+      <TopBar title="Discover" large={false} />
       <div aria-busy className="flex min-h-0 flex-1 justify-center px-gutter pb-3 pt-3 md:pb-6 md:pt-5">
         <div className="flex w-full max-w-[26rem] flex-col">
           <div className="my-auto flex min-h-0 w-full flex-1 flex-col md:max-h-[46rem]">

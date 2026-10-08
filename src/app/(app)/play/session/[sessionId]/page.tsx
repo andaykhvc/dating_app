@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { GameSessionRenderer } from "@/features/games/components/GameSessionRenderer";
 import { createClient } from "@/lib/supabase/server";
 import type { GameSession } from "@/features/games/engine/types";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export default async function GameSessionPage({
   params,
@@ -20,5 +21,9 @@ export default async function GameSessionPage({
   const session = data as GameSession & { match_id: string | null };
   const returnTo = session.match_id ? `/messages/${session.match_id}` : "/play";
 
-  return <GameSessionRenderer session={session} returnTo={returnTo} />;
+  return (
+    <PushTransition>
+      <GameSessionRenderer session={session} returnTo={returnTo} />
+    </PushTransition>
+  );
 }

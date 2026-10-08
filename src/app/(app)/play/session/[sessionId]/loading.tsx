@@ -1,7 +1,7 @@
 export default function GameSessionLoading() {
   return (
     <div aria-busy className="flex min-h-dvh flex-col">
-      <div className="safe-top border-b border-line">
+      <div className="safe-top shadow-[0_0.5px_0_var(--separator)]">
         <div className="mx-auto flex min-h-14 max-w-2xl items-center gap-3 px-gutter md:min-h-16">
           <div className="skeleton size-8 rounded-full" />
           <div className="skeleton h-4 w-40 rounded-full" />

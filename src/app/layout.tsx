@@ -9,6 +9,7 @@ import { ThemeSync } from "@/features/appearance/ThemeSync";
 import { THEME_COLORS, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { InstallAppProvider } from "@/features/install/InstallAppProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -61,8 +62,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <ThemeSync />
         <I18nProvider locale={locale} messages={getMessages(locale)}>
-          <InstallAppProvider>{children}</InstallAppProvider>
-          <SiteFooter />
+          <MotionProvider>
+            <InstallAppProvider>{children}</InstallAppProvider>
+            <SiteFooter />
+          </MotionProvider>
         </I18nProvider>
       </body>
     </html>

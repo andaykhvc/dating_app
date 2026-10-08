@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Avatar } from "@/components/ui/Avatar";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { SectionLabel } from "@/components/layout/Page";
+import { FORWARD } from "@/components/motion/PushTransition";
 import { useLiveMatches } from "@/features/chat/ConversationsContext";
 import type { MatchSummary } from "@/types/domain";
 import { cn } from "@/lib/utils";
@@ -57,8 +58,9 @@ export function ConversationList({
                 <li key={match.match_id} className="shrink-0 snap-start">
                   <Link
                     href={`/messages/${match.match_id}`}
+                    {...(compact ? {} : FORWARD)}
                     aria-current={active ? "page" : undefined}
-                    className="flex w-[4.25rem] flex-col items-center gap-1.5 rounded-2xl py-1"
+                    className="press flex w-[4.25rem] flex-col items-center gap-1.5 rounded-2xl py-1"
                   >
                     <Avatar
                       storagePath={match.partner.primary_photo_path}
@@ -70,7 +72,7 @@ export function ConversationList({
                         active ? "ring-brand" : "ring-brand/40",
                       )}
                     />
-                    <span className="w-full truncate text-center text-xs text-muted">
+                    <span className="w-full truncate text-center text-xs font-medium text-ink">
                       {match.partner.first_name}
                     </span>
                   </Link>
@@ -82,7 +84,12 @@ export function ConversationList({
       )}
 
       {withMessages.length > 0 && (
-        <ul className={cn("space-y-0.5", compact ? "px-2" : "-mx-2")}>
+        <ul
+          className={cn(
+            "grouped-rows",
+            compact ? "px-2 [--row-inset:4.5rem]" : "-mx-2 [--row-inset:5rem]",
+          )}
+        >
           {withMessages.map((match) => {
             const active = match.match_id === activeId;
             const last = match.last_message!;
@@ -90,10 +97,11 @@ export function ConversationList({
               <li key={match.match_id}>
                 <Link
                   href={`/messages/${match.match_id}`}
+                  {...(compact ? {} : FORWARD)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-3.5 rounded-2xl px-2 py-3 transition-colors",
-                    active ? "bg-brand-soft" : "hover:bg-sunken active:bg-sunken",
+                    "press-soft flex items-center gap-3.5 rounded-2xl px-2 py-3",
+                    active ? "bg-brand-soft" : "hover:bg-fill active:bg-fill",
                   )}
                 >
                   <Avatar
@@ -104,7 +112,7 @@ export function ConversationList({
                   />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
-                      <p className="truncate font-semibold text-ink">
+                      <p className="truncate text-[1.0625rem] font-semibold tracking-[-0.015em] text-ink">
                         {match.partner.first_name}
                       </p>
                       <LocalTime
@@ -113,7 +121,7 @@ export function ConversationList({
                         className="shrink-0 text-xs text-faint"
                       />
                     </div>
-                    <p className="truncate text-sm text-muted">
+                    <p className="truncate text-[0.9375rem] text-muted">
                       {last.is_mine && <span className="text-faint">You: </span>}
                       {last.body}
                     </p>

@@ -93,14 +93,14 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
         <p className="mt-6 text-base leading-7 text-muted">{policy.intro}</p>
       </header>
 
-      <section aria-labelledby={summaryId} className="mt-8 rounded-3xl border border-line bg-raised p-5 sm:p-6">
+      <section aria-labelledby={summaryId} className="mt-8 surface-card p-5 sm:p-6">
         <h2 id={summaryId} className="text-lg font-bold text-ink">{isTerms ? labels.termsSummary : labels.summary}</h2>
         <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-6 text-muted">
           {policy.summary.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </section>
 
-      <nav aria-labelledby={contentsId} className="mt-8 rounded-3xl bg-sunken p-5 sm:p-6">
+      <nav aria-labelledby={contentsId} className="mt-8 rounded-[var(--radius-group)] bg-fill p-5 sm:p-6">
         <h2 id={contentsId} className="text-lg font-bold text-ink">{labels.contents}</h2>
         <ol className="mt-3 grid gap-x-6 sm:grid-cols-2">
           {policy.sections.map((section) => (
@@ -122,7 +122,7 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
             </div>
             {isImprint && section.id === "provider" && <ImprintDetails language={policy.language} />}
             {((!isTerms && section.id === "controller") || (isTerms && section.id === "provider")) && (
-              <div className="mt-5 rounded-3xl border border-line bg-raised p-5">
+              <div className="mt-5 surface-card p-5">
                 <h3 className="text-sm font-bold text-ink">{isTerms ? labels.provider : labels.controller}</h3>
                 <dl className="mt-4 space-y-4 text-sm">
                   {fields.map((field) => (
@@ -148,7 +148,7 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
             {section.rules && (
               <ul className="mt-5 space-y-3">
                 {section.rules.map((rule) => (
-                  <li key={rule.id} className="rounded-2xl border border-line bg-raised p-4 sm:p-5">
+                  <li key={rule.id} className="rounded-2xl bg-raised shadow-[var(--shadow-card)] p-4 sm:p-5">
                     <h3 className="text-base font-bold text-ink">{rule.title}</h3>
                     <p className="mt-2 text-sm leading-7 text-muted">{rule.description}</p>
                     <p className="mt-3 text-sm leading-6 text-muted">

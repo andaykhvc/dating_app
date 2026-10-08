@@ -11,7 +11,7 @@ export default function MatchesLoading() {
           className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr))] md:gap-4"
         >
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="rounded-3xl border border-line bg-raised p-4 md:p-5">
+            <div key={i} className="surface-card p-4 md:p-5">
               <div className="flex items-center gap-3.5">
                 <div className="skeleton size-14 shrink-0 rounded-full" />
                 <div className="flex-1 space-y-2">

@@ -5,6 +5,7 @@ import { EditProfileForm } from "@/features/profile/EditProfileForm";
 import type { StoredPhoto } from "@/features/profile/PhotoManager";
 import { STORED_PHOTO_COLUMNS } from "@/lib/photos";
 import type { CefrLevel, Intention, Interest, Language } from "@/types/domain";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Edit profile" };
 
@@ -48,6 +49,7 @@ export default async function EditProfilePage() {
   const learning = userLanguages?.find((l) => l.role === "learning");
 
   return (
+    <PushTransition>
     <EditProfileForm
       userId={user!.id}
       languages={(languages ?? []) as Language[]}
@@ -70,5 +72,6 @@ export default async function EditProfilePage() {
         interestIds: (myInterests ?? []).map((r) => r.interest_id as number),
       }}
     />
+    </PushTransition>
   );
 }

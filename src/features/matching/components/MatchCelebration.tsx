@@ -2,11 +2,19 @@
 
 import { useEffect, useId, useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
 import { createClient } from "@/lib/supabase/client";
 import { one } from "@/lib/utils";
 import type { DiscoveryCard, MatchMission } from "@/types/domain";
+import { SPRING, SPRING_PLAYFUL, haptic } from "@/lib/motion";
+
+/** One beat after another: the headline, the face, the mission, the actions. */
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { ...SPRING, delay } },
+});
 
 /**
  * The moment the whole product hangs on: a match hands over a mission, not an
@@ -33,6 +41,11 @@ export function MatchCelebration({
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [onDismiss]);
+
+  // The one moment in the app that earns a celebratory tick.
+  useEffect(() => {
+    haptic([12, 60, 18]);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -66,70 +79,99 @@ export function MatchCelebration({
 
   return (
     // Scrolls inside itself, so the buttons are never stranded below the fold
-    // of a short phone or a phone turned sideways.
-    <div
+    // of a short phone or a phone turned sideways. The backdrop arrives as a
+    // material — blur and opacity together — and leaves the same way.
+    <motion.div
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="animate-fade fixed inset-x-0 top-0 z-50 h-svh overflow-y-auto overscroll-contain bg-surface/95 backdrop-blur-md"
+      initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+      animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
+      exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.2 } }}
+      transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+      className="fixed inset-x-0 top-0 z-50 h-svh overflow-y-auto overscroll-contain bg-surface/85"
     >
-      <div className="flex min-h-full items-center justify-center px-gutter pb-safe-8 pt-safe-8">
-      <div className="animate-rise w-full max-w-sm text-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
-          It&apos;s a match
-        </p>
-        <h2
-          id={titleId}
-          className="mt-2 text-3xl font-bold tracking-tight text-ink [overflow-wrap:anywhere]"
+      {/* A soft brand glow behind the face, so the moment has some warmth. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[70%] bg-[radial-gradient(60%_50%_at_50%_30%,color-mix(in_oklab,var(--brand)_22%,transparent),transparent)]"
+      />
+      <div className="relative flex min-h-full items-center justify-center px-gutter pb-safe-8 pt-safe-8">
+        <motion.div
+          exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.18 } }}
+          className="w-full max-w-sm text-center"
         >
-          You and {partner.first_name}
-        </h2>
-
-        <div className="animate-pop mx-auto mt-7 flex justify-center short:mt-5">
-          <Avatar
-            storagePath={partner.primary_photo_path}
-            name={partner.first_name}
-            userId={partner.id}
-            size={112}
-            className="ring-4 ring-brand/25"
-          />
-        </div>
-
-        <div className="mt-8 rounded-3xl border border-line bg-raised p-5 text-left short:mt-5">
-          <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent-ink">
-            Today&apos;s mission
-          </p>
-          {mission ? (
-            <>
-              <h3 className="mt-2 text-lg font-bold leading-snug text-ink">
-                {mission.title}
-              </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                {mission.description}
-              </p>
-              <p className="mt-3 text-sm font-semibold text-accent-ink">
-                +{mission.xp_reward_per_step} XP each
-              </p>
-            </>
-          ) : (
-            <p className="mt-2 text-sm text-muted">Picking your first mission…</p>
-          )}
-        </div>
-
-        <div className="mt-6 space-y-2">
-          <Button
-            size="lg"
-            fullWidth
-            onClick={() => router.push(`/messages/${matchId}`)}
+          <motion.p
+            {...rise(0.05)}
+            className="text-sm font-semibold uppercase tracking-[0.2em] text-brand"
           >
-            Say something
-          </Button>
-          <Button variant="ghost" fullWidth onClick={onDismiss}>
-            Keep swiping
-          </Button>
-        </div>
+            It&apos;s a match
+          </motion.p>
+          <motion.h2
+            {...rise(0.1)}
+            id={titleId}
+            className="mt-2 text-[2rem] font-bold leading-tight text-ink [overflow-wrap:anywhere]"
+          >
+            You and {partner.first_name}
+          </motion.h2>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1, transition: { ...SPRING_PLAYFUL, delay: 0.16 } }}
+            className="mx-auto mt-7 flex justify-center short:mt-5"
+          >
+            <span className="rounded-full p-1.5 shadow-[0_20px_50px_-18px_var(--brand)] [background:conic-gradient(from_200deg,var(--brand),var(--accent),var(--brand))]">
+              <Avatar
+                storagePath={partner.primary_photo_path}
+                name={partner.first_name}
+                userId={partner.id}
+                size={120}
+                className="ring-4 ring-surface"
+              />
+            </span>
+          </motion.div>
+
+          <motion.div
+            {...rise(0.28)}
+            className="surface-card mt-8 p-5 text-left short:mt-5"
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent-ink">
+              Today&apos;s mission
+            </p>
+            {mission ? (
+              <div className="animate-fade">
+                <h3 className="mt-2 text-lg font-bold leading-snug text-ink">
+                  {mission.title}
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                  {mission.description}
+                </p>
+                <p className="mt-3 text-sm font-semibold text-accent-ink">
+                  +{mission.xp_reward_per_step} XP each
+                </p>
+              </div>
+            ) : (
+              <div aria-label="Picking your first mission" className="mt-3 space-y-2">
+                <div className="skeleton h-4 w-3/4 rounded-full" />
+                <div className="skeleton h-3 w-full rounded-full" />
+              </div>
+            )}
+          </motion.div>
+
+          <motion.div {...rise(0.36)} className="mt-6 space-y-2">
+            <Button
+              size="lg"
+              fullWidth
+              onClick={() => router.push(`/messages/${matchId}`, { transitionTypes: ["nav-forward"] })}
+            >
+              Say something
+            </Button>
+            <Button variant="ghost" fullWidth onClick={onDismiss}>
+              Keep swiping
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }

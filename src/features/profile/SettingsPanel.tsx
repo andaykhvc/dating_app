@@ -54,7 +54,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
       <PushNotificationsCard />
       <AppearanceSettings />
       <InstallSettings />
-      <section className="rounded-3xl border border-line bg-raised p-5">
+      <section className="surface-card p-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">
           {t("settings.blocked.title")}
         </h2>
@@ -63,11 +63,11 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
             {t("settings.blocked.empty")}
           </p>
         ) : (
-          <ul className="mt-3 space-y-2">
+          <ul className="grouped-rows -mx-5 mt-2 [--row-inset:4.25rem]">
             {list.map((person) => (
               <li
                 key={person.user_id}
-                className="flex items-center gap-3 rounded-2xl bg-sunken p-3"
+                className="animate-fade flex items-center gap-3 px-5 py-2.5"
               >
                 <Avatar
                   storagePath={person.primary_photo_path}
@@ -82,7 +82,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
                   type="button"
                   onClick={() => unblock(person.user_id)}
                   disabled={busy === person.user_id}
-                  className="min-h-11 shrink-0 rounded-full px-3.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
+                  className="press min-h-9 shrink-0 rounded-full bg-brand-soft px-3.5 text-xs font-semibold text-brand disabled:opacity-50"
                 >
                   {t("settings.blocked.unblock")}
                 </button>
@@ -94,7 +94,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
 
       <DownloadMyData />
 
-      <section className="rounded-3xl border border-line bg-raised p-5">
+      <section className="surface-card p-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">
           {t("settings.safety.title")}
         </h2>
@@ -105,31 +105,25 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
         </ul>
       </section>
 
-      <Link
-        href="/support"
-        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
-      >
-        Help &amp; safety
-        <span aria-hidden className="text-faint">›</span>
-      </Link>
+      {/* One grouped list of rows, hairlines between, chevrons on the right. */}
+      <nav aria-label="Help" className="surface-card grouped-rows overflow-hidden">
+        {[
+          { href: "/support", label: "Help & safety" },
+          { href: "/guidelines", label: "Community guidelines" },
+          { href: "/licenses", label: t("settings.licenses") },
+        ].map((row) => (
+          <Link
+            key={row.href}
+            href={row.href}
+            className="flex min-h-[3.25rem] items-center justify-between px-5 text-[0.9375rem] font-medium text-ink transition-colors active:bg-fill hover:bg-fill"
+          >
+            {row.label}
+            <Chevron />
+          </Link>
+        ))}
+      </nav>
 
-      <Link
-        href="/guidelines"
-        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
-      >
-        Community guidelines
-        <span aria-hidden className="text-faint">›</span>
-      </Link>
-
-      <Link
-        href="/licenses"
-        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
-      >
-        {t("settings.licenses")}
-        <span aria-hidden className="text-faint">›</span>
-      </Link>
-
-      <section className="rounded-3xl border border-line bg-raised p-3">
+      <section className="surface-card p-3">
         <LegalLinks />
       </section>
 
@@ -139,5 +133,20 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
 
       <DeleteAccount />
     </div>
+  );
+}
+
+function Chevron() {
+  return (
+    <svg viewBox="0 0 8 14" aria-hidden className="h-3.5 w-2 shrink-0 text-faint">
+      <path
+        d="m1.5 1.5 5 5.5-5 5.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

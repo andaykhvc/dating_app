@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
 import { Avatar } from "@/components/ui/Avatar";
 import { LocalTime, useHydrated } from "@/components/ui/LocalTime";
 import { ArrowDownIcon, BackIcon } from "@/components/icons";
@@ -27,6 +28,8 @@ import {
   submitCorrection,
 } from "@/features/chat/api";
 import { MESSAGE_PAGE_SIZE } from "@/lib/constants";
+import { BACK } from "@/components/motion/PushTransition";
+import { SPRING_MOMENTUM } from "@/lib/motion";
 import type {
   ChatMessage,
   MatchMission,
@@ -69,6 +72,9 @@ export function ChatThread({
   const atBottom = useRef(true);
   const prepending = useRef<{ height: number; top: number } | null>(null);
   const revealSent = useRef(false);
+  // What was on screen when the thread opened appears as-is; only messages
+  // that arrive afterwards animate in.
+  const [initialIds] = useState(() => new Set(initialMessages.map((m) => m.id)));
   const touch = useConversations()?.touch;
   const hydrated = useHydrated();
   const isActive = match.status === "active";
@@ -254,13 +260,14 @@ export function ChatThread({
       ref={rootRef}
       className="flex h-[var(--vvh,100dvh)] min-h-0 flex-col overflow-hidden"
     >
-      <header className="safe-top shrink-0 border-b border-line bg-surface/90 backdrop-blur-lg">
+      <header className="material safe-top relative z-10 shrink-0 shadow-[0_0.5px_0_var(--separator)]">
         <div className="mx-auto flex min-h-14 max-w-3xl items-center gap-2 px-2 py-1.5 md:min-h-16 md:px-gutter">
           {/* On desktop the list is right there, so there is nothing to go back to. */}
           <Link
             href="/messages"
+            {...BACK}
             aria-label="Back to messages"
-            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken lg:hidden"
+            className="press flex size-11 shrink-0 items-center justify-center rounded-full text-brand hover:bg-fill lg:hidden"
           >
             <BackIcon className="size-5" />
           </Link>
@@ -271,7 +278,7 @@ export function ChatThread({
             size={40}
           />
           <div className="min-w-0 flex-1 pl-1">
-            <p className="truncate text-[0.9375rem] font-bold text-ink">
+            <p className="truncate text-[1.0625rem] font-semibold tracking-[-0.015em] text-ink">
               {match.partner.first_name}
             </p>
             <p className="truncate text-xs text-faint md:text-xs">
@@ -309,7 +316,7 @@ export function ChatThread({
                 type="button"
                 onClick={loadOlder}
                 disabled={loadingOlder}
-                className="mx-auto block rounded-full bg-sunken px-4 py-2 text-xs font-semibold text-muted hover:text-ink disabled:opacity-60"
+                className="press mx-auto block rounded-full bg-fill px-4 py-2 text-xs font-semibold text-muted hover:text-ink disabled:opacity-60"
               >
                 {loadingOlder ? "Loading…" : "Load earlier messages"}
               </button>
@@ -342,6 +349,7 @@ export function ChatThread({
                   <MessageBubble
                     message={message}
                     isMine={message.sender_id === viewerId}
+                    animateIn={!initialIds.has(message.id)}
                     onReply={() => setReplyTo(message)}
                     onCorrect={() => setCorrecting(message)}
                   />
@@ -351,15 +359,25 @@ export function ChatThread({
           </div>
         </div>
 
-        {unseen && (
-          <button
-            type="button"
-            onClick={() => scrollToBottom()}
-            className="animate-rise absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-brand-ink shadow-lg shadow-brand/25"
-          >
-            <ArrowDownIcon className="size-3.5" /> New message
-          </button>
-        )}
+        <AnimatePresence>
+          {unseen && (
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.95 }}
+              transition={SPRING_MOMENTUM}
+              className="absolute bottom-3 left-1/2 -translate-x-1/2"
+            >
+              <button
+                type="button"
+                onClick={() => scrollToBottom()}
+                className="material-float press flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-brand"
+              >
+                <ArrowDownIcon className="size-3.5" /> New message
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <MessageInput

@@ -74,7 +74,7 @@ export function ConversationMission({
           {payload.suggested_questions.map((question) => (
             <div
               key={question}
-              className="rounded-2xl border border-line bg-raised px-4 py-3 text-sm text-ink [overflow-wrap:anywhere]"
+              className="rounded-2xl bg-raised shadow-[var(--shadow-card)] px-4 py-3 text-sm text-ink [overflow-wrap:anywhere]"
             >
               {question}
             </div>
@@ -139,7 +139,7 @@ export function CorrectionChallenge({
       </Instructions>
 
       {payload?.seed_sentence && (
-        <div className="rounded-2xl bg-sunken p-4">
+        <div className="rounded-[1rem] bg-fill p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-faint">
             Or fix this one
           </p>

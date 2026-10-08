@@ -68,7 +68,7 @@ export function ChoiceExercise({ exercise, result, onChange, speech, target, kno
                 <SpeakButton text={payload.speak ?? ""} speech={speech} slow />
               </>
             ) : (
-              <p className="rounded-2xl bg-sunken px-4 py-3 text-sm text-muted">
+              <p className="rounded-[1rem] bg-fill px-4 py-3 text-sm text-muted">
                 No {target.name} voice on this device. Use &ldquo;Can&rsquo;t listen now&rdquo; below.
               </p>
             )}
@@ -89,7 +89,7 @@ export function ChoiceExercise({ exercise, result, onChange, speech, target, kno
         )}
 
         {type === "context_choice" && (
-          <div className="rounded-2xl border border-line bg-sunken/70 px-4 py-3.5">
+          <div className="rounded-[1rem] bg-fill px-4 py-3.5">
             <p className="text-base leading-relaxed text-ink">{payload.situation}</p>
           </div>
         )}

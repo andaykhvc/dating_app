@@ -33,7 +33,7 @@ export const ProfileCard = memo(function ProfileCard({
   const learning = card.languages.find((l) => l.role === "learning");
 
   return (
-    <article className="card-container size-full overflow-hidden rounded-[var(--radius-card)] bg-raised shadow-[0_18px_50px_-20px_rgba(0,0,0,0.45)] ring-1 ring-line">
+    <article className="card-container size-full overflow-hidden rounded-[var(--radius-card)] bg-raised shadow-[0_0_0_0.5px_var(--separator),0_24px_60px_-24px_rgb(0_0_0/0.5)]">
       <div className="flex size-full flex-col card-wide:flex-row">
         <div className="relative min-h-[42%] flex-1 overflow-hidden bg-sunken card-wide:min-h-0 card-wide:max-w-[46%]">
           {/* Placeholder underneath, so the slot never collapses or jumps. */}
@@ -57,10 +57,10 @@ export const ProfileCard = memo(function ProfileCard({
           )}
 
           {learning && (
-            <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
+            <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-xs font-semibold text-white shadow-[inset_0_0.5px_0_rgb(255_255_255/0.3)] backdrop-blur-xl backdrop-saturate-150">
               <span>{learning.flag_emoji}</span>
               <span className="truncate">Learning {learning.language_name}</span>
-              <span className="shrink-0 rounded-full bg-white/25 px-1.5 py-0.5 text-xs">
+              <span className="shrink-0 rounded-full bg-white/20 px-1.5 py-0.5 text-xs font-bold">
                 {learning.cefr_level}
               </span>
             </div>
@@ -70,7 +70,7 @@ export const ProfileCard = memo(function ProfileCard({
         <div className="flex min-h-0 shrink-0 flex-col gap-3 overflow-hidden p-5 card-compact:gap-2 card-compact:px-4 card-compact:py-3.5 card-wide:flex-1 card-wide:shrink">
           <div className="flex items-start gap-2">
             <div className="min-w-0 flex-1">
-              <h2 className="line-clamp-2 text-2xl font-bold leading-tight tracking-tight text-ink [overflow-wrap:anywhere] card-tiny:text-xl">
+              <h2 className="line-clamp-2 text-[1.75rem] font-bold leading-tight tracking-[-0.024em] text-ink [overflow-wrap:anywhere] card-compact:text-2xl card-tiny:text-xl">
                 {card.first_name}, {card.age}
               </h2>
               <p className="mt-0.5 truncate text-sm text-muted">
@@ -85,7 +85,7 @@ export const ProfileCard = memo(function ProfileCard({
                 onPointerDown={(e) => e.stopPropagation()}
                 onClick={onInfo}
                 aria-label={`More about ${card.first_name}`}
-                className="-mr-2 -mt-1 flex size-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-sunken hover:text-ink active:scale-95"
+                className="press -mr-2 -mt-1 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-fill hover:text-ink"
               >
                 <InfoIcon className="size-6" />
               </button>

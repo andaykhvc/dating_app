@@ -70,7 +70,7 @@ export function ProfileDetails({
         <SectionLabel>Languages</SectionLabel>
         <ul className="space-y-2">
           {native && (
-            <li className="flex items-center gap-3 rounded-2xl bg-sunken px-4 py-3">
+            <li className="flex items-center gap-3 rounded-[1rem] bg-fill px-4 py-3">
               <span className="text-xl leading-none">{native.flag_emoji}</span>
               <span className="min-w-0 flex-1 truncate text-sm font-semibold text-ink">
                 {native.language_name}

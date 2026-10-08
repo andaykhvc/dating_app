@@ -23,7 +23,7 @@ export function NewWords({ exercise, onChange, speech, target, known }: Exercise
         {items.map((item) => (
           <li
             key={item.text}
-            className="animate-rise flex items-center gap-3 rounded-2xl border border-line bg-raised p-3.5"
+            className="animate-rise flex items-center gap-3 rounded-2xl bg-raised shadow-[var(--shadow-card)] p-3.5"
           >
             <SpeakButton text={item.speak} speech={speech} />
             <div className="min-w-0 flex-1">

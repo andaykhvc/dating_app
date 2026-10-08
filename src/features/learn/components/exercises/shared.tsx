@@ -83,9 +83,9 @@ export function SpeakButton({
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-full transition-[transform,background-color] active:scale-95",
         size === "lg"
-          ? "size-20 bg-brand text-brand-ink shadow-lg shadow-brand/25 hover:bg-brand-strong"
+          ? "size-20 bg-brand text-brand-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.2),0_14px_30px_-12px_var(--brand)] hover:bg-brand-strong"
           : "size-11 bg-brand-soft text-brand hover:bg-brand/15",
-        slow && size !== "lg" && "bg-sunken text-muted",
+        slow && size !== "lg" && "bg-fill text-muted",
       )}
     >
       <SpeakerIcon className={size === "lg" ? "size-9" : "size-5"} />
@@ -119,12 +119,12 @@ export function OptionButton({
       disabled={disabled}
       aria-pressed={state === "selected"}
       className={cn(
-        "group flex min-h-14 w-full items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left text-base font-medium leading-snug transition-[transform,background-color,border-color,opacity] [overflow-wrap:anywhere] active:scale-[0.99]",
-        state === "idle" && "border-line bg-raised text-ink hover:border-brand/40",
+        "press-soft group flex min-h-14 w-full items-center gap-3 rounded-[1.125rem] border-2 px-4 py-3 text-left text-base font-medium leading-snug [overflow-wrap:anywhere]",
+        state === "idle" && "border-transparent bg-raised text-ink shadow-[var(--shadow-card)] hover:border-brand/30",
         state === "selected" && "border-brand bg-brand-soft text-brand",
-        state === "correct" && "border-positive bg-positive-soft text-positive",
-        state === "wrong" && "border-negative bg-negative-soft text-negative",
-        state === "dimmed" && "border-line bg-raised text-faint opacity-60",
+        state === "correct" && "animate-correct border-positive bg-positive-soft text-positive",
+        state === "wrong" && "animate-shake border-negative bg-negative-soft text-negative",
+        state === "dimmed" && "border-transparent bg-raised text-faint opacity-60 shadow-[var(--shadow-card)]",
       )}
     >
       {hotkey !== undefined && (

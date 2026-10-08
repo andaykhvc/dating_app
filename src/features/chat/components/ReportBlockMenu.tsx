@@ -44,7 +44,7 @@ export function ReportBlockMenu({
         type="button"
         onClick={() => setMode("menu")}
         aria-label={`Options for ${partnerName}`}
-        className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+        className="press flex size-11 shrink-0 items-center justify-center rounded-full text-brand hover:bg-fill"
       >
         <MoreIcon className="size-5" />
       </button>
@@ -56,30 +56,33 @@ export function ReportBlockMenu({
       >
         <div className="space-y-2">
           {reported && (
-            <p className="rounded-2xl bg-positive-soft px-4 py-3 text-sm text-positive">
+            <p className="animate-pop rounded-2xl bg-positive-soft px-4 py-3 text-sm text-positive">
               Thanks — we have your report.
             </p>
           )}
-          <button
-            type="button"
-            onClick={() => setMode("report")}
-            className="w-full rounded-2xl bg-sunken px-4 py-3.5 text-left text-sm font-semibold text-ink hover:brightness-95"
-          >
-            Report {partnerName}
-            <span className="mt-0.5 block text-xs font-normal text-muted">
-              Sends this conversation to us for review.
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode("block")}
-            className="w-full rounded-2xl bg-negative-soft px-4 py-3.5 text-left text-sm font-semibold text-negative hover:brightness-95"
-          >
-            Block {partnerName}
-            <span className="mt-0.5 block text-xs font-normal text-negative/80">
-              Ends the match and hides you from each other.
-            </span>
-          </button>
+          {/* An iOS action list: one grouped surface, destructive action in red. */}
+          <div className="grouped-rows overflow-hidden rounded-[1.125rem] bg-fill">
+            <button
+              type="button"
+              onClick={() => setMode("report")}
+              className="w-full px-4 py-3.5 text-left text-[0.9375rem] font-semibold text-ink transition-colors active:bg-fill-strong"
+            >
+              Report {partnerName}
+              <span className="mt-0.5 block text-xs font-normal text-muted">
+                Sends this conversation to us for review.
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("block")}
+              className="w-full px-4 py-3.5 text-left text-[0.9375rem] font-semibold text-negative transition-colors active:bg-fill-strong"
+            >
+              Block {partnerName}
+              <span className="mt-0.5 block text-xs font-normal text-negative/80">
+                Ends the match and hides you from each other.
+              </span>
+            </button>
+          </div>
         </div>
       </Sheet>
 

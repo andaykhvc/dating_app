@@ -45,7 +45,7 @@ export function DownloadMyData() {
   }
 
   return (
-    <section className="rounded-3xl border border-line bg-raised p-5">
+    <section className="surface-card p-5">
       <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">Your data</h2>
       <p className="mt-3 text-sm leading-relaxed text-muted">
         Get a copy of everything we hold about you — profile, photos list, matches, messages,

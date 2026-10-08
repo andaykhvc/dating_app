@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PracticeRunPlayer } from "@/features/games/components/PracticeRunPlayer";
 import type { PracticeRun } from "@/features/games/api";
 import { createClient } from "@/lib/supabase/server";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Challenge" };
 
@@ -22,5 +23,9 @@ export default async function PracticeRunPage({
   const run = data as PracticeRun | null;
   if (!run || !run.available) notFound();
 
-  return <PracticeRunPlayer key={run.run_id} initial={run} />;
+  return (
+    <PushTransition>
+      <PracticeRunPlayer key={run.run_id} initial={run} />
+    </PushTransition>
+  );
 }

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { startLesson, startReview } from "@/features/learn/api";
 import { hasVoiceFor } from "@/features/learn/speech";
 import type { LearnOverview, SkillSummary, UnitSummary } from "@/features/learn/types";
+import { ProgressFill } from "@/components/ui/ProgressFill";
 
 type Starter = {
   start: (lessonId: number | "review") => Promise<void>;
@@ -29,7 +30,7 @@ function useStarter(locale: string | null | undefined): Starter {
       const audio = await hasVoiceFor(locale);
       const session =
         lessonId === "review" ? await startReview(audio) : await startLesson(lessonId, audio);
-      router.push(`/play/lesson/${session.session_id}`);
+      router.push(`/play/lesson/${session.session_id}`, { transitionTypes: ["nav-forward"] });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not start that.");
       setStarting(null);
@@ -46,7 +47,7 @@ export function CourseCard({ overview }: { overview: LearnOverview }) {
 
   if (!course) {
     return (
-      <section className="rounded-3xl border border-dashed border-line p-5 text-center md:p-6">
+      <section className="rounded-[var(--radius-group)] border border-dashed border-separator p-5 text-center md:p-6">
         <p className="text-sm font-semibold text-ink">No course for your learning language yet</p>
         <p className="mt-1 text-sm text-muted">
           Courses exist for German, Spanish, Dutch, Turkish and English. You can
@@ -64,10 +65,10 @@ export function CourseCard({ overview }: { overview: LearnOverview }) {
   const reviewDue = review?.due ?? 0;
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-line bg-raised">
+    <section className="overflow-hidden surface-card">
       <div className="p-5 md:p-6">
         <div className="flex items-center gap-3">
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-sunken text-2xl" aria-hidden>
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-[0.9rem] bg-fill text-2xl" aria-hidden>
             {course.target.flag_emoji}
           </span>
           <div className="min-w-0 flex-1">
@@ -107,18 +108,18 @@ export function CourseCard({ overview }: { overview: LearnOverview }) {
         )}
 
         <div
-          className="mt-4 h-1.5 overflow-hidden rounded-full bg-sunken"
+          className="mt-4 h-1.5 overflow-hidden rounded-full bg-fill"
           role="progressbar"
           aria-label={`Course progress: ${course.lessons_completed} of ${course.lessons_total} lessons`}
           aria-valuenow={pct}
           aria-valuemin={0}
           aria-valuemax={100}
         >
-          <div className="h-full rounded-full bg-brand transition-[width] duration-700" style={{ width: `${pct}%` }} />
+          <ProgressFill value={pct} className="bg-brand" />
         </div>
       </div>
 
-      <div className="flex items-center gap-3 border-t border-line bg-sunken/60 px-5 py-2.5 md:px-6">
+      <div className="flex items-center gap-3 bg-fill px-5 py-2.5 shadow-[inset_0_0.5px_0_var(--separator)] md:px-6">
         <p className="min-w-0 flex-1 truncate text-sm text-muted">
           {reviewDue > 0 ? `${reviewDue} to review` : "Nothing to review yet"}
         </p>
@@ -206,10 +207,10 @@ export function SyllabusAccordion({ overview }: { overview: LearnOverview }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="all-lessons"
-        className="flex w-full items-center justify-between rounded-3xl border border-line bg-raised px-5 py-4 text-left text-sm font-semibold text-ink transition-colors hover:border-brand/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+        className="flex w-full items-center justify-between surface-card press-soft px-5 py-4 text-left text-sm font-semibold text-ink hover:brightness-[0.98] dark:hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
       >
         All lessons
-        <span className={cn("text-xs text-muted transition-transform", open && "rotate-180")} aria-hidden>
+        <span className={cn("text-xs text-muted transition-transform duration-300 ease-ios", open && "rotate-180")} aria-hidden>
           ▾
         </span>
       </button>
@@ -246,12 +247,12 @@ function UnitRow({
   const complete = done === lessons.length && lessons.length > 0;
 
   return (
-    <li className="overflow-hidden rounded-3xl border border-line bg-raised">
+    <li className="overflow-hidden surface-card">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={expanded}
-        className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-sunken/50 md:px-5"
+        className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-fill/50 md:px-5"
       >
         <span
           className={cn(
@@ -266,13 +267,13 @@ function UnitRow({
           {done}/{lessons.length}
           <span className="sr-only"> lessons done</span>
         </span>
-        <span className={cn("shrink-0 text-xs text-muted transition-transform", expanded && "rotate-180")} aria-hidden>
+        <span className={cn("shrink-0 text-xs text-muted transition-transform duration-300 ease-ios", expanded && "rotate-180")} aria-hidden>
           ▾
         </span>
       </button>
 
       {expanded && (
-        <ul className="divide-y divide-line border-t border-line">
+        <ul className="grouped-rows shadow-[inset_0_0.5px_0_var(--separator)] [--row-inset:3.75rem]">
           {unit.skills.map((skill) => (
             <SkillRow
               key={skill.id}
@@ -317,9 +318,9 @@ function SkillRow({
         type="button"
         onClick={onToggle}
         aria-expanded={expanded}
-        className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-sunken/50 md:px-5"
+        className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-fill/50 md:px-5"
       >
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-sunken text-base" aria-hidden>
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-[0.6rem] bg-fill text-base" aria-hidden>
           {skill.icon}
         </span>
         <span className="min-w-0 flex-1">
@@ -327,7 +328,7 @@ function SkillRow({
           {/* Mastery is the spaced-repetition state of the skill's words, so it
               can go down again if they are not reviewed. */}
           <span
-            className="mt-1 block h-1 overflow-hidden rounded-full bg-line"
+            className="mt-1 block h-1 overflow-hidden rounded-full bg-fill-strong"
             role="progressbar"
             aria-label={`${skill.title} mastery`}
             aria-valuenow={skill.mastery}
@@ -345,7 +346,7 @@ function SkillRow({
         >
           {state}
         </span>
-        <span className={cn("shrink-0 text-xs text-muted transition-transform", expanded && "rotate-180")} aria-hidden>
+        <span className={cn("shrink-0 text-xs text-muted transition-transform duration-300 ease-ios", expanded && "rotate-180")} aria-hidden>
           ▾
         </span>
       </button>
@@ -368,7 +369,7 @@ function SkillRow({
                     ? "bg-brand text-brand-ink shadow-sm shadow-brand/30"
                     : lesson.completed
                       ? "bg-positive-soft text-positive"
-                      : "border border-line bg-raised text-muted hover:border-brand/40 hover:text-ink",
+                      : "bg-fill text-muted hover:bg-fill-strong hover:text-ink",
                 )}
               >
                 {starter.starting === lesson.id ? (
