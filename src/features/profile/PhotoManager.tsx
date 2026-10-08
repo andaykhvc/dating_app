@@ -146,7 +146,7 @@ export function PhotoManager({
                   <div className="flex size-full flex-col items-center justify-center gap-1.5 bg-negative-soft p-2 text-center">
                     <span className="text-xs font-semibold text-negative">Not approved</span>
                     {photo.moderation_reason && (
-                      <span className="line-clamp-3 text-[0.625rem] leading-snug text-muted">
+                      <span className="line-clamp-3 text-xs leading-snug text-muted">
                         {photo.moderation_reason}
                       </span>
                     )}
@@ -170,17 +170,17 @@ export function PhotoManager({
                   />
                 )}
                 {photo.moderation_status === "pending" && (
-                  <span className="absolute left-1.5 top-1.5 rounded-full bg-accent-soft px-2 py-0.5 text-[0.625rem] font-semibold text-accent">
+                  <span className="absolute left-1.5 top-1.5 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent">
                     In review
                   </span>
                 )}
                 {photo.moderation_status === "approved" && (
-                  <span className="absolute left-1.5 top-1.5 rounded-full bg-positive-soft px-2 py-0.5 text-[0.625rem] font-semibold text-positive">
+                  <span className="absolute left-1.5 top-1.5 rounded-full bg-positive-soft px-2 py-0.5 text-xs font-semibold text-positive">
                     Approved
                   </span>
                 )}
                 {i === 0 && photo.moderation_status !== "rejected" && (
-                  <span className="absolute bottom-1.5 left-1.5 rounded-full bg-brand px-2 py-0.5 text-[0.625rem] font-semibold text-brand-ink">
+                  <span className="absolute bottom-1.5 left-1.5 rounded-full bg-brand px-2 py-0.5 text-xs font-semibold text-brand-ink">
                     Main
                   </span>
                 )}

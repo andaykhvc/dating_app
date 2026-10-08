@@ -16,13 +16,9 @@ export default async function DiscoverPage() {
 
   // The first batch is rendered on the server so the deck is on screen
   // immediately; every batch after that is fetched by the client hook.
-  const [{ data: cards }, { data: progress }, { data: me }, { data: myPhotos }] = await Promise.all([
+  const [{ data: cards }, { data: streak }, { data: me }, { data: myPhotos }] = await Promise.all([
     supabase.rpc("discover_profiles", { p_limit: DISCOVERY_BATCH_SIZE }),
-    supabase
-      .from("user_progress")
-      .select("current_streak_days")
-      .eq("user_id", user!.id)
-      .single(),
+    supabase.rpc("get_my_streak"),
     supabase.from("profiles").select("primary_photo_path").eq("id", user!.id).single(),
     supabase.from("profile_photos").select("moderation_status").eq("user_id", user!.id),
   ]);
@@ -46,7 +42,7 @@ export default async function DiscoverPage() {
             aria-label="Your streak"
             className="-m-1.5 rounded-full p-1.5"
           >
-            <StreakFlame days={progress?.current_streak_days ?? 0} />
+            <StreakFlame days={streak?.current_streak_days ?? 0} />
           </Link>
         }
       />
