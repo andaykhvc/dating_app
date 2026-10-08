@@ -34,6 +34,7 @@ type Initial = {
   countryCode: string;
   bio: string;
   intentions: Intention[];
+  datingConsent: boolean;
   ageMin: number;
   ageMax: number;
   countries: string[];
@@ -95,6 +96,11 @@ export function EditProfileForm({
       return;
     }
 
+    if (form.intentions.includes("open_to_dating") && !form.datingConsent) {
+      setError("Please tick the consent box to be open to dating, or unselect that option.");
+      return;
+    }
+
     const unsupported = unsupportedLearningMessage(languages, form.learning);
     if (unsupported) {
       setError(unsupported);
@@ -112,6 +118,8 @@ export function EditProfileForm({
         country_code: form.countryCode,
         bio: form.bio.trim() || null,
         intentions: form.intentions,
+        // Any value means "consented"; the database stamps the real time.
+        dating_consent_at: form.datingConsent ? new Date().toISOString() : null,
         preferred_age_min: form.ageMin,
         preferred_age_max: form.ageMax,
         preferred_countries: form.countries,
@@ -287,6 +295,8 @@ export function EditProfileForm({
             <IntentionPicker
               value={form.intentions}
               onChange={(v) => set("intentions", v)}
+              datingConsent={form.datingConsent}
+              onDatingConsentChange={(v) => set("datingConsent", v)}
             />
           </Section>
 

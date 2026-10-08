@@ -22,7 +22,7 @@ export default async function EditProfilePage() {
     supabase
       .from("profiles")
       .select(
-        "first_name, city, country_code, bio, intentions, preferred_age_min, preferred_age_max, preferred_countries, hide_dating_profiles",
+        "first_name, city, country_code, bio, intentions, preferred_age_min, preferred_age_max, preferred_countries, hide_dating_profiles, dating_consent_at",
       )
       .eq("id", user!.id)
       .single(),
@@ -58,6 +58,7 @@ export default async function EditProfilePage() {
         countryCode: profile?.country_code ?? "",
         bio: profile?.bio ?? "",
         intentions: (profile?.intentions ?? []) as Intention[],
+        datingConsent: Boolean(profile?.dating_consent_at),
         ageMin: profile?.preferred_age_min ?? 18,
         ageMax: profile?.preferred_age_max ?? 45,
         countries: profile?.preferred_countries ?? [],

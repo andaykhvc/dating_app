@@ -6,6 +6,7 @@ import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
 import { authCallbackUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
 
 type Provider = "google" | "apple";
 
@@ -78,6 +79,11 @@ export function OAuthButtons({ next, className }: Props) {
           {error}
         </p>
       )}
+
+      <p className="text-center text-xs leading-relaxed text-faint">
+        By continuing you agree to the <TermsLink /> and acknowledge the{" "}
+        <PrivacyLink />. You will be asked to confirm after signing in.
+      </p>
     </div>
   );
 }
