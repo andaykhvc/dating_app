@@ -6,6 +6,7 @@ import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
 import { authCallbackUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/client";
 import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
 
 type Provider = "google" | "apple";
@@ -20,6 +21,7 @@ type Props = { next?: string; className?: string };
 const APPLE_ENABLED = process.env.NEXT_PUBLIC_APPLE_SIGNIN_ENABLED === "true";
 
 export function OAuthButtons({ next, className }: Props) {
+  const t = useT();
   const [pending, setPending] = useState<Provider | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -53,7 +55,7 @@ export function OAuthButtons({ next, className }: Props) {
         onClick={() => signInWithProvider("google")}
       >
         <GoogleLogo />
-        Continue with Google
+        {t("auth.google")}
       </Button>
       <Button
         type="button"
@@ -66,10 +68,12 @@ export function OAuthButtons({ next, className }: Props) {
         className={cn(!APPLE_ENABLED && "opacity-50 hover:border-line")}
       >
         <AppleLogo />
-        Continue with Apple
+        {t("auth.apple")}
         {!APPLE_ENABLED && (
           <span className="rounded-full bg-sunken px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-muted">
-            <span className="sr-only">(</span>Coming soon<span className="sr-only">)</span>
+            <span className="sr-only">(</span>
+            {t("auth.appleComingSoon")}
+            <span className="sr-only">)</span>
           </span>
         )}
       </Button>

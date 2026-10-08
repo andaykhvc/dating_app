@@ -11,6 +11,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --test \"scripts/**/*.test.ts\" \"scripts/**/*.test.mjs\" \"supabase/functions/**/*.test.ts\"",
     "test:db": "supabase/tests/run.sh",
+    "i18n:check": "node scripts/i18n-check.mjs",
     "content:validate": "node scripts/content/validate.ts",
     "content:build": "node scripts/content/build-seed.ts",
     "content:import:cldr": "node scripts/content/import-cldr.ts",

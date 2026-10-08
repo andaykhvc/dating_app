@@ -12,8 +12,10 @@ import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
 import { authCallbackUrl } from "@/lib/site";
 import { rememberPendingEmail } from "@/features/auth/pendingEmail";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
+import { useT } from "@/i18n/client";
 
 export function SignupForm() {
+  const t = useT();
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [dob, setDob] = useState("");
@@ -28,15 +30,15 @@ export function SignupForm() {
     setError(null);
 
     if (firstName.trim().length < 2) {
-      setError("Please enter your first name.");
+      setError(t("auth.signup.errorFirstName"));
       return;
     }
     if (!dob || !isAtLeast18(dob)) {
-      setError("You must be 18 or older to use Lingua Match.");
+      setError(t("auth.signup.errorAge"));
       return;
     }
     if (password.length < 8) {
-      setError("Use at least 8 characters for your password.");
+      setError(t("auth.signup.errorPassword"));
       return;
     }
     if (!agreed) {
@@ -91,25 +93,25 @@ export function SignupForm() {
     <form onSubmit={onSubmit} className="space-y-5">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-ink">
-          Create your account
+          {t("auth.signup.title")}
         </h1>
         <p className="mt-2 text-sm text-muted">
-          Takes about two minutes. You can change everything later.
+          {t("auth.signup.subtitle")}
         </p>
       </div>
 
-      <Field label="First name">
+      <Field label={t("auth.signup.firstName")}>
         <Input
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          placeholder="Sofia"
+          placeholder={t("auth.signup.firstNamePlaceholder")}
           autoComplete="given-name"
           maxLength={40}
           required
         />
       </Field>
 
-      <Field label="Date of birth" hint="Lingua Match is 18+. Only your age is ever shown.">
+      <Field label={t("auth.signup.dateOfBirth")} hint={t("auth.signup.dateOfBirthHint")}>
         <Input
           type="date"
           value={dob}
@@ -119,18 +121,18 @@ export function SignupForm() {
         />
       </Field>
 
-      <Field label="Email">
+      <Field label={t("auth.signup.email")}>
         <Input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
+          placeholder={t("auth.signup.emailPlaceholder")}
           autoComplete="email"
           required
         />
       </Field>
 
-      <Field label="Password" hint="At least 8 characters.">
+      <Field label={t("auth.signup.password")} hint={t("auth.signup.passwordHint")}>
         <Input
           type="password"
           value={password}
@@ -161,21 +163,21 @@ export function SignupForm() {
       )}
 
       <Button type="submit" size="lg" fullWidth loading={loading} disabled={!agreed || loading}>
-        Create account
+        {t("auth.signup.submit")}
       </Button>
 
       <div className="flex items-center gap-3 py-1">
         <div className="h-px flex-1 bg-line" />
-        <span className="text-xs text-muted">or continue with</span>
+        <span className="text-xs text-muted">{t("auth.orContinueWith")}</span>
         <div className="h-px flex-1 bg-line" />
       </div>
 
       <OAuthButtons />
 
       <p className="text-center text-sm text-muted">
-        Already have an account?{" "}
+        {t("auth.signup.haveAccount")}{" "}
         <Link href="/login" className="font-semibold text-brand">
-          Sign in
+          {t("auth.signup.signIn")}
         </Link>
       </p>
     </form>

@@ -3,20 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TABS, isImmersive, isTabActive } from "@/components/layout/nav";
+import { useT } from "@/i18n/client";
 import { cn } from "@/lib/utils";
 
 /** Phones only — from tablet width up the SideNav takes over. */
 export function BottomNav() {
   const pathname = usePathname();
+  const t = useT();
   if (isImmersive(pathname)) return null;
 
   return (
     <nav
-      aria-label="Main"
+      aria-label={t("nav.label")}
       className="safe-bottom safe-x sticky bottom-0 z-30 border-t border-line bg-raised/95 backdrop-blur-lg md:hidden"
     >
       <ul className="mx-auto flex max-w-lg items-stretch">
-        {TABS.map(({ href, label, Icon }) => {
+        {TABS.map(({ href, labelKey, Icon }) => {
           const active = isTabActive(pathname, href);
           return (
             <li key={href} className="flex-1">
@@ -37,7 +39,7 @@ export function BottomNav() {
                   <Icon className="size-6" filled={active} />
                 </span>
                 <span className="text-xs font-medium leading-none tiny:sr-only">
-                  {label}
+                  {t(labelKey)}
                 </span>
               </Link>
             </li>

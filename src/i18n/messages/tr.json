@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "label": "Ana menü",
+    "discover": "Keşfet",
+    "matches": "Eşleşmeler",
+    "learn": "Öğren",
+    "messages": "Mesajlar",
+    "profile": "Profil"
+  },
+  "auth": {
+    "orContinueWith": "veya şununla devam et",
+    "google": "Google ile devam et",
+    "apple": "Apple ile devam et",
+    "appleComingSoon": "Çok yakında",
+    "login": {
+      "title": "Tekrar hoş geldin",
+      "subtitle": "Serin seni bekliyor.",
+      "email": "E-posta",
+      "password": "Şifre",
+      "submit": "Giriş yap",
+      "newHere": "Yeni misin?",
+      "createAccount": "Hesap oluştur",
+      "callbackFailed": "Olmadı — lütfen tekrar dene.",
+      "genericError": "Bir şeyler ters gitti — lütfen tekrar dene."
+    },
+    "signup": {
+      "title": "Hesabını oluştur",
+      "subtitle": "Yaklaşık iki dakika sürer. Her şeyi sonra değiştirebilirsin.",
+      "firstName": "Ad",
+      "firstNamePlaceholder": "Sofia",
+      "dateOfBirth": "Doğum tarihi",
+      "dateOfBirthHint": "Lingua Match 18 yaş ve üzeri içindir. Yalnızca yaşın gösterilir.",
+      "email": "E-posta",
+      "emailPlaceholder": "sen@ornek.com",
+      "password": "Şifre",
+      "passwordHint": "En az 8 karakter.",
+      "confirmAdult": "18 yaşında veya daha büyük olduğumu onaylıyorum.",
+      "submit": "Hesap oluştur",
+      "haveAccount": "Zaten hesabın var mı?",
+      "signIn": "Giriş yap",
+      "errorFirstName": "Lütfen adını gir.",
+      "errorAge": "Lingua Match'i kullanmak için 18 yaşında veya daha büyük olmalısın.",
+      "errorPassword": "Şifren için en az 8 karakter kullan.",
+      "errorConfirmAdult": "Lütfen 18 yaşında veya daha büyük olduğunu onayla."
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "backToProfile": "Profile dön",
+    "appLanguage": "Uygulama dili",
+    "appLanguageHint": "Menülerin ve düğmelerin dilini değiştirir. Dersler, öğrenmek için seçtiğin dilleri kullanmaya devam eder.",
+    "blocked": {
+      "title": "Engellenen kişiler",
+      "empty": "Henüz kimseyi engellemedin. Birini engellemek eşleşmeyi sonlandırır ve Keşfet'te görünmesini engeller.",
+      "unblock": "Engeli kaldır",
+      "someone": "Biri"
+    },
+    "safety": {
+      "title": "Güvenlik",
+      "adults": "{app} 18 yaş ve üzeri içindir. 18 yaşından küçük görünen biri olursa bildir.",
+      "location": "Tam konumun hiçbir zaman saklanmaz veya gösterilmez — yalnızca şehir ve ülke.",
+      "reportBlock": "Bildir ve engelle, her sohbetin üstündeki menüde."
+    },
+    "licenses": "Lisanslar ve atıflar",
+    "signOut": "Çıkış yap",
+    "install": {
+      "installed": "Uygulama yüklendi",
+      "add": "Ana Ekrana Ekle",
+      "installedHint": "Uygulama simgenden açmaya hazır.",
+      "addHint": "{app} uygulamasını uygulama gibi kullan. Nasıl olduğunu gör.",
+      "sheetGet": "Uygulamayı edin",
+      "done": "Tamam"
+    }
+  }
+}
