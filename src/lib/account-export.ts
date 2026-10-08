@@ -68,6 +68,8 @@ export const EXCLUDED_TABLES: Record<string, string> = {
   courses: "Course content, not personal data.",
   blocked_terms: "Moderation word list written by us, not personal data (and kept private on purpose).",
   name_allowlist: "Moderation allow-list written by us, not personal data.",
+  photo_moderation_events: "Log of automatic photo checks (labels and scores, never the image). Closed to the browser, so it is not in the self-service export; it can be provided on request.",
+  moderation_settings: "Server configuration (webhook address and secret), not personal data, and closed to the browser.",
   push_settings: "Server configuration (the push webhook address and its secret), not personal data, and closed to the browser.",
   units: "Course content, not personal data.",
   skills: "Course content, not personal data.",

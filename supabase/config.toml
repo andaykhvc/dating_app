@@ -424,6 +424,11 @@ enabled = true
 # and column/key alignment. Set to "null" to emit raw, unformatted SQL.
 # format_options = "{\"keywordCase\":\"upper\",\"indent\":2,\"maxWidth\":180,\"commaStyle\":\"trailing\"}"
 
+# The moderation webhook is called by the database with a shared secret in
+# x-webhook-secret, not by a signed-in user, so it has no JWT to verify.
+[functions.moderate-photo]
+verify_jwt = false
+
 # The push webhook is called by the database with a shared secret in
 # x-webhook-secret, not by a signed-in user, so it has no JWT to verify.
 [functions.send-push]
