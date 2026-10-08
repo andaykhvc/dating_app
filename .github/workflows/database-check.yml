@@ -1,0 +1,54 @@
+name: Database check
+
+# Says out loud when main has migrations the live database has not got yet.
+#
+# The web app deploys on every merge, but the database only changes when
+# someone runs "Deploy database" by hand, so code can briefly (or not so
+# briefly) run against an older schema. This is a read-only alarm: it never
+# changes anything.
+#
+# It deliberately does NOT run on pull requests. That would hand the production
+# connection string to workflow code from any branch, which can be edited in
+# the PR itself. If you later want a pre-merge gate, create a read-only database
+# role for this check and store its URL as a separate secret first.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: database-check
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pending:
+    name: Pending migrations
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip quietly if the secret is not configured
+        id: secret
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "SUPABASE_DB_URL is not set; nothing to check." | tee -a "$GITHUB_STEP_SUMMARY"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install psql
+        if: steps.secret.outputs.run == 'true'
+        run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+
+      - name: Are all migrations applied?
+        if: steps.secret.outputs.run == 'true'
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: scripts/db/check-pending.sh

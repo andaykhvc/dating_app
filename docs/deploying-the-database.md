@@ -90,6 +90,24 @@ Whenever a PR adds a migration or changes content under `content/` (and its
 regenerated seed files), merge it, then run the workflow again: dry run first,
 then for real.
 
+## Knowing when the database is behind
+
+The web app goes live the moment a pull request is merged, but the database only
+changes when you run this workflow. The **Database check** workflow
+(`.github/workflows/database-check.yml`) runs after every push to `main` (and on
+demand) and fails, with the list of migrations, when `main` has some the live
+database does not. It only reads; it never changes anything. A red run means:
+run **Deploy database** now.
+
+It reuses the same `SUPABASE_DB_URL` secret and quietly does nothing if that is
+not set. It does not run on pull requests on purpose: that would give the
+production connection string to workflow code from any branch. A real pre-merge
+gate needs a separate read-only database user first.
+
+After a real deploy, `deploy.sh` now also confirms nothing is left pending and
+asks PostgREST to reload its schema cache, so newly created functions are
+callable straight away.
+
 ## What it does not do
 
 - It does not run the original seeds `supabase/seed/0001`–`0007` (languages,
