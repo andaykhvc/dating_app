@@ -58,3 +58,20 @@ name) or set `account_status = 'suspended'`.
 "That name can't be used. Please use the name you'd like people to call you."
 It never says which word matched. If a name arrives through sign-up and fails, the
 account is still created with an empty name and onboarding asks again.
+
+## Names of political figures
+
+`blocked_terms` rows with category `public_figure` (migration
+`99999_public_figure_names.sql`) stop profiles from using the name of a Turkish
+political figure. The rule for the list: block the **full name** ("Recep Tayyip
+Erdoğan"), never a bare first name or a bare common surname, so ordinary people
+called Recep, Erdoğan, Özel or Yılmaz are unaffected. Add or remove a person:
+
+```sql
+insert into blocked_terms (term, language, category, match_mode)
+values ('Firstname Lastname', 'tr', 'public_figure', 'word');
+
+update blocked_terms set is_active = false where term = 'Ali Babacan';
+```
+
+Offices change, so review the list now and then. Atatürk is deliberately not in it.
