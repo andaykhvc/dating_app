@@ -3,6 +3,7 @@ import { PRIVACY_LAST_UPDATED, PRIVACY_SOURCES as sources, PRIVACY_VERSION } fro
 
 /** German is the primary editorial edition. Changes must be reflected in EN. */
 export const privacyDe: PrivacyPolicy = {
+  kind: "privacy",
   language: "de",
   title: "Datenschutzerklärung",
   description: "Informationen zur Verarbeitung personenbezogener Daten bei Lingua Match — deutscher Entwurf zur rechtlichen Prüfung.",

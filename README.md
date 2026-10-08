@@ -108,6 +108,8 @@ Privacy information is public at [`/datenschutz`](https://dating-app-ruddy.verce
 
 The [review notes](docs/compliance/privacy-policy-review.md) trace statements to source files and list unresolved provider/region, retention, cookie and consent questions. Updating the notice does not implement account deletion or data export.
 
+Terms are public at `/nutzungsbedingungen` (German primary edition) and `/terms` (English companion), using the same static legal layout, operator contact details and draft/noindex gate. Both editions share `TERMS_VERSION` in [`terms.config.ts`](src/content/legal/terms.config.ts); displaying a version does not record acceptance. The [terms review notes](docs/compliance/terms-review.md) map community rules to actual report reasons, distinguish implemented controls from pending moderation work, and record current legal sources and outstanding approval items. The owner currently runs the app alone as an unpaid hobby; its legal classification remains subject to review.
+
 ### 3 · Create the database schema
 
 Create a project in the [Supabase dashboard](https://supabase.com/dashboard), then link this checkout and apply its migrations:

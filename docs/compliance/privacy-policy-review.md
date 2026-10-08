@@ -54,6 +54,8 @@ Die Seiten sind statisch, verwenden keine Kontoabfragen und umgehen nur für die
 
 Die Beschwerdeseite nennt aufgrund der bestätigten Dresden-Adresse die **Sächsische Datenschutz- und Transparenzbeauftragte**. Rechte auf Beschwerden bei anderen zuständigen Behörden werden nicht eingeschränkt.
 
+Erweiterung durch #40: Das gemeinsame Layout und die Metadaten unterscheiden jetzt Datenschutz und Nutzungsbedingungen. Der exakte Auth-Bypass umfasst zusätzlich `/nutzungsbedingungen` und `/terms`; `LegalLinks` ersetzt die bisherige reine Datenschutznavigation. Die nachfolgende Verifikation dokumentiert den ursprünglichen #39-Stand; Regressionsergebnisse der Erweiterung stehen in [terms-review.md](terms-review.md).
+
 ## Quellen für die rechtliche Prüfung
 
 Geprüft am 8. Oktober 2026. Die gesetzlichen Verweise sind für die fachliche Prüfung verlinkt; Anbieterangaben sind vom tatsächlich geltenden eigenen Vertragsstand zu unterscheiden.
