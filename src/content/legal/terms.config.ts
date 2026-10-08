@@ -1,5 +1,5 @@
 /** Reference version for a future, separately implemented acceptance record. */
-export const TERMS_VERSION = "2026-10-08-draft.1";
+export const TERMS_VERSION = "2026-10-08-draft.2";
 export const TERMS_LAST_UPDATED = "2026-10-08";
 
 export const TERMS_SOURCES = {

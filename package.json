@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "legal:check": "node scripts/legal-check.mjs",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --test scripts/content/content.test.ts scripts/install.test.ts scripts/lint-glob.test.mjs scripts/redirect.test.ts scripts/date.test.ts scripts/discovery-feed.test.ts scripts/profile-lists.test.ts scripts/legal.test.ts",
     "test:db": "supabase/tests/run.sh",

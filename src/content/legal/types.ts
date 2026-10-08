@@ -17,7 +17,7 @@ export type LegalSection = {
   links?: LegalLink[];
 };
 export type LegalDocument = {
-  kind: "privacy" | "terms";
+  kind: "privacy" | "terms" | "imprint";
   language: "de" | "en";
   title: string;
   description: string;
@@ -29,3 +29,4 @@ export type LegalDocument = {
 };
 export type PrivacyPolicy = LegalDocument & { kind: "privacy" };
 export type TermsPolicy = LegalDocument & { kind: "terms" };
+export type ImprintPolicy = LegalDocument & { kind: "imprint" };

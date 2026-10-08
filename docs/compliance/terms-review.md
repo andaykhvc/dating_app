@@ -1,10 +1,12 @@
 # Nutzungsbedingungen: Prüfgrundlage und offene Freigabe
 
-Stand: 8. Oktober 2026 · Version `2026-10-08-draft.1` · Issue #40, Teil von #17.
+Stand: 8. Oktober 2026 · Version `2026-10-08-draft.2` · Issue #40, ergänzt in #41; Teil von #17.
 
 Die deutsche Ausgabe ist eigenständig als Hauptfassung verfasst, die englische erläutert denselben Regelungsumfang. Beide Seiten sind **DRAFT — pending legal review**, keine rechtlich freigegebenen AGB. Sie haben dieselben 17 Abschnittsanker und fünf Punkte in der Kurzfassung.
 
 ## Grundlage und Abhängigkeiten
+
+#41 ergänzt die vom Betreiber ausdrücklich zur Veröffentlichung freigegebene Telefonnummer **+491782943998** in beiden Anbieter-Karten und erhöht `TERMS_VERSION` auf `draft.2`. Die nachfolgenden ursprünglichen Prüfbefunde beschreiben #40. #41 erweitert den globalen Footer und die öffentliche Pfadliste auf sechs Legal-Routen; aktuelle Prüfungen sind in den [Impressum-Prüfnotizen](imprint-review.md) dokumentiert. Der gemeinsame Entwurfsmodus umfasst nun Datenschutz, Nutzungsbedingungen und Impressum; sämtliche Freigaben bleiben erforderlich.
 
 Diese Änderung baut auf PR [#62](https://github.com/andaykhvc/dating_app/pull/62), Branch `codex/privacy-policy-39`, Commit `530eace` auf. Der PR richtet sich zunächst gegen diesen Branch, damit ausschließlich #40 sichtbar ist. #62 liefert die Betreiberkonfiguration und das gemeinsame Seitenlayout; dieses wird um den Dokumenttyp `terms` erweitert. Nach Integration von #62 ist die Basis auf `main` umzustellen und der dann aktuelle Stand erneut abzugleichen. Die bestehende GitHub-CI läuft nur für PRs gegen `main`; lokale Prüfungen sind daher separat dokumentiert.
 
@@ -72,9 +74,9 @@ Primärquellen am 8. Oktober 2026 geprüft; dies bestätigt weder die Vertragswi
 - Tatsächlich betriebenen Moderationsprozess mit Verantwortlichkeit, üblichen realistischen Zeiten, Begründungen, Überprüfung und vollständiger Sperrwirkung bestätigen; mit #44/#60 abgleichen.
 - Löschung/Export, Foto-/Datei-/Backup-Aufbewahrung und Ende der Inhaltslizenz mit #38/#43 und der Datenschutzerklärung abstimmen.
 - Verbraucherschlichtung klären; keine Betreiberzusage aus einer unvollständigen Antwort konstruieren.
-- Änderungen des Texts parallel DE/EN pflegen, Version/Datum erhöhen. `LEGAL_DRAFT_MODE` ist gemeinsam mit Datenschutz; beide Dokumente müssen vor seinem Abschalten freigegeben sein.
+- Änderungen des Texts parallel DE/EN pflegen, Version/Datum erhöhen. `LEGAL_DRAFT_MODE` ist gemeinsam mit Datenschutz und Impressum; alle drei Dokumente müssen vor seinem Abschalten freigegeben sein.
 
-## Technische Verifikation
+## Ursprüngliche technische Verifikation von #40
 
 Die Seiten liefern statische Inhalte, benötigen keine Sitzung und keine API-/DB-Abfrage. Nur die vier exakten Pfade aus `LEGAL_DOCUMENT_PATHS` umgehen den Auth-Refresh; verschachtelte oder ähnlich benannte App-Pfade bleiben geschützt. `LegalLinks` wird in Landeseite, Auth-Layout und Settings verwendet. Provider-Kontakt und `mailto:` kommen aus `LEGAL_ENTITY`, ohne doppelte Betreiberkonfiguration. Jede Edition hat einen eigenen Canonical, reziproke DE/EN-Alternativen und deutsches `x-default`; die gemeinsame Entwurfsprüfung ergibt `noindex, follow`.
 
