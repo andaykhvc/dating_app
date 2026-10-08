@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoMark } from "@/components/icons";
+import { AccountDeletedNotice } from "@/components/marketing/AccountDeletedNotice";
 import { HeroPreview } from "@/components/marketing/HeroPreview";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { APP_NAME, VALUE_PROPS } from "@/lib/constants";
@@ -8,6 +9,7 @@ export default function LandingPage() {
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col px-gutter pb-safe-10 pt-safe-14 short:pt-safe-8 md:max-w-lg lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:content-center lg:items-center lg:gap-20 lg:py-16 xl:gap-28">
       <div className="flex flex-1 flex-col lg:flex-none">
+        <AccountDeletedNotice />
         <div className="flex items-center gap-3 text-brand">
           <LogoMark className="size-10" />
           <span className="text-lg font-bold tracking-tight text-ink">
@@ -69,7 +71,7 @@ export default function LandingPage() {
 
           <p className="pt-2 text-center text-xs text-faint">
             18+ only. Report and block are always one tap away.{" "}
-            <Link href="/licenses" className="underline hover:text-muted">
+            <Link href="/licenses" className="inline-block min-h-11 py-3 underline hover:text-muted">
               Licenses
             </Link>
           </p>

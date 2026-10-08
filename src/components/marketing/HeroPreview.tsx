@@ -17,7 +17,7 @@ export function HeroPreview({ className }: { className?: string }) {
             </span>
             <span className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
               🇩🇪 Learning German
-              <span className="rounded-full bg-white/25 px-1.5 py-0.5 text-[0.625rem]">B1</span>
+              <span className="rounded-full bg-white/25 px-1.5 py-0.5 text-xs">B1</span>
             </span>
           </div>
           <div className="space-y-2.5 p-5">
@@ -41,17 +41,17 @@ export function HeroPreview({ className }: { className?: string }) {
         </div>
 
         <div className="absolute -right-10 bottom-10 w-56 rotate-3 rounded-2xl bg-raised p-4 shadow-xl ring-1 ring-line xl:-right-16">
-          <p className="text-[0.625rem] font-bold uppercase tracking-[0.14em] text-accent">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent-ink">
             Today&apos;s mission
           </p>
           <p className="mt-1 text-sm font-bold leading-snug text-ink">
             Swap your favourite film recommendations
           </p>
-          <p className="mt-1.5 text-xs font-semibold text-accent">+10 XP each</p>
+          <p className="mt-1.5 text-xs font-semibold text-accent-ink">+10 XP each</p>
         </div>
 
         <div className="absolute -left-12 top-16 w-52 -rotate-2 rounded-2xl border border-positive/30 bg-positive-soft px-3.5 py-2.5 shadow-lg xl:-left-20">
-          <p className="text-[0.625rem] font-bold uppercase tracking-[0.12em] text-positive">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-positive">
             Correction
           </p>
           <p className="mt-1 text-sm text-muted line-through decoration-negative/60">

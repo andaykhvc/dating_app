@@ -79,7 +79,7 @@ export function MessageInput({
       {replyTo && (
         <div className="mx-auto flex max-w-3xl items-center gap-2 border-b border-line px-gutter py-1.5">
           <div className="min-w-0 flex-1 border-l-2 border-brand pl-2.5">
-            <p className="text-[0.625rem] font-semibold uppercase tracking-wide text-brand">
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand">
               Replying to
             </p>
             <p className="truncate text-xs text-muted">{replyTo.body}</p>
