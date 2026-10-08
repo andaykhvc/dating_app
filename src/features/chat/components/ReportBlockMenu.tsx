@@ -65,7 +65,7 @@ export function ReportBlockMenu({
         type="button"
         onClick={() => setMode("menu")}
         aria-label={`Options for ${partnerName}`}
-        className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+        className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
       >
         <MoreIcon className="size-5" />
       </button>

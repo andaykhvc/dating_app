@@ -119,7 +119,7 @@ export function PhotoManager({
                   className="size-full object-cover"
                 />
                 {i === 0 && (
-                  <span className="absolute bottom-1.5 left-1.5 rounded-full bg-brand px-2 py-0.5 text-[0.625rem] font-semibold text-brand-ink">
+                  <span className="absolute bottom-1.5 left-1.5 rounded-full bg-brand px-2 py-0.5 text-xs font-semibold text-brand-ink">
                     Main
                   </span>
                 )}

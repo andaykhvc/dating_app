@@ -72,7 +72,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
                   type="button"
                   onClick={() => unblock(person.user_id)}
                   disabled={busy === person.user_id}
-                  className="min-h-9 shrink-0 rounded-full px-3.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
+                  className="min-h-11 shrink-0 rounded-full px-3.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
                 >
                   Unblock
                 </button>

@@ -35,7 +35,7 @@ export function StreakFlame({ days }: { days: number }) {
     <span
       className={cn(
         "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold",
-        alive ? "bg-accent-soft text-accent" : "bg-sunken text-faint",
+        alive ? "bg-accent-soft text-accent-ink" : "bg-sunken text-faint",
       )}
       title={alive ? `${days} day streak` : "No streak yet — earn XP today"}
     >

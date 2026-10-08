@@ -171,7 +171,7 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
           <Link
             href="/play"
             aria-label="Leave lesson"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
+            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
           >
             <CloseIcon className="size-5" />
           </Link>
@@ -180,7 +180,7 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
               <p className="truncate text-xs font-semibold text-muted">
                 {initial.target.flag_emoji} {title}
               </p>
-              <p className="shrink-0 text-[0.6875rem] tabular-nums text-faint">
+              <p className="shrink-0 text-xs tabular-nums text-faint">
                 {Math.min(answered + 1, exercises.length)} / {exercises.length}
               </p>
             </div>
@@ -212,7 +212,7 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
         ) : exercise ? (
           <div key={exercise.index} className="animate-rise">
             {exercise.is_retry && (
-              <p className="mb-4 inline-flex rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
+              <p className="mb-4 inline-flex rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-ink">
                 One more try
               </p>
             )}
@@ -366,7 +366,7 @@ function Feedback({
           </p>
         )}
         {credit && (
-          <p className="mt-1 text-[0.6875rem] opacity-75">
+          <p className="mt-1 text-xs opacity-75">
             {credit.url ? (
               <a href={credit.url} target="_blank" rel="noreferrer" className="underline">
                 Sentence

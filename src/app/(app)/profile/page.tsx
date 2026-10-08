@@ -158,7 +158,7 @@ export default async function ProfilePage() {
                   ["Best", `${xp.longest_streak_days}d`],
                 ].map(([label, value]) => (
                   <div key={label as string} className="rounded-2xl bg-sunken px-1 py-3">
-                    <dt className="truncate text-[0.6875rem] uppercase tracking-wide text-faint">
+                    <dt className="truncate text-xs uppercase tracking-wide text-faint">
                       {label}
                     </dt>
                     <dd className="mt-0.5 text-lg font-bold text-ink">{value}</dd>
