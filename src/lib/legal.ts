@@ -1,4 +1,4 @@
-/** Shared operator facts for privacy pages and the future #41 Impressum. */
+/** Shared operator facts for legal pages and the future #41 Impressum. */
 export type LegalEntity = {
   name: string | null;
   address: string | null;
@@ -32,6 +32,11 @@ export const LEGAL_ENTITY: LegalEntity = {
 /** Change only after the documented factual and legal review is complete. */
 export const LEGAL_DRAFT_MODE = true;
 
+export const LEGAL_DOCUMENT_PATHS = {
+  privacy: { de: "/datenschutz", en: "/privacy" },
+  terms: { de: "/nutzungsbedingungen", en: "/terms" },
+} as const;
+
 export function missingLegalFields(entity: LegalEntity): string[] {
   return [
     ...(!entity.name ? ["name"] : []),
@@ -45,7 +50,13 @@ export function legalPagesIndexable(entity: LegalEntity, draft: boolean): boolea
 }
 
 export function isPrivacyPath(pathname: string): boolean {
-  return pathname === "/datenschutz" || pathname === "/privacy";
+  return Object.values(LEGAL_DOCUMENT_PATHS.privacy).some((path) => path === pathname);
+}
+
+export function isPublicLegalPath(pathname: string): boolean {
+  return Object.values(LEGAL_DOCUMENT_PATHS).some((paths) =>
+    Object.values(paths).some((path) => path === pathname),
+  );
 }
 
 export function legalSiteOrigin(input: string | undefined): string {

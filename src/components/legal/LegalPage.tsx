@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { APP_NAME } from "@/lib/constants";
-import { LEGAL_DRAFT_MODE, LEGAL_ENTITY } from "@/lib/legal";
-import type { PrivacyPolicy } from "@/content/legal/types";
+import { APP_NAME, REPORT_REASON_LABELS } from "@/lib/constants";
+import { LEGAL_DOCUMENT_PATHS, LEGAL_DRAFT_MODE, LEGAL_ENTITY } from "@/lib/legal";
+import type { LegalDocument } from "@/content/legal/types";
 
 const copy = {
   de: {
@@ -13,6 +13,9 @@ const copy = {
     missing: "FEHLT — noch nicht angegeben", unverified: "Benennungspflicht und Kontaktdaten noch zu prüfen",
     sources: "Quellen und weitere Informationen", top: "Zum Seitenanfang",
     post: "Datenschutzanfragen können schriftlich an die angegebene Postanschrift gerichtet werden. Die elektronische Kontaktadresse wird ergänzt, sobald sie bestätigt ist.",
+    termsLanguage: "Sprache der Nutzungsbedingungen", termsSummary: "Kurzfassung", provider: "Anbieter",
+    termsDraft: "Dieser Entwurf bedarf rechtlicher Prüfung und wirksamer Vereinbarung. Die Verlinkung allein begründet keine Zustimmung; offene Angaben und Verfahren sind vor Freigabe zu klären.",
+    reportReason: "Meldegrund im App-Menü", termsPost: "Anfragen können schriftlich an die angegebene Postanschrift gerichtet werden.",
   },
   en: {
     back: "Back to home", language: "Notice language", switchLabel: "Deutsche Fassung",
@@ -23,17 +26,25 @@ const copy = {
     missing: "MISSING — not provided yet", unverified: "Appointment requirement and contact details need assessment",
     sources: "Sources and further information", top: "Back to top",
     post: "Privacy requests can be sent in writing to the postal address shown. An electronic contact address will be added once confirmed.",
+    termsLanguage: "Terms language", termsSummary: "The short version", provider: "Service provider",
+    termsDraft: "These terms need legal review and valid agreement. Linking them alone does not record acceptance. Outstanding facts and procedures must be resolved before approval.",
+    reportReason: "Report reason in the app menu", termsPost: "Requests can be sent in writing to the postal address shown.",
   },
 };
 
-export function LegalPage({ policy }: { policy: PrivacyPolicy }) {
+export function LegalPage({ policy }: { policy: LegalDocument }) {
   const labels = copy[policy.language];
-  const email = LEGAL_ENTITY.privacyEmail ?? LEGAL_ENTITY.email;
+  const isTerms = policy.kind === "terms";
+  const paths = LEGAL_DOCUMENT_PATHS[policy.kind];
+  const otherLanguage = policy.language === "de" ? "en" : "de";
+  const summaryId = `${policy.kind}-summary`;
+  const contentsId = `${policy.kind}-contents`;
+  const email = isTerms ? LEGAL_ENTITY.email : LEGAL_ENTITY.privacyEmail ?? LEGAL_ENTITY.email;
   const fields = [
     { label: labels.name, value: LEGAL_ENTITY.name },
     { label: labels.address, value: LEGAL_ENTITY.address },
     { label: labels.email, value: LEGAL_ENTITY.email },
-    { label: labels.privacy, value: email },
+    ...(!isTerms ? [{ label: labels.privacy, value: email }] : []),
   ];
   const sectionLink = "rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand";
 
@@ -44,8 +55,8 @@ export function LegalPage({ policy }: { policy: PrivacyPolicy }) {
           <Link href="/" className={`inline-flex min-h-11 items-center gap-2 text-sm font-medium text-muted hover:text-ink ${sectionLink}`}>
             <span aria-hidden="true">←</span> {labels.back}
           </Link>
-          <nav aria-label={labels.language}>
-            <Link href={policy.language === "de" ? "/privacy" : "/datenschutz"} lang={policy.language === "de" ? "en" : "de"} hrefLang={policy.language === "de" ? "en" : "de"} className={`inline-flex min-h-11 items-center text-sm font-semibold text-brand underline underline-offset-4 ${sectionLink}`}>
+          <nav aria-label={isTerms ? labels.termsLanguage : labels.language}>
+            <Link href={paths[otherLanguage]} lang={otherLanguage} hrefLang={otherLanguage} className={`inline-flex min-h-11 items-center text-sm font-semibold text-brand underline underline-offset-4 ${sectionLink}`}>
               {labels.switchLabel}
             </Link>
           </nav>
@@ -60,21 +71,21 @@ export function LegalPage({ policy }: { policy: PrivacyPolicy }) {
           <aside aria-labelledby="draft-heading" className="mt-6 rounded-3xl border border-accent/50 bg-accent-soft p-5 text-ink">
             <h2 lang="en" id="draft-heading" className="text-sm font-bold">DRAFT — pending legal review</h2>
             <p className="mt-1 text-sm font-semibold">{labels.draft}</p>
-            <p className="mt-2 text-sm leading-relaxed">{labels.draftText}</p>
+            <p className="mt-2 text-sm leading-relaxed">{isTerms ? labels.termsDraft : labels.draftText}</p>
           </aside>
         )}
         <p className="mt-6 text-base leading-7 text-muted">{policy.intro}</p>
       </header>
 
-      <section aria-labelledby="privacy-summary" className="mt-8 rounded-3xl border border-line bg-raised p-5 sm:p-6">
-        <h2 id="privacy-summary" className="text-lg font-bold text-ink">{labels.summary}</h2>
+      <section aria-labelledby={summaryId} className="mt-8 rounded-3xl border border-line bg-raised p-5 sm:p-6">
+        <h2 id={summaryId} className="text-lg font-bold text-ink">{isTerms ? labels.termsSummary : labels.summary}</h2>
         <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-6 text-muted">
           {policy.summary.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </section>
 
-      <nav aria-labelledby="privacy-contents" className="mt-8 rounded-3xl bg-sunken p-5 sm:p-6">
-        <h2 id="privacy-contents" className="text-lg font-bold text-ink">{labels.contents}</h2>
+      <nav aria-labelledby={contentsId} className="mt-8 rounded-3xl bg-sunken p-5 sm:p-6">
+        <h2 id={contentsId} className="text-lg font-bold text-ink">{labels.contents}</h2>
         <ol className="mt-3 grid gap-x-6 sm:grid-cols-2">
           {policy.sections.map((section) => (
             <li key={section.id}>
@@ -93,9 +104,9 @@ export function LegalPage({ policy }: { policy: PrivacyPolicy }) {
             <div className="mt-4 space-y-4 text-sm leading-7 text-muted sm:text-base">
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
-            {section.id === "controller" && (
+            {((!isTerms && section.id === "controller") || (isTerms && section.id === "provider")) && (
               <div className="mt-5 rounded-3xl border border-line bg-raised p-5">
-                <h3 className="text-sm font-bold text-ink">{labels.controller}</h3>
+                <h3 className="text-sm font-bold text-ink">{isTerms ? labels.provider : labels.controller}</h3>
                 <dl className="mt-4 space-y-4 text-sm">
                   {fields.map((field) => (
                     <div key={field.label} className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
@@ -103,17 +114,33 @@ export function LegalPage({ policy }: { policy: PrivacyPolicy }) {
                       <dd className={`whitespace-pre-line break-words ${field.value ? "text-ink" : "font-semibold text-negative"}`}>{field.value ?? labels.missing}</dd>
                     </div>
                   ))}
-                  <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                  {!isTerms && <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
                     <dt className="font-semibold text-muted">{labels.dpo}</dt>
                     <dd className="break-words text-muted">{LEGAL_ENTITY.dataProtectionOfficer ?? labels.unverified}</dd>
-                  </div>
+                  </div>}
                 </dl>
                 {email ? (
                   <a href={`mailto:${email}`} className={`mt-4 inline-flex min-h-11 items-center break-all text-sm font-semibold text-brand underline underline-offset-4 ${sectionLink}`}>{email}</a>
                 ) : (
-                  <p className="mt-4 text-sm leading-6 text-muted">{labels.post}</p>
+                  <p className="mt-4 text-sm leading-6 text-muted">{isTerms ? labels.termsPost : labels.post}</p>
                 )}
               </div>
+            )}
+            {section.rules && (
+              <ul className="mt-5 space-y-3">
+                {section.rules.map((rule) => (
+                  <li key={rule.id} className="rounded-2xl border border-line bg-raised p-4 sm:p-5">
+                    <h3 className="text-base font-bold text-ink">{rule.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-muted">{rule.description}</p>
+                    <p className="mt-3 text-sm leading-6 text-muted">
+                      <span className="font-semibold">{labels.reportReason}: </span>
+                      {rule.reportReasons.map((reason, index) => (
+                        <span key={reason}>{index > 0 && " / "}<span lang="en">{REPORT_REASON_LABELS[reason]}</span></span>
+                      ))}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             )}
             {section.bullets && (
               <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-7 text-muted sm:text-base">

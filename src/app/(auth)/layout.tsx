@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LogoMark } from "@/components/icons";
 import { APP_NAME, APP_TAGLINE, VALUE_PROPS } from "@/lib/constants";
-import { PrivacyLinks } from "@/components/legal/PrivacyLinks";
+import { LegalLinks } from "@/components/legal/LegalLinks";
 
 /**
  * Phones: the form alone. Desktop: the form on the right with a brand panel on
@@ -46,7 +46,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
           <span className="font-bold tracking-tight text-ink">{APP_NAME}</span>
         </Link>
         <div className="flex flex-1 flex-col justify-center py-8">{children}</div>
-        <footer><PrivacyLinks /></footer>
+        <footer><LegalLinks /></footer>
       </main>
     </div>
   );
