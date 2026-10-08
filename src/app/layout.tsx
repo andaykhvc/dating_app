@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
 import { InstallAppProvider } from "@/features/install/InstallAppProvider";
+import { LegalLinks } from "@/components/legal/LegalLinks";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -44,6 +45,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${geistSans.variable} h-full`}>
       <body className="flex min-h-full flex-col font-sans">
         <InstallAppProvider>{children}</InstallAppProvider>
+        <footer className="safe-bottom border-t border-line px-gutter py-4">
+          <LegalLinks />
+        </footer>
       </body>
     </html>
   );

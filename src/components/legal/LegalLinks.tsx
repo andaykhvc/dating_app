@@ -12,6 +12,11 @@ export function LegalLinks() {
         <Link href={LEGAL_DOCUMENT_PATHS.privacy.en} lang="en" className={linkClass}>Privacy</Link>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-x-2">
+        <Link href={LEGAL_DOCUMENT_PATHS.imprint.de} lang="de" className={linkClass}>Impressum</Link>
+        <span aria-hidden="true">·</span>
+        <Link href={LEGAL_DOCUMENT_PATHS.imprint.en} lang="en" className={linkClass}>Imprint</Link>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-x-2">
         <Link href={LEGAL_DOCUMENT_PATHS.terms.de} lang="de" className={linkClass}>Nutzungsbedingungen</Link>
         <span aria-hidden="true">·</span>
         <Link href={LEGAL_DOCUMENT_PATHS.terms.en} lang="en" className={linkClass}>Terms</Link>

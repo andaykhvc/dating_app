@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { APP_NAME, REPORT_REASON_LABELS } from "@/lib/constants";
-import { LEGAL_DOCUMENT_PATHS, LEGAL_DRAFT_MODE, LEGAL_ENTITY } from "@/lib/legal";
+import { LEGAL_DOCUMENT_PATHS, LEGAL_DRAFT_MODE, LEGAL_ENTITY, imprintFieldIssues, phoneHref } from "@/lib/legal";
 import type { LegalDocument } from "@/content/legal/types";
+import { ImprintDetails } from "./ImprintDetails";
 
 const copy = {
   de: {
@@ -16,6 +17,9 @@ const copy = {
     termsLanguage: "Sprache der Nutzungsbedingungen", termsSummary: "Kurzfassung", provider: "Anbieter",
     termsDraft: "Dieser Entwurf bedarf rechtlicher Prüfung und wirksamer Vereinbarung. Die Verlinkung allein begründet keine Zustimmung; offene Angaben und Verfahren sind vor Freigabe zu klären.",
     reportReason: "Meldegrund im App-Menü", termsPost: "Anfragen können schriftlich an die angegebene Postanschrift gerichtet werden.",
+    imprintLanguage: "Sprache des Impressums", imprintDraft: "Dieses Impressum ist ein Entwurf zur rechtlichen Prüfung. Bestätigte Angaben werden veröffentlicht; noch offene Kontaktwege und Anwendbarkeitsfragen müssen vor der Freigabe geklärt werden.",
+    incomplete: "Impressum unvollständig", incompleteText: "Pflichtangaben oder ihre Anwendbarkeit sind noch nicht vollständig bestätigt. Die Seite bleibt von der Suchindexierung ausgeschlossen; fehlende Angaben sind unten mit MISSING gekennzeichnet.",
+    phone: "Telefon",
   },
   en: {
     back: "Back to home", language: "Notice language", switchLabel: "Deutsche Fassung",
@@ -29,12 +33,17 @@ const copy = {
     termsLanguage: "Terms language", termsSummary: "The short version", provider: "Service provider",
     termsDraft: "These terms need legal review and valid agreement. Linking them alone does not record acceptance. Outstanding facts and procedures must be resolved before approval.",
     reportReason: "Report reason in the app menu", termsPost: "Requests can be sent in writing to the postal address shown.",
+    imprintLanguage: "Legal notice language", imprintDraft: "This legal notice is a draft for legal review. Confirmed details are published; outstanding contact channels and applicability decisions must be settled before approval.",
+    incomplete: "Incomplete legal notice", incompleteText: "Required details or their applicability are not fully confirmed. This page remains excluded from search indexing. Outstanding fields are marked MISSING below.",
+    phone: "Phone",
   },
 };
 
 export function LegalPage({ policy }: { policy: LegalDocument }) {
   const labels = copy[policy.language];
   const isTerms = policy.kind === "terms";
+  const isImprint = policy.kind === "imprint";
+  const incomplete = isImprint && imprintFieldIssues(LEGAL_ENTITY).length > 0;
   const paths = LEGAL_DOCUMENT_PATHS[policy.kind];
   const otherLanguage = policy.language === "de" ? "en" : "de";
   const summaryId = `${policy.kind}-summary`;
@@ -44,6 +53,7 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
     { label: labels.name, value: LEGAL_ENTITY.name },
     { label: labels.address, value: LEGAL_ENTITY.address },
     { label: labels.email, value: LEGAL_ENTITY.email },
+    { label: labels.phone, value: LEGAL_ENTITY.phone, href: phoneHref(LEGAL_ENTITY.phone) },
     ...(!isTerms ? [{ label: labels.privacy, value: email }] : []),
   ];
   const sectionLink = "rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand";
@@ -55,7 +65,7 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
           <Link href="/" className={`inline-flex min-h-11 items-center gap-2 text-sm font-medium text-muted hover:text-ink ${sectionLink}`}>
             <span aria-hidden="true">←</span> {labels.back}
           </Link>
-          <nav aria-label={isTerms ? labels.termsLanguage : labels.language}>
+          <nav aria-label={isImprint ? labels.imprintLanguage : isTerms ? labels.termsLanguage : labels.language}>
             <Link href={paths[otherLanguage]} lang={otherLanguage} hrefLang={otherLanguage} className={`inline-flex min-h-11 items-center text-sm font-semibold text-brand underline underline-offset-4 ${sectionLink}`}>
               {labels.switchLabel}
             </Link>
@@ -71,7 +81,13 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
           <aside aria-labelledby="draft-heading" className="mt-6 rounded-3xl border border-accent/50 bg-accent-soft p-5 text-ink">
             <h2 lang="en" id="draft-heading" className="text-sm font-bold">DRAFT — pending legal review</h2>
             <p className="mt-1 text-sm font-semibold">{labels.draft}</p>
-            <p className="mt-2 text-sm leading-relaxed">{isTerms ? labels.termsDraft : labels.draftText}</p>
+            <p className="mt-2 text-sm leading-relaxed">{isImprint ? labels.imprintDraft : isTerms ? labels.termsDraft : labels.draftText}</p>
+          </aside>
+        )}
+        {incomplete && (
+          <aside aria-labelledby="incomplete-heading" className="mt-5 rounded-2xl border border-negative/40 bg-sunken p-5 text-sm leading-6">
+            <h2 id="incomplete-heading" className="font-bold text-negative">{labels.incomplete}</h2>
+            <p className="mt-2 text-muted">{labels.incompleteText}</p>
           </aside>
         )}
         <p className="mt-6 text-base leading-7 text-muted">{policy.intro}</p>
@@ -104,6 +120,7 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
             <div className="mt-4 space-y-4 text-sm leading-7 text-muted sm:text-base">
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
+            {isImprint && section.id === "provider" && <ImprintDetails language={policy.language} />}
             {((!isTerms && section.id === "controller") || (isTerms && section.id === "provider")) && (
               <div className="mt-5 rounded-3xl border border-line bg-raised p-5">
                 <h3 className="text-sm font-bold text-ink">{isTerms ? labels.provider : labels.controller}</h3>
@@ -111,7 +128,9 @@ export function LegalPage({ policy }: { policy: LegalDocument }) {
                   {fields.map((field) => (
                     <div key={field.label} className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
                       <dt className="font-semibold text-muted">{field.label}</dt>
-                      <dd className={`whitespace-pre-line break-words ${field.value ? "text-ink" : "font-semibold text-negative"}`}>{field.value ?? labels.missing}</dd>
+                      <dd className={`whitespace-pre-line break-words ${field.value ? "text-ink" : "font-semibold text-negative"}`}>
+                        {field.href ? <a href={field.href} className={`inline-flex min-h-11 items-center text-brand underline underline-offset-4 ${sectionLink}`}>{field.value}</a> : field.value ?? labels.missing}
+                      </dd>
                     </div>
                   ))}
                   {!isTerms && <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
