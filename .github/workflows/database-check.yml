@@ -1,23 +1,28 @@
 name: Database check
 
-# Says out loud when main has migrations the live database has not got yet.
+# Says out loud when a branch carries migrations the live database has not got
+# yet. Read-only: it never changes anything.
 #
-# The web app deploys on every merge, but the database only changes when
-# someone runs "Deploy database" by hand, so code can briefly (or not so
-# briefly) run against an older schema. This is a read-only alarm: it never
-# changes anything.
+# Why: the web app deploys on every merge, but the database only changes when
+# someone runs "Deploy database" by hand, so code can go live against an older
+# schema.
 #
-# It deliberately does NOT run on pull requests. That would hand the production
-# connection string to workflow code from any branch, which can be edited in
-# the PR itself. If you later want a pre-merge gate, create a read-only database
-# role for this check and store its URL as a separate secret first.
+# How to read it (no database knowledge needed): see "Knowing when the database
+# is behind" in docs/deploying-the-database.md.
+#
+# It runs on pull requests, on main, and on demand. A red run on a pull request
+# only warns; it blocks the merge ONLY if you mark "Database check" as a
+# required check in the repository's branch protection (you do not have to).
+# Pull requests from forks never get the secret, so the job skips there.
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: database-check
+  group: database-check-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
