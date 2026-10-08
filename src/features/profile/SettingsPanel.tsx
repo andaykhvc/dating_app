@@ -7,6 +7,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/client";
 import { APP_NAME } from "@/lib/constants";
+import { DeleteAccount } from "@/features/profile/DeleteAccount";
 import { InstallSettings } from "@/features/install/InstallSettings";
 
 type BlockedUser = {
@@ -104,6 +105,8 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
       <Button variant="secondary" fullWidth onClick={signOut}>
         Sign out
       </Button>
+
+      <DeleteAccount />
     </div>
   );
 }
