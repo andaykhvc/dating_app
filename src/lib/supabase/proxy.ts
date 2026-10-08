@@ -1,7 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { isPublicLegalPath } from "@/lib/legal";
 
-const PUBLIC_PATHS = ["/", "/login", "/signup", "/verify-email", "/auth", "/licenses"];
+const PUBLIC_PATHS = [
+  "/",
+  "/login",
+  "/signup",
+  "/verify-email",
+  "/auth",
+  "/licenses",
+  "/support",
+  "/guidelines",
+];
 
 function isPublic(pathname: string) {
   return PUBLIC_PATHS.some(
@@ -19,6 +29,10 @@ function isPublic(pathname: string) {
  */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
+
+  // Static legal information remains accessible without a session or Auth uptime.
+  // Only these exact public routes skip refresh; app authentication is unchanged.
+  if (isPublicLegalPath(request.nextUrl.pathname)) return response;
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

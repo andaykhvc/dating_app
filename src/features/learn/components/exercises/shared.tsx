@@ -84,7 +84,7 @@ export function SpeakButton({
         "inline-flex shrink-0 items-center justify-center rounded-full transition-[transform,background-color] active:scale-95",
         size === "lg"
           ? "size-20 bg-brand text-brand-ink shadow-lg shadow-brand/25 hover:bg-brand-strong"
-          : "size-10 bg-brand-soft text-brand hover:bg-brand/15",
+          : "size-11 bg-brand-soft text-brand hover:bg-brand/15",
         slow && size !== "lg" && "bg-sunken text-muted",
       )}
     >
@@ -128,7 +128,7 @@ export function OptionButton({
       )}
     >
       {hotkey !== undefined && (
-        <kbd className="hidden size-6 shrink-0 items-center justify-center rounded-md border border-current/25 text-[0.6875rem] font-semibold opacity-60 md:flex">
+        <kbd className="hidden size-6 shrink-0 items-center justify-center rounded-md border border-current/25 text-xs font-semibold opacity-60 md:flex">
           {hotkey}
         </kbd>
       )}

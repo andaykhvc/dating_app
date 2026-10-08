@@ -60,7 +60,7 @@ export const ProfileCard = memo(function ProfileCard({
             <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
               <span>{learning.flag_emoji}</span>
               <span className="truncate">Learning {learning.language_name}</span>
-              <span className="shrink-0 rounded-full bg-white/25 px-1.5 py-0.5 text-[0.625rem]">
+              <span className="shrink-0 rounded-full bg-white/25 px-1.5 py-0.5 text-xs">
                 {learning.cefr_level}
               </span>
             </div>
@@ -85,7 +85,7 @@ export const ProfileCard = memo(function ProfileCard({
                 onPointerDown={(e) => e.stopPropagation()}
                 onClick={onInfo}
                 aria-label={`More about ${card.first_name}`}
-                className="-mr-2 -mt-1 flex size-10 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-sunken hover:text-ink active:scale-95"
+                className="-mr-2 -mt-1 flex size-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-sunken hover:text-ink active:scale-95"
               >
                 <InfoIcon className="size-6" />
               </button>

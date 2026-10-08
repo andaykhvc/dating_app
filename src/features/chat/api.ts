@@ -114,7 +114,7 @@ export async function reportUser(
   reporterId: string,
   reason: ReportReason,
   details: string,
-  matchId: string,
+  matchId: string | null,
 ) {
   const supabase = createClient();
   const { error } = await supabase.from("reports").insert({

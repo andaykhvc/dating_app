@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+  <body style="margin:0;padding:24px;background:#faf7f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16151c;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;margin:0 auto;">
+      <tr>
+        <td style="padding:0 0 16px 0;font-size:18px;font-weight:700;">Lingua Match</td>
+      </tr>
+      <tr>
+        <td style="background:#ffffff;border-radius:16px;padding:24px;">
+          <p style="margin:0 0 8px 0;font-size:16px;">Dein Bestätigungscode:</p>
+          <p style="margin:0 0 16px 0;font-size:34px;font-weight:700;letter-spacing:8px;">{{ .Token }}</p>
+          <p style="margin:0;font-size:14px;line-height:1.5;color:#605c6e;">
+            Gib den Code in der App ein, um dein Konto zu bestätigen. Er ist eine Stunde gültig.
+            Wenn du dich nicht angemeldet hast, kannst du diese E-Mail ignorieren.
+          </p>
+          <hr style="border:none;border-top:1px solid #e6e0d6;margin:20px 0;">
+          <p style="margin:0 0 8px 0;font-size:16px;">Your confirmation code:</p>
+          <p style="margin:0 0 16px 0;font-size:34px;font-weight:700;letter-spacing:8px;">{{ .Token }}</p>
+          <p style="margin:0;font-size:14px;line-height:1.5;color:#605c6e;">
+            Enter the code in the app to confirm your account. It is valid for one hour.
+            If you did not sign up, you can ignore this email.
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
