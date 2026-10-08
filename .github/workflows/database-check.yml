@@ -1,0 +1,59 @@
+name: Database check
+
+# Says out loud when a branch carries migrations the live database has not got
+# yet. Read-only: it never changes anything.
+#
+# Why: the web app deploys on every merge, but the database only changes when
+# someone runs "Deploy database" by hand, so code can go live against an older
+# schema.
+#
+# How to read it (no database knowledge needed): see "Knowing when the database
+# is behind" in docs/deploying-the-database.md.
+#
+# It runs on pull requests, on main, and on demand. A red run on a pull request
+# only warns; it blocks the merge ONLY if you mark "Database check" as a
+# required check in the repository's branch protection (you do not have to).
+# Pull requests from forks never get the secret, so the job skips there.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: database-check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pending:
+    name: Pending migrations
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip quietly if the secret is not configured
+        id: secret
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "SUPABASE_DB_URL is not set; nothing to check." | tee -a "$GITHUB_STEP_SUMMARY"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install psql
+        if: steps.secret.outputs.run == 'true'
+        run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+
+      - name: Are all migrations applied?
+        if: steps.secret.outputs.run == 'true'
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: scripts/db/check-pending.sh
