@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/client";
 import { APP_NAME } from "@/lib/constants";
 import { DownloadMyData } from "@/features/profile/DownloadMyData";
+import { AppearanceSettings } from "@/features/appearance/AppearanceSettings";
 import { DeleteAccount } from "@/features/profile/DeleteAccount";
 import { InstallSettings } from "@/features/install/InstallSettings";
 import { LegalLinks } from "@/components/legal/LegalLinks";
@@ -45,6 +46,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
 
   return (
     <div className="mx-auto w-full max-w-xl space-y-4 px-gutter py-5 md:space-y-5 md:py-8">
+      <AppearanceSettings />
       <InstallSettings />
       <section className="rounded-3xl border border-line bg-raised p-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">
