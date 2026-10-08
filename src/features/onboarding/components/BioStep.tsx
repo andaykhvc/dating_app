@@ -67,7 +67,7 @@ export function BioStep({ initialBio }: { initialBio: string }) {
               key={example}
               type="button"
               onClick={() => setBio(example)}
-              className="w-full rounded-2xl border border-line bg-raised px-4 py-3 text-left text-sm text-muted transition-colors hover:border-brand/40 hover:text-ink"
+              className="w-full rounded-2xl bg-raised shadow-[var(--shadow-card)] px-4 py-3 text-left text-sm text-muted transition-colors hover:border-brand/40 hover:text-ink"
             >
               “{example}”
             </button>

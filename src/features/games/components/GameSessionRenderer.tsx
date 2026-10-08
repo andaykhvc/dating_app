@@ -91,13 +91,13 @@ export function GameSessionRenderer({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="safe-top sticky top-0 z-20 border-b border-line bg-surface/90 backdrop-blur-lg">
+      <header className="material safe-top sticky top-0 z-20 shadow-[0_0.5px_0_var(--separator)]">
         <div className="mx-auto flex min-h-14 max-w-2xl items-center gap-2 px-2 py-1.5 md:min-h-16 md:px-gutter">
           <button
             type="button"
             onClick={() => router.push(returnTo)}
             aria-label="Leave challenge"
-            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
+            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-fill md:-ml-2"
           >
             <BackIcon className="size-5" />
           </button>

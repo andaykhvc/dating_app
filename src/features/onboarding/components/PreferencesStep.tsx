@@ -104,7 +104,7 @@ export function PreferencesStep({
           <CountryPicker value={countries} onChange={setCountries} />
         </div>
 
-        <label className="flex items-start gap-3 rounded-2xl border border-line bg-raised p-4">
+        <label className="flex items-start gap-3 rounded-2xl bg-raised shadow-[var(--shadow-card)] p-4">
           <input
             type="checkbox"
             checked={hideDating}

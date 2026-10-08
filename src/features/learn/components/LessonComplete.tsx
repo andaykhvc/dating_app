@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import { CountUp } from "@/components/ui/CountUp";
+import { haptic } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { startLesson } from "@/features/learn/api";
 import { hasVoiceFor } from "@/features/learn/speech";
@@ -31,6 +33,11 @@ export function LessonComplete({
   const [starting, setStarting] = useState(false);
   const phrase = completion.social_phrase;
 
+  // The tally lands with a tick, the one reward moment of a lesson.
+  useEffect(() => {
+    haptic(completion.perfect ? [10, 60, 10, 60, 16] : [10, 60, 14]);
+  }, [completion.perfect]);
+
   async function next() {
     if (!completion.next_lesson) return;
     setStarting(true);
@@ -39,9 +46,9 @@ export function LessonComplete({
         completion.next_lesson.id,
         await hasVoiceFor(session.target.speech_locale),
       );
-      router.push(`/play/lesson/${s.session_id}`);
+      router.push(`/play/lesson/${s.session_id}`, { transitionTypes: ["nav-forward"] });
     } catch {
-      router.push("/play");
+      router.push("/play", { transitionTypes: ["nav-back"] });
     }
   }
 
@@ -66,14 +73,14 @@ export function LessonComplete({
           )}
         </div>
 
-        <dl className="grid grid-cols-3 gap-2.5">
-          <Stat label="XP" value={`+${completion.xp_awarded}`} tone="accent" />
-          <Stat label="First try" value={`${completion.score}%`} />
+        <dl className="stagger grid grid-cols-3 gap-2.5">
+          <Stat label="XP" value={<CountUp value={completion.xp_awarded} prefix="+" />} tone="accent" />
+          <Stat label="First try" value={<CountUp value={completion.score} suffix="%" delay={0.25} />} />
           <Stat label="To review" value={String(completion.review_due)} />
         </dl>
 
         {phrase && (
-          <section className="animate-rise rounded-3xl border border-line bg-raised p-5 [animation-delay:120ms] md:p-6">
+          <section className="animate-rise surface-card p-5 [animation-delay:120ms] md:p-6">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">
               Use it
             </p>
@@ -110,11 +117,11 @@ export function LessonComplete({
             </>
           )}
           <Link
-            href="/play"
+            href="/play" transitionTypes={["nav-back"]}
             className={cn(
-              "flex h-14 items-center justify-center rounded-full text-base font-semibold",
+              "press flex h-14 items-center justify-center rounded-full text-base font-semibold",
               completion.next_lesson
-                ? "text-muted hover:bg-sunken hover:text-ink"
+                ? "text-muted hover:bg-fill hover:text-ink"
                 : "bg-brand text-brand-ink hover:bg-brand-strong",
             )}
           >
@@ -135,9 +142,22 @@ export function LessonComplete({
   );
 }
 
-function Stat({ label, value, tone }: { label: string; value: string; tone?: "accent" }) {
+function Stat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: React.ReactNode;
+  tone?: "accent";
+}) {
   return (
-    <div className={cn("rounded-2xl px-2 py-3.5 text-center", tone === "accent" ? "bg-accent-soft" : "bg-sunken")}>
+    <div
+      className={cn(
+        "rounded-[1.125rem] px-2 py-3.5 text-center",
+        tone === "accent" ? "bg-accent-soft" : "bg-raised shadow-[var(--shadow-card)]",
+      )}
+    >
       <dt className="text-xs uppercase tracking-wide text-faint">{label}</dt>
       <dd className={cn("mt-0.5 text-xl font-bold tabular-nums", tone === "accent" ? "text-accent-ink" : "text-ink")}>
         {value}

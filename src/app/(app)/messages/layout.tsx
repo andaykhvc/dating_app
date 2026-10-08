@@ -19,9 +19,9 @@ export default function MessagesLayout({ children }: LayoutProps<"/messages">) {
   return (
     <ConversationsProvider>
       <div className="flex flex-1 lg:h-dvh lg:overflow-hidden">
-        <aside className="safe-top hidden w-[21rem] shrink-0 flex-col border-r border-line lg:flex xl:w-[23rem]">
-          <div className="flex min-h-16 shrink-0 items-center border-b border-line px-5">
-            <h2 className="text-2xl font-bold tracking-tight text-ink">Messages</h2>
+        <aside className="safe-top hidden w-[21rem] shrink-0 flex-col shadow-[0.5px_0_0_var(--separator)] lg:flex xl:w-[23rem]">
+          <div className="flex min-h-16 shrink-0 items-center px-5">
+            <h2 className="text-[1.75rem] font-bold text-ink">Messages</h2>
           </div>
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
             <Suspense fallback={<ConversationListSkeleton compact />}>

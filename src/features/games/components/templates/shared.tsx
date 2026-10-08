@@ -66,13 +66,13 @@ export function ChoiceButton({
       disabled={disabled}
       aria-pressed={selected}
       className={cn(
-        "min-h-14 w-full rounded-2xl border-2 px-4 py-3 text-left text-base font-medium leading-snug transition-all [overflow-wrap:anywhere] active:scale-[0.99]",
-        state === "correct" && "border-positive bg-positive-soft text-positive",
-        state === "wrong" && "border-negative bg-negative-soft text-negative",
+        "press-soft min-h-14 w-full rounded-[1.125rem] border-2 px-4 py-3 text-left text-base font-medium leading-snug [overflow-wrap:anywhere]",
+        state === "correct" && "animate-correct border-positive bg-positive-soft text-positive",
+        state === "wrong" && "animate-shake border-negative bg-negative-soft text-negative",
         state === "idle" &&
           (selected
             ? "border-brand bg-brand-soft text-brand"
-            : "border-line bg-raised text-ink hover:border-brand/40"),
+            : "border-transparent bg-raised text-ink shadow-[var(--shadow-card)] hover:border-brand/30"),
         disabled && state === "idle" && !selected && "opacity-60",
       )}
     >

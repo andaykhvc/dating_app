@@ -14,7 +14,7 @@ export function SiteFooter() {
   if (TABS.some(({ href }) => isTabActive(pathname, href))) return null;
 
   return (
-    <footer className="safe-bottom border-t border-line px-gutter py-4">
+    <footer className="safe-bottom px-gutter py-4 shadow-[inset_0_0.5px_0_var(--separator)]">
       <LegalLinks />
     </footer>
   );

@@ -9,7 +9,7 @@ export default function RankingsLoading() {
       <div aria-hidden="true" className="animate-pulse space-y-3">
         <div className="h-40 rounded-3xl bg-sunken" />
         {Array.from({ length: 5 }, (_, i) => (
-          <div key={i} className="h-20 rounded-2xl bg-sunken" />
+          <div key={i} className="h-20 rounded-[1rem] bg-fill" />
         ))}
       </div>
     </PageBody>

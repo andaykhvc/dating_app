@@ -22,7 +22,7 @@ export function PushNotificationsCard() {
   const on = state === "on";
 
   return (
-    <section className="rounded-3xl border border-line bg-raised p-5">
+    <section className="surface-card p-5">
       <div className="flex items-center gap-4">
         <div className="min-w-0 flex-1">
           <h2

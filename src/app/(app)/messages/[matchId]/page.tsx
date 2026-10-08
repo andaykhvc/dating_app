@@ -7,6 +7,7 @@ import { MESSAGE_PAGE_SIZE } from "@/lib/constants";
 import { one } from "@/lib/utils";
 import { loadSharedPhrase } from "@/features/learn/server";
 import type { ChatMessage } from "@/types/domain";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 const SELECT =
   "id, match_id, sender_id, body, reply_to_message_id, delivery_state, created_at, " +
@@ -59,7 +60,7 @@ export default async function ChatPage({
     .reverse();
 
   return (
-    <>
+    <PushTransition>
       <SyncConversations matches={matches.filter((m) => m.status === "active")} />
       <ChatThread
         key={matchId}
@@ -68,6 +69,6 @@ export default async function ChatPage({
         initialMessages={messages}
         initialDraft={share}
       />
-    </>
+    </PushTransition>
   );
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LessonPlayer } from "@/features/learn/components/LessonPlayer";
 import { createClient } from "@/lib/supabase/server";
 import type { LessonSession } from "@/features/learn/types";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Lesson" };
 
@@ -21,5 +22,9 @@ export default async function LessonPage({
   if (!data) notFound();
 
   const session = data as LessonSession;
-  return <LessonPlayer key={session.session_id} initial={session} />;
+  return (
+    <PushTransition>
+      <LessonPlayer key={session.session_id} initial={session} />
+    </PushTransition>
+  );
 }

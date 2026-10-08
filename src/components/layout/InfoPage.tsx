@@ -34,7 +34,7 @@ export function InfoPage({
       <div className="flex items-center justify-between gap-3">
         <Link
           href="/"
-          className="-ml-2 inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted hover:bg-sunken hover:text-ink"
+          className="-ml-2 inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted hover:bg-fill hover:text-ink"
         >
           <BackIcon className="size-4" /> {labels.back}
         </Link>
@@ -52,7 +52,7 @@ export function InfoPage({
 
       <div className="mt-8 space-y-6">
         {page.sections.map((section) => (
-          <section key={section.heading} className="rounded-3xl border border-line bg-raised p-5 md:p-6">
+          <section key={section.heading} className="surface-card p-5 md:p-6">
             <h2 className="text-base font-bold text-ink">{section.heading}</h2>
             {section.body.map((paragraph) => (
               <p key={paragraph} className="mt-2 text-sm leading-relaxed text-muted">
@@ -64,7 +64,7 @@ export function InfoPage({
       </div>
 
       {showContact && (
-        <section className="mt-6 rounded-3xl border border-line bg-raised p-5 md:p-6">
+        <section className="mt-6 surface-card p-5 md:p-6">
           <h2 className="text-base font-bold text-ink">{labels.contact}</h2>
           {SUPPORT_EMAIL ? (
             <a
@@ -85,7 +85,7 @@ export function InfoPage({
             <li key={link.href}>
               <Link
                 href={`${link.href}?lang=${locale}`}
-                className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+                className="flex items-center justify-between surface-card press-soft p-5 text-sm font-semibold text-ink hover:brightness-[0.98] dark:hover:brightness-110"
               >
                 {link.label[locale]}
                 <span aria-hidden className="text-faint">›</span>

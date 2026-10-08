@@ -59,7 +59,7 @@ export function TypeExercise({ exercise, result, onChange, onSubmit, speech, tar
                 <SpeakButton text={payload.speak ?? ""} speech={speech} slow />
               </>
             ) : (
-              <p className="rounded-2xl bg-sunken px-4 py-3 text-sm text-muted">
+              <p className="rounded-[1rem] bg-fill px-4 py-3 text-sm text-muted">
                 No {target.name} voice on this device. Use &ldquo;Can&rsquo;t listen now&rdquo; below.
               </p>
             )}
@@ -106,7 +106,7 @@ export function TypeExercise({ exercise, result, onChange, onSubmit, speech, tar
                 type="button"
                 onPointerDown={(e) => e.preventDefault()}
                 onClick={() => insert(ch)}
-                className="min-h-11 min-w-11 rounded-xl border border-line bg-raised px-2 text-base font-medium text-ink hover:border-brand/40 active:scale-95"
+                className="min-h-11 min-w-11 rounded-xl border border-transparent bg-raised px-2 text-base font-medium shadow-[var(--shadow-card)] text-ink hover:border-brand/40 active:scale-95"
               >
                 {ch}
               </button>

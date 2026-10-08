@@ -36,11 +36,12 @@ export default async function DiscoverPage() {
     <>
       <TopBar
         title="Discover"
+        large={false}
         action={
           <Link
             href="/play"
             aria-label="Your streak"
-            className="-m-1.5 rounded-full p-1.5"
+            className="press -m-1.5 rounded-full p-1.5"
           >
             <StreakFlame days={streak?.current_streak_days ?? 0} />
           </Link>

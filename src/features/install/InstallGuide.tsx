@@ -76,7 +76,7 @@ export function InstallGuide() {
             </p>
           )}
 
-          <div role="group" aria-label="Installation instructions for your device" className="mt-5 grid grid-cols-3 gap-1 rounded-2xl bg-sunken p-1">
+          <div role="group" aria-label="Installation instructions for your device" className="mt-5 grid grid-cols-3 gap-1 rounded-[1rem] bg-fill p-1">
             {platforms.map(({ id, label }) => (
               <button key={id} type="button" aria-pressed={guidePlatform === id} onClick={() => setSelected(id)}
                 className={cn("min-h-11 rounded-xl px-2 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-brand", guidePlatform === id ? "bg-raised text-brand shadow-sm" : "text-muted hover:text-ink")}>

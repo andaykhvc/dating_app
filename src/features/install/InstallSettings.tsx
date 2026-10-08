@@ -16,7 +16,7 @@ export function InstallSettings() {
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} aria-haspopup="dialog"
-        className="flex w-full items-center gap-3 rounded-3xl border border-line bg-raised p-5 text-left transition-colors hover:border-brand/40 focus-visible:outline-2 focus-visible:outline-brand">
+        className="flex w-full items-center gap-3 surface-card press-soft p-5 text-left hover:brightness-[0.98] dark:hover:brightness-110 focus-visible:outline-2 focus-visible:outline-brand">
         <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand"><LogoMark className="size-6" /></span>
         <span className="flex-1">
           <span className="block text-sm font-semibold text-ink">{installed ? t("settings.install.installed") : t("settings.install.add")}</span>

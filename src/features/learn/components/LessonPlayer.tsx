@@ -18,6 +18,8 @@ import type {
 import { Feedback, LISTENING, Renderer, TARGET_SOLUTION } from "./ExerciseRenderer";
 import { LessonComplete } from "./LessonComplete";
 import { ReportSheet } from "./ReportSheet";
+import { ProgressFill } from "@/components/ui/ProgressFill";
+import { haptic } from "@/lib/motion";
 
 /**
  * One lesson or review, start to finish. Each answer is graded by one RPC;
@@ -83,6 +85,10 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
         const nextList = r.appended ? [...exercises, r.appended] : exercises;
         setResults(nextResults);
         setExercises(nextList);
+        // Right gets a light tick, wrong a softer double — felt on the same
+        // frame the colour changes, so the two read as one event.
+        if (r.correct === true) haptic(8);
+        else if (r.correct === false) haptic([6, 50, 6]);
         if (exercise.type === "new_words") {
           advance(nextList, nextResults);
         } else if (TARGET_SOLUTION.has(exercise.type) && r.solution && r.correct !== null) {
@@ -133,12 +139,12 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="safe-top sticky top-0 z-20 bg-surface/90 backdrop-blur-lg">
+      <header className="material safe-top sticky top-0 z-20 shadow-[0_0.5px_0_var(--separator)]">
         <div className="mx-auto flex min-h-14 max-w-2xl items-center gap-3 px-2 py-2 md:min-h-16 md:px-gutter">
           <Link
-            href="/play"
+            href="/play" transitionTypes={["nav-back"]}
             aria-label="Leave lesson"
-            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
+            className="press flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-fill md:-ml-2"
           >
             <CloseIcon className="size-5" />
           </Link>
@@ -157,12 +163,9 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
               aria-valuenow={progress}
               aria-valuemin={0}
               aria-valuemax={100}
-              className="h-2 overflow-hidden rounded-full bg-sunken"
+              className="h-2 overflow-hidden rounded-full bg-fill"
             >
-              <div
-                className="h-full rounded-full bg-brand transition-[width] duration-500 ease-out"
-                style={{ width: `${progress}%` }}
-              />
+              <ProgressFill value={progress} className="bg-brand" />
             </div>
           </div>
         </div>
@@ -172,12 +175,12 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
         {finished ? (
           <div className="my-auto space-y-4 py-16 text-center">
             <p className="text-lg font-bold text-ink">This lesson is already over.</p>
-            <Link href="/play" className="inline-block rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-ink">
+            <Link href="/play" transitionTypes={["nav-back"]} className="press inline-block rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-ink">
               Back to your course
             </Link>
           </div>
         ) : exercise ? (
-          <div key={exercise.index} className="animate-rise">
+          <div key={exercise.index} className="animate-advance">
             {exercise.is_retry && (
               <p className="mb-4 inline-flex rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-ink">
                 One more try
@@ -212,11 +215,11 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
       {exercise && !finished && (
         <footer
           className={cn(
-            "safe-bottom sticky bottom-0 z-10 mt-8 border-t transition-colors",
-            !result && "border-line bg-surface/95 backdrop-blur-lg",
-            result?.correct === true && "border-positive/30 bg-positive-soft",
-            result?.correct === false && "border-negative/30 bg-negative-soft",
-            result && result.correct === null && "border-line bg-sunken",
+            "safe-bottom sticky bottom-0 z-10 mt-8 transition-[background-color,box-shadow] duration-300 ease-ios",
+            !result && "material shadow-[0_-0.5px_0_var(--separator)]",
+            result?.correct === true && "bg-positive-soft shadow-[0_-1px_0_color-mix(in_oklab,var(--positive)_30%,transparent)]",
+            result?.correct === false && "bg-negative-soft shadow-[0_-1px_0_color-mix(in_oklab,var(--negative)_30%,transparent)]",
+            result && result.correct === null && "bg-sunken shadow-[0_-0.5px_0_var(--separator)]",
           )}
         >
           <div className="mx-auto max-w-2xl space-y-3 px-gutter py-4 md:py-5">
@@ -226,11 +229,13 @@ export function LessonPlayer({ initial }: { initial: LessonSession }) {
               </p>
             )}
             {result && exercise.type !== "new_words" && (
+              <div className="animate-rise">
               <Feedback
                 result={result}
                 exercise={exercise}
                 onReport={() => setReporting(true)}
               />
+              </div>
             )}
             <div className="flex gap-2.5">
               {!result && LISTENING.has(exercise.type) && (

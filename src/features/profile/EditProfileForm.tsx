@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Field, Input, Select, Textarea } from "@/components/ui/Field";
 import { SelectableChip } from "@/components/ui/Chip";
 import { TopBar } from "@/components/layout/TopBar";
+import { BACK } from "@/components/motion/PushTransition";
 import { PhotoManager, type StoredPhoto } from "@/features/profile/PhotoManager";
 import { IntentionPicker } from "@/features/profile/IntentionPicker";
 import { AgeRangeSlider } from "@/features/profile/AgeRangeSlider";
@@ -54,7 +55,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-line bg-raised p-5 md:p-6">
+    <section className="surface-card p-5 md:p-6">
       <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-faint">
         {title}
       </h2>
@@ -160,14 +161,15 @@ export function EditProfileForm({
         leading={
           <Link
             href="/profile"
+            {...BACK}
             aria-label="Back to profile"
-            className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+            className="press -ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-brand hover:bg-fill"
           >
             <BackIcon className="size-5" />
           </Link>
         }
         action={
-          <Button onClick={save} loading={saving} className="h-11 px-4">
+          <Button onClick={save} loading={saving} className="h-9 px-4 text-sm">
             Save
           </Button>
         }
@@ -318,7 +320,7 @@ export function EditProfileForm({
                   onChange={(v) => set("countries", v)}
                 />
               </div>
-              <label className="flex items-start gap-3 rounded-2xl bg-sunken p-4">
+              <label className="flex items-start gap-3 rounded-[1rem] bg-fill p-4">
                 <input
                   type="checkbox"
                   checked={form.hideDating}

@@ -7,6 +7,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import type { Leaderboard, LeaderboardEntry } from "@/features/progress/types";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "XP rankings" };
 
@@ -19,10 +20,12 @@ function RankingRow({
 }) {
   return (
     <Link
-      href={`/play/rankings/${entry.id}`}
+      href={`/play/rankings/${entry.id}`} transitionTypes={["nav-forward"]}
       className={cn(
-        "flex min-h-20 items-center gap-3 rounded-2xl border p-3 transition-colors hover:border-brand/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:gap-4 sm:p-4",
-        isYou ? "border-brand/30 bg-brand-soft/60" : "border-line bg-raised",
+        "press-soft flex min-h-20 items-center gap-3 rounded-[1.125rem] p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:gap-4 sm:p-4",
+        isYou
+          ? "bg-brand-soft shadow-[0_0_0_1px_color-mix(in_oklab,var(--brand)_30%,transparent)]"
+          : "bg-raised shadow-[var(--shadow-card)] hover:brightness-[0.98] dark:hover:brightness-110",
       )}
       aria-label={`View ${entry.first_name}'s profile, rank ${entry.rank}, ${entry.total_xp} XP${isYou ? ", you" : ""}`}
     >
@@ -41,7 +44,7 @@ function RankingRow({
         size={44}
       />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm font-bold text-ink">
+        <span className="block truncate text-[0.9375rem] font-semibold text-ink">
           {entry.first_name}
         </span>
         <span className="block text-xs text-muted">
@@ -55,8 +58,8 @@ function RankingRow({
         </span>
         <span className="block text-xs text-faint">XP</span>
       </span>
-      <span aria-hidden="true" className="hidden text-muted sm:block">
-        →
+      <span aria-hidden="true" className="hidden text-faint sm:block">
+        ›
       </span>
     </Link>
   );
@@ -69,22 +72,22 @@ export default async function RankingsPage() {
   const leaderboard = data as Leaderboard;
 
   return (
-    <>
+    <PushTransition>
       <TopBar
         title="XP rankings"
         subtitle="All-time learning XP"
         leading={
           <Link
-            href="/play"
+            href="/play" transitionTypes={["nav-back"]}
             aria-label="Back to Learn"
-            className="rounded-full p-2 hover:bg-sunken"
+            className="rounded-full p-2 hover:bg-fill"
           >
             <BackIcon />
           </Link>
         }
       />
       <PageBody className="space-y-6">
-        <section className="rounded-3xl border border-line bg-raised p-6">
+        <section className="surface-card p-6">
           <span aria-hidden="true" className="text-4xl">
             🏆
           </span>
@@ -130,6 +133,6 @@ export default async function RankingsPage() {
           )}
         </section>
       </PageBody>
-    </>
+    </PushTransition>
   );
 }

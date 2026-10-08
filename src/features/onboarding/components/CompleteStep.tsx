@@ -49,7 +49,7 @@ export function CompleteStep() {
         to your conversations and daily practice.
       </p>
 
-      <div className="mt-8 rounded-3xl border border-line bg-raised p-5 short:mt-6">
+      <div className="mt-8 surface-card p-5 short:mt-6">
         <InstallGuide />
       </div>
 

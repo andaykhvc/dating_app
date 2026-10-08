@@ -68,7 +68,7 @@ export function MatchPairs({ exercise, result, onChange, target, known, speech }
     }
     if (leftId && pairs[leftId]) return tintOf(leftId);
     if (side === "left" && active === id) return "border-brand bg-raised text-brand ring-4 ring-brand/15";
-    return "border-line bg-raised text-ink hover:border-brand/40";
+    return "border-transparent bg-raised text-ink shadow-[var(--shadow-card)] hover:border-brand/30";
   }
 
   return (

@@ -12,6 +12,7 @@ import {
 } from "@/features/progress/components/ProgressBadges";
 import { createClient } from "@/lib/supabase/server";
 import type { ProfileCard } from "@/types/domain";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Learner profile" };
 
@@ -36,21 +37,21 @@ export default async function LearnerProfilePage({
   const card = data as ProfileCard;
 
   return (
-    <>
+    <PushTransition>
       <TopBar
         title="Learner profile"
         leading={
           <Link
-            href="/play/rankings"
+            href="/play/rankings" transitionTypes={["nav-back"]}
             aria-label="Back to XP rankings"
-            className="rounded-full p-2 hover:bg-sunken"
+            className="rounded-full p-2 hover:bg-fill"
           >
             <BackIcon />
           </Link>
         }
       />
       <PageBody width="narrow">
-        <article className="rounded-3xl border border-line bg-raised p-5 sm:p-6">
+        <article className="surface-card p-5 sm:p-6">
           <div className="mb-6 flex items-center gap-4">
             <Avatar
               storagePath={card.primary_photo_path}
@@ -74,6 +75,6 @@ export default async function LearnerProfilePage({
           <ProfileDetails card={card} full={card} />
         </article>
       </PageBody>
-    </>
+    </PushTransition>
   );
 }

@@ -25,7 +25,7 @@ export function TrueFalse({ exercise, result, onChange, speech }: ExerciseProps)
             {payload.prompt}
           </PromptText>
         </div>
-        <div className="rounded-2xl border border-line bg-sunken/70 px-4 py-3.5">
+        <div className="rounded-[1rem] bg-fill px-4 py-3.5">
           <p lang={payload.statement_lang} className="text-base leading-relaxed text-ink">
             {payload.statement}
           </p>

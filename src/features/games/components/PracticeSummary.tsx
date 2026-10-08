@@ -49,7 +49,7 @@ export function PracticeSummary({
         </div>
 
         <dl className="grid grid-cols-2 gap-2.5">
-          <div className="rounded-2xl bg-sunken px-3 py-4 text-center">
+          <div className="rounded-[1rem] bg-fill px-3 py-4 text-center">
             <dt className="text-[0.6875rem] uppercase tracking-wide text-faint">Score</dt>
             <dd className="mt-1 text-2xl font-bold tabular-nums text-ink">
               {summary.correct} / {total}
@@ -92,8 +92,8 @@ export function PracticeSummary({
             </Button>
           )}
           <Link
-            href="/play"
-            className="flex h-14 w-full items-center justify-center rounded-full border border-line bg-raised px-6 text-base font-semibold text-ink hover:border-brand/40"
+            href="/play" transitionTypes={["nav-back"]}
+            className="flex h-14 w-full items-center justify-center press rounded-full bg-fill px-6 text-base font-semibold text-ink hover:bg-fill-strong"
           >
             Back to Play
           </Link>

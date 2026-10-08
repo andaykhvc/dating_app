@@ -11,7 +11,7 @@ export function Chip({
   className?: string;
 }) {
   const tones = {
-    neutral: "bg-sunken text-muted",
+    neutral: "bg-fill text-muted",
     brand: "bg-brand-soft text-brand",
     accent: "bg-accent-soft text-accent-ink",
     positive: "bg-positive-soft text-positive",
@@ -20,7 +20,7 @@ export function Chip({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium",
+        "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold",
         tones[tone],
         className,
       )}
@@ -48,11 +48,11 @@ export function SelectableChip({
       disabled={disabled}
       aria-pressed={selected}
       className={cn(
-        "min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition-all",
-        "active:scale-[0.97] disabled:opacity-40",
+        "press min-h-11 rounded-full px-4 py-2 text-sm font-medium",
+        "disabled:opacity-40",
         selected
-          ? "border-brand bg-brand text-brand-ink"
-          : "border-line bg-raised text-muted hover:border-brand/40",
+          ? "bg-brand text-brand-ink shadow-[0_4px_12px_-6px_var(--brand)]"
+          : "bg-fill text-ink hover:bg-fill-strong",
       )}
     >
       {children}

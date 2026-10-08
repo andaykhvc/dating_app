@@ -6,6 +6,7 @@ import { MessagesIcon } from "@/components/icons";
 import { ConversationList } from "@/features/chat/components/ConversationList";
 import { SyncConversations } from "@/features/chat/ConversationsContext";
 import { getActiveMatches } from "@/lib/supabase/queries";
+import { PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Messages" };
 
@@ -14,12 +15,12 @@ export default async function MessagesPage() {
 
   if (matches.length === 0) {
     return (
-      <>
+      <PushTransition>
         <div className="lg:hidden">
           <TopBar title="Messages" />
         </div>
-        <div className="flex flex-1 flex-col items-center justify-center px-8 py-12 text-center">
-          <div className="flex size-16 items-center justify-center rounded-2xl bg-brand-soft text-2xl">
+        <div className="stagger flex flex-1 flex-col items-center justify-center px-8 py-12 text-center">
+          <div className="flex size-20 items-center justify-center rounded-[1.5rem] bg-brand-soft text-3xl shadow-[var(--shadow-card)]">
             💬
           </div>
           <h2 className="mt-5 text-xl font-bold text-ink">Nothing here yet</h2>
@@ -28,17 +29,17 @@ export default async function MessagesPage() {
           </p>
           <Link
             href="/discover"
-            className="mt-6 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-brand-ink hover:bg-brand-strong"
+            className="press mt-6 rounded-full bg-brand px-6 py-3 text-[0.9375rem] font-semibold text-brand-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_8px_20px_-10px_var(--brand)] hover:bg-brand-strong"
           >
             Find someone
           </Link>
         </div>
-      </>
+      </PushTransition>
     );
   }
 
   return (
-    <>
+    <PushTransition>
       <SyncConversations matches={matches} />
       {/* Phones and tablets: the list is this screen. */}
       <div className="lg:hidden">
@@ -49,8 +50,8 @@ export default async function MessagesPage() {
       </div>
 
       {/* Desktop: the list lives in the sidebar, so this pane waits for a pick. */}
-      <div className="hidden flex-1 flex-col items-center justify-center px-8 text-center lg:flex">
-        <div className="flex size-16 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+      <div className="stagger hidden flex-1 flex-col items-center justify-center px-8 text-center lg:flex">
+        <div className="flex size-20 items-center justify-center rounded-[1.5rem] bg-brand-soft text-brand shadow-[var(--shadow-card)]">
           <MessagesIcon className="size-8" />
         </div>
         <h2 className="mt-5 text-xl font-bold text-ink">Pick a conversation</h2>
@@ -59,6 +60,6 @@ export default async function MessagesPage() {
           where you left off.
         </p>
       </div>
-    </>
+    </PushTransition>
   );
 }

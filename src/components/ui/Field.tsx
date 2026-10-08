@@ -7,10 +7,13 @@ import type {
 } from "react";
 import { cn } from "@/lib/utils";
 
+// A filled field, iOS-style: no outline at rest, the fill itself is the
+// affordance. Focus lifts it onto a raised surface with a brand ring.
 const CONTROL =
-  "w-full rounded-2xl border border-line bg-raised px-4 py-3 text-base text-ink " +
-  "placeholder:text-faint outline-none transition-colors " +
-  "focus:border-brand focus:ring-2 focus:ring-brand/20";
+  "w-full rounded-[0.875rem] border border-transparent bg-fill px-4 py-3 text-base text-ink " +
+  "placeholder:text-faint outline-none transition-[background-color,box-shadow,border-color] duration-200 ease-ios " +
+  "hover:bg-fill-strong focus:border-brand/50 focus:bg-raised focus:shadow-[0_0_0_4px_color-mix(in_oklab,var(--brand)_18%,transparent)] " +
+  "aria-[invalid=true]:border-negative/60";
 
 export function Field({
   label,
@@ -25,12 +28,12 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-semibold text-ink">{label}</span>
+      <span className="mb-1.5 block px-1 text-[0.8125rem] font-semibold text-muted">{label}</span>
       {children}
       {error ? (
-        <span className="mt-1.5 block text-xs text-negative">{error}</span>
+        <span className="animate-fade mt-1.5 block px-1 text-xs text-negative">{error}</span>
       ) : hint ? (
-        <span className="mt-1.5 block text-xs text-faint">{hint}</span>
+        <span className="mt-1.5 block px-1 text-xs text-faint">{hint}</span>
       ) : null}
     </label>
   );

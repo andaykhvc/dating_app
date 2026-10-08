@@ -143,7 +143,7 @@ export function SignupForm() {
         />
       </Field>
 
-      <label className="flex items-start gap-3 rounded-2xl bg-sunken p-4">
+      <label className="flex items-start gap-3 rounded-[1rem] bg-fill p-4">
         <input
           type="checkbox"
           checked={agreed}

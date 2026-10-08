@@ -71,6 +71,32 @@
   --negative: light-dark(#c0324b, #ff7d94);
   --negative-soft: light-dark(#fbe9ec, #2a151b);
 
+  /*
+   * Apple-style layering. Hairlines and fills are the ink at low alpha, so they
+   * read on paper, on a raised card and on a photo alike. Materials are the
+   * translucent chrome (bars, tab bar, sheets' headers) that content scrolls
+   * beneath — structure without an opaque strip eating the screen.
+   */
+  --separator: light-dark(rgb(22 21 28 / 0.1), rgb(244 242 248 / 0.1));
+  --fill: light-dark(rgb(22 21 28 / 0.055), rgb(244 242 248 / 0.08));
+  --fill-strong: light-dark(rgb(22 21 28 / 0.09), rgb(244 242 248 / 0.13));
+  --material: light-dark(rgb(250 247 242 / 0.74), rgb(15 14 20 / 0.7));
+  --material-raised: light-dark(rgb(255 255 255 / 0.72), rgb(38 36 50 / 0.7));
+  /* The bright top edge of a glass surface: light catching the material. */
+  --material-edge: light-dark(rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.09));
+
+  --shadow-card:
+    0 0 0 0.5px var(--separator),
+    0 1px 2px light-dark(rgb(40 30 10 / 0.04), rgb(0 0 0 / 0.3)),
+    0 10px 28px -14px light-dark(rgb(40 30 10 / 0.14), rgb(0 0 0 / 0.55));
+  --shadow-float:
+    0 0 0 0.5px var(--separator),
+    0 2px 6px light-dark(rgb(40 30 10 / 0.06), rgb(0 0 0 / 0.35)),
+    0 18px 44px -16px light-dark(rgb(40 30 10 / 0.24), rgb(0 0 0 / 0.7));
+
+  /* iOS's own sheet / navigation curve: a fast start that settles softly. */
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+
   /* Fluid page gutter: 16px on the smallest phones, 32px from tablets up. */
   --gutter: clamp(1rem, 4vw, 2rem);
 }
@@ -106,9 +132,39 @@
   --color-negative: var(--negative);
   --color-negative-soft: var(--negative-soft);
 
+  --color-separator: var(--separator);
+  --color-fill: var(--fill);
+  --color-fill-strong: var(--fill-strong);
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1.75rem;
+  --radius-group: 1.375rem;
+
+  --ease-ios: var(--ease-ios);
+}
+
+/*
+ * Tracking is size-specific, the way Apple's type is: large text tightens as it
+ * grows (letters read too far apart otherwise), small text opens up slightly
+ * for legibility. Every heading picks this up without a class of its own.
+ */
+@theme {
+  --text-xs--letter-spacing: 0.012em;
+  --text-sm--letter-spacing: -0.003em;
+  --text-base--letter-spacing: -0.008em;
+  --text-lg--letter-spacing: -0.013em;
+  --text-xl--letter-spacing: -0.017em;
+  --text-2xl--letter-spacing: -0.02em;
+  --text-3xl--letter-spacing: -0.022em;
+  --text-4xl--letter-spacing: -0.024em;
+  --text-5xl--letter-spacing: -0.026em;
+
+  /* iOS Large Title: the screen's name, before it collapses into the bar. */
+  --text-large-title: 2.125rem;
+  --text-large-title--line-height: 1.12;
+  --text-large-title--letter-spacing: -0.026em;
+  --text-large-title--font-weight: 750;
 }
 
 html {
@@ -180,6 +236,98 @@ summary:focus-visible,
   }
 }
 
+/*
+ * A grouped surface: a raised card with no border, separated from the paper by
+ * a hairline and a soft shadow, the way an iOS inset-grouped section sits.
+ */
+@utility surface-card {
+  background-color: var(--surface-raised);
+  border-radius: var(--radius-group);
+  box-shadow: var(--shadow-card);
+}
+
+/*
+ * Rows of an inset grouped list: a hairline between each, indented to where
+ * the text starts (--row-inset), never a full-width rule or a box per row.
+ */
+@utility grouped-rows {
+  & > * {
+    position: relative;
+  }
+
+  & > :not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: var(--row-inset, 1rem);
+    right: 0;
+    height: 1px;
+    background: var(--separator);
+    transform: scaleY(0.5);
+    transform-origin: bottom;
+    pointer-events: none;
+  }
+}
+
+/* Translucent chrome. Heavier blur reads as a thicker, more structural layer. */
+@utility material {
+  background-color: var(--material);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* A floating glass surface: lighter, with a lit top edge and a lifted shadow. */
+@utility material-float {
+  background-color: var(--material-raised);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  backdrop-filter: blur(28px) saturate(190%);
+  box-shadow: inset 0 0.5px 0 var(--material-edge), var(--shadow-float);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--surface-raised);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  @media (prefers-contrast: more) {
+    background-color: var(--surface-raised);
+    box-shadow: 0 0 0 1px var(--ink-faint), var(--shadow-float);
+  }
+}
+
+/*
+ * Feedback on the press, not the release: the moment a finger lands the
+ * control gives a little, and it springs back the moment it lifts.
+ */
+@utility press {
+  transition-property: transform, background-color, color, opacity, box-shadow, filter;
+  transition-duration: 0.22s;
+  transition-timing-function: var(--ease-ios);
+
+  &:active:not(:disabled, [aria-disabled="true"]) {
+    transform: scale(0.97);
+    transition-duration: 0.08s;
+  }
+}
+
+/* The same give, scaled down for big surfaces like whole cards. */
+@utility press-soft {
+  transition-property: transform, background-color, color, opacity, box-shadow, filter;
+  transition-duration: 0.25s;
+  transition-timing-function: var(--ease-ios);
+
+  &:active:not(:disabled, [aria-disabled="true"]) {
+    transform: scale(0.985);
+    transition-duration: 0.1s;
+  }
+}
+
 .card-container {
   container: card / size;
 }
@@ -223,7 +371,7 @@ summary:focus-visible,
     transform: scale(0.85);
   }
   60% {
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
   100% {
     opacity: 1;
@@ -237,16 +385,34 @@ summary:focus-visible,
   }
 }
 
-@keyframes sheet-up {
+/* Glass arrives as a material: blur and scale settle together, not a flat fade. */
+@keyframes materialize {
   from {
-    transform: translateY(100%);
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.96);
   }
 }
 
-@keyframes dialog-in {
+/* A wrong answer shakes its head, the way a rejected iOS passcode does. */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(2px); }
+}
+
+/* A right answer gives a small, satisfied lift. */
+@keyframes correct {
+  40% { transform: scale(1.025); }
+}
+
+/* The next step of a lesson arrives from the trailing edge: forward motion. */
+@keyframes advance {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.97);
+    transform: translateX(28px);
   }
 }
 
@@ -257,28 +423,44 @@ summary:focus-visible,
 }
 
 .animate-rise {
-  animation: rise 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rise 0.45s var(--ease-ios) both;
 }
 
 .animate-pop {
-  animation: pop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: pop 0.42s var(--ease-ios) both;
 }
 
 .animate-fade {
-  animation: fade 0.2s ease-out both;
+  animation: fade 0.22s ease-out both;
 }
 
-/* A bottom sheet on phones, a centred dialog once there is room for one. */
-.animate-sheet {
-  animation: sheet-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+.animate-materialize {
+  animation: materialize 0.4s var(--ease-ios) both;
 }
 
-@media (min-width: 40rem) {
-  .animate-sheet {
-    animation-name: dialog-in;
-    animation-duration: 0.22s;
-  }
+.animate-advance {
+  animation: advance 0.45s var(--ease-ios) both;
 }
+
+.animate-shake {
+  animation: shake 0.42s var(--ease-ios);
+}
+
+.animate-correct {
+  animation: correct 0.38s var(--ease-ios);
+}
+
+/* Children of .stagger rise one after another, a beat apart. */
+.stagger > * {
+  animation: rise 0.55s var(--ease-ios) both;
+}
+
+.stagger > :nth-child(2) { animation-delay: 0.05s; }
+.stagger > :nth-child(3) { animation-delay: 0.1s; }
+.stagger > :nth-child(4) { animation-delay: 0.15s; }
+.stagger > :nth-child(5) { animation-delay: 0.2s; }
+.stagger > :nth-child(6) { animation-delay: 0.25s; }
+.stagger > :nth-child(n + 7) { animation-delay: 0.3s; }
 
 .skeleton {
   background: linear-gradient(
@@ -288,15 +470,109 @@ summary:focus-visible,
       var(--surface-sunken) 100%
     )
     0 0 / 200% 100%;
-  animation: shimmer 1.4s linear infinite;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/*
+ * Screen-to-screen navigation (React <ViewTransition>, see PushTransition).
+ * Going deeper slides the new screen in from the trailing edge while the old
+ * one recedes; going back is the exact reverse path. The tab bar and sidebar
+ * are anchored, so it is plainly the content that moved, not the whole app.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.nav-forward) {
+  animation: vt-recede-left 0.36s var(--ease-ios) both;
+}
+
+::view-transition-new(.nav-forward) {
+  animation: vt-enter-right 0.42s var(--ease-ios) both;
+}
+
+::view-transition-old(.nav-back) {
+  animation: vt-exit-right 0.36s var(--ease-ios) both;
+}
+
+::view-transition-new(.nav-back) {
+  animation: vt-return-left 0.42s var(--ease-ios) both;
+}
+
+@keyframes vt-enter-right {
+  from {
+    translate: min(30%, 12rem) 0;
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes vt-recede-left {
+  to {
+    translate: max(-10%, -4rem) 0;
+    opacity: 0;
+  }
+}
+
+@keyframes vt-exit-right {
+  to {
+    translate: min(30%, 12rem) 0;
+    opacity: 0;
+  }
+}
+
+@keyframes vt-return-left {
+  from {
+    translate: max(-10%, -4rem) 0;
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+::view-transition-group(tab-bar),
+::view-transition-group(side-nav) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(tab-bar),
+::view-transition-old(side-nav) {
+  display: none;
+}
+
+::view-transition-new(tab-bar),
+::view-transition-new(side-nav) {
+  animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
   .animate-pop,
-  .animate-fade,
-  .animate-sheet,
+  .animate-materialize,
+  .animate-advance,
+  .animate-shake,
+  .animate-correct,
+  .stagger > *,
   .skeleton {
     animation: none;
+  }
+
+  .animate-fade {
+    animation-duration: 0.15s;
+  }
+
+  /* No travel across the screen: a short cross-fade keeps the "it changed". */
+  ::view-transition-old(.nav-forward),
+  ::view-transition-old(.nav-back) {
+    animation: 0.18s ease-out both reverse fade;
+  }
+
+  ::view-transition-new(.nav-forward),
+  ::view-transition-new(.nav-back) {
+    animation: 0.18s ease-out both fade;
   }
 }

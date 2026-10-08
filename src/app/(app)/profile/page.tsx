@@ -22,12 +22,13 @@ import {
 import { ageFromDateOfBirth } from "@/lib/date";
 import { one } from "@/lib/utils";
 import type { Intention, UserProgress } from "@/types/domain";
+import { FORWARD, PushTransition } from "@/components/motion/PushTransition";
 
 export const metadata: Metadata = { title: "Profile" };
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl border border-line bg-raised p-5 md:p-6">
+    <section className="surface-card p-5 md:p-6">
       {children}
     </section>
   );
@@ -97,14 +98,15 @@ export default async function ProfilePage() {
     : null;
 
   return (
-    <>
+    <PushTransition>
       <TopBar
         title="Your profile"
         width="wide"
         action={
           <Link
             href="/profile/settings"
-            className="rounded-full px-3 py-2 text-sm font-semibold text-muted hover:bg-sunken hover:text-ink"
+            {...FORWARD}
+            className="press rounded-full px-3 py-2 text-[0.9375rem] font-semibold text-brand hover:bg-fill"
           >
             Settings
           </Link>
@@ -144,7 +146,8 @@ export default async function ProfilePage() {
 
           <Link
             href="/profile/edit"
-            className="flex min-h-12 items-center justify-center gap-2 rounded-full border border-line bg-raised py-3 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+            {...FORWARD}
+            className="flex min-h-12 items-center justify-center gap-2 press rounded-full bg-fill py-3 text-sm font-semibold text-ink hover:bg-fill-strong"
           >
             <PencilIcon /> Edit profile
           </Link>
@@ -154,7 +157,7 @@ export default async function ProfilePage() {
           )}
         </div>
 
-        <div className="space-y-4 md:space-y-5">
+        <div className="stagger space-y-4 md:space-y-5">
           {xp && (
             <Card>
               <XPBar progress={xp} />
@@ -164,11 +167,11 @@ export default async function ProfilePage() {
                   ["Streak", `${xp.current_streak_days}d`],
                   ["Best", `${xp.longest_streak_days}d`],
                 ].map(([label, value]) => (
-                  <div key={label as string} className="rounded-2xl bg-sunken px-1 py-3">
+                  <div key={label as string} className="rounded-[1rem] bg-fill px-1 py-3">
                     <dt className="truncate text-xs uppercase tracking-wide text-faint">
                       {label}
                     </dt>
-                    <dd className="mt-0.5 text-lg font-bold text-ink">{value}</dd>
+                    <dd className="mt-0.5 text-xl font-bold tabular-nums text-ink">{value}</dd>
                   </div>
                 ))}
               </dl>
@@ -247,6 +250,6 @@ export default async function ProfilePage() {
           )}
         </div>
       </PageBody>
-    </>
+    </PushTransition>
   );
 }

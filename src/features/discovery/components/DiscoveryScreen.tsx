@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { AnimatePresence } from "motion/react";
 import {
   SwipeDeck,
   type SwipeDeckHandle,
@@ -105,8 +106,8 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
 
   if (!top) {
     return (
-      <div className="flex flex-1 flex-col items-center justify-center px-8 py-12 text-center">
-        <div className="flex size-16 items-center justify-center rounded-2xl bg-brand-soft text-2xl">
+      <div className="stagger flex flex-1 flex-col items-center justify-center px-8 py-12 text-center">
+        <div className="flex size-20 items-center justify-center rounded-[1.5rem] bg-brand-soft text-3xl shadow-[var(--shadow-card)]">
           🗺️
         </div>
         <h2 className="mt-5 text-xl font-bold text-ink">
@@ -124,7 +125,7 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
             </Button>
             <Link
               href="/profile/edit"
-              className="rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand-soft"
+              className="press rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand-soft"
             >
               Adjust who I meet
             </Link>
@@ -165,15 +166,18 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
             (which pushed the deck's buttons below the fold on short screens). */}
         <aside className="relative hidden w-[21rem] shrink-0 lg:block xl:w-[23rem]">
           <div className="absolute inset-0 flex flex-col">
-            <div className="my-auto max-h-[min(100%,46rem)] overflow-y-auto overscroll-contain rounded-[var(--radius-card)] border border-line bg-raised p-6">
+            <div className="my-auto max-h-[min(100%,46rem)] overflow-y-auto overscroll-contain rounded-[var(--radius-card)] bg-raised p-6 shadow-[var(--shadow-card)]">
               <p className="text-xs font-semibold uppercase tracking-wide text-faint">
                 Up now
               </p>
-              <h2 className="mb-5 mt-1 text-2xl font-bold tracking-tight text-ink [overflow-wrap:anywhere]">
-                {top.first_name}, {top.age}
-              </h2>
-              <ProfileDetails card={top} />
-              <div className="mt-6 flex items-center justify-between gap-3 border-t border-line pt-4">
+              {/* Keyed by person, so each new card's details settle in fresh. */}
+              <div key={top.id} className="animate-rise">
+                <h2 className="mb-5 mt-1 text-2xl font-bold text-ink [overflow-wrap:anywhere]">
+                  {top.first_name}, {top.age}
+                </h2>
+                <ProfileDetails card={top} />
+              </div>
+              <div className="mt-6 flex items-center justify-between gap-3 pt-4 shadow-[inset_0_0.5px_0_var(--separator)]">
                 <div className="flex items-center gap-4">
                   <button
                     type="button"
@@ -209,7 +213,7 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
         <button
           type="button"
           onClick={() => setReportOpen(true)}
-          className="mt-6 w-full rounded-2xl py-3 text-sm font-medium text-muted hover:text-negative"
+          className="press mt-6 w-full rounded-2xl py-3 text-sm font-medium text-muted hover:bg-negative-soft hover:text-negative"
         >
           Report {top.first_name}
         </button>
@@ -229,20 +233,23 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
         matchId={null}
       />
 
-      {match && (
-        <MatchCelebration
-          matchId={match.matchId}
-          partner={match.partner}
-          onDismiss={() => setMatch(null)}
-        />
-      )}
+      <AnimatePresence>
+        {match && (
+          <MatchCelebration
+            key={match.matchId}
+            matchId={match.matchId}
+            partner={match.partner}
+            onDismiss={() => setMatch(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
 
 function Kbd({ children }: { children: React.ReactNode }) {
   return (
-    <kbd className="inline-flex min-w-5 items-center justify-center rounded-md border border-line bg-sunken px-1 font-sans text-xs text-muted">
+    <kbd className="inline-flex min-w-5 items-center justify-center rounded-md bg-fill px-1 font-sans text-xs text-muted shadow-[inset_0_-1px_0_var(--separator)]">
       {children}
     </kbd>
   );

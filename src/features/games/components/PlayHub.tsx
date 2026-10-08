@@ -18,6 +18,7 @@ import { hasVoiceFor } from "@/features/learn/speech";
 import { CourseCard, SyllabusAccordion } from "@/features/learn/components/CourseOverview";
 import type { LearnOverview } from "@/features/learn/types";
 import type { UserProgress } from "@/types/domain";
+import { ProgressFill } from "@/components/ui/ProgressFill";
 
 /** A challenge card: a practice run to start (the old game templates are gone). */
 type PracticeTemplate = {
@@ -82,7 +83,7 @@ export function PlayHub({
         setStarting(null);
         return;
       }
-      router.push(`/play/practice/${run.run_id}`);
+      router.push(`/play/practice/${run.run_id}`, { transitionTypes: ["nav-forward"] });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not start that.");
       setStarting(null);
@@ -94,14 +95,14 @@ export function PlayHub({
 
   return (
     <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-gutter py-5 md:gap-6 md:py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-8">
-      <div className="space-y-4 md:space-y-6 lg:sticky lg:top-24">
+      <div className="stagger space-y-4 md:space-y-6 lg:sticky lg:top-24">
         {progress && (
-          <section className="rounded-3xl border border-line bg-raised px-5 py-4">
+          <section className="surface-card px-5 py-4">
             <div className="mb-3 flex items-center gap-2">
               <LeagueTag league={progress.league} />
               <StreakFlame days={progress.current_streak_days} />
               <Link
-                href="/play/rankings"
+                href="/play/rankings" transitionTypes={["nav-forward"]}
                 className="ml-auto text-xs font-semibold text-brand hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
                 🏆 Rankings
@@ -125,7 +126,7 @@ export function PlayHub({
               type="button"
               onClick={() => play(daily)}
               disabled={starting !== null}
-              className="w-full rounded-3xl bg-brand p-5 text-left text-brand-ink transition-[transform,background-color] hover:bg-brand-strong active:scale-[0.99] disabled:opacity-70 md:p-6"
+              className="press-soft relative w-full overflow-hidden rounded-[var(--radius-group)] bg-brand bg-[radial-gradient(120%_90%_at_100%_0%,color-mix(in_oklab,var(--accent)_55%,transparent),transparent_60%)] p-5 text-left text-brand-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_16px_36px_-18px_var(--brand)] hover:bg-brand-strong disabled:opacity-70 md:p-6"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -152,13 +153,13 @@ export function PlayHub({
         <section>
           <SectionLabel>Missions with your matches</SectionLabel>
           {missions.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-line p-5 text-center">
+            <div className="rounded-[var(--radius-group)] border border-dashed border-separator p-5 text-center">
               <p className="text-sm text-muted">
                 No missions in flight. Every new match starts one.
               </p>
               <Link
                 href="/discover"
-                className="mt-3 inline-block rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-ink hover:bg-brand-strong"
+                className="press mt-3 inline-block rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-ink hover:bg-brand-strong"
               >
                 Find someone
               </Link>
@@ -169,7 +170,7 @@ export function PlayHub({
                 <li key={mission.match_mission_id}>
                   <Link
                     href={`/messages/${mission.match_id}`}
-                    className="block rounded-3xl border border-line bg-raised p-4 transition-colors hover:border-accent/40 active:bg-sunken md:p-5"
+                    className="block surface-card press-soft p-4 hover:brightness-[0.98] dark:hover:brightness-110 md:p-5"
                   >
                     <p className="truncate text-xs font-bold uppercase tracking-[0.12em] text-accent-ink">
                       With {mission.partner_first_name} ·{" "}
@@ -181,13 +182,8 @@ export function PlayHub({
                     <p className="mt-0.5 line-clamp-2 text-xs text-muted">
                       {mission.description}
                     </p>
-                    <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-sunken">
-                      <div
-                        className="h-full rounded-full bg-accent"
-                        style={{
-                          width: `${(mission.steps_completed / mission.target_steps) * 100}%`,
-                        }}
-                      />
+                    <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-fill">
+                      <ProgressFill value={(mission.steps_completed / mission.target_steps) * 100} className="bg-accent" />
                     </div>
                   </Link>
                 </li>
@@ -199,7 +195,7 @@ export function PlayHub({
         <section>
           <SectionLabel>Quick challenges</SectionLabel>
           {overview.practice.length === 0 ? (
-            <p className="rounded-3xl border border-dashed border-line p-5 text-center text-sm text-muted">
+            <p className="rounded-[var(--radius-group)] border border-dashed border-separator p-5 text-center text-sm text-muted">
               No solo content for your target language yet.
             </p>
           ) : (
@@ -210,7 +206,7 @@ export function PlayHub({
                     type="button"
                     onClick={() => play(template)}
                     disabled={starting !== null}
-                    className="flex h-full w-full items-center gap-3 rounded-3xl border border-line bg-raised p-4 text-left transition-colors hover:border-brand/40 active:bg-sunken disabled:opacity-60"
+                    className="flex h-full w-full items-center gap-3 surface-card press-soft p-4 text-left hover:brightness-[0.98] dark:hover:brightness-110 disabled:opacity-60"
                   >
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-ink">
