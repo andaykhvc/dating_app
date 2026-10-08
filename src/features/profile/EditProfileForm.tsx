@@ -13,6 +13,7 @@ import { IntentionPicker } from "@/features/profile/IntentionPicker";
 import { AgeRangeSlider } from "@/features/profile/AgeRangeSlider";
 import { CountryPicker } from "@/features/profile/CountryPicker";
 import { createClient } from "@/lib/supabase/client";
+import { profileErrorMessage } from "@/lib/profile-errors";
 import { saveInterests, saveLanguages } from "@/features/profile/saveLists";
 import { CEFR_DESCRIPTIONS, COUNTRIES } from "@/lib/constants";
 import {
@@ -109,7 +110,7 @@ export function EditProfileForm({
       .eq("id", userId);
 
     if (profileError) {
-      setError(profileError.message);
+      setError(profileErrorMessage(profileError.message));
       setSaving(false);
       return;
     }
