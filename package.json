@@ -35,6 +35,7 @@
     "typescript": "^5"
   },
   "overrides": {
+    "@grpc/grpc-js": "^1.14.5",
     "@next/eslint-plugin-next": {
       "fast-glob": "npm:tinyglobby@0.2.17"
     }
