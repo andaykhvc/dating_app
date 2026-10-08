@@ -110,7 +110,7 @@ export function ConversationList({
                       <LocalTime
                         iso={last.created_at}
                         format="relative"
-                        className="shrink-0 text-[0.6875rem] text-faint"
+                        className="shrink-0 text-xs text-faint"
                       />
                     </div>
                     <p className="truncate text-sm text-muted">

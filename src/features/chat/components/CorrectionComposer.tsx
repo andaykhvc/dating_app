@@ -56,7 +56,7 @@ export function CorrectionComposer({
     >
       <div className="space-y-4">
         <div className="rounded-2xl bg-sunken p-3.5">
-          <p className="text-[0.625rem] font-bold uppercase tracking-[0.12em] text-faint">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-faint">
             They wrote
           </p>
           <p className="mt-1 text-[0.9375rem] leading-relaxed text-muted">

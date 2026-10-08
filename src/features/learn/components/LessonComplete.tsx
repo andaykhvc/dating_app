@@ -49,7 +49,7 @@ export function LessonComplete({
     <div className="flex min-h-dvh flex-col">
       <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-6 px-gutter pb-safe-8 pt-safe-10 md:pt-safe-16">
         <div className="animate-pop space-y-2 text-center">
-          <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-accent">
+          <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-accent-ink">
             {session.mode === "review" ? "Review done" : completion.perfect ? "Perfect lesson" : "Lesson complete"}
           </p>
           <h1 className="text-balance text-[clamp(1.75rem,6vw,2.5rem)] font-bold leading-tight tracking-tight text-ink">
@@ -74,7 +74,7 @@ export function LessonComplete({
 
         {phrase && (
           <section className="animate-rise rounded-3xl border border-line bg-raised p-5 [animation-delay:120ms] md:p-6">
-            <p className="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-brand">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">
               Use it
             </p>
             <div className="mt-3 flex items-start gap-3">
@@ -138,8 +138,8 @@ export function LessonComplete({
 function Stat({ label, value, tone }: { label: string; value: string; tone?: "accent" }) {
   return (
     <div className={cn("rounded-2xl px-2 py-3.5 text-center", tone === "accent" ? "bg-accent-soft" : "bg-sunken")}>
-      <dt className="text-[0.6875rem] uppercase tracking-wide text-faint">{label}</dt>
-      <dd className={cn("mt-0.5 text-xl font-bold tabular-nums", tone === "accent" ? "text-accent" : "text-ink")}>
+      <dt className="text-xs uppercase tracking-wide text-faint">{label}</dt>
+      <dd className={cn("mt-0.5 text-xl font-bold tabular-nums", tone === "accent" ? "text-accent-ink" : "text-ink")}>
         {value}
       </dd>
     </div>

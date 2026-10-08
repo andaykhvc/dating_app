@@ -245,6 +245,13 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
+# Sign-up confirmation: a six-digit code (German first, English underneath).
+# Hosted projects do not read this file: paste the same HTML into the dashboard,
+# see docs/auth-email-brevo.md.
+[auth.email.template.confirmation]
+subject = "Dein Code / Your code: {{ .Token }}"
+content_path = "./supabase/templates/confirm-signup.html"
+
 # Uncomment to customize email template
 # [auth.email.template.invite]
 # subject = "You have been invited"
