@@ -9,13 +9,21 @@ import {
   XPBar,
 } from "@/features/progress/components/ProgressBadges";
 import { SectionLabel } from "@/components/layout/Page";
-import { startGameSession } from "@/features/games/api";
+import {
+  startPracticeRun,
+  type PracticeKind,
+  type PracticeStyle,
+} from "@/features/games/api";
+import { hasVoiceFor } from "@/features/learn/speech";
 import { CourseCard, SyllabusAccordion } from "@/features/learn/components/CourseOverview";
 import type { LearnOverview } from "@/features/learn/types";
 import type { UserProgress } from "@/types/domain";
 
+/** A challenge card: a practice run to start (the old game templates are gone). */
 type PracticeTemplate = {
-  game_template_id: number;
+  game_template_id: number | null;
+  kind: PracticeKind;
+  style?: PracticeStyle;
   key: string;
   type: string;
   title: string;
@@ -59,15 +67,22 @@ export function PlayHub({
   learn: LearnOverview;
 }) {
   const router = useRouter();
-  const [starting, setStarting] = useState<number | null>(null);
+  const [starting, setStarting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  async function play(templateId: number) {
-    setStarting(templateId);
+  async function play(challenge: PracticeTemplate) {
+    setStarting(challenge.key);
     setError(null);
     try {
-      const session = await startGameSession(templateId);
-      router.push(`/play/session/${session.session_id}`);
+      // Listening cards are left out when this device has no voice for the language.
+      const audio = await hasVoiceFor(learnLocale);
+      const run = await startPracticeRun(challenge.kind, { style: challenge.style, audio });
+      if (!run.available) {
+        setError("There is not enough content for that yet.");
+        setStarting(null);
+        return;
+      }
+      router.push(`/play/practice/${run.run_id}`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not start that.");
       setStarting(null);
@@ -75,6 +90,7 @@ export function PlayHub({
   }
 
   const { progress, daily_challenge: daily, match_missions: missions } = overview;
+  const learnLocale = learn.course?.target.speech_locale;
 
   return (
     <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-gutter py-5 md:gap-6 md:py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-8">
@@ -94,7 +110,7 @@ export function PlayHub({
             <XPBar progress={progress} />
             {progress.current_streak_days === 0 && (
               <p className="mt-2 text-xs text-muted">
-                Earn any XP today to start a streak.
+                Practise any lesson today to start a streak.
               </p>
             )}
           </section>
@@ -107,7 +123,7 @@ export function PlayHub({
             <SectionLabel>Daily challenge</SectionLabel>
             <button
               type="button"
-              onClick={() => play(daily.game_template_id)}
+              onClick={() => play(daily)}
               disabled={starting !== null}
               className="w-full rounded-3xl bg-brand p-5 text-left text-brand-ink transition-[transform,background-color] hover:bg-brand-strong active:scale-[0.99] disabled:opacity-70 md:p-6"
             >
@@ -123,7 +139,7 @@ export function PlayHub({
               <p className="mt-4 text-sm font-semibold">
                 {daily.completed_today
                   ? "Done today — play it again"
-                  : starting === daily.game_template_id
+                  : starting === daily.key
                     ? "Loading…"
                     : "Start →"}
               </p>
@@ -155,7 +171,7 @@ export function PlayHub({
                     href={`/messages/${mission.match_id}`}
                     className="block rounded-3xl border border-line bg-raised p-4 transition-colors hover:border-accent/40 active:bg-sunken md:p-5"
                   >
-                    <p className="truncate text-[0.625rem] font-bold uppercase tracking-[0.12em] text-accent">
+                    <p className="truncate text-xs font-bold uppercase tracking-[0.12em] text-accent-ink">
                       With {mission.partner_first_name} ·{" "}
                       {mission.steps_completed}/{mission.target_steps}
                     </p>
@@ -189,16 +205,16 @@ export function PlayHub({
           ) : (
             <ul className="grid gap-2.5 [grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr))]">
               {overview.practice.map((template) => (
-                <li key={template.game_template_id}>
+                <li key={template.key}>
                   <button
                     type="button"
-                    onClick={() => play(template.game_template_id)}
+                    onClick={() => play(template)}
                     disabled={starting !== null}
                     className="flex h-full w-full items-center gap-3 rounded-3xl border border-line bg-raised p-4 text-left transition-colors hover:border-brand/40 active:bg-sunken disabled:opacity-60"
                   >
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-ink">
-                        {starting === template.game_template_id
+                        {starting === template.key
                           ? "Loading…"
                           : template.title}
                       </p>

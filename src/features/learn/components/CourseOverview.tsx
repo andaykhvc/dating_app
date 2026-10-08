@@ -363,7 +363,7 @@ function SkillRow({
                 onClick={() => starter.start(lesson.id)}
                 disabled={starter.starting !== null}
                 className={cn(
-                  "inline-flex min-h-9 items-center gap-1 rounded-full px-3 text-xs font-semibold transition-[transform,colors] active:scale-95 disabled:opacity-60",
+                  "inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-xs font-semibold transition-[transform,colors] active:scale-95 disabled:opacity-60",
                   isNext
                     ? "bg-brand text-brand-ink shadow-sm shadow-brand/30"
                     : lesson.completed

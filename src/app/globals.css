@@ -16,6 +16,22 @@
 @custom-variant card-wide (@container card (orientation: landscape));
 
 /*
+ * Tailwind's dark: variant follows the Appearance setting too (data-theme on
+ * <html>), falling back to the OS when no explicit choice has been made.
+ */
+@custom-variant dark {
+  &:where(:root[data-theme="dark"] *) {
+    @slot;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/*
  * Lingua Match design tokens.
  *
  * Warm paper rather than clinical white, electric indigo rather than the red /
@@ -25,54 +41,46 @@
  */
 
 :root {
-  --surface: #faf7f2;
-  --surface-raised: #ffffff;
-  --surface-sunken: #f1ece3;
-  --ink: #16151c;
-  --ink-muted: #605c6e;
-  --ink-faint: #8f8a9e;
-  --line: #e6e0d6;
+  /*
+   * Each token is written once as light-dark(light, dark). Which side wins is
+   * decided by color-scheme: "light dark" follows the OS (System), and the
+   * Appearance setting forces one side with data-theme on <html>.
+   */
+  color-scheme: light dark;
 
-  --brand: #3b2fe8;
-  --brand-strong: #2a1fc4;
-  --brand-soft: #ecebfe;
-  --brand-ink: #ffffff;
+  --surface: light-dark(#faf7f2, #0f0e14);
+  --surface-raised: light-dark(#ffffff, #1a1822);
+  --surface-sunken: light-dark(#f1ece3, #16151d);
+  --ink: light-dark(#16151c, #f4f2f8);
+  --ink-muted: light-dark(#605c6e, #a49fb4);
+  --ink-faint: light-dark(#6b6679, #8f8aa0);
+  --line: light-dark(#e6e0d6, #2a2735);
 
-  --accent: #f2761f;
-  --accent-soft: #fdeee1;
+  --brand: light-dark(#3b2fe8, #7d72ff);
+  --brand-strong: light-dark(#2a1fc4, #9a92ff);
+  --brand-soft: light-dark(#ecebfe, #221f3d);
+  --brand-ink: light-dark(#ffffff, #0f0e14);
 
-  --positive: #10804f;
-  --positive-soft: #e3f5ec;
-  --negative: #c0324b;
-  --negative-soft: #fbe9ec;
+  --accent: light-dark(#f2761f, #ff9b4d);
+  --accent-soft: light-dark(#fdeee1, #2d2016);
+  /* The accent as TEXT: the orange fill alone is only 2.7:1 on paper. */
+  --accent-ink: light-dark(#b34f08, #ff9b4d);
+
+  --positive: light-dark(#0d7248, #4ade9f);
+  --positive-soft: light-dark(#e3f5ec, #14261f);
+  --negative: light-dark(#c0324b, #ff7d94);
+  --negative-soft: light-dark(#fbe9ec, #2a151b);
 
   /* Fluid page gutter: 16px on the smallest phones, 32px from tablets up. */
   --gutter: clamp(1rem, 4vw, 2rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --surface: #0f0e14;
-    --surface-raised: #1a1822;
-    --surface-sunken: #16151d;
-    --ink: #f4f2f8;
-    --ink-muted: #a49fb4;
-    --ink-faint: #736e84;
-    --line: #2a2735;
+:root[data-theme="light"] {
+  color-scheme: light;
+}
 
-    --brand: #7d72ff;
-    --brand-strong: #9a92ff;
-    --brand-soft: #221f3d;
-    --brand-ink: #0f0e14;
-
-    --accent: #ff9b4d;
-    --accent-soft: #2d2016;
-
-    --positive: #4ade9f;
-    --positive-soft: #14261f;
-    --negative: #ff7d94;
-    --negative-soft: #2a151b;
-  }
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -91,6 +99,7 @@
 
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
 
   --color-positive: var(--positive);
   --color-positive-soft: var(--positive-soft);
@@ -104,10 +113,16 @@
 
 html {
   background: var(--surface);
-  color-scheme: light dark;
   /* Stops iOS inflating text when the phone is turned sideways. */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+/* One visible keyboard focus ring for every control; components can still
+   override it (the where() keeps this at zero specificity). */
+:where(a, button, summary, [role="button"], [role="switch"], input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 
 body {
