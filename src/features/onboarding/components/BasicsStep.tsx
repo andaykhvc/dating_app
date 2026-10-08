@@ -6,6 +6,7 @@ import { Field, Input } from "@/components/ui/Field";
 import { StepShell } from "@/features/onboarding/components/StepShell";
 import { createClient } from "@/lib/supabase/client";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
+import { profileErrorMessage } from "@/lib/profile-errors";
 
 export function BasicsStep({
   initialFirstName,
@@ -35,7 +36,7 @@ export function BasicsStep({
       .eq("id", (await supabase.auth.getUser()).data.user!.id);
 
     if (updateError) {
-      setError(updateError.message);
+      setError(profileErrorMessage(updateError.message));
       setSaving(false);
       return;
     }

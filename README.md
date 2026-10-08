@@ -100,6 +100,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_CLIENT_KEY
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL used by the browser and server Supabase clients, and photo URLs. |
 | `SUPABASE_SERVICE_ROLE_KEY` | **Server-only secret** (never `NEXT_PUBLIC_`). Needed only for in-app account deletion (`/api/account/delete`), which removes the user's photo files and their auth row. Find it in Supabase → Project Settings → API (the `service_role` / secret key). Without it, "Delete account" answers "not available right now". Set it as a Vercel environment variable (Production, and Preview if you test there); never commit it. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public client API key. The existing variable name is retained; it can hold the project's publishable key or compatible legacy anon key. |
+| `NEXT_PUBLIC_APPLE_SIGNIN_ENABLED` | Optional. Set to `true` once Sign in with Apple is configured in Supabase to enable the button; otherwise it is shown greyed out with "Coming soon". |
 
 `NEXT_PUBLIC_*` values are included in the browser bundle. The app uses public client credentials and authenticated sessions; **a secret/service-role key does not belong in any `NEXT_PUBLIC_*` variable** (the server-only `SUPABASE_SERVICE_ROLE_KEY` above is the one exception, read only on the server). Database deployment credentials belong in the separate workflow secret described below.
 
