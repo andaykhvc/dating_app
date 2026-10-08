@@ -39,6 +39,7 @@ export default async function ProfilePage() {
   const [
     { data: profile },
     { data: progress },
+    { data: streak },
     { data: languages },
     { data: interests },
     { data: photos },
@@ -57,6 +58,8 @@ export default async function ProfilePage() {
       )
       .eq("user_id", user!.id)
       .single(),
+    // The streak as of today in the user's timezone: 0 once a day was missed.
+    supabase.rpc("get_my_streak"),
     supabase
       .from("user_languages")
       .select("role, cefr_level, languages(code, name, flag_emoji)")
@@ -84,6 +87,8 @@ export default async function ProfilePage() {
   const xp: UserProgress | null = progress
     ? {
         ...progress,
+        current_streak_days:
+          streak?.current_streak_days ?? progress.current_streak_days,
         xp_into_level: progress.total_xp % 100,
         xp_for_next_level: 100,
       }
