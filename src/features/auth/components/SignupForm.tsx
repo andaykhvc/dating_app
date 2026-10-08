@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
+import { authCallbackUrl } from "@/lib/site";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
 
 export function SignupForm() {
@@ -50,7 +51,7 @@ export function SignupForm() {
       password,
       options: {
         data: { first_name: firstName.trim(), is_18_plus_confirmed: true },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: authCallbackUrl(),
       },
     });
 

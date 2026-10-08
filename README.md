@@ -97,6 +97,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_CLIENT_KEY
 
 | Variable | Purpose |
 | :--- | :--- |
+| `NEXT_PUBLIC_SITE_URL` | Optional. The public origin of the deployed site (e.g. `https://example.com`), used for auth-email and OAuth return links and absolute metadata URLs. Unset, the current page's origin is used (and `http://localhost:3000` where there is none), so local development needs nothing. See [Moving to your own domain](docs/domain-setup.md). |
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL used by the browser and server Supabase clients, and photo URLs. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public client API key. The existing variable name is retained; it can hold the project's publishable key or compatible legacy anon key. |
 
@@ -360,7 +361,7 @@ The project targets a small footprint on Supabase and Vercel. Plan limits and su
 
 Import this repository into Vercel, configure both `NEXT_PUBLIC_SUPABASE_*` variables for the relevant environments, and deploy. Set Supabase's Site URL and allowed callback URLs to match the deployed origin. Public environment changes require a new web build.
 
-The Android configuration currently points to [dating-app-ruddy.vercel.app](https://dating-app-ruddy.vercel.app). This is the committed deployment target; remote deployment health needs a separate check.
+The Android configuration currently points to [dating-app-ruddy.vercel.app](https://dating-app-ruddy.vercel.app). This is the committed deployment target; remote deployment health needs a separate check. To move to your own domain (including a new Android release, since the host is baked into the APK), follow [docs/domain-setup.md](docs/domain-setup.md).
 
 ### Database updates
 
