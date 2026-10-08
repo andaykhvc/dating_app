@@ -21,7 +21,7 @@ bought it (the "registrar"); step 2 adds three records there.
 1. Create an account at brevo.com.
 2. **Senders, domains** → add `linguamatch.online` → Brevo shows DNS records to add at your
    domain registrar: **SPF** (a TXT record), **DKIM** (a TXT record) and it asks
-   for a **DMARC** record (TXT `_dmarc`, e.g. `v=DMARC1; p=none; rua=mailto:you@yourdomain.com`).
+   for a **DMARC** record (TXT `_dmarc`, e.g. `v=DMARC1; p=none; rua=mailto:contact@linguamatch.online`).
    Add them, then press *Authenticate*. It can take from minutes to a few hours.
 3. **SMTP & API** → **SMTP** → copy the **server, port, login** and create an
    **SMTP key** (this is the password; copy it now, it is shown once).
