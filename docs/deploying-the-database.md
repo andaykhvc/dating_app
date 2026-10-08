@@ -90,6 +90,44 @@ Whenever a PR adds a migration or changes content under `content/` (and its
 regenerated seed files), merge it, then run the workflow again: dry run first,
 then for real.
 
+## Knowing when the database is behind
+
+The web app goes live the moment a pull request is merged, but the database only
+changes when you run **Deploy database**. The **Database check** workflow
+(`.github/workflows/database-check.yml`) tells you when the two disagree. It only
+reads; it never changes anything, and it does nothing if the `SUPABASE_DB_URL`
+secret is not set.
+
+**What you will see, and what to do**
+
+| You see | It means | You do |
+| --- | --- | --- |
+| Green "Database check" | The live database already has every migration in this branch. | Nothing. |
+| Red "Database check" on a **pull request** | This pull request adds a migration that is not in the live database yet. That is normal for a pull request that changes the database. | Merge it, then run the steps below. |
+| Red "Database check" on **main** | `main` has migrations the live database does not. The app may be using tables or functions that are not there yet. | Run the steps below now. |
+
+**Steps to bring the database up to date** (about two minutes)
+
+1. GitHub → **Actions** → **Deploy database** → **Run workflow**.
+2. *Use workflow from*: choose **main**.
+3. Leave **Dry run** ticked and press the green button. Open the run: it lists
+   what would change and changes nothing. If it stops with an explanation, read it;
+   it never breaks anything.
+4. Run it again with **Dry run** unticked. This is the real one.
+5. Open **Actions → Database check → Run workflow**: it should turn green.
+
+Rule of thumb: when several pull requests change the database, merge them all
+first and run Deploy database once, from `main`.
+
+The check on pull requests uses the production connection string, which a pull
+request could in principle read by editing the workflow. That is fine while only
+you and trusted agents push to this repository. If that ever changes, create a
+read-only database user for the check and store its URL as a separate secret.
+
+After a real deploy, `deploy.sh` also confirms nothing is left pending and asks
+PostgREST to reload its schema cache, so newly created functions are callable
+straight away.
+
 ## What it does not do
 
 - It does not run the original seeds `supabase/seed/0001`–`0007` (languages,

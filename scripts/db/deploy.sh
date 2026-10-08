@@ -147,6 +147,15 @@ if [ "$DRY_RUN" = "true" ]; then
   exit 0
 fi
 
+# Proof, not hope: nothing may be left pending after a real run.
+scripts/db/check-pending.sh
+
+# PostgREST caches function signatures. Supabase normally refreshes it after
+# DDL, but if it misses one the new functions answer 404, which looks exactly
+# like the migration not having run. Asking again is harmless.
+psql_q "notify pgrst, 'reload schema'" > /dev/null
+echo "PostgREST schema cache reload requested"
+
 if [ "$(psql_q "select to_regclass('public.concept_translations') is not null")" = "t" ]; then
   say "### ✓ Database updated"
   say ""
