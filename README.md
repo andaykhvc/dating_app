@@ -102,6 +102,12 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_CLIENT_KEY
 
 `NEXT_PUBLIC_*` values are included in the browser bundle. The app uses public client credentials and authenticated sessions; **a secret/service-role key does not belong here**. Database deployment credentials belong in the separate workflow secret described below.
 
+Privacy information is public at [`/datenschutz`](https://dating-app-ruddy.vercel.app/datenschutz) (German primary edition) and [`/privacy`](https://dating-app-ruddy.vercel.app/privacy) (English). These routes use static content and bypass session refresh. They remain visibly **DRAFT — pending legal review** and `noindex` until the factual and legal review is complete.
+
+[`src/lib/legal.ts`](src/lib/legal.ts) holds the owner-supplied public name/address, missing contact fields and the single `LEGAL_DRAFT_MODE` switch. Set `NEXT_PUBLIC_LEGAL_EMAIL` when the operator confirms it; `NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL` optionally supplies a separate privacy inbox. `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` (with real newlines), and `NEXT_PUBLIC_LEGAL_DPO` can override public contact details. Optional shared fields for the future Impressum are documented in the [privacy review notes](docs/compliance/privacy-policy-review.md). `NEXT_PUBLIC_SITE_URL` sets the canonical site origin; rebuild after changing any of these public variables.
+
+The [review notes](docs/compliance/privacy-policy-review.md) trace statements to source files and list unresolved provider/region, retention, cookie and consent questions. Updating the notice does not implement account deletion or data export.
+
 ### 3 · Create the database schema
 
 Create a project in the [Supabase dashboard](https://supabase.com/dashboard), then link this checkout and apply its migrations:
