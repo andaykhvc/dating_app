@@ -47,6 +47,7 @@ export const EXPORT_TABLES: ExportTable[] = [
   { key: "concept_progress", table: "user_concept_progress", order: "concept_id" },
   { key: "lesson_progress", table: "user_lesson_progress", order: "lesson_id" },
   { key: "phrase_shares", table: "phrase_shares", order: "id" },
+  { key: "push_tokens", table: "push_tokens", order: "id" },
 ];
 
 /** Provided by SQL functions rather than a plain table read (see 99998). */

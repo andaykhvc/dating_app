@@ -11,6 +11,7 @@ import { DownloadMyData } from "@/features/profile/DownloadMyData";
 import { AppearanceSettings } from "@/features/appearance/AppearanceSettings";
 import { DeleteAccount } from "@/features/profile/DeleteAccount";
 import { InstallSettings } from "@/features/install/InstallSettings";
+import { PushNotificationsCard } from "@/features/push/PushNotificationsCard";
 import { LegalLinks } from "@/components/legal/LegalLinks";
 
 type BlockedUser = {
@@ -46,6 +47,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
 
   return (
     <div className="mx-auto w-full max-w-xl space-y-4 px-gutter py-5 md:space-y-5 md:py-8">
+      <PushNotificationsCard />
       <AppearanceSettings />
       <InstallSettings />
       <section className="rounded-3xl border border-line bg-raised p-5">
