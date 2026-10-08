@@ -281,7 +281,6 @@ export function ChatThread({
           <ReportBlockMenu
             partnerId={match.partner.id}
             partnerName={match.partner.first_name}
-            viewerId={viewerId}
             matchId={match.match_id}
           />
         </div>
