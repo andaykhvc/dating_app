@@ -24,4 +24,8 @@ export function thumbUrl(storagePath: string | null | undefined): string | null 
   return storagePath ? photoUrl(thumbPath(storagePath)) : null;
 }
 
+/** Columns to select wherever a photo is loaded for its owner (see StoredPhoto). */
+export const STORED_PHOTO_COLUMNS =
+  "id, storage_path, position, moderation_status, moderation_reason";
+
 export { BUCKET as PHOTO_BUCKET };
