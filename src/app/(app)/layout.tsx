@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { SideNav } from "@/components/layout/SideNav";
+import { TimezoneSync } from "@/features/progress/components/TimezoneSync";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/supabase/queries";
 
@@ -30,6 +31,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   // sidebar on wide screens) next to the content column.
   return (
     <div className="flex min-h-dvh">
+      <TimezoneSync />
       <SideNav />
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex flex-1 flex-col">{children}</div>
