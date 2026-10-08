@@ -72,6 +72,8 @@ export default async function ProfilePage() {
       .from("profile_photos")
       .select("id, storage_path")
       .eq("user_id", user!.id)
+      // A rejected photo's file is deleted.
+      .neq("moderation_status", "rejected")
       .order("position"),
   ]);
 
@@ -117,7 +119,7 @@ export default async function ProfilePage() {
         <div className="space-y-4 md:space-y-5">
           <section className="flex items-center gap-4 lg:flex-col lg:items-start">
             <Avatar
-              storagePath={profile?.primary_photo_path ?? null}
+              storagePath={profile?.primary_photo_path ?? photos?.[0]?.storage_path ?? null}
               name={profile?.first_name ?? null}
               userId={user!.id}
               size={76}
