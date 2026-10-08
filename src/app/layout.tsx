@@ -8,7 +8,7 @@ import { siteUrl } from "@/lib/site";
 import { ThemeSync } from "@/features/appearance/ThemeSync";
 import { THEME_COLORS, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { InstallAppProvider } from "@/features/install/InstallAppProvider";
-import { LegalLinks } from "@/components/legal/LegalLinks";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -62,9 +62,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeSync />
         <I18nProvider locale={locale} messages={getMessages(locale)}>
           <InstallAppProvider>{children}</InstallAppProvider>
-          <footer className="safe-bottom border-t border-line px-gutter py-4">
-            <LegalLinks />
-          </footer>
+          <SiteFooter />
         </I18nProvider>
       </body>
     </html>
