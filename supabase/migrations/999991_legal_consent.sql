@@ -42,14 +42,21 @@ as $$
 declare
   v_terms text := left(nullif(new.raw_user_meta_data ->> 'terms_version', ''), 40);
   v_privacy text := left(nullif(new.raw_user_meta_data ->> 'privacy_version', ''), 40);
+  v_name text := nullif(new.raw_user_meta_data ->> 'first_name', '');
 begin
+  -- Keep the name filter from 99998_name_moderation.sql: a sign-up name that
+  -- fails it is left empty (onboarding asks again) instead of failing sign-up.
+  if v_name is not null and not public.is_name_allowed(v_name) then
+    v_name := null;
+  end if;
+
   insert into profiles (
     id, first_name, is_18_plus_confirmed,
     terms_accepted_at, terms_version, privacy_accepted_at, privacy_version
   )
   values (
     new.id,
-    nullif(new.raw_user_meta_data ->> 'first_name', ''),
+    v_name,
     coalesce((new.raw_user_meta_data ->> 'is_18_plus_confirmed')::boolean, false),
     case when v_terms is not null then now() end, v_terms,
     case when v_privacy is not null then now() end, v_privacy
