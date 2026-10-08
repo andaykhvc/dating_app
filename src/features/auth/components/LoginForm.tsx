@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
+import { rememberPendingEmail } from "@/features/auth/pendingEmail";
+import { isEmailNotConfirmed } from "@/lib/otp";
 import { safeNextPath } from "@/lib/redirect";
 
 const CALLBACK_ERRORS: Record<string, string> = {
@@ -38,6 +40,14 @@ export function LoginForm() {
     });
 
     if (signInError) {
+      // Signed up but never entered the code: send a fresh one and go to the
+      // code screen instead of showing a bare "Email not confirmed".
+      if (isEmailNotConfirmed(signInError.message)) {
+        await supabase.auth.resend({ type: "signup", email: email.trim() });
+        rememberPendingEmail(email.trim());
+        router.push("/verify-email");
+        return;
+      }
       setError(signInError.message);
       setLoading(false);
       return;

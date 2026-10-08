@@ -8,6 +8,7 @@ import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
 import { authCallbackUrl } from "@/lib/site";
+import { rememberPendingEmail } from "@/features/auth/pendingEmail";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
 
 export function SignupForm() {
@@ -64,6 +65,7 @@ export function SignupForm() {
     // With email confirmation on there is no session yet; the date of birth is
     // captured again on the first onboarding step.
     if (!data.session) {
+      rememberPendingEmail(email.trim());
       router.push("/verify-email");
       return;
     }

@@ -99,10 +99,23 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_CLIENT_KEY
 | :--- | :--- |
 | `NEXT_PUBLIC_SITE_URL` | Optional. The public origin of the deployed site (e.g. `https://example.com`), used for auth-email and OAuth return links and absolute metadata URLs. Unset, the current page's origin is used (and `http://localhost:3000` where there is none), so local development needs nothing. See [Moving to your own domain](docs/domain-setup.md). |
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL used by the browser and server Supabase clients, and photo URLs. |
+| `SUPABASE_SERVICE_ROLE_KEY` | **Server-only secret** (never `NEXT_PUBLIC_`). Needed only for in-app account deletion (`/api/account/delete`), which removes the user's photo files and their auth row. Find it in Supabase → Project Settings → API (the `service_role` / secret key). Without it, "Delete account" answers "not available right now". Set it as a Vercel environment variable (Production, and Preview if you test there); never commit it. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public client API key. The existing variable name is retained; it can hold the project's publishable key or compatible legacy anon key. |
-| `NEXT_PUBLIC_APPLE_SIGNIN_ENABLED` | Optional. Set to `true` once Sign in with Apple is configured in Supabase to enable the button; otherwise it is shown greyed out with "Coming soon". |
+| `NEXT_PUBLIC_SUPPORT_EMAIL` | Optional. The address shown on the Help & safety page and the suspended-account screen. Defaults to `contact@linguamatch.online`; set it only to override. |
 
-`NEXT_PUBLIC_*` values are included in the browser bundle. The app uses public client credentials and authenticated sessions; **a secret/service-role key does not belong here**. Database deployment credentials belong in the separate workflow secret described below.
+`NEXT_PUBLIC_*` values are included in the browser bundle. The app uses public client credentials and authenticated sessions; **a secret/service-role key does not belong in any `NEXT_PUBLIC_*` variable** (the server-only `SUPABASE_SERVICE_ROLE_KEY` above is the one exception, read only on the server). Database deployment credentials belong in the separate workflow secret described below.
+
+Privacy information is public at [`/datenschutz`](https://dating-app-ruddy.vercel.app/datenschutz) (German primary edition) and [`/privacy`](https://dating-app-ruddy.vercel.app/privacy) (English). These routes use static content and bypass session refresh. They remain visibly **DRAFT — pending legal review** and `noindex` until the factual and legal review is complete.
+
+[`src/lib/legal.ts`](src/lib/legal.ts) holds the owner-supplied public name/address/email/phone, unconfirmed conditional fields and the single `LEGAL_DRAFT_MODE` switch. The confirmed email defaults to `contact@linguamatch.online` and the phone to `+491782943998`; all six legal pages share these facts and the clickable `tel:` link. `NEXT_PUBLIC_LEGAL_EMAIL` and `NEXT_PUBLIC_LEGAL_PHONE` override them; `NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL` optionally supplies a separate privacy inbox. `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` (with real newlines), and `NEXT_PUBLIC_LEGAL_DPO` override other public details. Explicitly empty overrides clear a field. `NEXT_PUBLIC_SITE_URL` sets the canonical site origin; rebuild after changing any of these public variables.
+
+The [review notes](docs/compliance/privacy-policy-review.md) trace statements to source files and list unresolved provider/region, retention, cookie and consent questions. Updating the notice does not implement account deletion or data export.
+
+Terms are public at `/nutzungsbedingungen` (German primary edition) and `/terms` (English companion), using the same static legal layout, operator contact details and draft/noindex gate. Both editions share `TERMS_VERSION` in [`terms.config.ts`](src/content/legal/terms.config.ts); displaying a version does not record acceptance. The [terms review notes](docs/compliance/terms-review.md) map community rules to actual report reasons, distinguish implemented controls from pending moderation work, and record current legal sources and outstanding approval items. The owner currently runs the app alone as an unpaid hobby; its legal classification remains subject to review.
+
+The provider notice is public at `/impressum` (German) and `/imprint` (English). The root footer links all six legal pages on public, authentication, onboarding and app screens; Settings also retains its legal card. Missing or unconfirmed imprint fields show **MISSING**, and an incomplete imprint remains `noindex` even if draft mode is switched off. The [imprint review notes](docs/compliance/imprint-review.md) explain every configuration variable and the conditional register, tax-ID, professional and editorial decisions.
+
+**Before a public release**, run `npm run legal:check` with the same exported `NEXT_PUBLIC_LEGAL_*` values used by the production build. This plain Node command fails for missing required facts, unconfirmed applicability or draft mode; it is deliberately outside default CI. It does not automatically load `.env` files. Confirm actual contact-channel availability, complete the review of all three documents, set `NEXT_PUBLIC_LEGAL_DRAFT_MODE=false` only after approval, then check and rebuild. See the review notes for a local `.env` command and the [German marketing checklist](docs/compliance/marketing-germany.md) before implementing #14/#15.
 
 ### 3 · Create the database schema
 
@@ -311,6 +324,9 @@ Routes compose screens; features own their behavior. Most data work is either an
 | `/play/rankings`, `/play/rankings/[userId]` | XP standings and an eligible profile card. |
 | `/profile`, `/profile/edit`, `/profile/settings` | Profile, editing, installation, blocked people, and sign out. |
 | `/licenses` | Learning-content licences and attributions. |
+| `/datenschutz`, `/privacy` | Public privacy notice, German and English. |
+| `/nutzungsbedingungen`, `/terms` | Public terms and community rules, German and English. |
+| `/impressum`, `/imprint` | Public provider identity and contact, German and English. |
 
 </details>
 

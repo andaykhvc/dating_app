@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
 import { siteUrl } from "@/lib/site";
+import { ThemeSync } from "@/features/appearance/ThemeSync";
+import { THEME_COLORS, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { InstallAppProvider } from "@/features/install/InstallAppProvider";
+import { LegalLinks } from "@/components/legal/LegalLinks";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,16 +39,25 @@ export const viewport: Viewport = {
   // opens, which keeps the chat composer and form buttons above it.
   interactiveWidget: "resizes-content",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf7f2" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f0e14" },
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.light },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.dark },
   ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full`}>
+    // data-theme is set by the inline script before paint, so React must keep
+    // the DOM's value rather than the (always absent) server one.
+    <html lang="en" className={`${geistSans.variable} h-full`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col font-sans">
+        <ThemeSync />
         <InstallAppProvider>{children}</InstallAppProvider>
+        <footer className="safe-bottom border-t border-line px-gutter py-4">
+          <LegalLinks />
+        </footer>
       </body>
     </html>
   );
