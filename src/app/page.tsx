@@ -69,7 +69,7 @@ export default function LandingPage() {
 
           <p className="pt-2 text-center text-xs text-faint">
             18+ only. Report and block are always one tap away.{" "}
-            <Link href="/licenses" className="underline hover:text-muted">
+            <Link href="/licenses" className="inline-block min-h-11 py-3 underline hover:text-muted">
               Licenses
             </Link>
           </p>

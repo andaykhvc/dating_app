@@ -81,7 +81,7 @@ export function MessageBubble({
 
           <span
             className={cn(
-              "mt-1 flex items-center justify-end gap-1 text-[0.625rem]",
+              "mt-1 flex items-center justify-end gap-1 text-xs",
               isMine ? "text-brand-ink/65" : "text-faint",
             )}
           >
@@ -137,7 +137,7 @@ export function MessageBubble({
             isMine ? "rounded-tr-md" : "rounded-tl-md",
           )}
         >
-          <p className="text-[0.625rem] font-bold uppercase tracking-[0.12em] text-positive">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-positive">
             Correction
           </p>
           <p className="mt-1 text-[0.9375rem] leading-relaxed text-ink [overflow-wrap:anywhere]">

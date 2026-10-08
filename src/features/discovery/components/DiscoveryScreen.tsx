@@ -242,7 +242,7 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
 
 function Kbd({ children }: { children: React.ReactNode }) {
   return (
-    <kbd className="inline-flex min-w-5 items-center justify-center rounded-md border border-line bg-sunken px-1 font-sans text-[0.6875rem] text-muted">
+    <kbd className="inline-flex min-w-5 items-center justify-center rounded-md border border-line bg-sunken px-1 font-sans text-xs text-muted">
       {children}
     </kbd>
   );

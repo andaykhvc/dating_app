@@ -161,7 +161,7 @@ export function PlayHub({
                     href={`/messages/${mission.match_id}`}
                     className="block rounded-3xl border border-line bg-raised p-4 transition-colors hover:border-accent/40 active:bg-sunken md:p-5"
                   >
-                    <p className="truncate text-[0.625rem] font-bold uppercase tracking-[0.12em] text-accent">
+                    <p className="truncate text-xs font-bold uppercase tracking-[0.12em] text-accent-ink">
                       With {mission.partner_first_name} ·{" "}
                       {mission.steps_completed}/{mission.target_steps}
                     </p>

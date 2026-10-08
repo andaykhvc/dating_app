@@ -260,7 +260,7 @@ export function ChatThread({
           <Link
             href="/messages"
             aria-label="Back to messages"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken lg:hidden"
+            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken lg:hidden"
           >
             <BackIcon className="size-5" />
           </Link>
@@ -274,7 +274,7 @@ export function ChatThread({
             <p className="truncate text-[0.9375rem] font-bold text-ink">
               {match.partner.first_name}
             </p>
-            <p className="truncate text-[0.6875rem] text-faint md:text-xs">
+            <p className="truncate text-xs text-faint md:text-xs">
               {partnerLanguages}
             </p>
           </div>
@@ -336,7 +336,7 @@ export function ChatThread({
                     <LocalTime
                       iso={message.created_at}
                       format="day"
-                      className="py-1 text-center text-[0.6875rem] font-medium text-faint"
+                      className="py-1 text-center text-xs font-medium text-faint"
                     />
                   )}
                   <MessageBubble
