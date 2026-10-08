@@ -3,6 +3,8 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { SideNav } from "@/components/layout/SideNav";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/supabase/queries";
+import { LocaleSync } from "@/features/i18n/LocaleSync";
+import { getLocale } from "@/i18n/server";
 
 /**
  * The onboarding gate lives here rather than in the proxy: this layout already
@@ -14,6 +16,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   if (!user) redirect("/login");
 
   const supabase = await createClient();
+  const locale = await getLocale();
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -27,6 +30,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   // sidebar on wide screens) next to the content column.
   return (
     <div className="flex min-h-dvh">
+      <LocaleSync locale={locale} />
       <SideNav />
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex flex-1 flex-col">{children}</div>

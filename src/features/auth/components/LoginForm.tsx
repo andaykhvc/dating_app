@@ -8,12 +8,10 @@ import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
 import { safeNextPath } from "@/lib/redirect";
-
-const CALLBACK_ERRORS: Record<string, string> = {
-  auth_callback_failed: "That didn't work — please try again.",
-};
+import { useT } from "@/i18n/client";
 
 export function LoginForm() {
+  const t = useT();
   const router = useRouter();
   const searchParams = useSearchParams();
   // "" when absent or not a plain same-site path.
@@ -22,7 +20,11 @@ export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(
-    callbackError ? (CALLBACK_ERRORS[callbackError] ?? "Something went wrong — please try again.") : null,
+    callbackError
+      ? callbackError === "auth_callback_failed"
+        ? t("auth.login.callbackFailed")
+        : t("auth.login.genericError")
+      : null,
   );
   const [loading, setLoading] = useState(false);
 
@@ -51,14 +53,14 @@ export function LoginForm() {
     <form onSubmit={onSubmit} className="space-y-5">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-ink">
-          Welcome back
+          {t("auth.login.title")}
         </h1>
         <p className="mt-2 text-sm text-muted">
-          Your streak is waiting.
+          {t("auth.login.subtitle")}
         </p>
       </div>
 
-      <Field label="Email">
+      <Field label={t("auth.login.email")}>
         <Input
           type="email"
           value={email}
@@ -68,7 +70,7 @@ export function LoginForm() {
         />
       </Field>
 
-      <Field label="Password">
+      <Field label={t("auth.login.password")}>
         <Input
           type="password"
           value={password}
@@ -85,21 +87,21 @@ export function LoginForm() {
       )}
 
       <Button type="submit" size="lg" fullWidth loading={loading}>
-        Sign in
+        {t("auth.login.submit")}
       </Button>
 
       <div className="flex items-center gap-3 py-1">
         <div className="h-px flex-1 bg-line" />
-        <span className="text-xs text-muted">or continue with</span>
+        <span className="text-xs text-muted">{t("auth.orContinueWith")}</span>
         <div className="h-px flex-1 bg-line" />
       </div>
 
       <OAuthButtons next={next || undefined} />
 
       <p className="text-center text-sm text-muted">
-        New here?{" "}
+        {t("auth.login.newHere")}{" "}
         <Link href="/signup" className="font-semibold text-brand">
-          Create an account
+          {t("auth.login.createAccount")}
         </Link>
       </p>
     </form>

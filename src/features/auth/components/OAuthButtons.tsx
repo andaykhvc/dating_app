@@ -5,12 +5,14 @@ import { Button } from "@/components/ui/Button";
 import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/client";
 
 type Provider = "google" | "apple";
 
 type Props = { next?: string; className?: string };
 
 export function OAuthButtons({ next, className }: Props) {
+  const t = useT();
   const [pending, setPending] = useState<Provider | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,7 +46,7 @@ export function OAuthButtons({ next, className }: Props) {
         onClick={() => signInWithProvider("google")}
       >
         <GoogleLogo />
-        Continue with Google
+        {t("auth.google")}
       </Button>
       <Button
         type="button"
@@ -56,7 +58,7 @@ export function OAuthButtons({ next, className }: Props) {
         onClick={() => signInWithProvider("apple")}
       >
         <AppleLogo />
-        Continue with Apple
+        {t("auth.apple")}
       </Button>
 
       {error && (

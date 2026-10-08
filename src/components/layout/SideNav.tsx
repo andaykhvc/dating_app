@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { LogoMark } from "@/components/icons";
 import { TABS, isTabActive } from "@/components/layout/nav";
 import { APP_NAME } from "@/lib/constants";
+import { useT } from "@/i18n/client";
 import { cn } from "@/lib/utils";
 
 /**
@@ -14,10 +15,11 @@ import { cn } from "@/lib/utils";
  */
 export function SideNav() {
   const pathname = usePathname();
+  const t = useT();
 
   return (
     <nav
-      aria-label="Main"
+      aria-label={t("nav.label")}
       className="safe-top safe-bottom scrollbar-none sticky top-0 z-30 hidden h-dvh w-20 shrink-0 flex-col overflow-y-auto border-r border-line bg-raised/60 md:flex xl:w-64"
     >
       <Link
@@ -31,7 +33,7 @@ export function SideNav() {
       </Link>
 
       <ul className="flex flex-1 flex-col gap-1 px-2 xl:px-3 tiny:gap-0.5">
-        {TABS.map(({ href, label, Icon }) => {
+        {TABS.map(({ href, labelKey, Icon }) => {
           const active = isTabActive(pathname, href);
           return (
             <li key={href}>
@@ -49,7 +51,7 @@ export function SideNav() {
                 <Icon className="size-6" filled={active} />
                 {/* A phone on its side has no height for labels under icons. */}
                 <span className={cn("tiny:sr-only", active && "xl:font-semibold")}>
-                  {label}
+                  {t(labelKey)}
                 </span>
               </Link>
             </li>

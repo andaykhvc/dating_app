@@ -1,3 +1,4 @@
+import type { MessageKey } from "@/i18n/messages";
 import {
   DiscoverIcon,
   MatchesIcon,
@@ -7,12 +8,12 @@ import {
 } from "@/components/icons";
 
 export const TABS = [
-  { href: "/discover", label: "Discover", Icon: DiscoverIcon },
-  { href: "/matches", label: "Matches", Icon: MatchesIcon },
-  { href: "/play", label: "Learn", Icon: PlayIcon },
-  { href: "/messages", label: "Messages", Icon: MessagesIcon },
-  { href: "/profile", label: "Profile", Icon: ProfileIcon },
-] as const;
+  { href: "/discover", labelKey: "nav.discover", Icon: DiscoverIcon },
+  { href: "/matches", labelKey: "nav.matches", Icon: MatchesIcon },
+  { href: "/play", labelKey: "nav.learn", Icon: PlayIcon },
+  { href: "/messages", labelKey: "nav.messages", Icon: MessagesIcon },
+  { href: "/profile", labelKey: "nav.profile", Icon: ProfileIcon },
+] as const satisfies readonly { href: string; labelKey: MessageKey; Icon: unknown }[];
 
 export function isTabActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
