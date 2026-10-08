@@ -98,7 +98,13 @@ select pg_temp.make_user('a5000000-0000-0000-0000-000000000001', 'tr', 'de');
 select pg_temp.make_user('a5000000-0000-0000-0000-000000000002', 'de', 'tr');
 select pg_temp.make_user('a5000000-0000-0000-0000-000000000003', 'en', 'de');
 select pg_temp.make_user('a5000000-0000-0000-0000-000000000004', 'tr', 'de');
-select pg_temp.make_user('a5000000-0000-0000-0000-000000000005', 'en', 'fr');
+select pg_temp.make_user('a5000000-0000-0000-0000-000000000005', 'en', 'de');
+-- A learner whose language has no course. New choices like that are refused
+-- (99997_language_support.sql), so this is someone who picked it before the rule.
+alter table user_languages disable trigger user_languages_enforce_learnable;
+update user_languages set language_code = 'fr'
+where user_id = 'a5000000-0000-0000-0000-000000000005' and role = 'learning';
+alter table user_languages enable trigger user_languages_enforce_learnable;
 
 -- ---------------------------------------------------------------------------
 -- Runs start in several directions, with five cards and no answer keys.
