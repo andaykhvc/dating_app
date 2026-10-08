@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
+import { authCallbackUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type Provider = "google" | "apple";
@@ -29,7 +30,7 @@ export function OAuthButtons({ next, className }: Props) {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next ?? "/onboarding/basics")}`,
+        redirectTo: authCallbackUrl(next ?? "/onboarding/basics"),
       },
     });
 

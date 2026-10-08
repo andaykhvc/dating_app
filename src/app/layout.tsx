@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
+import { siteUrl } from "@/lib/site";
 import { ThemeSync } from "@/features/appearance/ThemeSync";
 import { THEME_COLORS, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { InstallAppProvider } from "@/features/install/InstallAppProvider";
@@ -13,6 +14,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: {
     default: `${APP_NAME} — ${APP_TAGLINE}`,
     template: `%s · ${APP_NAME}`,
