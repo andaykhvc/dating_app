@@ -3,6 +3,7 @@ import { PRIVACY_LAST_UPDATED, PRIVACY_SOURCES as sources, PRIVACY_VERSION } fro
 
 /** Companion edition of the German-first Datenschutzerklärung. */
 export const privacyEn: PrivacyPolicy = {
+  kind: "privacy",
   language: "en",
   title: "Privacy Policy",
   description: "How Lingua Match processes personal data — English companion draft awaiting legal review.",

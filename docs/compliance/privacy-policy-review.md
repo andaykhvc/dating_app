@@ -1,6 +1,6 @@
 # Datenschutz: Prüfgrundlage und offene Freigabe
 
-Stand: 8. Oktober 2026 · Version `2026-10-08-draft.2` · Issue #39, Teil von #17.
+Stand: 8. Oktober 2026 · Version `2026-10-08-draft.3` · Issue #39, ergänzt in #41; Teil von #17.
 
 Die deutsche Fassung ist primär verfasst, die englische Ausgabe erläutert denselben Stand. Beide sind **Entwürfe zur menschlichen/rechtlichen Prüfung**. Diese Umsetzung stellt keine rechtliche Freigabe und keine Fertigstellung der übrigen Compliance-Issues dar.
 
@@ -8,7 +8,9 @@ Die deutsche Fassung ist primär verfasst, die englische Ausgabe erläutert dens
 
 `docs/compliance/data-inventory.md` aus #37 liegt auf dem geprüften Basisstand `eac3ea5` noch nicht vor. Nach der ausdrücklichen Prioritätsanweisung des Betreibers in #39 wurde daher direkt aus Code und Migrationen gearbeitet. Die folgende Zuordnung ist die begrenzte Prüfgrundlage dieses Textes; sie ersetzt nicht das umfassende Verarbeitungsverzeichnis aus #37. Nach dessen Fertigstellung sind Abweichungen mit beiden Sprachfassungen abzugleichen.
 
-Die gemeinsame Betreiberkonfiguration aus #41 liegt noch nicht vor. Deshalb wird `src/lib/legal.ts` hier eingeführt; #41 soll sie weiterverwenden. Vom Betreiber am 8. Oktober bestätigt: **Anday Sahin Kahveci, Wundtstr. 5, 01217 Dresden, Deutschland**. Die ebenfalls bestätigte allgemeine Kontakt- und Datenschutzadresse lautet **contact@linguamatch.online**. Keine Telefonnummer, Gesellschaftsform, Register-/USt-ID oder DPO-Angabe wurde erfunden. Datenschutzanträge können per E-Mail oder an die Postanschrift gerichtet werden.
+`src/lib/legal.ts` wurde für #39 eingeführt und wird in #41 für alle drei Rechtsdokumente erweitert. Vom Betreiber am 8. Oktober bestätigt: **Anday Sahin Kahveci, Wundtstr. 5, 01217 Dresden, Deutschland; contact@linguamatch.online; +491782943998**. Die in #41 ausdrücklich zur Veröffentlichung freigegebene Telefonnummer erscheint auch in beiden Datenschutzfassungen mit `tel:`-Link; deshalb wird die gemeinsame Datenschutzversion auf `draft.3` erhöht. Gesellschafts-, Register-/Steuer-ID- oder DPO-Angaben werden nicht erfunden. Datenschutzanträge können per E-Mail oder an die Postanschrift gerichtet werden.
+
+Die nachfolgenden ursprünglichen Prüfbefunde dokumentieren #39. #41 ergänzt den globalen Footer und sechs exakte öffentliche Legal-Pfade; aktuelle Verifikation und Freigabekonfiguration stehen in den [Impressum-Prüfnotizen](imprint-review.md). Der gemeinsame Entwurfsmodus darf erst nach Prüfung aller drei Dokumente abgeschaltet werden.
 
 ## Abgleich mit dem geprüften Code
 
@@ -44,15 +46,17 @@ Vor dem Entfernen der Entwurfskennzeichnung:
 - **Vercels veröffentlichtes DPA, Schedule 1 Abschnitt 6, untersagt sensible Customer Data.** Den tatsächlichen Datenfluss, den geltenden Vertragsstand und die Vereinbarkeit prüfen; keine DSGVO-Zulässigkeit aus der Hosting-Wahl ableiten.
 - Löschkonzept je Kategorie, Backups und Bilddateien festlegen. Konto-Löschung #38 und Export #43 implementieren; den Text dann anpassen.
 - Cookie-/Provider-Audit in Produktion durchführen, notwendige Zwecke und Laufzeiten dokumentieren, zusätzliche Integrationen berücksichtigen.
-- Beide Sprachfassungen fachlich prüfen, Angaben aktualisieren und gemeinsame Version/Datum erhöhen; erst dann `LEGAL_DRAFT_MODE` umstellen.
+- Beide Sprachfassungen fachlich prüfen, Angaben aktualisieren und gemeinsame Version/Datum erhöhen; vor Umstellung des gemeinsamen `LEGAL_DRAFT_MODE` auch Nutzungsbedingungen und Impressum freigeben.
 
 ## Konfiguration, Metadaten und Zugang
 
-`LEGAL_ENTITY` enthält die vom Betreiber bestätigten Name-/Adress-/E-Mail-Werte als Vorgabe. Öffentlich verwendete Overrides: `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` (echte Zeilenumbrüche), `NEXT_PUBLIC_LEGAL_EMAIL`, `NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL`, `NEXT_PUBLIC_LEGAL_DPO`. Für #41 sind zusätzlich `NEXT_PUBLIC_LEGAL_PHONE`, `NEXT_PUBLIC_LEGAL_FORM`, `NEXT_PUBLIC_LEGAL_REPRESENTATIVE`, `NEXT_PUBLIC_LEGAL_REGISTER`, `NEXT_PUBLIC_LEGAL_VAT_ID` vorgesehen; sie sind aktuell leer und werden nicht als Pflichtangaben für jeden Betreiber ausgegeben. Alle Werte sind öffentliche Kontaktdaten, keine Secrets. Die Datenschutzadresse fällt auf die allgemeine E-Mail zurück.
+`LEGAL_ENTITY` enthält bestätigte Name-/Adress-/E-Mail-/Telefon-Werte als Vorgabe. Öffentlich verwendete Overrides: `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` (echte Zeilenumbrüche), `NEXT_PUBLIC_LEGAL_EMAIL`, `NEXT_PUBLIC_LEGAL_PRIVACY_EMAIL`, `NEXT_PUBLIC_LEGAL_PHONE`, `NEXT_PUBLIC_LEGAL_DPO`. #41 ergänzt bedingte Unternehmens-, Register-, Identifikations- und Inhaltsverantwortlichenfelder sowie bestätigungsbedürftige Anwendbarkeitsflags; die vollständige Konfiguration steht in [imprint-review.md](imprint-review.md). Unbestätigte zusätzliche Angaben sind `null` und werden nicht als Pflichtangaben für jeden Betreiber behauptet. Alle Werte sind öffentliche Kontaktdaten, keine Secrets. Die Datenschutzadresse fällt auf die allgemeine E-Mail zurück.
 
-Die Seiten sind statisch, verwenden keine Kontoabfragen und umgehen nur für die **exakten** Pfade `/datenschutz` und `/privacy` den Auth-Refresh. App-Pfade bleiben geschützt. Landeseite, gemeinsames Auth-Layout und Einstellungen verlinken beide Fassungen. Es gibt auf diesem Basisstand keine Sitemap-/Robots-Datei zur Erweiterung. Jede Seite hat ihren eigenen Canonical, gegenseitige Sprachalternativen und `x-default` zur deutschen Fassung. `NEXT_PUBLIC_SITE_URL` legt den Ursprung fest; Vorgabe ist die bestehende App-Domain. Im Entwurfsmodus und bei fehlenden notwendigen Betreiberangaben gilt `noindex, follow`. Öffentliche Konfiguration wird beim Build übernommen; Änderungen erfordern einen neuen Build. Änderungen der Betreiberanschrift verlangen zusätzlich einen erneuten Abgleich der im Text genannten Aufsichtsbehörde.
+Die Seiten sind statisch und verwenden keine Kontoabfragen. Der Auth-Bypass betrifft in #41 nur die **sechs exakten Legal-Pfade** aus `LEGAL_DOCUMENT_PATHS`, einschließlich `/datenschutz` und `/privacy`; App-Pfade bleiben geschützt. Ein globaler Root-Footer und die zusätzliche Settings-Karte verlinken die Fassungen. Es gibt auf diesem Basisstand keine Sitemap-/Robots-Datei zur Erweiterung. Jede Seite hat ihren eigenen Canonical, gegenseitige Sprachalternativen und `x-default` zur deutschen Fassung. `NEXT_PUBLIC_SITE_URL` legt den Ursprung fest; Vorgabe ist die bestehende App-Domain. Im Entwurfsmodus und bei fehlenden notwendigen Betreiberangaben gilt `noindex, follow`. Öffentliche Konfiguration wird beim Build übernommen; Änderungen erfordern einen neuen Build. Änderungen der Betreiberanschrift verlangen zusätzlich einen erneuten Abgleich der im Text genannten Aufsichtsbehörde.
 
 Die Beschwerdeseite nennt aufgrund der bestätigten Dresden-Adresse die **Sächsische Datenschutz- und Transparenzbeauftragte**. Rechte auf Beschwerden bei anderen zuständigen Behörden werden nicht eingeschränkt.
+
+Erweiterung durch #40: Das gemeinsame Layout und die Metadaten unterscheiden jetzt Datenschutz und Nutzungsbedingungen. Der exakte Auth-Bypass umfasst zusätzlich `/nutzungsbedingungen` und `/terms`; `LegalLinks` ersetzt die bisherige reine Datenschutznavigation. Die nachfolgende Verifikation dokumentiert den ursprünglichen #39-Stand; Regressionsergebnisse der Erweiterung stehen in [terms-review.md](terms-review.md).
 
 ## Quellen für die rechtliche Prüfung
 
@@ -68,7 +72,7 @@ Geprüft am 8. Oktober 2026. Die gesetzlichen Verweise sind für die fachliche P
 - [Vercel DPA](https://vercel.com/legal/dpa), insbesondere Schedule 1 Abschnitt 6 und internationale Übermittlungen
 - [MDN: SpeechSynthesisVoice.localService](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice/localService)
 
-## Technische Verifikation
+## Ursprüngliche technische Verifikation von #39
 
 Der geprüfte Ablauf ist: öffentliche Navigation → exakter Legal-Pfad im Proxy → typisierte, statische Inhalte → verständliche Seite mit Sprachwechsel. Es gibt dafür keinen API-/Datenbankaufruf.
 
