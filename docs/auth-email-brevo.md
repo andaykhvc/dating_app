@@ -7,18 +7,19 @@ project**, which is nothing on launch night.
 
 You do four things in dashboards; the code is already in the app.
 
-## 1. A domain you own (do this first)
+## 1. The domain: linguamatch.online
 
-Emails must come from an address on a domain you control, e.g.
-`no-reply@yourdomain.com`. Do **not** send from a `gmail.com` or `outlook.com`
-address: Gmail and others reject or spam-folder it. The domain does not have to
-be the website's address. If you have no domain yet, buy one (about €10/year);
-you will need access to its DNS settings.
+You own `linguamatch.online`, so emails will come from an address on it:
+**`no-reply@linguamatch.online`** (or `contact@linguamatch.online`, which is also
+the public support address; replies then reach you). Do **not** send from a
+`gmail.com` or `outlook.com` address: Gmail and others reject or spam-folder it.
+You need access to the DNS settings of `linguamatch.online` at wherever you
+bought it (the "registrar"); step 2 adds three records there.
 
 ## 2. Brevo
 
 1. Create an account at brevo.com.
-2. **Senders, domains** → add your domain → Brevo shows DNS records to add at your
+2. **Senders, domains** → add `linguamatch.online` → Brevo shows DNS records to add at your
    domain registrar: **SPF** (a TXT record), **DKIM** (a TXT record) and it asks
    for a **DMARC** record (TXT `_dmarc`, e.g. `v=DMARC1; p=none; rua=mailto:you@yourdomain.com`).
    Add them, then press *Authenticate*. It can take from minutes to a few hours.
@@ -39,7 +40,7 @@ and limits). People who hit the limit see no email and cannot get in.
 1. **Authentication → Emails → SMTP settings** (the exact menu names change; look
    for "SMTP"): turn on **custom SMTP** and enter the values from Brevo:
    host, port (usually 587), username, password (the SMTP key), and the sender
-   name ("Lingua Match") and sender address (`no-reply@yourdomain.com`).
+   name ("Lingua Match") and sender address (`no-reply@linguamatch.online`).
 2. **Authentication → Rate Limits**: raise **emails sent per hour** above what you
    expect (custom SMTP starts at a low number). For 300 sign-ups in an hour set it
    to at least 400, since resends count too.
