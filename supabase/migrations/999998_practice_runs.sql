@@ -505,6 +505,8 @@ grant execute on function public.answer_practice_card(uuid, int, jsonb) to authe
 grant execute on function public.finish_practice_run(uuid) to authenticated;
 
 -- get_play_overview: daily_challenge and practice come from the practice-run engine.
+-- It also keeps the effective streak from 999990_streak_timezone.sql (this
+-- migration runs after it and replaces the function, so it must include it).
 create or replace function public.get_play_overview()
 returns jsonb
 language plpgsql
@@ -533,7 +535,7 @@ begin
     'total_xp', total_xp,
     'level', level,
     'league', league,
-    'current_streak_days', current_streak_days,
+    'current_streak_days', public.effective_streak_days(v_uid),
     'longest_streak_days', longest_streak_days,
     'last_activity_date', last_activity_date,
     'xp_into_level', total_xp % 100,
