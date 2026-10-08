@@ -92,7 +92,7 @@ export function PlayHub({
             <XPBar progress={progress} />
             {progress.current_streak_days === 0 && (
               <p className="mt-3 text-xs text-muted">
-                Earn any XP today to start a streak.
+                Practise any lesson today to start a streak.
               </p>
             )}
           </section>
