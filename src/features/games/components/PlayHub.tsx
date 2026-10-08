@@ -10,10 +10,9 @@ import {
 } from "@/features/progress/components/ProgressBadges";
 import { SectionLabel } from "@/components/layout/Page";
 import { startGameSession } from "@/features/games/api";
-import { CourseCard, Syllabus } from "@/features/learn/components/CourseOverview";
+import { CourseCard, SyllabusAccordion } from "@/features/learn/components/CourseOverview";
 import type { LearnOverview } from "@/features/learn/types";
 import type { UserProgress } from "@/types/domain";
-import { LeaderboardLink } from "@/features/progress/components/LeaderboardLink";
 
 type PracticeTemplate = {
   game_template_id: number;
@@ -81,24 +80,26 @@ export function PlayHub({
     <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-gutter py-5 md:gap-6 md:py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-8">
       <div className="space-y-4 md:space-y-6 lg:sticky lg:top-24">
         {progress && (
-          <section className="rounded-3xl border border-line bg-raised p-5 md:p-6">
-            <div className="mb-4 flex flex-wrap items-center gap-2">
+          <section className="rounded-3xl border border-line bg-raised px-5 py-4">
+            <div className="mb-3 flex items-center gap-2">
               <LeagueTag league={progress.league} />
               <StreakFlame days={progress.current_streak_days} />
-              <span className="ml-auto text-xs text-faint">
-                {progress.total_xp} XP total
-              </span>
+              <Link
+                href="/play/rankings"
+                className="ml-auto text-xs font-semibold text-brand hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              >
+                🏆 Rankings
+              </Link>
             </div>
             <XPBar progress={progress} />
             {progress.current_streak_days === 0 && (
-              <p className="mt-3 text-xs text-muted">
+              <p className="mt-2 text-xs text-muted">
                 Earn any XP today to start a streak.
               </p>
             )}
           </section>
         )}
 
-        <LeaderboardLink />
         <CourseCard overview={learn} />
 
         {daily && (
@@ -132,13 +133,6 @@ export function PlayHub({
       </div>
 
       <div className="space-y-4 md:space-y-6">
-        {learn.units && learn.units.length > 0 && (
-          <section>
-            <SectionLabel>Your course</SectionLabel>
-            <Syllabus overview={learn} />
-          </section>
-        )}
-
         <section>
           <SectionLabel>Missions with your matches</SectionLabel>
           {missions.length === 0 ? (
@@ -221,6 +215,8 @@ export function PlayHub({
             </ul>
           )}
         </section>
+
+        <SyllabusAccordion overview={learn} />
 
         {error && (
           <p role="alert" className="text-center text-xs text-negative">
