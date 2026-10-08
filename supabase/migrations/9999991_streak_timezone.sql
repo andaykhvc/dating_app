@@ -1,4 +1,4 @@
--- 99997_streak_timezone.sql
+-- 9999991_streak_timezone.sql
 -- Streak fixes (issue #26).
 --
 -- Root causes:
