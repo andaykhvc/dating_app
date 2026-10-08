@@ -174,11 +174,14 @@ html {
   text-size-adjust: 100%;
 }
 
-/* One visible keyboard focus ring for every control; components can still
-   override it (the where() keeps this at zero specificity). */
-:where(a, button, summary, [role="button"], [role="switch"], input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
+/* One visible keyboard focus ring for every control. It lives in the base
+   layer so a component's own focus style (a utility) can replace it — an
+   unlayered rule would beat every utility regardless of specificity. */
+@layer base {
+  :where(a, button, summary, [role="button"], [role="switch"], input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
 }
 
 body {
@@ -200,12 +203,6 @@ summary,
   touch-action: manipulation;
 }
 
-a:focus-visible,
-summary:focus-visible,
-[role="button"]:focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
-}
 
 @utility px-gutter {
   padding-inline: var(--gutter);

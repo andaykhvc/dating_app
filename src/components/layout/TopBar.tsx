@@ -79,26 +79,22 @@ export function TopBar({
             PAGE_WIDTH[width],
           )}
         >
+          {large && (
+            // iOS centres the compact title on the bar itself, whatever sits
+            // either side of it; the side insets keep it clear of buttons.
+            <p
+              aria-hidden
+              className={cn(
+                "pointer-events-none absolute inset-x-20 inset-y-0 flex items-center justify-center text-[1.0625rem] font-semibold tracking-[-0.015em] text-ink transition-[opacity,translate] duration-300 ease-ios",
+                collapsed ? "opacity-100" : "translate-y-1 opacity-0",
+              )}
+            >
+              <span className="truncate">{title}</span>
+            </p>
+          )}
           {leading}
-          <div
-            className={cn(
-              "min-w-0 flex-1",
-              // iOS centres the compact title between a back button and actions.
-              Boolean(leading) && large && "text-center",
-              Boolean(leading) && large && action == null && "pr-11",
-            )}
-          >
-            {large ? (
-              <p
-                aria-hidden
-                className={cn(
-                  "truncate text-[1.0625rem] font-semibold tracking-[-0.015em] text-ink transition-[opacity,transform] duration-300 ease-ios",
-                  collapsed ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
-                )}
-              >
-                {title}
-              </p>
-            ) : (
+          <div className="min-w-0 flex-1">
+            {large ? null : (
               <>
                 <h1 className="truncate text-[1.375rem] font-bold leading-tight tracking-[-0.022em] text-ink md:text-2xl">
                   {title}

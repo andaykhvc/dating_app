@@ -13,7 +13,7 @@ const CONTROL =
   "w-full rounded-[0.875rem] border border-transparent bg-fill px-4 py-3 text-base text-ink " +
   "placeholder:text-faint outline-none transition-[background-color,box-shadow,border-color] duration-200 ease-ios " +
   "hover:bg-fill-strong focus:border-brand/50 focus:bg-raised focus:shadow-[0_0_0_4px_color-mix(in_oklab,var(--brand)_18%,transparent)] " +
-  "aria-[invalid=true]:border-negative/60";
+  "focus-visible:outline-none aria-[invalid=true]:border-negative/60";
 
 export function Field({
   label,

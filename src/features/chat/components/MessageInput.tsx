@@ -127,7 +127,7 @@ export function MessageInput({
           enterKeyHint="send"
           aria-label="Message"
           placeholder={disabled ? "This conversation has ended" : "Write something…"}
-          className="min-h-11 flex-1 resize-none rounded-[1.375rem] border border-transparent bg-fill px-4 py-2.5 text-base leading-snug text-ink outline-none transition-[background-color,border-color] duration-200 ease-ios placeholder:text-faint focus:border-separator focus:bg-raised disabled:opacity-60"
+          className="min-h-11 flex-1 resize-none rounded-[1.375rem] border border-transparent bg-fill px-4 py-2.5 text-base leading-snug text-ink outline-none transition-[background-color,border-color,box-shadow] duration-200 ease-ios placeholder:text-faint focus:border-brand/40 focus:bg-raised focus:shadow-[0_0_0_3px_color-mix(in_oklab,var(--brand)_14%,transparent)] focus-visible:outline-none disabled:opacity-60"
         />
         <button
           type="button"
