@@ -9,7 +9,7 @@ export default async function PreferencesPage() {
   const { data: profile } = await supabase
     .from("profiles")
     .select(
-      "intentions, preferred_age_min, preferred_age_max, preferred_countries, hide_dating_profiles",
+      "intentions, dating_consent_at, preferred_age_min, preferred_age_max, preferred_countries, hide_dating_profiles",
     )
     .eq("id", user!.id)
     .single();
@@ -17,6 +17,7 @@ export default async function PreferencesPage() {
   return (
     <PreferencesStep
       initialIntentions={(profile?.intentions ?? []) as Intention[]}
+      initialDatingConsent={Boolean(profile?.dating_consent_at)}
       initialAgeMin={profile?.preferred_age_min ?? 18}
       initialAgeMax={profile?.preferred_age_max ?? 45}
       initialCountries={profile?.preferred_countries ?? []}

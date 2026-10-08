@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
+import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/legal";
+import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
 
 export function SignupForm() {
@@ -15,7 +17,7 @@ export function SignupForm() {
   const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmed18, setConfirmed18] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,8 +37,8 @@ export function SignupForm() {
       setError("Use at least 8 characters for your password.");
       return;
     }
-    if (!confirmed18) {
-      setError("Please confirm you are 18 or older.");
+    if (!agreed) {
+      setError("Please confirm you are 18 or older and agree to the Terms and Privacy Policy.");
       return;
     }
 
@@ -49,7 +51,13 @@ export function SignupForm() {
       email,
       password,
       options: {
-        data: { first_name: firstName.trim(), is_18_plus_confirmed: true },
+        data: {
+          first_name: firstName.trim(),
+          is_18_plus_confirmed: true,
+          // Copied into the profile by the handle_new_user trigger.
+          terms_version: TERMS_VERSION,
+          privacy_version: PRIVACY_VERSION,
+        },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
@@ -133,12 +141,13 @@ export function SignupForm() {
       <label className="flex items-start gap-3 rounded-2xl bg-sunken p-4">
         <input
           type="checkbox"
-          checked={confirmed18}
-          onChange={(e) => setConfirmed18(e.target.checked)}
-          className="mt-0.5 size-4 accent-[var(--brand)]"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+          className="mt-0.5 size-4 shrink-0 accent-[var(--brand)]"
         />
         <span className="text-sm text-muted">
-          I confirm I am 18 years or older.
+          I am 18 or older and I agree to the <TermsLink /> and have read the{" "}
+          <PrivacyLink />.
         </span>
       </label>
 
@@ -148,7 +157,7 @@ export function SignupForm() {
         </p>
       )}
 
-      <Button type="submit" size="lg" fullWidth loading={loading}>
+      <Button type="submit" size="lg" fullWidth loading={loading} disabled={!agreed || loading}>
         Create account
       </Button>
 

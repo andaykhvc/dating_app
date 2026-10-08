@@ -1,7 +1,20 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
-const PUBLIC_PATHS = ["/", "/login", "/signup", "/verify-email", "/auth", "/licenses"];
+// The legal pages must be readable before signing in: the signup form links to them.
+const PUBLIC_PATHS = [
+  "/",
+  "/login",
+  "/signup",
+  "/verify-email",
+  "/auth",
+  "/licenses",
+  "/terms",
+  "/privacy",
+  "/nutzungsbedingungen",
+  "/datenschutz",
+  "/impressum",
+];
 
 function isPublic(pathname: string) {
   return PUBLIC_PATHS.some(

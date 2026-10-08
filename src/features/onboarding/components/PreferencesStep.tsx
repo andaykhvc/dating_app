@@ -11,12 +11,14 @@ import type { Intention } from "@/types/domain";
 
 export function PreferencesStep({
   initialIntentions,
+  initialDatingConsent,
   initialAgeMin,
   initialAgeMax,
   initialCountries,
   initialHideDating,
 }: {
   initialIntentions: Intention[];
+  initialDatingConsent: boolean;
   initialAgeMin: number;
   initialAgeMax: number;
   initialCountries: string[];
@@ -26,6 +28,7 @@ export function PreferencesStep({
   const [intentions, setIntentions] = useState<Intention[]>(
     initialIntentions.length ? initialIntentions : ["language_buddy"],
   );
+  const [datingConsent, setDatingConsent] = useState(initialDatingConsent);
   const [ageMin, setAgeMin] = useState(initialAgeMin);
   const [ageMax, setAgeMax] = useState(initialAgeMax);
   const [countries, setCountries] = useState<string[]>(initialCountries);
@@ -41,6 +44,8 @@ export function PreferencesStep({
       .from("profiles")
       .update({
         intentions,
+        // Any value means "consented"; the database stamps the real time.
+        dating_consent_at: datingConsent ? new Date().toISOString() : null,
         preferred_age_min: ageMin,
         preferred_age_max: ageMax,
         preferred_countries: countries,
@@ -61,12 +66,19 @@ export function PreferencesStep({
       title="Why you are here"
       subtitle="Pick everything that fits. Dating is entirely optional, and others can filter it out."
       onContinue={save}
-      canContinue={intentions.length > 0}
+      canContinue={
+        intentions.length > 0 && (!intentions.includes("open_to_dating") || datingConsent)
+      }
       loading={saving}
       error={error}
     >
       <div className="space-y-8">
-        <IntentionPicker value={intentions} onChange={setIntentions} />
+        <IntentionPicker
+          value={intentions}
+          onChange={setIntentions}
+          datingConsent={datingConsent}
+          onDatingConsentChange={setDatingConsent}
+        />
 
         <div>
           <span className="mb-3 block text-sm font-semibold text-ink">
