@@ -39,6 +39,7 @@ export default async function ProfilePage() {
   const [
     { data: profile },
     { data: progress },
+    { data: streak },
     { data: languages },
     { data: interests },
     { data: photos },
@@ -57,6 +58,8 @@ export default async function ProfilePage() {
       )
       .eq("user_id", user!.id)
       .single(),
+    // The streak as of today in the user's timezone: 0 once a day was missed.
+    supabase.rpc("get_my_streak"),
     supabase
       .from("user_languages")
       .select("role, cefr_level, languages(code, name, flag_emoji)")
@@ -86,6 +89,8 @@ export default async function ProfilePage() {
   const xp: UserProgress | null = progress
     ? {
         ...progress,
+        current_streak_days:
+          streak?.current_streak_days ?? progress.current_streak_days,
         xp_into_level: progress.total_xp % 100,
         xp_for_next_level: 100,
       }
@@ -160,7 +165,7 @@ export default async function ProfilePage() {
                   ["Best", `${xp.longest_streak_days}d`],
                 ].map(([label, value]) => (
                   <div key={label as string} className="rounded-2xl bg-sunken px-1 py-3">
-                    <dt className="truncate text-[0.6875rem] uppercase tracking-wide text-faint">
+                    <dt className="truncate text-xs uppercase tracking-wide text-faint">
                       {label}
                     </dt>
                     <dd className="mt-0.5 text-lg font-bold text-ink">{value}</dd>

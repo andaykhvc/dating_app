@@ -13,7 +13,7 @@ export function Chip({
   const tones = {
     neutral: "bg-sunken text-muted",
     brand: "bg-brand-soft text-brand",
-    accent: "bg-accent-soft text-accent",
+    accent: "bg-accent-soft text-accent-ink",
     positive: "bg-positive-soft text-positive",
   };
 
@@ -48,7 +48,7 @@ export function SelectableChip({
       disabled={disabled}
       aria-pressed={selected}
       className={cn(
-        "min-h-10 rounded-full border px-4 py-2 text-sm font-medium transition-all",
+        "min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition-all",
         "active:scale-[0.97] disabled:opacity-40",
         selected
           ? "border-brand bg-brand text-brand-ink"

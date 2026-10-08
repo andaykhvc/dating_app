@@ -13,7 +13,12 @@ import { IntentionPicker } from "@/features/profile/IntentionPicker";
 import { AgeRangeSlider } from "@/features/profile/AgeRangeSlider";
 import { CountryPicker } from "@/features/profile/CountryPicker";
 import { createClient } from "@/lib/supabase/client";
+import { profileErrorMessage } from "@/lib/profile-errors";
 import { saveInterests, saveLanguages } from "@/features/profile/saveLists";
+import {
+  LanguageOptions,
+  unsupportedLearningMessage,
+} from "@/features/profile/LanguageOptions";
 import { CEFR_DESCRIPTIONS, COUNTRIES } from "@/lib/constants";
 import {
   CEFR_LEVELS,
@@ -90,6 +95,12 @@ export function EditProfileForm({
       return;
     }
 
+    const unsupported = unsupportedLearningMessage(languages, form.learning);
+    if (unsupported) {
+      setError(unsupported);
+      return;
+    }
+
     setSaving(true);
     const supabase = createClient();
 
@@ -109,7 +120,7 @@ export function EditProfileForm({
       .eq("id", userId);
 
     if (profileError) {
-      setError(profileError.message);
+      setError(profileErrorMessage(profileError.message));
       setSaving(false);
       return;
     }
@@ -131,29 +142,6 @@ export function EditProfileForm({
     router.refresh();
   }
 
-  const languageOptions = (
-    <>
-      <optgroup label="Available now">
-        {languages
-          .filter((l) => l.is_launch_language)
-          .map((l) => (
-            <option key={l.code} value={l.code}>
-              {l.flag_emoji} {l.name}
-            </option>
-          ))}
-      </optgroup>
-      <optgroup label="More languages">
-        {languages
-          .filter((l) => !l.is_launch_language)
-          .map((l) => (
-            <option key={l.code} value={l.code}>
-              {l.flag_emoji} {l.name}
-            </option>
-          ))}
-      </optgroup>
-    </>
-  );
-
   return (
     <>
       {/* Save sits in the header as well as at the end, so a long form never
@@ -165,13 +153,13 @@ export function EditProfileForm({
           <Link
             href="/profile"
             aria-label="Back to profile"
-            className="-ml-2 flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+            className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
           >
             <BackIcon className="size-5" />
           </Link>
         }
         action={
-          <Button onClick={save} loading={saving} className="h-10 px-4">
+          <Button onClick={save} loading={saving} className="h-11 px-4">
             Save
           </Button>
         }
@@ -233,7 +221,7 @@ export function EditProfileForm({
                   onChange={(e) => set("native", e.target.value)}
                 >
                   <option value="">Select a language</option>
-                  {languageOptions}
+                  <LanguageOptions languages={languages} forLearning={false} />
                 </Select>
               </Field>
               <Field label="I want to learn">
@@ -242,7 +230,7 @@ export function EditProfileForm({
                   onChange={(e) => set("learning", e.target.value)}
                 >
                   <option value="">Select a language</option>
-                  {languageOptions}
+                  <LanguageOptions languages={languages} forLearning />
                 </Select>
               </Field>
               <div>

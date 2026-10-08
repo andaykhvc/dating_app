@@ -96,7 +96,7 @@ export function MatchCelebration({
         </div>
 
         <div className="mt-8 rounded-3xl border border-line bg-raised p-5 text-left short:mt-5">
-          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-accent">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent-ink">
             Today&apos;s mission
           </p>
           {mission ? (
@@ -107,7 +107,7 @@ export function MatchCelebration({
               <p className="mt-1.5 text-sm leading-relaxed text-muted">
                 {mission.description}
               </p>
-              <p className="mt-3 text-sm font-semibold text-accent">
+              <p className="mt-3 text-sm font-semibold text-accent-ink">
                 +{mission.xp_reward_per_step} XP each
               </p>
             </>

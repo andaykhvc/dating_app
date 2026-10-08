@@ -4,11 +4,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
+import { authCallbackUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type Provider = "google" | "apple";
 
 type Props = { next?: string; className?: string };
+
+/**
+ * Sign in with Apple needs an Apple Developer account and the Apple provider
+ * configured in Supabase. Until then the button is shown but cannot be used.
+ * Set NEXT_PUBLIC_APPLE_SIGNIN_ENABLED=true (and rebuild) to switch it on.
+ */
+const APPLE_ENABLED = process.env.NEXT_PUBLIC_APPLE_SIGNIN_ENABLED === "true";
 
 export function OAuthButtons({ next, className }: Props) {
   const [pending, setPending] = useState<Provider | null>(null);
@@ -22,7 +30,7 @@ export function OAuthButtons({ next, className }: Props) {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next ?? "/onboarding/basics")}`,
+        redirectTo: authCallbackUrl(next ?? "/onboarding/basics"),
       },
     });
 
@@ -52,11 +60,17 @@ export function OAuthButtons({ next, className }: Props) {
         size="lg"
         fullWidth
         loading={pending === "apple"}
-        disabled={pending !== null}
+        disabled={!APPLE_ENABLED || pending !== null}
         onClick={() => signInWithProvider("apple")}
+        className={cn(!APPLE_ENABLED && "opacity-50 hover:border-line")}
       >
         <AppleLogo />
         Continue with Apple
+        {!APPLE_ENABLED && (
+          <span className="rounded-full bg-sunken px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-muted">
+            <span className="sr-only">(</span>Coming soon<span className="sr-only">)</span>
+          </span>
+        )}
       </Button>
 
       {error && (

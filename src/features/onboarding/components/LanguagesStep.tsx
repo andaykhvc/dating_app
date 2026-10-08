@@ -7,6 +7,10 @@ import { SelectableChip } from "@/components/ui/Chip";
 import { StepShell } from "@/features/onboarding/components/StepShell";
 import { createClient } from "@/lib/supabase/client";
 import { saveLanguages } from "@/features/profile/saveLists";
+import {
+  LanguageOptions,
+  unsupportedLearningMessage,
+} from "@/features/profile/LanguageOptions";
 import { CEFR_DESCRIPTIONS } from "@/lib/constants";
 import { CEFR_LEVELS, type CefrLevel, type Language } from "@/types/domain";
 
@@ -28,13 +32,16 @@ export function LanguagesStep({
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const launch = languages.filter((l) => l.is_launch_language);
-  const others = languages.filter((l) => !l.is_launch_language);
-
   async function save() {
     setError(null);
     if (native === learning) {
       setError("Pick a different language to learn than the one you speak.");
+      return;
+    }
+
+    const unsupported = unsupportedLearningMessage(languages, learning);
+    if (unsupported) {
+      setError(unsupported);
       return;
     }
 
@@ -54,29 +61,6 @@ export function LanguagesStep({
     router.push("/onboarding/photos");
   }
 
-  function renderOptions() {
-    return (
-      <>
-        <optgroup label="Available now">
-          {launch.map((l) => (
-            <option key={l.code} value={l.code}>
-              {l.flag_emoji} {l.name}
-            </option>
-          ))}
-        </optgroup>
-        {others.length > 0 && (
-          <optgroup label="More languages">
-            {others.map((l) => (
-              <option key={l.code} value={l.code}>
-                {l.flag_emoji} {l.name}
-              </option>
-            ))}
-          </optgroup>
-        )}
-      </>
-    );
-  }
-
   return (
     <StepShell
       title="What are you swapping?"
@@ -91,7 +75,7 @@ export function LanguagesStep({
           <Field label="I speak natively">
             <Select value={native} onChange={(e) => setNative(e.target.value)}>
               <option value="">Select a language</option>
-              {renderOptions()}
+              <LanguageOptions languages={languages} forLearning={false} />
             </Select>
           </Field>
 
@@ -101,7 +85,7 @@ export function LanguagesStep({
           >
             <Select value={learning} onChange={(e) => setLearning(e.target.value)}>
               <option value="">Select a language</option>
-              {renderOptions()}
+              <LanguageOptions languages={languages} forLearning />
             </Select>
           </Field>
         </div>

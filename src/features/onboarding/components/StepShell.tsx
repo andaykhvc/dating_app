@@ -90,13 +90,13 @@ export function StepShell({
 
       <div className="flex flex-1 flex-col lg:rounded-[var(--radius-card)] lg:border lg:border-line lg:bg-raised lg:p-10 lg:shadow-[0_18px_50px_-30px_rgba(0,0,0,0.25)] xl:p-12">
         <div className="sticky top-0 z-10 -mx-gutter bg-surface/90 px-gutter pb-3 pt-safe-3 backdrop-blur-lg lg:hidden">
-          <div className="flex min-h-10 items-center gap-2">
+          <div className="flex min-h-11 items-center gap-2">
             {index > 0 && (
               <button
                 type="button"
                 onClick={() => router.back()}
                 aria-label="Go back"
-                className="-ml-2 flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+                className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
               >
                 <BackIcon className="size-5" />
               </button>

@@ -245,6 +245,13 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
+# Sign-up confirmation: a six-digit code (German first, English underneath).
+# Hosted projects do not read this file: paste the same HTML into the dashboard,
+# see docs/auth-email-brevo.md.
+[auth.email.template.confirmation]
+subject = "Dein Code / Your code: {{ .Token }}"
+content_path = "./supabase/templates/confirm-signup.html"
+
 # Uncomment to customize email template
 # [auth.email.template.invite]
 # subject = "You have been invited"
@@ -420,4 +427,9 @@ enabled = true
 # The moderation webhook is called by the database with a shared secret in
 # x-webhook-secret, not by a signed-in user, so it has no JWT to verify.
 [functions.moderate-photo]
+verify_jwt = false
+
+# The push webhook is called by the database with a shared secret in
+# x-webhook-secret, not by a signed-in user, so it has no JWT to verify.
+[functions.send-push]
 verify_jwt = false

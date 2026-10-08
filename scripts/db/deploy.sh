@@ -113,10 +113,13 @@ if [ "$DRY_RUN" = "true" ] && [ "${#versions[@]}" -gt 0 ]; then
   done
 else
   $SUPABASE migration list --db-url "$SUPABASE_DB_URL" || true
+  # --include-all: the legacy 9999x numbering has run out of room, so newer
+  # migrations carry a timestamp version that sorts *before* the ones already
+  # applied. Without this flag the CLI refuses them as "out of order".
   if [ "$DRY_RUN" = "true" ]; then
-    $SUPABASE db push --db-url "$SUPABASE_DB_URL" --dry-run
+    $SUPABASE db push --db-url "$SUPABASE_DB_URL" --include-all --dry-run
   else
-    $SUPABASE db push --db-url "$SUPABASE_DB_URL"
+    $SUPABASE db push --db-url "$SUPABASE_DB_URL" --include-all
   fi
 fi
 echo "::endgroup::"
