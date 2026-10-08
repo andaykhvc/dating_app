@@ -34,6 +34,7 @@ type Initial = {
   countryCode: string;
   bio: string;
   intentions: Intention[];
+  datingConsent: boolean;
   ageMin: number;
   ageMax: number;
   countries: string[];
@@ -95,6 +96,11 @@ export function EditProfileForm({
       return;
     }
 
+    if (form.intentions.includes("open_to_dating") && !form.datingConsent) {
+      setError("Please tick the consent box to be open to dating, or unselect that option.");
+      return;
+    }
+
     const unsupported = unsupportedLearningMessage(languages, form.learning);
     if (unsupported) {
       setError(unsupported);
@@ -112,6 +118,8 @@ export function EditProfileForm({
         country_code: form.countryCode,
         bio: form.bio.trim() || null,
         intentions: form.intentions,
+        // Any value means "consented"; the database stamps the real time.
+        dating_consent_at: form.datingConsent ? new Date().toISOString() : null,
         preferred_age_min: form.ageMin,
         preferred_age_max: form.ageMax,
         preferred_countries: form.countries,
@@ -153,13 +161,13 @@ export function EditProfileForm({
           <Link
             href="/profile"
             aria-label="Back to profile"
-            className="-ml-2 flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+            className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
           >
             <BackIcon className="size-5" />
           </Link>
         }
         action={
-          <Button onClick={save} loading={saving} className="h-10 px-4">
+          <Button onClick={save} loading={saving} className="h-11 px-4">
             Save
           </Button>
         }
@@ -287,6 +295,8 @@ export function EditProfileForm({
             <IntentionPicker
               value={form.intentions}
               onChange={(v) => set("intentions", v)}
+              datingConsent={form.datingConsent}
+              onDatingConsentChange={(v) => set("datingConsent", v)}
             />
           </Section>
 

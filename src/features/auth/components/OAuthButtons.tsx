@@ -4,8 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
+import { authCallbackUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { useT } from "@/i18n/client";
+import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
 
 type Provider = "google" | "apple";
 
@@ -31,7 +33,7 @@ export function OAuthButtons({ next, className }: Props) {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next ?? "/onboarding/basics")}`,
+        redirectTo: authCallbackUrl(next ?? "/onboarding/basics"),
       },
     });
 
@@ -68,7 +70,7 @@ export function OAuthButtons({ next, className }: Props) {
         <AppleLogo />
         {t("auth.apple")}
         {!APPLE_ENABLED && (
-          <span className="rounded-full bg-sunken px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wide text-muted">
+          <span className="rounded-full bg-sunken px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-muted">
             <span className="sr-only">(</span>
             {t("auth.appleComingSoon")}
             <span className="sr-only">)</span>
@@ -81,6 +83,11 @@ export function OAuthButtons({ next, className }: Props) {
           {error}
         </p>
       )}
+
+      <p className="text-center text-xs leading-relaxed text-faint">
+        By continuing you agree to the <TermsLink /> and acknowledge the{" "}
+        <PrivacyLink />. You will be asked to confirm after signing in.
+      </p>
     </div>
   );
 }

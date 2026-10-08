@@ -38,7 +38,7 @@ export function BottomNav() {
                 >
                   <Icon className="size-6" filled={active} />
                 </span>
-                <span className="text-[0.6875rem] font-medium leading-none tiny:sr-only">
+                <span className="text-xs font-medium leading-none tiny:sr-only">
                   {t(labelKey)}
                 </span>
               </Link>

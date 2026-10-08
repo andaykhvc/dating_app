@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { INTENTION_DESCRIPTIONS, INTENTION_LABELS } from "@/lib/constants";
 import { INTENTIONS, type Intention } from "@/types/domain";
 import { cn } from "@/lib/utils";
@@ -12,16 +13,21 @@ import { cn } from "@/lib/utils";
 export function IntentionPicker({
   value,
   onChange,
+  datingConsent,
+  onDatingConsentChange,
 }: {
   value: Intention[];
   onChange: (next: Intention[]) => void;
+  /** Explicit consent to be shown as open to dating; required while selected. */
+  datingConsent: boolean;
+  onDatingConsentChange: (consent: boolean) => void;
 }) {
   function toggle(intention: Intention) {
-    onChange(
-      value.includes(intention)
-        ? value.filter((i) => i !== intention)
-        : [...value, intention],
-    );
+    const removing = value.includes(intention);
+    onChange(removing ? value.filter((i) => i !== intention) : [...value, intention]);
+    // Consent belongs to the choice: unselecting dating withdraws it, and
+    // selecting it again starts from an unticked box.
+    if (intention === "open_to_dating") onDatingConsentChange(false);
   }
 
   return (
@@ -31,8 +37,8 @@ export function IntentionPicker({
         const isDating = intention === "open_to_dating";
 
         return (
+          <Fragment key={intention}>
           <button
-            key={intention}
             type="button"
             onClick={() => toggle(intention)}
             aria-pressed={selected}
@@ -72,7 +78,7 @@ export function IntentionPicker({
               <span
                 className={cn(
                   "block text-sm font-semibold",
-                  selected && isDating ? "text-accent" : "text-ink",
+                  selected && isDating ? "text-accent-ink" : "text-ink",
                 )}
               >
                 {INTENTION_LABELS[intention]}
@@ -82,6 +88,24 @@ export function IntentionPicker({
               </span>
             </span>
           </button>
+          {isDating && selected && (
+            <label className="flex items-start gap-3 rounded-2xl border border-accent/40 bg-accent-soft p-4">
+              <input
+                type="checkbox"
+                checked={datingConsent}
+                onChange={(e) => onDatingConsentChange(e.target.checked)}
+                className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]"
+              />
+              <span className="text-xs leading-relaxed text-ink">
+                <span className="block text-sm font-semibold">Your consent</span>
+                I consent to Lingua Match showing that I am open to dating on my profile to other
+                members, and to using this choice to decide who sees my profile. This is sensitive
+                information about my personal life. I can withdraw my consent at any time by
+                unselecting this option, and doing so does not affect anything done before.
+              </span>
+            </label>
+          )}
+          </Fragment>
         );
       })}
     </div>
