@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/supabase/queries";
 import { AcceptTerms } from "@/features/legal/AcceptTerms";
-import { pendingLegal } from "@/lib/legal";
+import { pendingLegal } from "@/lib/legal-consent";
 
 export default async function OnboardingLayout({ children }: LayoutProps<"/">) {
   const user = await getCurrentUser();

@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Field";
 import { OAuthButtons } from "@/features/auth/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
-import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/legal";
+import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/legal-consent";
 import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
+import { authCallbackUrl } from "@/lib/site";
+import { rememberPendingEmail } from "@/features/auth/pendingEmail";
 import { isAtLeast18, maxDateOfBirth } from "@/lib/date";
 
 export function SignupForm() {
@@ -58,7 +60,7 @@ export function SignupForm() {
           terms_version: TERMS_VERSION,
           privacy_version: PRIVACY_VERSION,
         },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: authCallbackUrl(),
       },
     });
 
@@ -71,6 +73,7 @@ export function SignupForm() {
     // With email confirmation on there is no session yet; the date of birth is
     // captured again on the first onboarding step.
     if (!data.session) {
+      rememberPendingEmail(email.trim());
       router.push("/verify-email");
       return;
     }

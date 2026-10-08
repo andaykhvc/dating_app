@@ -161,13 +161,13 @@ export function EditProfileForm({
           <Link
             href="/profile"
             aria-label="Back to profile"
-            className="-ml-2 flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
+            className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken"
           >
             <BackIcon className="size-5" />
           </Link>
         }
         action={
-          <Button onClick={save} loading={saving} className="h-10 px-4">
+          <Button onClick={save} loading={saving} className="h-11 px-4">
             Save
           </Button>
         }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { GoogleLogo, AppleLogo } from "@/components/icons";
 import { createClient } from "@/lib/supabase/client";
+import { authCallbackUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { PrivacyLink, TermsLink } from "@/features/legal/LegalLinks";
 
@@ -30,7 +31,7 @@ export function OAuthButtons({ next, className }: Props) {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next ?? "/onboarding/basics")}`,
+        redirectTo: authCallbackUrl(next ?? "/onboarding/basics"),
       },
     });
 
@@ -67,7 +68,7 @@ export function OAuthButtons({ next, className }: Props) {
         <AppleLogo />
         Continue with Apple
         {!APPLE_ENABLED && (
-          <span className="rounded-full bg-sunken px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wide text-muted">
+          <span className="rounded-full bg-sunken px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-muted">
             <span className="sr-only">(</span>Coming soon<span className="sr-only">)</span>
           </span>
         )}

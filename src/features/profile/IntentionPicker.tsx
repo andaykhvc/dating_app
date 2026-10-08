@@ -78,7 +78,7 @@ export function IntentionPicker({
               <span
                 className={cn(
                   "block text-sm font-semibold",
-                  selected && isDating ? "text-accent" : "text-ink",
+                  selected && isDating ? "text-accent-ink" : "text-ink",
                 )}
               >
                 {INTENTION_LABELS[intention]}

@@ -18,6 +18,10 @@ on:
         description: "Version name, e.g. 1.2.0 (blank: 1.0.<run number>)"
         required: false
         type: string
+      site_host:
+        description: "Host the app opens, e.g. app.example.com (blank: repository variable SITE_HOST, else the host in android/twa-manifest.json)"
+        required: false
+        type: string
 
 concurrency:
   group: android-${{ github.ref }}
@@ -74,6 +78,8 @@ jobs:
         env:
           APP_VERSION_CODE: ${{ steps.version.outputs.code }}
           APP_VERSION_NAME: ${{ steps.version.outputs.name }}
+          # Empty means "keep the host committed in twa-manifest.json".
+          SITE_HOST: ${{ inputs.site_host || vars.SITE_HOST }}
         run: |
           npm ci --prefix android
           node android/generate.mjs
@@ -138,12 +144,14 @@ jobs:
           TAG: ${{ steps.version.outputs.tag }}
           VERSION_NAME: ${{ steps.version.outputs.name }}
           VERSION_CODE: ${{ steps.version.outputs.code }}
+          SITE_HOST: ${{ inputs.site_host || vars.SITE_HOST }}
         run: |
+          host="${SITE_HOST:-$(jq -r .host android/twa-manifest.json)}"
           notes="Lingua Match ${VERSION_NAME} (versionCode ${VERSION_CODE}) for Android.
 
           Download **${APK}** below on your phone and open it. Android asks once to allow installs from your browser or file manager.
 
-          The app opens https://dating-app-ruddy.vercel.app, so it always runs the latest web version."
+          The app opens https://${host}, so it always runs the latest web version."
           gh release create "$TAG" "$APK" \
             --target "$GITHUB_SHA" \
             --title "Android ${VERSION_NAME}" \

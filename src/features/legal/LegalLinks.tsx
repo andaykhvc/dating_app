@@ -1,4 +1,4 @@
-import { LEGAL_PATHS } from "@/lib/legal";
+import { LEGAL_PATHS } from "@/lib/legal-consent";
 
 const LINK = "font-semibold text-brand underline-offset-2 hover:underline";
 

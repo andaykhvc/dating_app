@@ -7,7 +7,12 @@ import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/client";
 import { APP_NAME } from "@/lib/constants";
+import { DownloadMyData } from "@/features/profile/DownloadMyData";
+import { AppearanceSettings } from "@/features/appearance/AppearanceSettings";
+import { DeleteAccount } from "@/features/profile/DeleteAccount";
 import { InstallSettings } from "@/features/install/InstallSettings";
+import { PushNotificationsCard } from "@/features/push/PushNotificationsCard";
+import { LegalLinks } from "@/components/legal/LegalLinks";
 
 type BlockedUser = {
   user_id: string;
@@ -42,6 +47,8 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
 
   return (
     <div className="mx-auto w-full max-w-xl space-y-4 px-gutter py-5 md:space-y-5 md:py-8">
+      <PushNotificationsCard />
+      <AppearanceSettings />
       <InstallSettings />
       <section className="rounded-3xl border border-line bg-raised p-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">
@@ -72,7 +79,7 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
                   type="button"
                   onClick={() => unblock(person.user_id)}
                   disabled={busy === person.user_id}
-                  className="min-h-9 shrink-0 rounded-full px-3.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
+                  className="min-h-11 shrink-0 rounded-full px-3.5 text-xs font-semibold text-brand hover:bg-brand-soft disabled:opacity-50"
                 >
                   Unblock
                 </button>
@@ -81,6 +88,8 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
           </ul>
         )}
       </section>
+
+      <DownloadMyData />
 
       <section className="rounded-3xl border border-line bg-raised p-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-faint">
@@ -94,6 +103,22 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
       </section>
 
       <Link
+        href="/support"
+        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+      >
+        Help &amp; safety
+        <span aria-hidden className="text-faint">›</span>
+      </Link>
+
+      <Link
+        href="/guidelines"
+        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+      >
+        Community guidelines
+        <span aria-hidden className="text-faint">›</span>
+      </Link>
+
+      <Link
         href="/licenses"
         className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
       >
@@ -101,9 +126,15 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
         <span aria-hidden className="text-faint">›</span>
       </Link>
 
+      <section className="rounded-3xl border border-line bg-raised p-3">
+        <LegalLinks />
+      </section>
+
       <Button variant="secondary" fullWidth onClick={signOut}>
         Sign out
       </Button>
+
+      <DeleteAccount />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/supabase/queries";
 import { EditProfileForm } from "@/features/profile/EditProfileForm";
 import type { StoredPhoto } from "@/features/profile/PhotoManager";
+import { STORED_PHOTO_COLUMNS } from "@/lib/photos";
 import type { CefrLevel, Intention, Interest, Language } from "@/types/domain";
 
 export const metadata: Metadata = { title: "Edit profile" };
@@ -27,7 +28,7 @@ export default async function EditProfilePage() {
       .single(),
     supabase
       .from("profile_photos")
-      .select("id, storage_path, position")
+      .select(STORED_PHOTO_COLUMNS)
       .eq("user_id", user!.id)
       .order("position"),
     supabase

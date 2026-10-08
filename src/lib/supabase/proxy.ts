@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { isPublicLegalPath } from "@/lib/legal";
 
-// The legal pages must be readable before signing in: the signup form links to them.
 const PUBLIC_PATHS = [
   "/",
   "/login",
@@ -9,11 +9,8 @@ const PUBLIC_PATHS = [
   "/verify-email",
   "/auth",
   "/licenses",
-  "/terms",
-  "/privacy",
-  "/nutzungsbedingungen",
-  "/datenschutz",
-  "/impressum",
+  "/support",
+  "/guidelines",
 ];
 
 function isPublic(pathname: string) {
@@ -32,6 +29,10 @@ function isPublic(pathname: string) {
  */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
+
+  // Static legal information remains accessible without a session or Auth uptime.
+  // Only these exact public routes skip refresh; app authentication is unchanged.
+  if (isPublicLegalPath(request.nextUrl.pathname)) return response;
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -62,6 +63,12 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const { pathname } = request.nextUrl;
+
+  // API routes answer for themselves: a script or fetch() should get a 401, not
+  // an HTML redirect to the login page.
+  if (!user && pathname.startsWith("/api/")) {
+    return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+  }
 
   if (!user && !isPublic(pathname)) {
     const url = request.nextUrl.clone();

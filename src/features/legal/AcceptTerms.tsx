@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/legal";
+import { PRIVACY_VERSION, TERMS_VERSION } from "@/lib/legal-consent";
 import { createClient } from "@/lib/supabase/client";
 import { PrivacyLink, TermsLink } from "./LegalLinks";
 

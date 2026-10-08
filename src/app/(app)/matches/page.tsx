@@ -87,7 +87,7 @@ export default async function MatchesPage() {
 
                     {match.mission && (
                       <div className="mt-3.5 rounded-2xl bg-accent-soft px-4 py-3">
-                        <p className="text-[0.625rem] font-bold uppercase tracking-[0.12em] text-accent">
+                        <p className="text-xs font-bold uppercase tracking-[0.12em] text-accent-ink">
                           Mission · {match.mission.steps_completed}/
                           {match.mission.target_steps}
                         </p>

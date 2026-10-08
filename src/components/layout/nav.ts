@@ -23,6 +23,7 @@ export function isImmersive(pathname: string) {
   return (
     /^\/messages\/[^/]+$/.test(pathname) ||
     /^\/play\/session\/[^/]+$/.test(pathname) ||
-    /^\/play\/lesson\/[^/]+$/.test(pathname)
+    /^\/play\/lesson\/[^/]+$/.test(pathname) ||
+    /^\/play\/practice\/[^/]+$/.test(pathname)
   );
 }

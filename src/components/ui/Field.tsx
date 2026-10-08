@@ -1,6 +1,7 @@
 import type {
   InputHTMLAttributes,
   ReactNode,
+  Ref,
   SelectHTMLAttributes,
   TextareaHTMLAttributes,
 } from "react";
@@ -37,9 +38,10 @@ export function Field({
 
 export function Input({
   className,
+  ref,
   ...props
-}: InputHTMLAttributes<HTMLInputElement>) {
-  return <input {...props} className={cn(CONTROL, className)} />;
+}: InputHTMLAttributes<HTMLInputElement> & { ref?: Ref<HTMLInputElement> }) {
+  return <input {...props} ref={ref} className={cn(CONTROL, className)} />;
 }
 
 export function Textarea({

@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/lib/redirect";
+import { siteUrl } from "@/lib/site";
 
 /**
  * The only Route Handler in the app. Exchanging an email-confirmation code for
@@ -8,7 +9,8 @@ import { safeNextPath } from "@/lib/redirect";
  * direct RLS-guarded query or a Postgres function call.
  */
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = request.nextUrl;
+  const { searchParams, origin: requestOrigin } = request.nextUrl;
+  const origin = siteUrl(requestOrigin);
   const code = searchParams.get("code");
   const next = safeNextPath(searchParams.get("next"), "/onboarding/basics");
 
