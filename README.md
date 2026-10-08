@@ -99,6 +99,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_CLIENT_KEY
 | :--- | :--- |
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL used by the browser and server Supabase clients, and photo URLs. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public client API key. The existing variable name is retained; it can hold the project's publishable key or compatible legacy anon key. |
+| `NEXT_PUBLIC_SUPPORT_EMAIL` | Optional. The address shown on the Help & safety page and the suspended-account screen. Until it is set those pages say the address is not published yet. |
 
 `NEXT_PUBLIC_*` values are included in the browser bundle. The app uses public client credentials and authenticated sessions; **a secret/service-role key does not belong here**. Database deployment credentials belong in the separate workflow secret described below.
 

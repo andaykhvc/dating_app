@@ -94,6 +94,22 @@ export function SettingsPanel({ blocked }: { blocked: BlockedUser[] }) {
       </section>
 
       <Link
+        href="/support"
+        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+      >
+        Help &amp; safety
+        <span aria-hidden className="text-faint">›</span>
+      </Link>
+
+      <Link
+        href="/guidelines"
+        className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
+      >
+        Community guidelines
+        <span aria-hidden className="text-faint">›</span>
+      </Link>
+
+      <Link
         href="/licenses"
         className="flex items-center justify-between rounded-3xl border border-line bg-raised p-5 text-sm font-semibold text-ink transition-colors hover:border-brand/40"
       >

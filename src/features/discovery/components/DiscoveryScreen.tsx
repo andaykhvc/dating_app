@@ -8,6 +8,7 @@ import {
 } from "@/features/discovery/components/SwipeDeck";
 import { ProfileDetails } from "@/features/discovery/components/ProfileDetails";
 import { MatchCelebration } from "@/features/matching/components/MatchCelebration";
+import { ReportUserSheet } from "@/features/chat/components/ReportUserSheet";
 import { useDiscoveryFeed } from "@/features/discovery/hooks/useDiscoveryFeed";
 import { fetchProfileCard, recordSwipe } from "@/features/discovery/api";
 import { Sheet } from "@/components/ui/Sheet";
@@ -33,6 +34,7 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
   } | null>(null);
   const [swipeError, setSwipeError] = useState<string | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const [fullCards, setFullCards] = useState<Record<string, ProfileCard>>({});
   const preloaded = useRef(new Set<string>());
   const top = cards[0];
@@ -87,7 +89,7 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
 
   // Arrow keys on a keyboard: the desktop equivalent of a thumb.
   useEffect(() => {
-    if (!top || detailsOpen || match) return;
+    if (!top || detailsOpen || reportOpen || match) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
       const target = e.target as HTMLElement | null;
@@ -99,7 +101,7 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [top, detailsOpen, match]);
+  }, [top, detailsOpen, reportOpen, match]);
 
   if (!top) {
     return (
@@ -172,13 +174,22 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
               </h2>
               <ProfileDetails card={top} />
               <div className="mt-6 flex items-center justify-between gap-3 border-t border-line pt-4">
-                <button
-                  type="button"
-                  onClick={openDetails}
-                  className="rounded-full text-sm font-semibold text-brand hover:underline"
-                >
-                  See all photos
-                </button>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={openDetails}
+                    className="rounded-full text-sm font-semibold text-brand hover:underline"
+                  >
+                    See all photos
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReportOpen(true)}
+                    className="rounded-full text-sm font-medium text-muted hover:text-negative hover:underline"
+                  >
+                    Report
+                  </button>
+                </div>
                 <p className="text-xs text-faint">
                   <Kbd>←</Kbd> pass · <Kbd>→</Kbd> like
                 </p>
@@ -195,7 +206,28 @@ export function DiscoveryScreen({ initial }: { initial: DiscoveryCard[] }) {
         size="lg"
       >
         <ProfileDetails card={top} full={full} />
+        <button
+          type="button"
+          onClick={() => setReportOpen(true)}
+          className="mt-6 w-full rounded-2xl py-3 text-sm font-medium text-muted hover:text-negative"
+        >
+          Report {top.first_name}
+        </button>
       </Sheet>
+
+      <ReportUserSheet
+        open={reportOpen}
+        onClose={() => setReportOpen(false)}
+        onReported={() => {
+          // Thanks for the report; they should not stay on top of the deck.
+          setReportOpen(false);
+          setDetailsOpen(false);
+          window.setTimeout(() => deckRef.current?.swipe("pass"), 0);
+        }}
+        reportedId={top.id}
+        reportedName={top.first_name}
+        matchId={null}
+      />
 
       {match && (
         <MatchCelebration

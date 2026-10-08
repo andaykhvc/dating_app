@@ -4,47 +4,26 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Sheet } from "@/components/ui/Sheet";
-import { Textarea } from "@/components/ui/Field";
 import { MoreIcon } from "@/components/icons";
-import { blockUser, reportUser } from "@/features/chat/api";
-import { REPORT_REASON_LABELS } from "@/lib/constants";
-import { REPORT_REASONS, type ReportReason } from "@/types/domain";
-import { cn } from "@/lib/utils";
+import { blockUser } from "@/features/chat/api";
+import { ReportUserSheet } from "@/features/chat/components/ReportUserSheet";
 
 type Mode = null | "menu" | "report" | "block";
 
 export function ReportBlockMenu({
   partnerId,
   partnerName,
-  viewerId,
   matchId,
 }: {
   partnerId: string;
   partnerName: string;
-  viewerId: string;
   matchId: string;
 }) {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>(null);
-  const [reason, setReason] = useState<ReportReason>("harassment");
-  const [details, setDetails] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reported, setReported] = useState(false);
-
-  async function submitReport() {
-    setBusy(true);
-    setError(null);
-    try {
-      await reportUser(partnerId, viewerId, reason, details, matchId);
-      setReported(true);
-      setMode(null);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not send that report.");
-    } finally {
-      setBusy(false);
-    }
-  }
 
   async function confirmBlock() {
     setBusy(true);
@@ -104,49 +83,18 @@ export function ReportBlockMenu({
         </div>
       </Sheet>
 
-      <Sheet
+      <ReportUserSheet
         open={mode === "report"}
         onClose={() => setMode(null)}
-        title={`Report ${partnerName}`}
-      >
-        <div className="space-y-4">
-          <div className="space-y-2">
-            {REPORT_REASONS.map((r) => (
-              <button
-                key={r}
-                type="button"
-                onClick={() => setReason(r)}
-                className={cn(
-                  "w-full rounded-2xl border px-4 py-3 text-left text-sm font-medium transition-colors",
-                  reason === r
-                    ? "border-brand bg-brand-soft text-brand"
-                    : "border-line bg-raised text-muted",
-                )}
-              >
-                {REPORT_REASON_LABELS[r]}
-              </button>
-            ))}
-          </div>
-
-          <Textarea
-            value={details}
-            onChange={(e) => setDetails(e.target.value.slice(0, 1000))}
-            rows={3}
-            placeholder="Anything else we should know? Optional."
-          />
-
-          {error && <p className="text-sm text-negative">{error}</p>}
-
-          <div className="flex gap-3">
-            <Button variant="secondary" fullWidth onClick={() => setMode("menu")}>
-              Back
-            </Button>
-            <Button fullWidth onClick={submitReport} loading={busy}>
-              Send report
-            </Button>
-          </div>
-        </div>
-      </Sheet>
+        onBack={() => setMode("menu")}
+        onReported={() => {
+          setReported(true);
+          setMode(null);
+        }}
+        reportedId={partnerId}
+        reportedName={partnerName}
+        matchId={matchId}
+      />
 
       <Sheet
         open={mode === "block"}
