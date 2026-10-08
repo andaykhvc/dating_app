@@ -106,7 +106,7 @@ export function TypeExercise({ exercise, result, onChange, onSubmit, speech, tar
                 type="button"
                 onPointerDown={(e) => e.preventDefault()}
                 onClick={() => insert(ch)}
-                className="min-h-10 min-w-10 rounded-xl border border-line bg-raised px-2 text-base font-medium text-ink hover:border-brand/40 active:scale-95"
+                className="min-h-11 min-w-11 rounded-xl border border-line bg-raised px-2 text-base font-medium text-ink hover:border-brand/40 active:scale-95"
               >
                 {ch}
               </button>

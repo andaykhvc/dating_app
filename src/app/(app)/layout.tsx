@@ -18,9 +18,12 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("onboarding_completed_at")
+    .select("onboarding_completed_at, account_status")
     .eq("id", user.id)
     .single();
+
+  // A suspended or closed account gets a plain explanation instead of the app.
+  if (profile && profile.account_status !== "active") redirect("/suspended");
 
   if (!profile?.onboarding_completed_at) redirect("/onboarding/basics");
 

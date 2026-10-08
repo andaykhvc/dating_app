@@ -96,7 +96,7 @@ export function CourseCard({ overview }: { overview: LearnOverview }) {
 
         {next ? (
           <div className="mt-5">
-            <p className="text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-faint">Up next</p>
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-faint">Up next</p>
             <p className="mt-1 truncate text-base font-semibold text-ink">{next.title}</p>
             <p className="truncate text-xs text-muted">
               {next.cefr_level} · {next.unit_title} · {next.skill_title}
@@ -171,7 +171,7 @@ export function Syllabus({ overview }: { overview: LearnOverview }) {
       {levels.map((level) => (
         <section key={level} aria-label={`Level ${level}`}>
           <h2 className="mb-2.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-faint">
-            <span className="rounded-md bg-ink px-1.5 py-0.5 text-[0.625rem] font-bold text-surface">{level}</span>
+            <span className="rounded-md bg-ink px-1.5 py-0.5 text-xs font-bold text-surface">{level}</span>
             {level === "A1" ? "Beginner" : "Elementary"}
           </h2>
           <ol className="space-y-2.5">
@@ -290,7 +290,7 @@ function SkillCard({ skill, nextId, starter }: { skill: SkillSummary; nextId: nu
         >
           <div className="h-full rounded-full bg-accent" style={{ width: `${skill.mastery}%` }} />
         </div>
-        <span className="w-8 text-right text-[0.625rem] font-semibold tabular-nums text-faint">{skill.mastery}%</span>
+        <span className="w-8 text-right text-xs font-semibold tabular-nums text-faint">{skill.mastery}%</span>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-1.5">
@@ -305,7 +305,7 @@ function SkillCard({ skill, nextId, starter }: { skill: SkillSummary; nextId: nu
               onClick={() => starter.start(lesson.id)}
               disabled={starter.starting !== null}
               className={cn(
-                "inline-flex min-h-9 items-center gap-1 rounded-full px-3 text-xs font-semibold transition-[transform,colors] active:scale-95 disabled:opacity-60",
+                "inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-xs font-semibold transition-[transform,colors] active:scale-95 disabled:opacity-60",
                 isNext
                   ? "bg-brand text-brand-ink shadow-sm shadow-brand/30"
                   : lesson.completed

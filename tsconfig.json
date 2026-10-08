@@ -31,5 +31,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  // The Edge Function entry point runs on Deno (Deno globals, npm: imports);
+  // everything it imports is plain TypeScript and stays type-checked here.
+  "exclude": ["node_modules", "supabase/functions/**/index.ts"]
 }

@@ -99,7 +99,7 @@ export function ShareToMatchSheet({
                     <span className="size-4 animate-spin rounded-full border-2 border-brand border-t-transparent" />
                   ) : (
                     speaks && (
-                      <span className="shrink-0 rounded-full bg-positive-soft px-2 py-0.5 text-[0.6875rem] font-semibold text-positive">
+                      <span className="shrink-0 rounded-full bg-positive-soft px-2 py-0.5 text-xs font-semibold text-positive">
                         Native
                       </span>
                     )

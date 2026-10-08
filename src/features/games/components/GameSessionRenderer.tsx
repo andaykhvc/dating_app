@@ -97,7 +97,7 @@ export function GameSessionRenderer({
             type="button"
             onClick={() => router.push(returnTo)}
             aria-label="Leave challenge"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
+            className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-sunken md:-ml-2"
           >
             <BackIcon className="size-5" />
           </button>
@@ -105,7 +105,7 @@ export function GameSessionRenderer({
             <p className="truncate text-[0.9375rem] font-bold text-ink">
               {session.template.title}
             </p>
-            <p className="text-[0.6875rem] text-faint md:text-xs">
+            <p className="text-xs text-faint md:text-xs">
               {session.content.language_code.toUpperCase()} ·{" "}
               {session.content.cefr_level} · +{session.template.xp_reward} XP
             </p>

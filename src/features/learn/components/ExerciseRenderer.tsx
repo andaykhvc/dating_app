@@ -92,7 +92,7 @@ export function Feedback({
           </p>
         )}
         {credit && (
-          <p className="mt-1 text-[0.6875rem] opacity-75">
+          <p className="mt-1 text-xs opacity-75">
             {credit.url ? (
               <a href={credit.url} target="_blank" rel="noreferrer" className="underline">
                 Sentence

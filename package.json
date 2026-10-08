@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "legal:check": "node scripts/legal-check.mjs",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test scripts/content/content.test.ts scripts/install.test.ts scripts/lint-glob.test.mjs scripts/redirect.test.ts scripts/date.test.ts scripts/discovery-feed.test.ts scripts/profile-lists.test.ts scripts/profile-errors.test.ts",
+    "test": "node --test \"scripts/**/*.test.ts\" \"scripts/**/*.test.mjs\" \"supabase/functions/**/*.test.ts\"",
     "test:db": "supabase/tests/run.sh",
     "content:validate": "node scripts/content/validate.ts",
     "content:build": "node scripts/content/build-seed.ts",
@@ -19,6 +20,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
     "@supabase/supabase-js": "^2.112.2",
+    "firebase": "^13.0.0",
     "next": "16.4.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -34,6 +36,7 @@
     "typescript": "^5"
   },
   "overrides": {
+    "@grpc/grpc-js": "^1.14.5",
     "@next/eslint-plugin-next": {
       "fast-glob": "npm:tinyglobby@0.2.17"
     }
