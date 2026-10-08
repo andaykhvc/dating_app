@@ -48,7 +48,8 @@ export function Feedback({
 }: {
   result: ExerciseResult;
   exercise: Exercise;
-  onReport: () => void;
+  /** Omit where there is nothing to report against (practice runs). */
+  onReport?: () => void;
 }) {
   const credit = exercise.payload.credit;
   const heading =
@@ -103,13 +104,15 @@ export function Feedback({
           </p>
         )}
       </div>
-      <button
-        type="button"
-        onClick={onReport}
-        className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold opacity-70 hover:opacity-100"
-      >
-        <FlagIcon className="size-3.5" /> Report
-      </button>
+      {onReport && (
+        <button
+          type="button"
+          onClick={onReport}
+          className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold opacity-70 hover:opacity-100"
+        >
+          <FlagIcon className="size-3.5" /> Report
+        </button>
+      )}
     </div>
   );
 }
