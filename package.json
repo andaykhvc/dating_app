@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test scripts/content/content.test.ts scripts/install.test.ts scripts/lint-glob.test.mjs scripts/redirect.test.ts scripts/date.test.ts scripts/discovery-feed.test.ts scripts/profile-lists.test.ts scripts/site.test.ts",
+    "test": "node --test \"scripts/**/*.test.ts\" \"scripts/**/*.test.mjs\"",
     "test:db": "supabase/tests/run.sh",
     "content:validate": "node scripts/content/validate.ts",
     "content:build": "node scripts/content/build-seed.ts",

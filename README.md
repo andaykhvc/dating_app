@@ -100,6 +100,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_CLIENT_KEY
 | `NEXT_PUBLIC_SITE_URL` | Optional. The public origin of the deployed site (e.g. `https://example.com`), used for auth-email and OAuth return links and absolute metadata URLs. Unset, the current page's origin is used (and `http://localhost:3000` where there is none), so local development needs nothing. See [Moving to your own domain](docs/domain-setup.md). |
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL used by the browser and server Supabase clients, and photo URLs. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public client API key. The existing variable name is retained; it can hold the project's publishable key or compatible legacy anon key. |
+| `NEXT_PUBLIC_APPLE_SIGNIN_ENABLED` | Optional. Set to `true` once Sign in with Apple is configured in Supabase to enable the button; otherwise it is shown greyed out with "Coming soon". |
 
 `NEXT_PUBLIC_*` values are included in the browser bundle. The app uses public client credentials and authenticated sessions; **a secret/service-role key does not belong here**. Database deployment credentials belong in the separate workflow secret described below.
 
